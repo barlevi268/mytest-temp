@@ -20,8 +20,33 @@
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    <button class="btn btn-primary">a</button>
-    <button class="btn btn-danger">a</button>
-    <button class="btn btn-warning">a</button>
+    <div class="container">
+    <div class="login-wrapper">
+      <div class="login-header">
+        <img src=""/>
+      </div>
+      <form class="login-form">
+        <div class="inpuit-group">
+          <label>
+            שם משתמש
+          </label>
+          <input type="text" name="user_name" class="form-control form-control-solid"/>
+        </div>
+        <div class="inpuit-group">
+          <label>
+            סיסמה
+          </label>
+          <input type="password" name="password" class="form-control form-control-solid"/>
+        </div>
+        <button class="btn btn-primary" type="submit">
+          Sign In
+        </button>
+        <div class="login-footer">
+          <button class="btn btn-primary btn-block">התחבר</button>
+          <a href="#">שכחת את הסיסמה?</a>
+        </div>
+      </form>
+    </div>
+  </div>
   </body>
 </html>
