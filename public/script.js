@@ -1,0 +1,1 @@
+$(() => $('#alertModal').modal('show'))
