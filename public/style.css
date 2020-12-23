@@ -11,7 +11,7 @@
 * {
   box-sizing: border-box;
   font-family: 'Rubik', sans-serif;
-  font-size:14px;
+  font-size:10pt;
 }
 
 body {
@@ -50,6 +50,12 @@ form label {
   font-weight:400;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .form-control {
   border-radius:0.8rem;
   font-weight:500;
@@ -58,6 +64,11 @@ form label {
   background-color: var(--input-bg);
 }
 
+.form-control-pin {
+  width:73px;
+  text-align:center;
+  font-size:16pt;
+}
 
 
 .form-group {
