@@ -8,6 +8,7 @@
   --text-light:#676767;
   --input-bg: #F6F7F9;
   --text-muted:#c6c6c6;
+  --bg-light:#F0F0F0;
 }
 
 
@@ -102,7 +103,7 @@ input::-webkit-inner-spin-button {
 }
 
 .btn-primary:hover {
-
+  background-color: var(--primary-hover);
 }
 
 .btn-secondary {
@@ -111,7 +112,8 @@ input::-webkit-inner-spin-button {
 }
 
 .btn-secondary:hover {
-
+  background-color: var(--bg-light);
+  color: var(--primary)
 }
 
 .modal-dialog {
