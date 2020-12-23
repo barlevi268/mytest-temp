@@ -1,7 +1,7 @@
 <!-- This is a static file -->
 <!-- served from your routes in server.js -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he"  dir="rtl" >
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,40 +13,15 @@
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
 
     <!-- import the webpage's client-side javascript file -->
     <script src="/script.js" defer></script>
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    <header>
-      <h1>A Dream of the Future</h1>
-    </header>
-
-    <main>
-      <h2>Oh hi,</h2>
-
-      <p>Tell me your hopes and dreams:</p>
-
-      <form>
-        <label>
-          New Dream
-          <input name="dream" type="text" maxlength="100" required placeholder="Dreams!">
-        </label>
-        <button type="submit" id="submit-dream">Add Dream</button>
-      </form>
-
-      <section class="dreams">
-        <ul id="dreams">
-          <em>loading dreams&hellip;</em>
-        </ul>
-      </section>
-    </main>
-
-    <footer>Made with <a href="https://glitch.com">Glitch</a>!</footer>
-
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div class="glitchButton" style="position:fixed;top:2em;right:20px;"></div>
-    <script src="https://button.glitch.me/button.js" defer></script>
+    <button class="btn btn-primary">a</button>
+    <button class="btn btn-danger">a</button>
+    <button class="btn btn-warning">a</button>
   </body>
 </html>
