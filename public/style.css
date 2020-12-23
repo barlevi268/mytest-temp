@@ -100,5 +100,9 @@ input::-webkit-inner-spin-button {
 
 .btn-secondary {
   background-color: transparent;
-  color:
+  color: var(--primary)
+}
+
+.modal-dialog {
+  margin:5em 1em;
 }
