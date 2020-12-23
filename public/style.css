@@ -28,7 +28,11 @@ a:hover {
   color: var(--primary);
 }
 
-.wra
+.wrapper {
+  max-width: 450px;
+  margin:0 auto;
+}
+
 form label {
   font-weight:500;
   color:var(--text-primary);
@@ -62,6 +66,7 @@ form label {
 .btn {
   border-radius:0.8rem;
   border:none;
+  font-weight:500;
   padding:15px;
   background-color: var(--primary);
 }
