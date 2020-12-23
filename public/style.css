@@ -140,3 +140,7 @@ input::-webkit-inner-spin-button {
   margin-top:20px;
   margin-bottom:40px;
 }
+
+.col-spaced {
+  width:48%;
+}
