@@ -1,4 +1,10 @@
 /* this file is loaded by index.html and styles the page */
+:root {
+  --primary: #131f52;
+  --text-primary:#2c3350;
+  --input-bg: #f8f7f7; 
+}
+
 
 * {
   box-sizing: border-box;
@@ -13,13 +19,20 @@ body {
 
 form label {
   font-weight:500;
+  color:var(--text-primary)
+  margin-bottom:5px;
 }
 
-input {
+.form-control {
   border-radius:1rem;
   font-weight:500;
+  border:none;
+  padding:15px;
+  background-color: var(--input-bg);
 }
 
-button {
-  border-rdius:
+.btn {
+  border-radius:1rem;
+  border:none;
+  background-color: var(--primary);
 }
