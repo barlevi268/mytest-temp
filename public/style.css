@@ -4,6 +4,7 @@
   --text-primary:#2c3350;
   --text-light:#676767;
   --input-bg: #F6F7F9; 
+  --text-muted:#c6c6c6;
 }
 
 
@@ -27,6 +28,7 @@ a:hover {
   color: var(--primary);
 }
 
+.wra
 form label {
   font-weight:500;
   color:var(--text-primary);
@@ -38,6 +40,11 @@ form label {
   margin-bottom: 25px;
 }
 
+.form-control::placeholder {
+  color: var(--text-muted);
+  font-weight:400;
+}
+
 .form-control {
   border-radius:0.8rem;
   font-weight:500;
@@ -46,10 +53,7 @@ form label {
   background-color: var(--input-bg);
 }
 
-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: red;
-  opacity: 1; /* Firefox */
-}
+
 
 .form-group {
   margin-bottom: 20px;
