@@ -12,12 +12,12 @@
   box-sizing: border-box;
   font-family: 'Rubik', sans-serif;
   font-size:10pt;
+  color:var(--text-primary);
 }
 
 body {
   font-family: 'Rubik', sans-serif;
   margin: 0 1em;
-  line-height: 1.5em;
 }
 
 a {
@@ -27,6 +27,11 @@ a {
 
 a:hover {
   color: var(--primary);
+}
+
+p {
+  font-weight: 400;
+  line-height:1em;
 }
 
 .wrapper {
@@ -68,8 +73,14 @@ input::-webkit-inner-spin-button {
   width:73px;
   text-align:center;
   font-size:16pt;
+  font-weight:400;
+  padding: 15px;
 }
 
+.form-control:focus {
+  border:none;
+  background-color: var(--input-bg);
+}
 
 .form-group {
   margin-bottom: 20px;
