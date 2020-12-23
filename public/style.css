@@ -91,5 +91,14 @@ input::-webkit-inner-spin-button {
   border:none;
   font-weight:500;
   padding:20px;
+  
+}
+
+.btn-primary {
   background-color: var(--primary);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color:
 }
