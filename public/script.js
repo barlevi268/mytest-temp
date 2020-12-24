@@ -2,7 +2,7 @@ var alertModal = {
     subView: $('#alertModal'),
     content: $('.modal-message'),
     successIcon: $(''),
-    primaryButton: $(''),
+    primaryButton: $('.'),
     secondaryButton: $(''),
     show: () => alertModal.subView.modal('show'),
     clear: () => {},
