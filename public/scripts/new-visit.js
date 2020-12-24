@@ -1,4 +1,17 @@
 $(() => {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function(e) {
+            $('#uploadBarcodeCaddy').attr('src', e.target.result);
+          }
+          
+          reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+
     var App = {
         init: function() {
             App.attachListeners();
@@ -12,6 +25,7 @@ $(() => {
 
             $("#uploadBacode").on("change", function(e) {
                 if (e.target.files && e.target.files.length) {
+                    readURL(this);
                     App.decode(URL.createObjectURL(e.target.files[0]));
                 }
             });
@@ -63,7 +77,6 @@ $(() => {
     App.init();
 
     Quagga.onDetected(function(result) {
-        console.log(result.codeResult.code)
         var code = result.codeResult.code;
         $('[name="test_barcode"]').val(code);
     });
