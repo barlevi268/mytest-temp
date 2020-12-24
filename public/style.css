@@ -102,8 +102,8 @@ input::-webkit-inner-spin-button {
   border:none;
   color:var(--text-primary);
   border: none;
-  border-color:none;
-  outline-color:
+  border-color:transparent;
+  outline-color:transparent;
   background-color: var(--input-bg);
 }
 
