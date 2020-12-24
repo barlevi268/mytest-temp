@@ -19,6 +19,10 @@ app.use(express.static("public"));
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (request, response) => {
+  response.sendFile(__dirname + "/views/index.html");
+});
+
+app.get("/menu", (request, response) => {
   response.sendFile(__dirname + "/views/menu.html");
 });
 
