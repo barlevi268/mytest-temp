@@ -11,17 +11,18 @@ $(() => {
         }
     }
     
-    $("#uploadBacode").change(function() {
-    readURL(this);
+    $("#uploadBacode").change( async function() {
+        readURL(this);
+        const codeReader = new ZXing.BrowserQRCodeReader();
+        const img = document.getElementById('uploadBarcodeCaddy');
+    
+        try {
+            const result = await codeReader.decodeFromImage(img);
+        } catch (err) {
+            console.error(err);
+        }
+    
+        console.log(result);
     });
-    const codeReader = new ZXing.BrowserQRCodeReader();
-    const img = document.getElementById('img');
 
-    try {
-        const result = await codeReader.decodeFromImage(img);
-    } catch (err) {
-        console.error(err);
-    }
-
-    console.log(result);
 })
