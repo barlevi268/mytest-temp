@@ -63,15 +63,30 @@
         <div></div>
       </div>
     </div>
-    <div class="container">
-      <div class="wrapper">
-        <form>
-          <div class="row">
-            <input class="form-control col-5"/>
-            <input class="form-control col-2"/>
-          </div class="row">
-        </form>
+    <div class="container d-grid">
+      <div class="container">
+        <div class="row">
+          <div class="col-9">
+            <input 
+            class="form-control"
+            type="number"
+            pattern="\d*"
+            name="patient_id"
+            placeholder="ת.ז."
+            autocomplete="off"/>
+          </div>
+          <div class="col-3">
+            <input
+            class="form-control"
+            type="text"
+            name="patient_passport"
+            placeholder="דרכון"
+            autocomplete="off"
+            />
+          </div>
+        </div>
       </div>
+      
     </div>
     <!-- end::page content -->
   </body>

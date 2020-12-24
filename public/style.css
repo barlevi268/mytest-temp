@@ -161,6 +161,10 @@ input::-webkit-inner-spin-button {
   width:48%;
 }
 
+.row {
+  --bs-gutter-x:1rem;
+}
+
 hr {
   color:var(--border);
   background-color:var(--border);
