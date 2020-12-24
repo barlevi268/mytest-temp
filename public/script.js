@@ -1,10 +1,10 @@
 
 var alertModal = {
     subView: $('#alertModal'),
-    content,
-    successIcon,
-    primaryButton,
-    secondaryButton,
+    content:null,
+    successIcon:null,
+    primaryButton:null,
+    secondaryButton:null,
     show: () => alertModal.subView.modal('show'),
     clear: () => {
         alertModal.primaryButton.html('אישור')
@@ -66,7 +66,6 @@ var alertModal = {
         }
         alertModal.show()
     },
-
     init: () => {
         alertModal.content = alertModal.subView.find('.modal-message');
         alertModal.successIcon = alertModal.subView.find('.modal-icon');
