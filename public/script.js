@@ -14,7 +14,7 @@ var alertModal = {
         alertModal.successIcon.addClass('d-none')
         alertModal.secondaryButton.addClass(['col-spaced','col-6'])
     },
-    hide: (skip = '') => {
+    hide: () => {
         alertModal.subView.modal('hide')
         alertModal.clear()
     },
@@ -67,7 +67,5 @@ var alertModal = {
 
 $(() => {
     alertModal.init()
-    alertModal.display({
-        hideSecondary:true
-    })
+
 })
