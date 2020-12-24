@@ -113,8 +113,15 @@ input::-webkit-inner-spin-button {
   margin-bottom: 20px;
 }
 
-input[type="radio"]:checked+label {
-  background-color: back;
+.easy-radio input[type="radio"]+label {
+  color:var(--text-muted);
+  font-weight: 400;
+} 
+
+.easy-radio input[type="radio"]:checked+label {
+  border:1px solid var(--primary);
+  color:var(--primary);
+  font-weight: 500;
 } 
 
 .select2-container--default .select2-selection--single {

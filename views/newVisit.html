@@ -5,11 +5,8 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1 maximum-scale=1"
-    />
-    <meta name="description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <meta name="description"  />
 
     <title>Welcome to Glitch!</title>
 
@@ -20,15 +17,9 @@
       type="image/x-icon"
     />
     <!-- import the webpage's stylesheet -->
-
-    <link
-      rel="stylesheet"
-      href="/plugins/bootstrap/css/bootstrap.rtl.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/plugins/bootstrap/css/bootstrap-utilities.rtl.min.css"
-    />
+    
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap-utilities.rtl.min.css" />
     <link rel="stylesheet" href="/plugins/select2/select2.min.css" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -86,9 +77,7 @@
 
     <div class="container">
       <div class="nav-header mb-2 d-flex justify-content-between">
-        <a href="javascript:history.back()"
-          ><img src="media/back-icon.svg"
-        /></a>
+        <a href="javascript:history.back()"><img src="media/back-icon.svg" /></a>
         <div>מצא \ צור ביקור</div>
         <div></div>
       </div>
@@ -110,80 +99,80 @@
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label>מיקום</label>
+              <label>מיקום</label>                
               <select select2-type="search" placeholder="בחר מיקום">
                 <option></option>
-                <option>פרוטאה בכפר</option>
+                <option>
+                  פרוטאה בכפר
+                </option>
               </select>
             </div>
             <div class="form-group col-6">
-              <label>קופה</label>
+              <label>קופה</label>                
               <select select2-type="regular" placeholder="בחר קופה">
                 <option></option>
-                <option value="clalit">כללית</option>
-                <option value="leumit">לאומית</option>
-                <option value="maccabi">מעבי</option>
-                <option value="meuhedet">מאוחדת</option>
+                <option value="clalit">
+                  כללית
+                </option>
+                <option value="leumit">
+                  לאומית
+                </option>
+                <option value="maccabi">
+                  מעבי
+                </option>
+                <option value="meuhedet">
+                  מאוחדת
+                </option>
               </select>
             </div>
           </div>
-          <div class="row">
-            <div class="form-group col">
-              <label>סוג נבדק</label>
-              <select select2-type="regular" class="segment-select">
-                <option>דייר</option>
-                <option>צוות</option>
-                <option>אזרח</option>
-              </select>
+          <div class="row easy-radio">
+            <label>סוג נבדק</label>
+            <div class="form-group col-4">
+              <input type="radio" id="resident" name="testeeType" class="d-none" checked/>
+              <label for="resident" class="form-control text-center" > דייר </label>
+            </div>
+            <div class="form-group col-4">
+              <input type="radio" id="crew" name="testeeType" class="d-none" />
+              <label for="crew" class="form-control text-center"> צוות </label>
+            </div>
+            <div class="form-group col-4">
+              <input type="radio" id="civilian" name="testeeType" class="d-none" />
+              <label for="civilian" class="form-control text-center"> אזרח </label>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
               <label>תמונה</label>
-              <label for="uploadBacode" class="form-control text-center"
-                ><u>צלם תמונה</u></label
-              >
-              <input type="file" id="uploadBacode" class="d-none" />
+                <label for="uploadBacode" class="form-control text-center"><u>צלם תמונה</u></label>
+              <input type="file" id="uploadBacode" class="d-none"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
               <label>ברקוד</label>
-              <input
-                type="number"
-                class="form-control"
-                placeholder="העלאה תמונה או הזן ברקוד"
-              />
+              <input type="number" class="form-control" placeholder="העלאה תמונה או הזן ברקוד"/>
             </div>
           </div>
-          <div class="row">
+          <div class="row easy-radio">
             <label>האם קיימים תסמינים</label>
-            <div class="easy-radio">
-              <div class="form-group col-6">
-                <input type="radio" id="hasSymp" name="symptoms" />
-                <label
-                for="hasSymp"
-                class="form-control text-center text-muted"
-              >
-                כן
-              </label>
-              </div>
-              <div class="form-group col-6">
-                <input type="radio" id="noSymp" name="symptoms" />
-                <label for="noSymp" class="form-control text-center text-muted">
-                  לא
-                </label>
-              </div>
+            <div class="form-group col-6">
+              <input type="radio" id="hasSymp" name="symptoms" class="d-none" />
+              <label for="hasSymp" class="form-control text-center"> כן </label>
+            </div>
+            <div class="form-group col-6">
+              <input type="radio" id="noSymp" name="symptoms" class="d-none" />
+              <label for="noSymp" class="form-control text-center"> לא </label>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="form-footer mt-3">
-            <button type="button" class="btn btn-primary btn-block">
-              סיים ושלח ביקור
-            </button>
+            <button type="button" class="btn btn-primary btn-block">סיים ושלח ביקור</button>
           </div>
         </div>
+
+        
       </form>
     </div>
     <!-- end::page content -->
