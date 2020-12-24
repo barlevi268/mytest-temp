@@ -16,7 +16,7 @@ $(() => {
         javascriptBarcodeReader({
             /* Image ID || HTML5 Image || HTML5 Canvas || HTML5 Canvas ImageData || Image URL */
             image: uploadBarcodeCaddy,
-            barcode: 'code-2of5',
+            barcode: 'code-128',
             barcodeType: 'industrial',
             options: {
               // useAdaptiveThreshold: true // for images with sahded portions
