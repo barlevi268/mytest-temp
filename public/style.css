@@ -143,12 +143,52 @@ input::-webkit-inner-spin-button {
   left:15px;
 }
 
+#radios {
+  position:relative;
+  width:370px;
+}
+input {
+  display: none;
+}
+#bckgrnd, .labels {
+  width:50%;
+  height:30px;
+  text-align:center;
+  display: inline-block;
+  float:left;
+  padding-top:10px;
+  z-index:2;
+  cursor:pointer;
+}
+.labels {
+  outline: 1px solid green;
+}
+#bckgrnd {
+  background-color:orange;
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:-1;
+  transition: left linear 0.15s;
+}
+#rad1:checked ~ #bckgrnd {
+  left:0;
+}
+#rad2:checked ~ #bckgrnd {
+  left:50%;
+}
+
 .btn {
   border-radius:0.8rem;
   border:none;
   font-weight:500;
   padding:20px 30px;
   
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
 }
 
 .btn-primary {
