@@ -71,7 +71,7 @@ function initSelect2() {
             width:'100%',
             placeholder:$(val).attr('placeholder')
         }
-        displayMode != 'search' ? : delete settings.
+        displayMode != 'search' ? settings.minimumResultsForSearch = -1 : delete settings.minimumResultsForSearch
         $(val).select2(settings)
     })
 }
