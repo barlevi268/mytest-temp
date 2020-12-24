@@ -177,3 +177,8 @@ hr {
   background-color: var(--bg-light);
   border-radius: 10px;
 }
+
+.nav-header {
+  padding: 15px 15px;
+  font-weight: 500;
+}
