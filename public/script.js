@@ -60,21 +60,17 @@ var alertModal = {
         }
         alertModal.show()
     },
-
     init: () => alertModal.clear()
 }
 
 function initSelect2() {
     $.each($('[select2-type]'), (i,val) => {
         var displayMode = $(val).attr('select2-type')
-        var settings = {
+        $(val).select2({
             width:'100%',
-            placeholder:$(val).attr('placeholder')
-        }
-
-        displayMode != "search" ? settings.minimumResultsForSearch = -1:'';
-
-        $(val).select2(settings)
+            placeholder:$(val).attr('placeholder'),
+            // allowClear:true
+        })
     })
 }
 
@@ -89,6 +85,6 @@ $(() => {
 
     initSelect2()
 
-    initSegmnet()
+    
 
 })
