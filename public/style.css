@@ -9,6 +9,7 @@
   --text-muted:#c6c6c6;
   --bg-light:#F0F0F0;
   --bg-primary:#131f52;
+  --border:#E5E5E5;
 }
 
 
@@ -21,7 +22,7 @@
 
 body {
   font-family: 'Rubik', sans-serif;
-  margin: 0 1em;
+  margin: 0;
 }
 
 a {
@@ -44,6 +45,10 @@ h4 {
 .wrapper {
   max-width: 450px;
   margin:0 auto;
+}
+
+.container {
+  padding: 0;
 }
 
 form label {
@@ -150,6 +155,14 @@ input::-webkit-inner-spin-button {
 
 .col-spaced {
   width:48%;
+}
+
+hr {
+  color:var(--border);
+  background-color:var(--border);
+  height:20px;
+  border: 0 none;
+  border-width:0;
 }
 
 .nav-item {
