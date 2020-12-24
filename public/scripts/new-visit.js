@@ -13,16 +13,23 @@ $(() => {
     
     $("#uploadBacode").change( async function() {
         readURL(this);
-        const codeReader = new ZXing.BrowserQRCodeReader();
-        const img = document.getElementById('uploadBarcodeCaddy');
+        javascriptBarcodeReader({
+            /* Image ID || HTML5 Image || HTML5 Canvas || HTML5 Canvas ImageData || Image URL */
+            image: uploadBarcodeCaddy,
+            barcode: 'code-2of5',
+            barcodeType: 'industrial',
+            options: {
+              // useAdaptiveThreshold: true // for images with sahded portions
+              // singlePass: true
+            }
+          })
+            .then(code => {
+              console.log(code)
+            })
+            .catch(err => {
+              console.log(err)
+            })
     
-        try {
-            const result = await codeReader.decodeFromImage(img);
-        } catch (err) {
-            console.error(err);
-        }
-    
-        console.log(result);
     });
 
 })
