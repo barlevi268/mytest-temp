@@ -26,6 +26,7 @@ $(() => {
             $("#uploadBacode").on("change", function(e) {
                 if (e.target.files && e.target.files.length) {
                     readURL(this);
+                    $('[for="uploadBarcode"]')
                     App.decode(URL.createObjectURL(e.target.files[0]));
                 }
             });
