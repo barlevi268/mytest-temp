@@ -75,6 +75,10 @@ function initSelect2() {
     })
 }
 
+function initSegmnet() {
+    
+}
+
 $(() => {
     alertModal.init()
 

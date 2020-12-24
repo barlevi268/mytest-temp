@@ -145,37 +145,41 @@ input::-webkit-inner-spin-button {
 
 #radios {
   position:relative;
-  width:370px;
+  width:100%;
 }
 input {
   display: none;
 }
-#bckgrnd, .labels {
-  width:50%;
-  height:30px;
-  text-align:center;
-  display: inline-block;
-  float:left;
-  padding-top:10px;
-  z-index:2;
-  cursor:pointer;
+
+.ui-segment{
+	color: rgb(0, 122, 255);
+	border: 1px solid rgb(0, 122, 255);
+	border-radius: 4px;
+	display:inline-block;
+	font-family: 'Lato',Georgia, Serif;
 }
-.labels {
-  outline: 1px solid green;
+.ui-segment span.option.active{
+	background-color: rgb(0, 122, 255);
+	color: white;
 }
-#bckgrnd {
-  background-color:orange;
-  position:absolute;
-  left:0;
-  top:0;
-  z-index:-1;
-  transition: left linear 0.15s;
+.ui-segment span.option{
+	font-size: 13px;
+	padding-left: 23px;
+	padding-right: 23px;
+	height: 25px;
+	text-align:center;
+	display:inline-block;
+	line-height: 25px;
+	margin: 0px;
+	float:left;
+	cursor:pointer;
+	border-right:1px solid rgb(0, 122, 255);
 }
-#rad1:checked ~ #bckgrnd {
-  left:0;
+.ui-segment span.option:last-child{
+	border-right: none;
 }
-#rad2:checked ~ #bckgrnd {
-  left:50%;
+.segment-select{
+	display:none;
 }
 
 .btn {
