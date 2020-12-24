@@ -5,13 +5,19 @@ var alertModal = {
     primaryButton: $('.primary-action'),
     secondaryButton: $('.secondary-action'),
     show: () => alertModal.subView.modal('show'),
-    clear: () => {},
+    clear: () => {
+        alertModal.primaryButton.html('אישור')
+        alertModal.secondaryButton.html('ביטול')
+        alertModal.primaryButton.on('click',() => alertModal.subView.modal('hide'))
+        alertModal.secondaryButton.on('click',() => alertModal.hide())
+        alertModal.
+        alertModal.
+    },
     hide: () => {
         alertModal.subView.modal('hide')
         alertModal.clear()
     },
     display: (message) => {
-        console.log(typeof message)
         if (typeof message == "object") {
             
             if (message.content) {
@@ -48,7 +54,7 @@ var alertModal = {
             }
 
         } else if (typeof message == 'string') {
-
+            alertModal.content.html(message)
         }
         alertModal.show()
     }
@@ -56,11 +62,5 @@ var alertModal = {
 
 
 $(() => {
-    alertModal.display({
-        content:"hi",
-        primaryLabel:"המשך",
-        secondaryLabel:"ביטול",
-        icon: 'success',
-        primaryAction: function() {alert('hi')}
-    })
+    alertModal.display("פעולה הושלמה בהצלחה")
 })
