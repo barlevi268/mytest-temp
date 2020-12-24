@@ -8,12 +8,13 @@ var alertModal = {
     clear: () => {
         alertModal.primaryButton.html('אישור')
         alertModal.secondaryButton.html('ביטול')
-        alertModal.primaryButton.on('click',() => alertModal.subView.modal('hide'))
+        alertModal.primaryButton.on('click',() => alertModal.hide())
         alertModal.secondaryButton.on('click',() => alertModal.hide())
-        alertModal.
-        alertModal.
+        alertModal.content.html('')
+        alertModal.successIcon.addClass('d-none')
+        alertModal.secondaryButton.addClass(['col-spaced','col-6'])
     },
-    hide: () => {
+    hide: (skip = '') => {
         alertModal.subView.modal('hide')
         alertModal.clear()
     },
@@ -43,6 +44,7 @@ var alertModal = {
 
             if (message.hideSecondary) {
                 alertModal.secondaryButton.hide()
+                alertModal.primaryButton.removeClass(['col-spaced','col-6'])
             }
 
             if (message.icon) {
@@ -57,10 +59,15 @@ var alertModal = {
             alertModal.content.html(message)
         }
         alertModal.show()
-    }
+    },
+
+    init: () => alertModal.clear()
 }
 
 
 $(() => {
-    alertModal.display("פעולה הושלמה בהצלחה")
+    alertModal.init()
+    alertModal.display({
+        hideSecondary:true
+    })
 })
