@@ -3,8 +3,7 @@
   --primary: #131f52;
   --primary-hover:#1B3086;
   --secondary:transparent;
-  --secondary-hover:
-  --text-primary:#2C3350;
+  --text-primary:#2c3350;
   --text-light:#676767;
   --input-bg: #F6F7F9;
   --text-muted:#c6c6c6;
@@ -39,6 +38,9 @@ p {
   line-height:1em;
 }
 
+h4 {
+  color:var(--text-primary)
+}
 .wrapper {
   max-width: 450px;
   margin:0 auto;
