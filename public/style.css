@@ -113,6 +113,10 @@ input::-webkit-inner-spin-button {
   margin-bottom: 20px;
 }
 
+input[type="radio"]:checked+label {
+  background-color: back;
+} 
+
 .select2-container--default .select2-selection--single {
   border-radius:0.8rem;
   font-weight:500;
