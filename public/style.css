@@ -101,12 +101,12 @@ input::-webkit-inner-spin-button {
 }
 
 .form-control:focus {
-  border:none;
   color:var(--text-primary);
   border: none;
   border-color:transparent;
   outline-color:transparent;
   background-color: var(--input-bg);
+  box-shadow: unset;
 }
 
 .form-group {
@@ -115,11 +115,12 @@ input::-webkit-inner-spin-button {
 
 .easy-radio input[type="radio"]+label {
   color:var(--text-muted);
+  border:1.5px solid transparent;
   font-weight: 400;
 } 
 
 .easy-radio input[type="radio"]:checked+label {
-  border:1px solid var(--primary);
+  border:1.5px solid var(--primary);
   color:var(--primary);
   font-weight: 500;
 } 
