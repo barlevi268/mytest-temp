@@ -9,6 +9,7 @@
   --input-bg: #F6F7F9;
   --text-muted:#c6c6c6;
   --bg-light:#F0F0F0;
+  --bg-primary:#131f52;
 }
 
 
@@ -47,6 +48,10 @@ form label {
   font-weight:500;
   color:var(--text-primary);
   margin-bottom:5px;
+}
+
+.bg-primary {
+  background-color: var(--bg-primary)!important;
 }
 
 .form-header {
