@@ -67,21 +67,28 @@ var alertModal = {
 function initSelect2() {
     $.each($('[select2-type]'), (i,val) => {
         var displayMode = $(val).attr('select2-type')
-        $(val).select2({
+        var settings = {
             width:'100%',
-            placeholder:$(val).attr('placeholder'),
-            allowClear:true
-        })
+            placeholder:$(val).attr('placeholder')
+        }
+
+        displayMode != "search" ? settings.minimumResultsForSearch = -1:'';
+
+        $(val).select2(settings)
     })
 }
 
 function initSegmnet() {
-    
+    $.each($('[segmented]'),(i,val) => {
+        $(val).Segment()
+    })
 }
 
 $(() => {
     alertModal.init()
 
     initSelect2()
+
+    initSegmnet()
 
 })
