@@ -115,7 +115,7 @@ input::-webkit-inner-spin-button {
   border-radius:0.8rem;
   font-weight:500;
   border:none;
-  /* padding:20px 0 ; */
+  padding:20px 0 ;
   background-color: var(--input-bg);
 }
 
@@ -123,8 +123,8 @@ input::-webkit-inner-spin-button {
   color:var(--text-primary);
 }
 
-.select2-container[dir="rtl"] .select2-selection--single .select2-selection__rendered {
-  /* padding: 0 20px; */
+.select2-container .select2-selection--single {
+  height:unset;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
