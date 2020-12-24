@@ -151,3 +151,10 @@ input::-webkit-inner-spin-button {
 .col-spaced {
   width:48%;
 }
+
+.nav-item {
+  color:var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  background-color: black;
+}
