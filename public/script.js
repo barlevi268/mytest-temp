@@ -1,9 +1,10 @@
+
 var alertModal = {
     subView: $('#alertModal'),
-    content: $('.modal-message'),
-    successIcon: $('.modal-icon'),
-    primaryButton: $('.primary-action'),
-    secondaryButton: $('.secondary-action'),
+    content,
+    successIcon,
+    primaryButton,
+    secondaryButton,
     show: () => alertModal.subView.modal('show'),
     clear: () => {
         alertModal.primaryButton.html('אישור')
@@ -21,6 +22,11 @@ var alertModal = {
     display: (message) => {
         if (typeof message == "object") {
             
+            if (message.modalId) {
+                alertModal.subView = $(`#${message.modalId}`)
+                alertModal.init()
+            }
+
             if (message.content) {
                 alertModal.content.html(message.content)
             }
@@ -61,7 +67,13 @@ var alertModal = {
         alertModal.show()
     },
 
-    init: () => alertModal.clear()
+    init: () => {
+        alertModal.content = alertModal.subView.find('.modal-message');
+        alertModal.successIcon = alertModal.subView.find('.modal-icon');
+        alertModal.primaryButton = alertModal.subView.find('.primary-action');
+        alertModal.secondaryButton = alertModal.subView.find('.secondary-action');
+        alertModal.clear()
+    }
 }
 
 function initSelect2() {
