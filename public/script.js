@@ -64,8 +64,15 @@ var alertModal = {
     init: () => alertModal.clear()
 }
 
+function initSelect2() {
+    $.each($('[select2]'), (i,val) => {
+        $(val).select2()
+    })
+}
 
 $(() => {
     alertModal.init()
 
+    initSelect2()
+    
 })
