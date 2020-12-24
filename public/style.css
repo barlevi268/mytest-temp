@@ -89,6 +89,7 @@ input::-webkit-inner-spin-button {
   border:none;
   padding:20px;
   background-color: var(--input-bg);
+  text-align: right;
 }
 
 .form-control-pin {
