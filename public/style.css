@@ -47,6 +47,10 @@ h4 {
   margin:0 auto;
 }
 
+.px-4-5 {
+  padding-right: 2rem!important;
+  padding-left: 2rem!important;
+}
 .container {
   padding: 0;
 }

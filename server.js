@@ -26,6 +26,10 @@ app.get("/menu", (request, response) => {
   response.sendFile(__dirname + "/views/menu.html");
 });
 
+app.get("/findPatient", (request, response) => {
+  response.sendFile(__dirname + "/views/findPatient.html");
+});
+
 // send the default array of dreams to the webpage
 app.get("/dreams", (request, response) => {
   // express helps us take JS objects and send them as JSON
