@@ -19,6 +19,7 @@
   font-size:10pt;
   color:var(--text-primary);
   transition: all 0.2s;
+  outline:none;
 }
 
 body {
@@ -141,11 +142,6 @@ input::-webkit-inner-spin-button {
 
 .select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow {
   left:15px;
-}
-
-
-input {
-  display: none;
 }
 
 .btn {

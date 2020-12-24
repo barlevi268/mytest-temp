@@ -60,23 +60,19 @@ var alertModal = {
         }
         alertModal.show()
     },
+
     init: () => alertModal.clear()
 }
 
 function initSelect2() {
     $.each($('[select2-type]'), (i,val) => {
         var displayMode = $(val).attr('select2-type')
-        $(val).select2({
+        var settings = {
             width:'100%',
-            placeholder:$(val).attr('placeholder'),
-            // allowClear:true
-        })
-    })
-}
-
-function initSegmnet() {
-    $.each($('[segmented]'),(i,val) => {
-        $(val).Segment()
+            placeholder:$(val).attr('placeholder')
+        }
+        displayMode != 'search' ? : delete settings.
+        $(val).select2(settings)
     })
 }
 
@@ -84,7 +80,5 @@ $(() => {
     alertModal.init()
 
     initSelect2()
-
-    
 
 })
