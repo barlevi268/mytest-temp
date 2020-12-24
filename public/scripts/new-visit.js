@@ -1,40 +1,4 @@
 $(() => {
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          
-          reader.onload = function(e) {
-            $('#uploadBarcodeCaddy').attr('src', e.target.result);
-          }
-          
-          reader.readAsDataURL(input.files[0]); // convert to base64 string
-        }
-    }
-    
-    $("#uploadBacode").change( async function() {
-        readURL(this);
-        javascriptBarcodeReader({
-            /* Image ID || HTML5 Image || HTML5 Canvas || HTML5 Canvas ImageData || Image URL */
-            image: uploadBarcodeCaddy,
-            barcode: 'code-128',
-            barcodeType: 'industrial',
-            options: {
-              // useAdaptiveThreshold: true // for images with sahded portions
-              // singlePass: true
-            }
-          })
-            .then(code => {
-              console.log(code)
-            })
-            .catch(err => {
-              console.log(err)
-            })
-    
-    });
-
-})
-
-$(function() {
     var App = {
         init: function() {
             App.attachListeners();
@@ -43,32 +7,13 @@ $(function() {
             reader: "code_128",
             length: 10
         },
-        //not needed
         attachListeners: function() {
             var self = this;
 
-            $(".controls input[type=file]").on("change", function(e) {
+            $("#uploadBacode").on("change", function(e) {
                 if (e.target.files && e.target.files.length) {
                     App.decode(URL.createObjectURL(e.target.files[0]));
                 }
-            });
-
-            $(".controls button").on("click", function(e) {
-                var input = document.querySelector(".controls input[type=file]");
-                if (input.files && input.files.length) {
-                    App.decode(URL.createObjectURL(input.files[0]));
-                }
-            });
-
-            $(".controls .reader-config-group").on("change", "input, select", function(e) {
-                e.preventDefault();
-                var $target = $(e.target),
-                    value = $target.attr("type") === "checkbox" ? $target.prop("checked") : $target.val(),
-                    name = $target.attr("name"),
-                    state = self._convertNameToState(name);
-
-                console.log("Value of "+ state + " changed to " + value);
-                self.setState(state, value);
             });
 
         },
@@ -89,58 +34,11 @@ $(function() {
                 return result + value.charAt(0).toUpperCase() + value.substring(1);
             });
         },
-        detachListeners: function() {
-            $(".controls input[type=file]").off("change");
-            $(".controls .reader-config-group").off("change", "input, select");
-            $(".controls button").off("click");
-
-        },
         decode: function(src) {
             var self = this,
                 config = $.extend({}, self.state, {src: src});
 
             Quagga.decodeSingle(config, function(result) {});
-        },
-        setState: function(path, value) {
-            var self = this;
-
-            if (typeof self._accessByPath(self.inputMapper, path) === "function") {
-                value = self._accessByPath(self.inputMapper, path)(value);
-            }
-
-            self._accessByPath(self.state, path, value);
-
-            console.log(JSON.stringify(self.state));
-            App.detachListeners();
-            App.init();
-        },
-        inputMapper: {
-            inputStream: {
-                size: function(value){
-                    return parseInt(value);
-                }
-            },
-            numOfWorkers: function(value) {
-                return parseInt(value);
-            },
-            decoder: {
-                readers: function(value) {
-                    if (value === 'ean_extended') {
-                        return [{
-                            format: "ean_reader",
-                            config: {
-                                supplements: [
-                                    'ean_5_reader', 'ean_2_reader'
-                                ]
-                            }
-                        }];
-                    }
-                    return [{
-                        format: value + "_reader",
-                        config: {}
-                    }];
-                }
-            }
         },
         state: {
             inputStream: {
@@ -164,38 +62,9 @@ $(function() {
 
     App.init();
 
-    Quagga.onProcessed(function(result) {
-        var drawingCtx = Quagga.canvas.ctx.overlay,
-            drawingCanvas = Quagga.canvas.dom.overlay;
-
-        if (result) {
-            if (result.boxes) {
-                drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
-                result.boxes.filter(function (box) {
-                    return box !== result.box;
-                }).forEach(function (box) {
-                    Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, drawingCtx, {color: "green", lineWidth: 2});
-                });
-            }
-
-            if (result.box) {
-                Quagga.ImageDebug.drawPath(result.box, {x: 0, y: 1}, drawingCtx, {color: "#00F", lineWidth: 2});
-            }
-
-            if (result.codeResult && result.codeResult.code) {
-                Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
-            }
-        }
-    });
-
     Quagga.onDetected(function(result) {
-        var code = result.codeResult.code,
-            $node,
-            canvas = Quagga.canvas.dom.image;
-
-        $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
-        $node.find("img").attr("src", canvas.toDataURL());
-        $node.find("h4.code").html(code);
-        $("#result_strip ul.thumbnails").prepend($node);
+        console.log(result.codeResult.code)
+        var code = result.codeResult.code;
+        $('[name="test_barcode"]').val(code);
     });
 });
