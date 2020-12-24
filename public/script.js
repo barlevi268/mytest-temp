@@ -1,9 +1,9 @@
 var alertModal = {
     subView: $('#alertModal'),
     content: $('.modal-message'),
-    successIcon: $(''),
-    primaryButton: $('.'),
-    secondaryButton: $(''),
+    successIcon: $('.modal-icon'),
+    primaryButton: $('.primary-action'),
+    secondaryButton: $('.secondary-action'),
     show: () => alertModal.subView.modal('show'),
     clear: () => {},
     hide: () => {
@@ -11,21 +11,23 @@ var alertModal = {
         alertModal.clear()
     },
     display: (message) => {
-        if (typeof message == Object) {
+        console.log(typeof message)
+        if (typeof message == "object") {
+            
             if (message.content) {
                 alertModal.content.html(message.content)
             }
             
-            if (message.primaryAcion) {
-                alertModal.primaryButton.on('click', () => message.primaryAcion)
+            if (message.primaryAction) {
+                alertModal.primaryButton.on('click', message.primaryAction)
             }
 
             if (message.primaryLabel) {
                 alertModal.primaryButton.html(message.primaryLabel)
             }
 
-            if (message.secondaryAcion) {
-                alertModal.secondaryButton.on('click', () => message.secondaryAcion)
+            if (message.secondaryAction) {
+                alertModal.secondaryButton.on('click', message.secondaryAction)
             }
 
 
@@ -38,14 +40,14 @@ var alertModal = {
             }
 
             if (message.icon) {
-                message.icon == 'success' ? alertModal.successIcon.show() : alertModal.successIcon.hide();
+                message.icon == 'success' ? alertModal.successIcon.removeClass('d-none') : alertModal.successIcon.addClass('d-none');
             }
 
             if (message.onInit) {
                 message.onInit.call()
             }
 
-        } else if (typeof message == String) {
+        } else if (typeof message == 'string') {
 
         }
         alertModal.show()
@@ -56,6 +58,9 @@ var alertModal = {
 $(() => {
     alertModal.display({
         content:"hi",
+        primaryLabel:"המשך",
+        secondaryLabel:"ביטול",
+        icon: 'success',
         primaryAction: function() {alert('hi')}
     })
 })
