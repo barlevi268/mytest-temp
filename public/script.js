@@ -68,7 +68,9 @@ function initSelect2() {
     $.each($('[select2-type]'), (i,val) => {
         var displayMode = $(val).attr('select2-type')
         $(val).select2({
-            width:'100%'
+            width:'100%',
+            placeholder:$(val).attr('placeholder'),
+            allowClear:true
         })
     })
 }

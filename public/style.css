@@ -127,8 +127,20 @@ input::-webkit-inner-spin-button {
   height:unset;
 }
 
+.select2-container[dir="rtl"] .select2-selection--single .select2-selection__rendered {
+  padding-right:20px;
+}
+
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   line-height: unset;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height:60px;
+}
+
+.select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow {
+  left:15px;
 }
 
 .btn {
