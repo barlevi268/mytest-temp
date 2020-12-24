@@ -160,7 +160,7 @@ input::-webkit-inner-spin-button {
 hr {
   color:var(--border);
   background-color:var(--border);
-  height:20px;
+  height:2px;
   border: 0 none;
   border-width:0;
 }
