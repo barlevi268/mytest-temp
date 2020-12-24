@@ -1,11 +1,11 @@
 var alertModal = {
     subView: $('#alertModal'),
-    content,
-    successIcon,
-    primaryButton,
-    secondaryButton,
+    content: $('.modal-message'),
+    successIcon: $(''),
+    primaryButton: $(''),
+    secondaryButton: $(''),
     show: () => alertModal.subView.modal('show'),
-    clear,
+    clear: () => {},
     hide: () => {
         alertModal.subView.modal('hide')
         alertModal.clear()
@@ -20,8 +20,17 @@ var alertModal = {
                 alertModal.primaryButton.on('click', () => message.primaryAcion)
             }
 
+            if (message.primaryLabel) {
+                alertModal.primaryButton.html(message.primaryLabel)
+            }
+
             if (message.secondaryAcion) {
                 alertModal.secondaryButton.on('click', () => message.secondaryAcion)
+            }
+
+
+            if (message.secondaryLabel) {
+                alertModal.secondaryButton.html(message.secondaryLabel)
             }
 
             if (message.hideSecondary) {
@@ -39,11 +48,14 @@ var alertModal = {
         } else if (typeof message == String) {
 
         }
+        alertModal.show()
     }
 }
 
 
 $(() => {
-    
-    $('#alertModal').modal('show')
+    alertModal.display({
+        content:"hi",
+        primaryAction: function() {alert('hi')}
+    })
 })
