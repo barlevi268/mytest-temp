@@ -65,8 +65,11 @@ var alertModal = {
 }
 
 function initSelect2() {
-    $.each($('[select2]'), (i,val) => {
-        $(val).select2()
+    $.each($('[select2-type]'), (i,val) => {
+        var displayMode = $(val).attr('select2-type')
+        $(val).select2({
+            width:'100%'
+        })
     })
 }
 
@@ -74,5 +77,5 @@ $(() => {
     alertModal.init()
 
     initSelect2()
-    
+
 })
