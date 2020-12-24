@@ -122,7 +122,7 @@ input::-webkit-inner-spin-button {
 
 @media (min-width: 576px) {
   .modal-dialog {
-      max-width: 500px;
+      max-width: 300px;
       margin:1.75rem auto
   }
 }

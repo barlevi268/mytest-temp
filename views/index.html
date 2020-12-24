@@ -37,12 +37,12 @@
         <div class="modal-content">
           <div class="modal-body">
             <div class="modal-message">
-              שם משתמש או סיסמה לא נכונים
+              {{modal message}}
             </div>
             <div calss="modal-actiosn container-fluid">
               <div class="row justify-content-between">
-                  <button type="button" class="btn btn-primary btn-block col-6 col-spaced" data-dismiss="modal">נסה שוב</button>
-                  <button type="button" class="btn btn-secondary btn-block col-6 col-spaced" data-dismiss="modal">איפוס סיסמה</button>
+                  <button type="button" class="btn btn-primary btn-block col-6 col-spaced" data-dismiss="modal">{{primary action}}</button>
+                  <button type="button" class="btn btn-secondary btn-block col-6 col-spaced" data-dismiss="modal">{{secondary action}}</button>
               </div>
             </div>
           </div>
@@ -54,6 +54,7 @@
     <!-- start::page content -->
     <div class="container">
       <div class="wrapper">
+        <!-- start::login-form -->
         <div class="login-form">
           <!--begin::Form-->
           <form class="form login-form" id="loginForm" ovalidate="novalidate">
@@ -99,6 +100,8 @@
           </form>
           <!--end::Form-->
         </div>
+        <!-- end::login-form -->
+        <!-- start::forgot-form -->
         <div class="forgot-form d-none">
           <!--begin::Form-->
           <form class="form" id="forgotPasswordForm" novalidate="novalidate">
@@ -129,14 +132,16 @@
           </form>
           <!--end::Form-->
         </div>
+        <!-- end::forgot-form -->
+        <!-- start::two-factor-form -->
         <div class="two-factor-form d-none">
           <!--begin::Form-->
           <form class="form" id="twoFactorForm" novalidate="novalidate">
-            <!--begin::Title-->
+            <!--begin::logo-->
             <div class="form-header pt-5">
               <img src="media/logo-light.svg" />
             </div>
-            <!--begin::Title-->
+            <!--begin::logo-->
             <!--begin::Form group-->
             <div class="form-group">
               <h4>
@@ -168,6 +173,7 @@
           </form>
           <!--end::Form-->
         </div>
+        <!-- end::two-factor-form -->
       </div>
     </div>
     <!-- end::page content -->
