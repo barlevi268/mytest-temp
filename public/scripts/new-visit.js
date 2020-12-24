@@ -23,10 +23,11 @@ $(() => {
         attachListeners: function() {
             var self = this;
 
-            $("#uploadBacode").on("change", function(e) {
+            $("#uploadBarcode").on("change", function(e) {
                 if (e.target.files && e.target.files.length) {
                     readURL(this);
-                    $('[for="uploadBarcode"]')
+                    $('[for="uploadBarcode"]').addClass('d-flex align-items-center justify-content-between')
+                    $('[for="uploadBarcode"]').find('u').html('החלף תמונה')
                     App.decode(URL.createObjectURL(e.target.files[0]));
                 }
             });
