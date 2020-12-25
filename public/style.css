@@ -175,9 +175,10 @@ input::-webkit-inner-spin-button {
   width: 100%;
 }
 
-.btn-sticky {
-  position:fixed;
+.row-sticky {
+  position:sticky;
   bottom:1.5rem;
+  z-index:20;
 }
 
 .btn-primary {
