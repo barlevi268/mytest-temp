@@ -91,7 +91,7 @@
         <a href="javascript:history.back()"
           ><img src="media/back-icon.svg"
         /></a>
-        <div>מצא \ צור ביקור</div>
+        <div>שליחת נתונים למשה"ב ולמעבדה</div>
         <div></div>
       </div>
     </div>
@@ -99,16 +99,8 @@
       <form class="form" id="findPatient">
         <div class="container">
           <div class="row mb-2">
-            <div class="text-muted">מס' ביקור</div>
-            <h3 id="visitIdLabel">3122468</h3>
-          </div>
-          <div class="row mb-2">
-            <div class="text-muted">שם מטופל</div>
-            <h3 id="patientFullNameLabel">אברהם מנשה</h3>
-          </div>
-          <div class="row mb-2">
-            <div class="text-muted">תאריך ביקור</div>
-            <h3 id="visitTimeLabel">22/12/20 13:42</h3>
+            <div class="text-muted">מס' בקשה משה"ב</div>
+            <h3 id="mohRequestLabel">8790</h3>
           </div>
           <div class="row">
             <div class="form-group col-6">
@@ -118,9 +110,15 @@
                 <option>פרוטאה בכפר</option>
               </select>
             </div>
+          </div>
+          <div class="row">
             <div class="form-group col-6">
-              <label>קופה</label>
-              <select select2-type="regular" placeholder="בחר קופה">
+              <label>תאריך ביקור</label>
+              <input class="form-control" type="date" placeholder="תאריך ביקור"/>
+            </div>
+            <div class="form-group col-6">
+              <label>סניף</label>
+              <select select2-type="search" placeholder="בחר סניף">
                 <option></option>
                 <option value="clalit">כללית</option>
                 <option value="leumit">לאומית</option>
