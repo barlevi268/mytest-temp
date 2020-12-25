@@ -86,6 +86,10 @@ form label {
   border-bottom: 1px solid #F6F7F9!important;
 }
 
+.shadow-light {
+  box-shadow: 0 .3rem 1rem rgba(0,0,0,.07)!important;
+}
+
 .shadow-primary {
   box-shadow:0 .5rem 1rem rgba(19,31,82,.38)!important;
 }
