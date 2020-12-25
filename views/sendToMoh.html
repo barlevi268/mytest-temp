@@ -120,73 +120,61 @@
               <label>סניף</label>
               <select select2-type="search" placeholder="בחר סניף">
                 <option></option>
-                <option value="clalit">כללית</option>
-                <option value="leumit">לאומית</option>
-                <option value="maccabi">מעבי</option>
-                <option value="meuhedet">מאוחדת</option>
+                <option value="clalit">מודיעין דם המכבים</option>
               </select>
             </div>
           </div>
-          <div class="row easy-radio">
-            <label>סוג נבדק</label>
-            <div class="form-group col-4">
-              <input
-                type="radio"
-                id="resident"
-                name="testeeType"
-                class="d-none"
-                checked
-              />
-              <label for="resident" class="form-control text-center">
-                דייר
-              </label>
+          <div class="row">
+            <div class="form-group col-6">
+              <label>תאריך שליחה למעבדה</label>
+              <input class="form-control" placeholder="הזן תאריך שליחה"/>
             </div>
-            <div class="form-group col-4">
-              <input type="radio" id="crew" name="testeeType" class="d-none" />
-              <label for="crew" class="form-control text-center"> צוות </label>
-            </div>
-            <div class="form-group col-4">
-              <input
-                type="radio"
-                id="civilian"
-                name="testeeType"
-                class="d-none"
-              />
-              <label for="civilian" class="form-control text-center">
-                אזרח
-              </label>
+            <div class="form-group col-6">
+              <label>תאריך שליחה למעבדה</label>
+              <input class="form-control" placeholder="הזן תאריך שליחה"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label>תמונה</label>
-              <label for="uploadBarcode" class="form-control text-center py-3">
-                <u>צלם תמונה</u>
-                <img style="height: 40px" id="uploadBarcodeCaddy" />
-              </label>
-              <input type="file" id="uploadBarcode" class="d-none" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label>ברקוד</label>
+              <label>תיאור מיקום \ צידנית</label>
               <input
-                type="number"
-                name="test_barcode"
                 class="form-control"
-                placeholder="העלאה תמונה או הזן ברקוד"
+                placeholder="הזן תיאור מיקום \ צידנית"
               />
             </div>
           </div>
-          <div class="row easy-radio">
-            <label>האם קיימים תסמינים</label>
+          <div class="row">
+            <div class="form-group col">
+              <label>דף סיכום</label>
+              <label for="uploadSummaryPage" class="form-control text-center py-3">
+                <u>צלם תמונה</u>
+              </label>
+              <input type="file" id="uploadSummaryPage" class="d-none" />
+            </div>
+          </div>
+          <div class="row">
             <div class="form-group col-6">
-              <input type="radio" id="hasSymp" name="symptoms" class="d-none" />
-              <label for="hasSymp" class="form-control text-center"> כן </label>
+              <label>מס' ביקור</label>
+              <input class="form-control" placeholder="הזן מס' ביקור" />
             </div>
             <div class="form-group col-6">
-              <input type="radio" id="noSymp" name="symptoms" class="d-none" />
-              <label for="noSymp" class="form-control text-center"> לא </label>
+              <label>מעבדה</label>
+              <select select2-type="regular" disabled>
+                <option value="clalit">AID</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label>סטטוס דגימות</label>
+              <select select2-type="regular" disabled>
+                <option value="clalit">סיום דיגום במוסד ושליחה למעבדה</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h3>סיכום דגימות</h3>
             </div>
           </div>
         </div>
