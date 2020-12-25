@@ -53,8 +53,22 @@ h4 {
   padding-right: 2rem!important;
   padding-left: 2rem!important;
 }
+
+.text-left {
+  text-align: left;
+}
+
+.font-weight-bold {
+  font-weight: 500;
+}
 .container {
   padding: 0;
+}
+
+.card {
+  border:none;
+  border-radius:0.8rem;
+  padding: 0 25px;
 }
 
 form label {
