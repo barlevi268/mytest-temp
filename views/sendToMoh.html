@@ -103,9 +103,9 @@
             <h3 id="mohRequestLabel">8790</h3>
           </div>
           <div class="row">
-            <div class="form-group col-6">
+            <div class="form-group col">
               <label>מיקום</label>
-              <select select2-type="search" placeholder="בחר מיקום">
+              <select select2-type="search" placeholder="חפש או בחר מיקום">
                 <option></option>
                 <option>פרוטאה בכפר</option>
               </select>
@@ -146,7 +146,7 @@
           <div class="row">
             <div class="form-group col">
               <label>דף סיכום</label>
-              <label for="uploadSummaryPage" class="form-control text-center py-3">
+              <label for="uploadSummaryPage" class="form-control text-center">
                 <u>צלם תמונה</u>
               </label>
               <input type="file" id="uploadSummaryPage" class="d-none" />
@@ -165,9 +165,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="col">
+            <div class="form-group col">
               <label>סטטוס דגימות</label>
-              <select select2-type="regular" disabled>
+              <select select2-type="regular">
                 <option value="clalit">סיום דיגום במוסד ושליחה למעבדה</option>
               </select>
             </div>
@@ -175,6 +175,14 @@
           <div class="row">
             <div class="col">
               <h3>סיכום דגימות</h3>
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="scanTest" class="form-control text-center">
+                <u>סרוק דגימה</u>
+              </label>
+              <input type="file" id="scanTest" class="d-none" />
             </div>
           </div>
         </div>

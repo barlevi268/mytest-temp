@@ -157,6 +157,11 @@ input::-webkit-inner-spin-button {
   left:15px;
 }
 
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: var(--text-muted);
+  font-weight:400;
+}
+
 .btn {
   border-radius:0.8rem;
   border:none;
