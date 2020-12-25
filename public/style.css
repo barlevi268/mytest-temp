@@ -71,10 +71,19 @@ h4 {
   padding: 0 25px;
 }
 
+.form-check-input {
+  width:1.5em;
+  height:1.5em;
+}
+
 form label {
   font-weight:500;
   color:var(--text-primary);
   margin-bottom:5px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #F6F7F9!important;
 }
 
 .shadow-primary {
