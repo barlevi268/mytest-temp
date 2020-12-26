@@ -90,6 +90,7 @@ function initSelect2() {
 function initUploadField() {
     $('[type="file"]').on('change', (e) => {
 
+        var $parent = $(e.target).parent()
         var $this = $(e.target)
 
         
@@ -98,10 +99,9 @@ function initUploadField() {
             if (input.files && input.files[0]) {
               var reader = new FileReader();
               reader.onload = function(e) {
-                
-                $this.find('#uploadCaddy').attr('src', e.target.result);
-                $this.find('[for="uploadBarcode"]').addClass('d-flex align-items-center justify-content-between')
-                $this.find('[for="uploadBarcode"]').find('u').html('החלף תמונה')
+                $parent.find('.upload-caddy').attr('src', e.target.result);
+                $parent.find(`[for="${$this.attr('id')}"]`).addClass('d-flex align-items-center justify-content-between')
+                $parent.find(`[for="${$this.attr('id')}"]`).find('u').html('החלף תמונה')
               }
               
               reader.readAsDataURL(input.files[0]); // convert to base64 string
