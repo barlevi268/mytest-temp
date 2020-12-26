@@ -50,26 +50,22 @@ var barcodeReader = {
 
 const fakeVisit = {
     fullName:"חיים רפאלי",
-    patientId:"313521934",
-    phone:"054-7449087",
-    birthDate:"30/11/1985",
-    sex:"male",
-    city:"רחובות"
+    testBarcode:"40132164",
+    visitId:"31628",
 }
 
 function fakeVisitSuccess() {
     alertModal.display({
         modalId:"visitSuccessModal",
-        primaryLabel:"צור ביקור",
-        secondaryLabel:"החלף מטופל",
-        primaryAction: () => location.href = '/newvisit',
+        primaryLabel:"חזרה לתפריט",
+        secondaryLabel:"צור ביקור נוסף",
+        icon:"success",
+        primaryAction: () => location.href = '/menu',
+        secondaryAction: () => location.href = '/findPatient',
         onInit: () => {
             $('#patientFullNameLabel').html(fakeVisit.fullName)
-            $('#testBarcodeLabel').html(fakePatient.patientId)
-            $('[name="patientPhone"]').val(fakePatient.phone)
-            $('[name="patientBirthDate"]').val(fakePatient.birthDate)
-            $('[name="patientSex"]').val(fakePatient.sex)
-            $('[name="patientCity"]').val(fakePatient.city)
+            $('#testBarcodeLabel').html(fakeVisit.testBarcode)
+            $('#visitIdLabel').html(fakeVisit.visitId)
         }
     })
 }
