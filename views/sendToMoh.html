@@ -10,6 +10,8 @@
       content="width=device-width, initial-scale=1 maximum-scale=1"
     />
     <meta name="description" />
+    <meta name="format-detection" content="telephone=no">
+
 
     <title>Welcome to Glitch!</title>
 
@@ -43,7 +45,7 @@
     <script src="/plugins/segment/segment.js"></script>
     <script src="/plugins/barcode/javascript-barcode-reader.umd.min.js"></script>
     <script src="/script.js" defer></script>
-    <script src="/scripts/new-visit.js" defer></script>
+    <script src="/scripts/send-to-moh.js" defer></script>
   </head>
   <body>
     <!-- start::modal template -->
@@ -201,7 +203,7 @@
                   <div class="test-name-label col-6 font-weight-bold">
                     {{name}}
                   </div>
-                  <div class="test-id-labelcol-6 text-left">
+                  <div class="test-id-label col-6 text-left">
                     {{id}}
                   </div>
                 </div>
