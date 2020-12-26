@@ -1,20 +1,16 @@
 $(() => {
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          
-          reader.onload = function(e) {
-            $('#uploadBarcodeCaddy').attr('src', e.target.result);
-          }
-          
-          reader.readAsDataURL(input.files[0]); // convert to base64 string
-        }
-    }
 
 
-    var App = {
+
+    var barcodeReader = {
         init: function() {
-            App.attachListeners();
+            barcodeReader.attachListeners();
+
+            Quagga.onDetected(function(result) {
+                var code = result.codeResult.code;
+                $('[name="test_barcode"]').val(code);
+            });
+
         },
         config: {
             reader: "code_128",
@@ -28,27 +24,10 @@ $(() => {
                     readURL(this);
                     $('[for="uploadBarcode"]').addClass('d-flex align-items-center justify-content-between')
                     $('[for="uploadBarcode"]').find('u').html('החלף תמונה')
-                    App.decode(URL.createObjectURL(e.target.files[0]));
+                    barcodeReader.decode(URL.createObjectURL(e.target.files[0]));
                 }
             });
 
-        },
-        _accessByPath: function(obj, path, val) {
-            var parts = path.split('.'),
-                depth = parts.length,
-                setter = (typeof val !== "undefined") ? true : false;
-
-            return parts.reduce(function(o, key, i) {
-                if (setter && (i + 1) === depth) {
-                    o[key] = val;
-                }
-                return key in o ? o[key] : {};
-            }, obj);
-        },
-        _convertNameToState: function(name) {
-            return name.replace("_", ".").split("-").reduce(function(result, value) {
-                return result + value.charAt(0).toUpperCase() + value.substring(1);
-            });
         },
         decode: function(src) {
             var self = this,
@@ -76,10 +55,6 @@ $(() => {
         }
     };
 
-    App.init();
+    barcodeReader.init();
 
-    Quagga.onDetected(function(result) {
-        var code = result.codeResult.code;
-        $('[name="test_barcode"]').val(code);
-    });
 });

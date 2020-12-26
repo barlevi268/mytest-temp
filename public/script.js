@@ -87,6 +87,29 @@ function initSelect2() {
     })
 }
 
+function initUploadField() {
+    $('[type="file"]').on('change', (e) => {
+
+        var $this = $(this)
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              
+              reader.onload = function(e) {
+                $this.find('#uploadCaddy').attr('src', e.target.result);
+              }
+              
+              reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        
+
+
+    })
+}
+
 $(() => {
     alertModal.init()
 
