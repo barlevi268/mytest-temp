@@ -93,12 +93,10 @@ function initUploadField() {
         var $parent = $(e.target).parent()
         var $this = $(e.target)
 
-        
-
         function readURL(input) {
             if (input.files && input.files[0]) {
               var reader = new FileReader();
-              reader.onload = function(e) {
+              reader.onload = (e) => {
                 $parent.find('.upload-caddy').attr('src', e.target.result);
                 $parent.find(`[for="${$this.attr('id')}"]`).addClass('d-flex align-items-center justify-content-between')
                 $parent.find(`[for="${$this.attr('id')}"]`).find('u').html('החלף תמונה')
@@ -108,11 +106,7 @@ function initUploadField() {
             }
         }
         
-
         e.target.files && e.target.files.length ? readURL(e.target) : '';
-
-        
-
 
     })
 }
