@@ -73,6 +73,68 @@
       </div>
     </div>
     <!-- end::modal template -->
+      <!-- start::custom modal -->
+      <div
+      class="modal fade"
+      id="patientDetailsModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="alertModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="modal-icon d-none text-center pt-4 pb-3">
+              <img src="/media/success-icon.svg" />
+            </div>
+            <div class="modal-message container">
+              <div class="row mb-2">
+                <div class="text-muted">שם מטופל</div>
+                <h3 id="patientFullNameLabel">אברהם מנשה</h3>
+              </div>
+              <div class="row mb-2">
+                <div class="text-muted">תעודת זהות</div>
+                <h3 id="patientIdLabel">אברהם מנשה</h3>
+              </div>
+              <div calss="row">
+                <div class="form-group col">
+                  <label>נייד</label>
+                  <input class="form-control" name="patientPhone" type="phone"/>
+                </div>
+              </div>
+              <div calss="row">
+                <div class="form-group col-6">
+                  <label>נייד</label>
+                  <input class="form-control" name="patientPhone" type="phone"/>
+                </div>
+                <div class="form-group col-6">
+                  <label>נייד</label>
+                  <select class="form-control" name="patientPhone" type="phone"/>
+                </div>
+              </div>
+            </div>
+            <div calss="modal-actiosn container-fluid">
+              <div class="row justify-content-between">
+                <button
+                  type="button"
+                  class="primary-action btn btn-primary btn-block col-6 col-spaced"
+                >
+                  אישור
+                </button>
+                <button
+                  type="button"
+                  class="secondary-action btn btn-secondary btn-block col-6 col-spaced"
+                >
+                  ביטול
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end::custom modal -->
 
     <!-- start::page content -->
 
@@ -88,7 +150,7 @@
         <div class="container">
           <div class="row">
             <div class="form-group col">
-              <label>תעודכת זהות \ דכרון</label>
+              <label>תעודת זהות \ דכרון</label>
               <div class="row">
                 <div class="id-field col-9">
                   <input
@@ -98,7 +160,6 @@
                     name="patient_id"
                     placeholder="ת.ז."
                     autocomplete="off"
-                    mandatory
                   />
                 </div>
                 <div class="passport-field col-3">

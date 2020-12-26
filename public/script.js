@@ -97,7 +97,7 @@ function initUploadField() {
                 $parent.find(`[for="${$this.attr('id')}"]`).find('u').html('החלף תמונה')
               }
               
-              reader.readAsDataURL(input.files[0]); // convert to base64 string
+              reader.readAsDataURL(input.files[0]);
             }
         }
         
@@ -125,7 +125,7 @@ function initMandatoryFields() {
         return valid
     }
 
-    $('form').on('submit', (e) => {
+    $('[type="submit"]').on('click', (e) => {
         e.preventDefault()
         
         if (formValidated()) {
@@ -133,7 +133,11 @@ function initMandatoryFields() {
         } else {
             $('.field-message').remove()
 
-            alertModal.display("חלק מהשדות הנדרשים ריקים")
+            alertModal.display({
+                content:"חלק מהשדות הנדרשים ריקים",
+                hideSecondary:true,
+                primaryLabel:"הבנתי"
+            })
 
             $.each(emptyFields, (i,val) => {
                 var $val = $(val)
@@ -142,7 +146,6 @@ function initMandatoryFields() {
 
                 $val.on('input', (e) => {
                     $val.removeClass('border border-danger')
-                    console.log($val.closest('.field-message'))
                 })
             })
 
