@@ -13,6 +13,12 @@ function initIdPassportField() {
     })
 }
 
+function findPatient() {
+    var id = $('[name="patient_id"]').val()
+    var passport = $('[name="patient_id"]').val()
+
+}
+
 $(() => {
     initIdPassportField()
 })

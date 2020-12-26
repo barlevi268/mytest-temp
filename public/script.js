@@ -1,10 +1,6 @@
 
 var alertModal = {
     subView: $('#alertModal'),
-    content:null,
-    successIcon:null,
-    primaryButton:null,
-    secondaryButton:null,
     show: () => alertModal.subView.modal('show'),
     clear: () => {
         alertModal.primaryButton.html('אישור')
@@ -42,7 +38,6 @@ var alertModal = {
             if (message.secondaryAction) {
                 alertModal.secondaryButton.on('click', message.secondaryAction)
             }
-
 
             if (message.secondaryLabel) {
                 alertModal.secondaryButton.html(message.secondaryLabel)
@@ -109,6 +104,10 @@ function initUploadField() {
         e.target.files && e.target.files.length ? readURL(e.target) : '';
 
     })
+}
+
+function initMandatoryFields() {
+    var fields = $('[mandatur')
 }
 
 $(() => {
