@@ -17,12 +17,35 @@ function findPatient() {
     var id = $('[name="patient_id"]').val()
     var passport = $('[name="patient_id"]').val()
 
+    if (passport != "") {
+        alertModal.display('')
+    } else {
+        alertModal.display({
+            modalId:"patientDetailsModal",
+            primaryLabel:""
+            primaryAction: () => location.href('/newvisit'),
+            onInit: () => {
+                $('#patientFullNameLabel').html(fakePatient.fullName)
+                $('#patientIdLabel').html(fakePatient.patientId)
+                $('[name="patientPhone"]').val(fakePatient.phone)
+                $('[name="patientBirthDate"]').val(fakePatient.birthDate)
+                $('[name="patientSex"]').val(fakePatient.sex)
+                $('[name="patientCity"]').val(fakePatient.city)
+            }
+        })
+    }
+}
+
+
+const fakePatient = {
+    fullName:"חיים רפאלי",
+    patientId:"313521934",
+    phone:"054-7449087",
+    birthDate:"30/11/1985",
+    sex:"male",
+    city:"רחובות"
 }
 
 $(() => {
     initIdPassportField()
-
-    alertModal.display({
-        modalId:"patientDetailsModal"
-    })
 })
