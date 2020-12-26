@@ -110,7 +110,21 @@
                 </div>
                 <div class="form-group col-6">
                   <label>נייד</label>
-                  <select class="form-control" name="patientPhone" type="phone"/>
+                  <select select2-type="regular" name="patientPhone">
+                    <option value="male">זכר</option>
+                    <option value="female">נקבה</option>
+                  </select>
+                </div>
+              </div>
+              <div calss="row">
+                <div class="form-group col">
+                  <label>עיר</label>
+                  <select select2-type="search" name="patientCity">
+                    <option>תל אביב</option>
+                    <option>רחובות</option>
+                    <option>הרצליה</option>
+                    <option>רמת גן</option>
+                  </select>
                 </div>
               </div>
             </div>

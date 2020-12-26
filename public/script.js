@@ -7,7 +7,6 @@ var alertModal = {
         alertModal.secondaryButton.html('ביטול')
         alertModal.primaryButton.on('click',() => alertModal.hide())
         alertModal.secondaryButton.on('click',() => alertModal.hide())
-        alertModal.content.html('')
         alertModal.successIcon.addClass('d-none')
         alertModal.secondaryButton.addClass(['col-spaced','col-6'])
     },

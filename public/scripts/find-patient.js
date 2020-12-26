@@ -21,4 +21,8 @@ function findPatient() {
 
 $(() => {
     initIdPassportField()
+
+    alertModal.display({
+        modalId:"patientDetailsModal"
+    })
 })
