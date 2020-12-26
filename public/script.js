@@ -107,7 +107,40 @@ function initUploadField() {
 }
 
 function initMandatoryFields() {
-    var fields = $('[mandatur')
+    var fields = $('[mandatory]')
+    var emptyFields = []
+
+    function formValidated() {
+        valid = true 
+        
+        $.each(fields, (i,val) => {
+            if (val.val() == "" || val.val() == undefined) {
+                valid = false
+                emptyFields.push(val)
+            } 
+        })
+
+        return valid
+    }
+
+    $('form').on('submit', (e) => {
+        alert(formValidated())
+        e.preventDefualt()
+        
+        if (formValidated()) {
+            $('form').submit()
+        } else {
+            alertModal("חלק מהשדות הנדרשים ריקים")
+            $.each(emptyFields, (i,val) => {
+                val.after('<span class="text-danger">שדה חובה</span>')
+                val.addClass('border border-danger')
+
+                val.on('input', (e) => {
+                    val.removeClass('border border-danger')  
+                })
+            })
+        }
+    })
 }
 
 $(() => {
@@ -116,4 +149,6 @@ $(() => {
     initSelect2()
 
     initUploadField()
+
+    initMandatoryFields()
 })
