@@ -88,34 +88,35 @@
             <div class="modal-icon d-none text-center pt-4 pb-3">
               <img src="/media/success-icon.svg" />
             </div>
-            <div class="modal-message container">
+            <div class="modal-message text-right container">
               <div class="row mb-2">
                 <div class="text-muted">שם מטופל</div>
-                <h3 id="patientFullNameLabel">אברהם מנשה</h3>
+                <h3 id="patientFullNameLabel">{{patientName}}</h3>
               </div>
               <div class="row mb-2">
                 <div class="text-muted">תעודת זהות</div>
-                <h3 id="patientIdLabel">אברהם מנשה</h3>
+                <h3 id="patientIdLabel">{{pateintId}}</h3>
               </div>
               <div calss="row">
-                <div class="form-group col">
+                <div class="form-group">
                   <label>נייד</label>
                   <input class="form-control" name="patientPhone" type="phone"/>
                 </div>
               </div>
-              <div calss="row">
+              <div class="row">
                 <div class="form-group col-6">
-                  <label>נייד</label>
-                  <input class="form-control" name="patientPhone" type="phone"/>
+                  <label>תאריך לידה</label>
+                  <input class="form-control" name="patientBirthDate" type="phone"/>
                 </div>
                 <div class="form-group col-6">
-                  <label>נייד</label>
-                  <select select2-type="regular" name="patientPhone">
+                  <label>מין</label>
+                  <select select2-type="regular" name="patientSex">
                     <option value="male">זכר</option>
                     <option value="female">נקבה</option>
                   </select>
                 </div>
               </div>
+              
               <div calss="row">
                 <div class="form-group col">
                   <label>עיר</label>
