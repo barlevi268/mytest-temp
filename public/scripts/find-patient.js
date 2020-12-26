@@ -13,23 +13,23 @@ function initIdPassportField() {
     })
 }
 
-function findPatient() {
-    var id = $('[name="patient_id"]').val()
-    var passport = $('[name="patient_passport"]').val()
+function fakeFindPatient() {
+    var id = () => $('[name="patient_id"]').val()
+    var passport = () => $('[name="patient_passport"]').val()
 
-    if ($('[name="patient_id"]').val() != "") {
+    if (id() != "" && passport() == "") {
         
         alertModal.display({
-            content:`לא נמצא מטופל עם ת.ז. - <br/> ${id}`,
+            content:`לא נמצא מטופל עם ת.ז. - <br/> ${id()}`,
             primaryLabel:"צור מטופל",
             secondaryLabel:"חזור"
         })
-    } else {
+    } else if (passport() != "") {
         alertModal.display({
             modalId:"patientDetailsModal",
             primaryLabel:"צור ביקור",
             secondaryLabel:"החלף מטופל",
-            primaryAction: () => location.href('/newvisit'),
+            primaryAction: () => location.href = '/newvisit',
             onInit: () => {
                 $('#patientFullNameLabel').html(fakePatient.fullName)
                 $('#patientIdLabel').html(fakePatient.patientId)
