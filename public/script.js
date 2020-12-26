@@ -112,6 +112,7 @@ function initMandatoryFields() {
 
     function formValidated() {
         var valid = true 
+        emptyFields = []
 
         $.each(fields, (i,val) => {
             var $val = $(val)
@@ -125,22 +126,26 @@ function initMandatoryFields() {
     }
 
     $('form').on('submit', (e) => {
-        console.log(formValidated())
         e.preventDefault()
         
         if (formValidated()) {
             $('form').submit()
         } else {
+            $('.field-message').remove()
+
             alertModal.display("חלק מהשדות הנדרשים ריקים")
+
             $.each(emptyFields, (i,val) => {
                 var $val = $(val)
-                $val.after('<span class="text-danger">שדה חובה</span>')
+                $val.after('<span class="field-message text-danger">שדה חובה</span>')
                 $val.addClass('border border-danger')
 
                 $val.on('input', (e) => {
-                    $val.removeClass('border border-danger')  
+                    $val.removeClass('border border-danger')
+                    console.log($val.closest('.field-message'))
                 })
             })
+
         }
     })
 }
