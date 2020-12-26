@@ -90,19 +90,26 @@ function initSelect2() {
 function initUploadField() {
     $('[type="file"]').on('change', (e) => {
 
-        var $this = $(this)
+        var $this = $(e.target)
+
+        
 
         function readURL(input) {
             if (input.files && input.files[0]) {
               var reader = new FileReader();
-              
               reader.onload = function(e) {
+                
                 $this.find('#uploadCaddy').attr('src', e.target.result);
+                $this.find('[for="uploadBarcode"]').addClass('d-flex align-items-center justify-content-between')
+                $this.find('[for="uploadBarcode"]').find('u').html('החלף תמונה')
               }
               
               reader.readAsDataURL(input.files[0]); // convert to base64 string
             }
         }
+        
+
+        e.target.files && e.target.files.length ? readURL(e.target) : '';
 
         
 
@@ -115,4 +122,5 @@ $(() => {
 
     initSelect2()
 
+    initUploadField()
 })
