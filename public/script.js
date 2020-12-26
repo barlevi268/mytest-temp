@@ -111,12 +111,13 @@ function initMandatoryFields() {
     var emptyFields = []
 
     function formValidated() {
-        valid = true 
-        
+        var valid = true 
+
         $.each(fields, (i,val) => {
-            if (val.val() == "" || val.val() == undefined) {
+            var $val = $(val)
+            if ($val.val() == "" || $val.val() == undefined) {
                 valid = false
-                emptyFields.push(val)
+                emptyFields.push($val)
             } 
         })
 
@@ -124,19 +125,20 @@ function initMandatoryFields() {
     }
 
     $('form').on('submit', (e) => {
-        alert(formValidated())
-        e.preventDefualt()
+        console.log(formValidated())
+        e.preventDefault()
         
         if (formValidated()) {
             $('form').submit()
         } else {
-            alertModal("חלק מהשדות הנדרשים ריקים")
+            alertModal.display("חלק מהשדות הנדרשים ריקים")
             $.each(emptyFields, (i,val) => {
-                val.after('<span class="text-danger">שדה חובה</span>')
-                val.addClass('border border-danger')
+                var $val = $(val)
+                $val.after('<span class="text-danger">שדה חובה</span>')
+                $val.addClass('border border-danger')
 
-                val.on('input', (e) => {
-                    val.removeClass('border border-danger')  
+                $val.on('input', (e) => {
+                    $val.removeClass('border border-danger')  
                 })
             })
         }
