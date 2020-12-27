@@ -12,8 +12,15 @@ var pinField = {
             
             if ($target.val() != "") {
                 $target.val(e.originalEvent.data)
-                $(`[split-input="${inputNumber + 1}"]`)[0].focus()
-            } 
+                try {
+                    $(`[split-input="${inputNumber + 1}"]`)[0].focus()
+                } catch (e) {
+                }
+                
+            }
+
+            var button = $('.sumbit-two-factor-button')
+            pinField.getValue().length == 4 ? button.prop('disabled', false ) : button.prop('disabled', true);
             
         })
     },

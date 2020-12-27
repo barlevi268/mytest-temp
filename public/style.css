@@ -246,6 +246,10 @@ input::-webkit-inner-spin-button {
   color: var(--primary)
 }
 
+.btn-primary:disabled {
+  background-color: var(--primary);
+  border-color:var(--primary);
+}
 .modal-dialog {
   margin:4em 2em;
 }
