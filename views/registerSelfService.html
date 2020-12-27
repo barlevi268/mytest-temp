@@ -91,18 +91,24 @@
           <div class="form-header mt-3 mb-5">
             <img src="media/logo-light.svg" />
           </div>
-          <div class="row my-2">
+          <div class="row mt-2 mb-4">
             <h3>הרשמת נבדק</h3>
             <div>לנוחיותכם, ניתן למלא פרטים אישיים בטופס זה לצורך זירוז תהליך הרישום במעמד מסירת הבדיקה.</div>
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label>מיקום</label>
-              <select select2-type="search" placeholder="בחר מיקום">
-                <option></option>
-                <option>פרוטאה בכפר</option>
-              </select>
+              <label>שם פרטי</label>
+              <input class="form-control" placeholder="הזן שם פרטי" name="first_name"/>
             </div>
+            <div class="form-group col-6">
+              <label>שם משפחה</label>
+              <input class="form-control" placeholder="הזן שם משפחה" name="last_name"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col"
+          </div>
+          <div class="row">
             <div class="form-group col-6">
               <label>קופה</label>
               <select select2-type="regular" placeholder="בחר קופה">
@@ -113,106 +119,37 @@
                 <option value="meuhedet">מאוחדת</option>
               </select>
             </div>
-          </div>
-          <div class="row easy-radio">
-            <label>סוג נבדק</label>
-            <div class="form-group col-4">
-              <input
-                type="radio"
-                id="resident"
-                name="testeeType"
-                class="d-none"
-                checked
-              />
-              <label for="resident" class="form-control text-center">
-                דייר
-              </label>
-            </div>
-            <div class="form-group col-4">
-              <input type="radio" id="crew" name="testeeType" class="d-none" />
-              <label for="crew" class="form-control text-center"> צוות </label>
-            </div>
-            <div class="form-group col-4">
-              <input
-                type="radio"
-                id="civilian"
-                name="testeeType"
-                class="d-none"
-              />
-              <label for="civilian" class="form-control text-center">
-                אזרח
-              </label>
-            </div>
-          </div>
-          <div class="row easy-radio">
-            <label>אופן בדיקה</label>
             <div class="form-group col-6">
-              <input
-                type="radio"
-                id="PCRTest"
-                value="PCR"
-                name="testType"
-                class="d-none"
-                checked
-              />
-              <label for="PCRTest" class="form-control text-center">
-                PCR
-              </label>
-            </div>
-            <div class="form-group col-6">
-              <input type="radio" id="cerologyTest" name="testType" value="cerology" class="d-none" />
-              <label for="cerologyTest" class="form-control text-center"> סרולוגיה </label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="pcr-test-types form-group col">
-              <label>סוג בדיקה</label>
-              <select select2-type="regular" name="pcrTestType" placeholder="בחר בחר סוג בדיקה">
-                <option value="singular">בדיקה יחידנית</option>
-                <option value="personal">עיגום פרטני</option>
-                <option value="regular">עיגום רגיל</option>
+              <label>מין</label>
+              <select select2-type="regular" name="patientSex">
+                <option value="male">זכר</option>
+                <option value="female">נקבה</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label>תמונה</label>
-              <label for="uploadBarcode" class="form-control text-center py-3">
-                <img style="height: 40px" class="upload-caddy" />
-                <u>צלם תמונה</u>
-              </label>
-              <input type="file" id="uploadBarcode" class="d-none" />
+              <label>עיר מגורים</label>
+              <select select2-type="search" name="city">
+                <option value="תל אביב">תל אביב</option>
+                <option value="רחובות">רחובות</option>
+                <option value="הרצליה">הרצליה</option>
+                <option value="רמת גן">רמת גן</option>
+              </select>
             </div>
           </div>
           <div class="row">
-            <div class="form-group col">
-              <label>ברקוד</label>
-              <input
-                type="number"
-                name="test_barcode"
-                class="form-control"
-                placeholder="העלאה תמונה או הזן ברקוד"
-              />
+            <div class="form-group col-4">
+              <label>רחוב</label>
+              <input class="form-control" placeholder="הזן רחוב" name="street_name"/>
             </div>
-            <div class="impair-test-barcode d-none form-group col">
-              <label>ברקוד עיגום</label>
-              <input
-                type="number"
-                name="impair_test_barcode"
-                class="form-control"
-                placeholder="העלאה תמונה או הזן ברקוד"
-              />
+            <div class="form-group col-4">
+              <label>מס' בית</label>
+              <input class="form-control" placeholder="הזן מס' בית" name="street_number"/>
             </div>
-          </div>
-          <div class="row easy-radio">
-            <label>האם קיימים תסמינים</label>
-            <div class="form-group col-6">
-              <input type="radio" id="hasSymp" name="symptoms" class="d-none" />
-              <label for="hasSymp" class="form-control text-center"> כן </label>
-            </div>
-            <div class="form-group col-6">
-              <input type="radio" id="noSymp" name="symptoms" class="d-none" />
-              <label for="noSymp" class="form-control text-center"> לא </label>
+            <div class="form-group col-4">
+              <label>דירה</label>
+              <input class="form-control" placeholder="הזן דירה" name="apartment"/>
             </div>
           </div>
         </div>
@@ -223,7 +160,7 @@
               onclick="fakeVisitSuccess()"
               class="btn btn-primary btn-block"
             >
-              סיים ושלח ביקור
+              שלח טופס
             </button>
           </div>
         </div>
