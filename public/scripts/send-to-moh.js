@@ -1,24 +1,24 @@
 var testCards = {
+    makeCard: (cardObj) => {
+        var card = testCards.Card.clone()
+        card.find('.test-barcode-label').html(cardObj.barcode)
+        card.find('.test-name-label').html(cardObj.patientFullName)
+        card.find('.test-id-label').html(cardObj.patientId)
+        card.find('.test-visit-label').html(cardObj.visitId)
+        card.find('.test-tester-label').html(cardObj.testerName)
+        card.find('.test-barcode-checkbox').attr('name', `test_checked[${val.id}]`)
+        return card
+    },
     updateList: (cards) => {
         $('.tests-wrapper').children().remove()
         $.each(cards, (i,val) => {
-
-            var card = testCards.Card.clone()
-
-            card.find('.test-barcode-label').html(val.barcode)
-            card.find('.test-name-label').html(val.patientFullName)
-            card.find('.test-id-label').html(val.patientId)
-            card.find('.test-visit-label').html(val.visitId)
-            card.find('.test-tester-label').html(val.testerName)
-            card.find('.test-barcode-checkbox').attr('name', `test_checked[${val.id}]`)
-
-            $('.tests-wrapper').append(card)
+            $('.tests-wrapper').append(testCards.makeCard(val))
 
         })
     },
     init: () => {
-        testCards.Card = $('.test-details-card').clone()
-        $('.test-details-card').remove()
+        testCards.Card = $('.test-details-card-tmp').clone()
+        $('.test-details-card-tmp').remove()
     }
 }
 
