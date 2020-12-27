@@ -33,6 +33,7 @@
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/select2/select2.full.min.js"></script>
     <script src="/script.js" defer></script>
+    <script src="/scripts/login.js" defer></script>
   </head>
   <body>
     <!-- start::modal template -->
@@ -62,7 +63,7 @@
     <div class="container">
       <div class="wrapper px-4-5">
         <!-- start::login-form -->
-        <div class="login-form">
+        <div class="login-view login-form">
           <!--begin::Form-->
           <form class="form login-form" id="loginForm" ovalidate="novalidate">
             <!--begin::Title-->
@@ -96,10 +97,10 @@
             <!--end::Form group-->
             <!--begin::Action-->
             <div class="pt-3 d-grid">
-              <button type="button" class="btn btn-primary btn-block">
+              <button type="button" onclick="changeLoginView('two-factor')" class="btn btn-primary btn-block">
                 התחבר
               </button>
-              <a class="pt-3 text-left" style="text-align: left" href="#"
+              <a class="pt-3 text-left" style="text-align: left" href="javascript:changeLoginView('forgot')"
                 >שכחת את הסיסמה?</a
               >
             </div>
@@ -109,7 +110,7 @@
         </div>
         <!-- end::login-form -->
         <!-- start::forgot-form -->
-        <div class="forgot-form d-none">
+        <div class="login-view forgot-form d-none">
           <!--begin::Form-->
           <form class="form" id="forgotPasswordForm" novalidate="novalidate">
             <!--begin::Title-->
@@ -141,7 +142,7 @@
         </div>
         <!-- end::forgot-form -->
         <!-- start::two-factor-form -->
-        <div class="two-factor-form d-none">
+        <div class="login-view two-factor-form d-none">
           <!--begin::Form-->
           <form class="form" id="twoFactorForm" novalidate="novalidate">
             <!--begin::logo-->
