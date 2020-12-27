@@ -30,7 +30,7 @@ var barcodeReader = {
     },
     state: {
         inputStream: {
-            size: 800
+            size: 1200
         },
         locator: {
             patchSize: "medium",
