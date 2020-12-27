@@ -8,9 +8,10 @@ function initPinField() {
     $('[split-input]').on('input', (e) => {
         var $target = $(e.target)
         var inputNumber = $target.attr('split-input')
+        
         console.log($target.val())
-        console.log(inputNumber)
-        $target.val() != "" ? $(`[split-input="${inputNumber + 1}"]`)[0].focus() : '';
+        console.log($(`[split-input="${inputNumber}"]`))
+        $target.val() != "" ? $(`[split-input="${inputNumber}"]`)[0].focus() : '';
     })
 }
 
