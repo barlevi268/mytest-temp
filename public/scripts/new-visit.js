@@ -69,6 +69,8 @@ function fakeVisitSuccess() {
         }
     })
 }
+
+
 $(() => {
 
     barcodeReader.init();

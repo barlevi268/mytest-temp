@@ -1,18 +1,18 @@
 var testCards = {
-    makeCard: (cardObj) => {
-        var card = testCards.Card.clone()
-        card.find('.test-barcode-label').html(cardObj.barcode)
-        card.find('.test-name-label').html(cardObj.patientFullName)
-        card.find('.test-id-label').html(cardObj.patientId)
-        card.find('.test-visit-label').html(cardObj.visitId)
-        card.find('.test-tester-label').html(cardObj.testerName)
-        card.find('.test-barcode-checkbox').attr('name', `test_checked[${cardObj.id}]`)
-        return card
+    makeCard: (cardElm,cardObj) => {
+        cardElm.find('.test-barcode-label').html(cardObj.barcode)
+        cardElm.find('.test-name-label').html(cardObj.patientFullName)
+        cardElm.find('.test-id-label').html(cardObj.patientId)
+        cardElm.find('.test-visit-label').html(cardObj.visitId)
+        cardElm.find('.test-tester-label').html(cardObj.testerName)
+        cardElm.find('.test-barcode-checkbox').attr('name', `test_checked[${cardObj.id}]`)
+        return cardElm
     },
     updateList: (cards) => {
         $('.tests-wrapper').children().remove()
         $.each(cards, (i,val) => {
-            $('.tests-wrapper').append(testCards.makeCard(val))
+            var card = testCards.Card.clone()
+            $('.tests-wrapper').append(testCards.makeCard(card,val))
 
         })
     },
@@ -67,11 +67,66 @@ const fakeTests = [
 ]
 
 function showTestApprovale(test) {
+    var card = $('.test-details-dialog-card')
     alertModal.display({
         primaryLabel:"אשר והמשך",
-        se
+        secondaryLabel:"סגור",
+        onInit:() => testCards.makeCard(card,test)
     })
 }
+
+var barcodeReader = {
+    init: function() {
+        barcodeReader.attachListeners();
+
+        Quagga.onDetected(function(result) {
+            var code = result.codeResult.code;
+        });
+
+    },
+    config: {
+        reader: "code_128",
+        length: 10
+    },
+    attachListeners: function() {
+        var self = this;
+
+        $("#scanTest").on("change", function(e) {
+            if (e.target.files && e.target.files.length) {
+                $(e.target).removeClass('d-flex','justify-content-between')
+                barcodeReader.decode(URL.createObjectURL(e.target.files[0]));
+
+                // fake find
+                showTestApprovale(fakeTests[2])
+            }
+        });
+
+    },
+    decode: function(src) {
+        var self = this,
+            config = $.extend({}, self.state, {src: src});
+
+        Quagga.decodeSingle(config, function(result) {});
+    },
+    state: {
+        inputStream: {
+            size: 800
+        },
+        locator: {
+            patchSize: "medium",
+            halfSample: false
+        },
+        numOfWorkers: 1,
+        decoder: {
+            readers: [{
+                format: "code_128_reader",
+                config: {}
+            }]
+        },
+        locate: true,
+        src: null
+    }
+};
 
 $(() => {
 
