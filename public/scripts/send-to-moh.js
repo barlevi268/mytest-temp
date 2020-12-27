@@ -6,7 +6,7 @@ var testCards = {
         card.find('.test-id-label').html(cardObj.patientId)
         card.find('.test-visit-label').html(cardObj.visitId)
         card.find('.test-tester-label').html(cardObj.testerName)
-        card.find('.test-barcode-checkbox').attr('name', `test_checked[${val.id}]`)
+        card.find('.test-barcode-checkbox').attr('name', `test_checked[${cardObj.id}]`)
         return card
     },
     updateList: (cards) => {
@@ -65,6 +65,14 @@ const fakeTests = [
         testerName:"רוני כהן"
     },
 ]
+
+function showTestApprovale(test) {
+    alertModal.display({
+        primaryLabel:"אשר והמשך",
+        se
+    })
+}
+
 $(() => {
 
     testCards.init()
