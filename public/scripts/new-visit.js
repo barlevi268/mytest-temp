@@ -71,10 +71,10 @@ function fakeVisitSuccess() {
 }
 
 function initConditionalFields() {
-    $('input').on('change', (e) => {
+    $('.form-group').on('change', (e) => {
         var $target = $(e.target)
-        console.log($('[name="testType"]').val())
-        switch ($('[name="pcrTestType"]').val()) {
+        console.log($('[name="pcrTestType"]').val())
+        switch ($target.attr('name')) {
             case 'testType':
                 if ($('[name="testType"]:checked').val() == 'PCR') {
                     $('.pcr-test-types').show('fast')
@@ -84,7 +84,7 @@ function initConditionalFields() {
                 break;
             case 'pcrTestType':
                 if ($('[name="pcrTestType"]').val() == 'personal') {
-                    $('.impair-test-barcode').show('fast')
+                    $('.impair-test-barcode').show('fast').removeClass('d-none')
                 } else {
                     $('.impair-test-barcode').hide('fast')
                 } 
