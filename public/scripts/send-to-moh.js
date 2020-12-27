@@ -100,7 +100,6 @@ var barcodeReader = {
                 showTestApprovale(fakeTests[2])
             }
         });
-
     },
     decode: function(src) {
         var self = this,
