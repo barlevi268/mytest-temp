@@ -69,6 +69,7 @@ const fakeTests = [
 function showTestApprovale(test) {
     var card = $('.test-details-dialog-card')
     alertModal.display({
+        modalId:"testDetailsModal",
         primaryLabel:"אשר והמשך",
         secondaryLabel:"סגור",
         onInit:() => testCards.makeCard(card,test)
@@ -93,7 +94,6 @@ var barcodeReader = {
 
         $("#scanTest").on("change", function(e) {
             if (e.target.files && e.target.files.length) {
-                $(e.target).removeClass('d-flex','justify-content-between')
                 barcodeReader.decode(URL.createObjectURL(e.target.files[0]));
 
                 // fake find
@@ -131,6 +131,9 @@ var barcodeReader = {
 $(() => {
 
     testCards.init()
-    
+
+    barcodeReader.init()
+
     testCards.updateList(fakeTests)
+    
 })
