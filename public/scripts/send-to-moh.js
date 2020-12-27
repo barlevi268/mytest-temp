@@ -95,7 +95,7 @@ var barcodeReader = {
         $("#scanTest").on("change", function(e) {
             if (e.target.files && e.target.files.length) {
                 barcodeReader.decode(URL.createObjectURL(e.target.files[0]));
-
+                $('[for="scanTest"]').removeClass('d-flex')
                 // fake find
                 showTestApprovale(fakeTests[2])
             }
@@ -135,5 +135,5 @@ $(() => {
     barcodeReader.init()
 
     testCards.updateList(fakeTests)
-    
+
 })
