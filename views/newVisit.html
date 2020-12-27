@@ -216,6 +216,7 @@
               <input
                 type="radio"
                 id="PCRTest"
+                value="PCR"
                 name="testType"
                 class="d-none"
                 checked
@@ -225,14 +226,14 @@
               </label>
             </div>
             <div class="form-group col-6">
-              <input type="radio" id="cerologyTest" name="testType" class="d-none" />
+              <input type="radio" id="cerologyTest" name="testType" value="cerology" class="d-none" />
               <label for="cerologyTest" class="form-control text-center"> סרולוגיה </label>
             </div>
           </div>
           <div class="row">
             <div class="pcr-test-types form-group col">
               <label>סוג בדיקה</label>
-              <select select2-type="regular" placeholder="בחר בחר סוג בדיקה">
+              <select select2-type="regular" name="pcrTestType" placeholder="בחר בחר סוג בדיקה">
                 <option value="singular">בדיקה יחידנית</option>
                 <option value="personal">עיגום פרטני</option>
                 <option value="regular">עיגום רגיל</option>
@@ -259,7 +260,7 @@
                 placeholder="העלאה תמונה או הזן ברקוד"
               />
             </div>
-            <div class="impair-test-barcode form-group col">
+            <div class="impair-test-barcode d-none form-group col">
               <label>ברקוד עיגום</label>
               <input
                 type="number"

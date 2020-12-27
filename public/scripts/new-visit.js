@@ -71,11 +71,34 @@ function fakeVisitSuccess() {
 }
 
 function initConditionalFields() {
-    $('input').on('change', (e))
+    $('input').on('change', (e) => {
+        var $target = $(e.target)
+        console.log($('[name="testType"]').val())
+        switch ($('[name="pcrTestType"]').val()) {
+            case 'testType':
+                if ($('[name="testType"]:checked').val() == 'PCR') {
+                    $('.pcr-test-types').show('fast')
+                } else {
+                    $('.pcr-test-types').hide('fast')
+                } 
+                break;
+            case 'pcrTestType':
+                if ($('[name="pcrTestType"]').val() == 'personal') {
+                    $('.impair-test-barcode').show('fast')
+                } else {
+                    $('.impair-test-barcode').hide('fast')
+                } 
+                break;
+            default:
+                break;
+        }
+    })
 }
 
 $(() => {
 
     barcodeReader.init();
+
+    initConditionalFields()
 
 });
