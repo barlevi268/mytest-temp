@@ -10,8 +10,7 @@
       content="width=device-width, initial-scale=1 maximum-scale=1"
     />
     <meta name="description" />
-    <meta name="format-detection" content="telephone=no">
-
+    <meta name="format-detection" content="telephone=no" />
 
     <title>Welcome to Glitch!</title>
 
@@ -63,7 +62,79 @@
             <div class="modal-icon d-none text-center pt-4 pb-3">
               <img src="/media/success-icon.svg" />
             </div>
-            <div class="modal-message">{{modal message}}</div>
+            <div class="modal-message container">
+              <div class="row test-details-card">
+                <div class="col shadow-light card mb-5 mx-2">
+                  <div class="row py-3 border-bottom">
+                    <div class="col-6">
+                      <input
+                        type="checkbox"
+                        class="test-barcode-checkbox form-check-input"
+                      />
+                    </div>
+                    <div
+                      class="test-barcode-label col-6 text-left font-weight-bold"
+                    >
+                      {{barcode}}
+                    </div>
+                  </div>
+                  <div class="row py-3 border-bottom">
+                    <div class="test-name-label col-6 font-weight-bold">
+                      {{name}}
+                    </div>
+                    <div class="test-id-label col-6 text-left">{{id}}</div>
+                  </div>
+                  <div class="row py-3 border-bottom">
+                    <div class="col-6 font-weight-bold">ביקור</div>
+                    <div class="test-visit-label col-6 text-left">{{visit}}</div>
+                  </div>
+                  <div class="row py-3">
+                    <div class="col-6 font-weight-bold">נבדק ע"י</div>
+                    <div class="test-tester-label col-6 text-left">
+                      {{tester}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div calss="modal-actiosn container-fluid">
+              <div class="row justify-content-between">
+                <button
+                  type="button"
+                  class="primary-action btn btn-primary btn-block col-6 col-spaced"
+                >
+                  אישור
+                </button>
+                <button
+                  type="button"
+                  class="secondary-action btn btn-secondary btn-block col-6 col-spaced"
+                >
+                  ביטול
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end::modal template -->
+
+    <!-- start::modal template -->
+    <div
+      class="modal fade"
+      id="testDetailsModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="alertModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="modal-icon d-none text-center pt-4 pb-3">
+              <img src="/media/success-icon.svg" />
+            </div>
+            <div class="modal-message"></div>
             <div calss="modal-actiosn container-fluid">
               <div class="row justify-content-between">
                 <button
@@ -116,7 +187,11 @@
           <div class="row">
             <div class="form-group col-6">
               <label>תאריך ביקור</label>
-              <input class="form-control" type="date" placeholder="תאריך ביקור"/>
+              <input
+                class="form-control"
+                type="date"
+                placeholder="תאריך ביקור"
+              />
             </div>
             <div class="form-group col-6">
               <label>סניף</label>
@@ -129,11 +204,11 @@
           <div class="row">
             <div class="form-group col-6">
               <label>תאריך שליחה למעבדה</label>
-              <input class="form-control" placeholder="הזן תאריך שליחה"/>
+              <input class="form-control" placeholder="הזן תאריך שליחה" />
             </div>
             <div class="form-group col-6">
               <label>תאריך שליחה למעבדה</label>
-              <input class="form-control" placeholder="הזן תאריך שליחה"/>
+              <input class="form-control" placeholder="הזן תאריך שליחה" />
             </div>
           </div>
           <div class="row">
@@ -148,7 +223,10 @@
           <div class="row">
             <div class="form-group col">
               <label>דף סיכום</label>
-              <label for="uploadSummaryPage" class="form-control text-center py-3">
+              <label
+                for="uploadSummaryPage"
+                class="form-control text-center py-3"
+              >
                 <img style="height: 40px" class="upload-caddy" />
                 <u>צלם תמונה</u>
               </label>
@@ -183,7 +261,10 @@
           <div class="row">
             <div class="form-group col">
               <label for="scanTest" class="form-control text-center">
-                <img style="padding-left:10px;" src="/media/search-dark.svg"><span>סרוק דגימה</span>
+                <img
+                  style="padding-left: 10px"
+                  src="/media/search-dark.svg"
+                /><span>סרוק דגימה</span>
               </label>
               <input type="file" id="scanTest" class="d-none" />
             </div>
@@ -192,10 +273,15 @@
             <div class="row test-details-card">
               <div class="col shadow-light card mb-5 mx-2">
                 <div class="row py-3 border-bottom">
-                  <div class="col-6 ">
-                    <input type="checkbox" class="test-barcode-checkbox form-check-input">
+                  <div class="col-6">
+                    <input
+                      type="checkbox"
+                      class="test-barcode-checkbox form-check-input"
+                    />
                   </div>
-                  <div class="test-barcode-label col-6 text-left font-weight-bold">
+                  <div
+                    class="test-barcode-label col-6 text-left font-weight-bold"
+                  >
                     {{barcode}}
                   </div>
                 </div>
@@ -203,22 +289,14 @@
                   <div class="test-name-label col-6 font-weight-bold">
                     {{name}}
                   </div>
-                  <div class="test-id-label col-6 text-left">
-                    {{id}}
-                  </div>
+                  <div class="test-id-label col-6 text-left">{{id}}</div>
                 </div>
                 <div class="row py-3 border-bottom">
-                  <div class="col-6 font-weight-bold">
-                    ביקור
-                  </div>
-                  <div class="test-visit-label col-6 text-left">
-                    {{visit}}
-                  </div>
+                  <div class="col-6 font-weight-bold">ביקור</div>
+                  <div class="test-visit-label col-6 text-left">{{visit}}</div>
                 </div>
                 <div class="row py-3">
-                  <div class="col-6 font-weight-bold">
-                    נבדק ע"י
-                  </div>
+                  <div class="col-6 font-weight-bold">נבדק ע"י</div>
                   <div class="test-tester-label col-6 text-left">
                     {{tester}}
                   </div>
@@ -227,14 +305,16 @@
             </div>
           </div>
           <div class="row row-sticky">
-            <div class="col ">
-              <button type="button" class="btn btn-primary shadow-primary btn-block">
+            <div class="col">
+              <button
+                type="button"
+                class="btn btn-primary shadow-primary btn-block"
+              >
                 שלח נתונים
               </button>
             </div>
           </div>
         </div>
-
       </form>
     </div>
     <!-- end::page content -->

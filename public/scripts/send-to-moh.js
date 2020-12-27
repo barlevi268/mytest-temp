@@ -1,5 +1,6 @@
 var testCards = {
     updateList: (cards) => {
+        $('.tests-wrapper').children().remove()
         $.each(cards, (i,val) => {
 
             var card = testCards.Card.clone()
