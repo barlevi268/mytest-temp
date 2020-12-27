@@ -24,6 +24,9 @@ app.get("/moh", (request, response) => {
   response.sendFile(__dirname + "/views/sendToMoh.html");
 });
 
+app.get("/selfService", (request, response) => {
+  response.sendFile(__dirname + "/views/registerSelfService.html");
+});
 
 
 const listener = app.listen(process.env.PORT, () => {
