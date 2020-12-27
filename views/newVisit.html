@@ -211,7 +211,7 @@
             </div>
           </div>
           <div class="row easy-radio">
-            <label>סוג בדיקה</label>
+            <label>אופן בדיקה</label>
             <div class="form-group col-6">
               <input
                 type="radio"
@@ -229,7 +229,16 @@
               <label for="cerologyTest" class="form-control text-center"> סרולוגיה </label>
             </div>
           </div>
-          
+          <div class="row">
+            <div class="pcr-test-types form-group col">
+              <label>סוג בדיקה</label>
+              <select select2-type="regular" placeholder="בחר בחר סוג בדיקה">
+                <option value="singular">בדיקה יחידנית</option>
+                <option value="personal">עיגום פרטני</option>
+                <option value="regular">עיגום רגיל</option>
+              </select>
+            </div>
+          </div>
           <div class="row">
             <div class="form-group col">
               <label>תמונה</label>
@@ -246,6 +255,15 @@
               <input
                 type="number"
                 name="test_barcode"
+                class="form-control"
+                placeholder="העלאה תמונה או הזן ברקוד"
+              />
+            </div>
+            <div class="impair-test-barcode form-group col">
+              <label>ברקוד עיגום</label>
+              <input
+                type="number"
+                name="impair_test_barcode"
                 class="form-control"
                 placeholder="העלאה תמונה או הזן ברקוד"
               />

@@ -70,6 +70,9 @@ function fakeVisitSuccess() {
     })
 }
 
+function initConditionalFields() {
+    $('input').on('change', (e))
+}
 
 $(() => {
 
