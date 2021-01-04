@@ -129,17 +129,10 @@ var barcodeReader = {
 
 function initSignaturePad() {
     var canvas = document.querySelector("canvas");
-
+    
     var signaturePad = new SignaturePad(canvas);
 
-    // Returns signature image as data URL (see https://mdn.io/todataurl for the list of possible parameters)
     signaturePad.toDataURL(); // save image as PNG
-    signaturePad.toDataURL("image/jpeg"); // save image as JPEG
-    signaturePad.toDataURL("image/svg+xml"); // save image as SVG
-
-    // Draws signature image from data URL.
-    // NOTE: This method does not populate internal data structure that represents drawn signature. Thus, after using #fromDataURL, #toData won't work properly.
-    signaturePad.fromDataURL("data:image/png;base64,iVBORw0K...");
 
     // Returns signature image as an array of point groups
     const data = signaturePad.toData();
@@ -153,11 +146,11 @@ function initSignaturePad() {
     // Returns true if canvas is empty, otherwise returns false
     signaturePad.isEmpty();
 
-    // Unbinds all event handlers
-    signaturePad.off();
-
     // Rebinds all event handlers
     signaturePad.on();
+
+    canvas.addEventListener('click', (e) => console.log(e))
+
 }
 $(() => {
 
@@ -170,7 +163,8 @@ $(() => {
     initSignaturePad()
 
     alertModal.display({
-        modalId:'dispatchModal'
+        modalId:'dispatchModal',
+        primaryLabel:'מאשר קבלה'
     })
 
 })
