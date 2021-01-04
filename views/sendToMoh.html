@@ -43,6 +43,7 @@
     <script src="/plugins/select2/select2.full.min.js"></script>
     <script src="/plugins/segment/segment.js"></script>
     <script src="/plugins/barcode/javascript-barcode-reader.umd.min.js"></script>
+    <script src="/plugins/signature/signature-pad.js"></script>
     <script src="/script.js" defer></script>
     <script src="/scripts/send-to-moh.js" defer></script>
   </head>
@@ -171,12 +172,25 @@
               </div>
               <div class="modal-message container text-right mt-2">
                 <h3 class="text-center mb-4">פרטי מקבל</h3>
-                <div class="row">
-                  <div class="form-group col">
-                    <label>שם המקבל</label>
-                    <input name="recieverName" placeholder="הזן שם מלא" class='form-control'/>
+                <form>
+                  <div class="row">
+                    <div class="form-group col">
+                      <label>שם המקבל</label>
+                      <input name="recieverName" placeholder="הזן שם מלא" class='form-control'/>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label>חתימה</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <canvas class="bg-light w-100"></canvas>
+                        <input type="file" class="d-none">
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </form>
               </div>
               <div calss="modal-actiosn container-fluid">
                 <div class="row justify-content-between">
