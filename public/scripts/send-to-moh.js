@@ -128,30 +128,25 @@ var barcodeReader = {
 };
 
 
-var canvas = $('.signature-canvas');
-var btn = $('.submit-dispatch-btn')
+
 
 function initSignaturePad() {
+    var canvas = $('.signature-canvas');
+    var btn = $('.submit-dispatch-btn')
     var signaturePad = new SignaturePad(canvas[0]);
-
-    // signaturePad.toDataURL(); // save image as PNG
-
-    signaturePad.toData();
-
-    // Draws signature image from an array of point groups
-    // signaturePad.fromData(data);
 
     $('.clean-canvas-btn').on('click', (e) => {
         e.preventDefault()
+
         signaturePad.clear();
+
         btn.prop('disabled', true)
     })
 
-
-
     canvas.on('mouseup touchend', (e) => {
         btn.prop('disabled', signaturePad.isEmpty() ? true : false) 
-        
+
+        $('[name="recieverSignatureData"]').val(signaturePad.toData())
     })
 
     canvas.css('width',canvas.parent().width() + 10)
@@ -159,6 +154,15 @@ function initSignaturePad() {
     signaturePad.on();
 
 }
+
+function initDispatchModal() {
+    alertModal.display({
+        modalId:'dispatchModal',
+        primaryLabel:'מאשר קבלה',
+        afterInit: () => initSignaturePad()
+    })
+}
+
 $(() => {
 
     testCards.init()
@@ -166,16 +170,5 @@ $(() => {
     barcodeReader.init()
 
     testCards.updateList(fakeTests)
-
-    
-
-    alertModal.display({
-        modalId:'dispatchModal',
-        primaryLabel:'מאשר קבלה',
-        primaryAction: (e) => {
-            e.preventDefault
-        },
-        afterInit: () => initSignaturePad()
-    })
 
 })
