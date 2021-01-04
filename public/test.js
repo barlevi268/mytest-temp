@@ -1,6 +1,6 @@
 $(() => {
 
-    const codeReader = new ZXing.BrowserMultiFormatReader()
+    const codeReader = new ZXing.BrowserBarcodeReader()
     console.log('ZXing code reader initialized')
 
     $('[type="file"]').on("change", function(e) {
@@ -18,7 +18,8 @@ $(() => {
         e.target.files && e.target.files.length ? readURL(e.target) : "";
     });
     
-    document.getElementById('decodeFile').addEventListener('click', () => {
+    document.getElementById('decodeFile').addEventListener('click', (e) => {
+        e.preventDefault()
         const img = $("img")[0]
         codeReader.decodeFromImage(img).then((result) => {
             console.log(result)
@@ -27,7 +28,7 @@ $(() => {
             console.error(err)
             document.getElementById('result').textContent = err
         })
-        console.log(`Started decode for image from ${img.src}`)
+        
     })
 
 
