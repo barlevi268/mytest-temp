@@ -21,7 +21,7 @@ $(() => {
     document.getElementById('decodeFile').addEventListener('click', (e) => {
         e.preventDefault()
         const img = $("img")[0]
-        codeReader.decodeFromImage(img).then((result) => {
+        codeReader.decodeMultiple(img).then((result) => {
             console.log(result)
             document.getElementById('result').textContent = result.text
         }).catch((err) => {
@@ -34,3 +34,4 @@ $(() => {
 
 
 })
+
