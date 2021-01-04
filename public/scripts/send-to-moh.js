@@ -135,4 +135,8 @@ $(() => {
 
     testCards.updateList(fakeTests)
 
+    alertModal.display({
+        modalId:'dispatchModal'
+    })
+
 })
