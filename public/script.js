@@ -58,6 +58,10 @@ var alertModal = {
       alertModal.content.html(message);
     }
     alertModal.show();
+
+    if (message.afterInit) {
+      message.afterInit.call();
+    }
   },
   init: () => {
     alertModal.content = alertModal.subView.find(".modal-message");

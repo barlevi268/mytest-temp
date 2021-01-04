@@ -127,11 +127,12 @@ var barcodeReader = {
     }
 };
 
+
+var canvas = $('.signature-canvas');
+var btn = $('.submit-dispatch-btn')
+
 function initSignaturePad() {
-    var canvas = $("signatucanvas");
-    var btn = $('.submit-dispatch-btn')
-    
-    var signaturePad = new SignaturePad(canvas);
+    var signaturePad = new SignaturePad(canvas[0]);
 
     // signaturePad.toDataURL(); // save image as PNG
 
@@ -147,10 +148,14 @@ function initSignaturePad() {
         btn.prop('disabled', true)
     })
 
-    $(canvas).on('mouseup touchend', (e) => {
+
+
+    canvas.on('mouseup touchend', (e) => {
         btn.prop('disabled', signaturePad.isEmpty() ? true : false) 
     })
 
+    canvas.css('width', canvas.parent().width())
+    
     signaturePad.on();
 
 }
@@ -162,11 +167,14 @@ $(() => {
 
     testCards.updateList(fakeTests)
 
-    initSignaturePad()
+    
 
     alertModal.display({
         modalId:'dispatchModal',
-        primaryLabel:'מאשר קבלה'
+        primaryLabel:'מאשר קבלה',
+        afterInit: () => {
+            initSignaturePad()
+        }
     })
 
 })
