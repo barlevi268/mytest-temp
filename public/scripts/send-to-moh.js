@@ -136,8 +136,7 @@ function initSignaturePad() {
 
     // signaturePad.toDataURL(); // save image as PNG
 
-    // Returns signature image as an array of point groups
-    // const data = signaturePad.toData();
+    signaturePad.toData();
 
     // Draws signature image from an array of point groups
     // signaturePad.fromData(data);
@@ -152,9 +151,10 @@ function initSignaturePad() {
 
     canvas.on('mouseup touchend', (e) => {
         btn.prop('disabled', signaturePad.isEmpty() ? true : false) 
+        
     })
 
-    canvas.css('width',canvas.parent().width())
+    canvas.css('width',canvas.parent().width() + 10)
     
     signaturePad.on();
 
@@ -172,6 +172,9 @@ $(() => {
     alertModal.display({
         modalId:'dispatchModal',
         primaryLabel:'מאשר קבלה',
+        primaryAction: (e) => {
+            e.preventDefault
+        },
         afterInit: () => initSignaturePad()
     })
 

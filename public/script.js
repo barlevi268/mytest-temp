@@ -25,7 +25,7 @@ var alertModal = {
       }
 
       if (message.primaryAction) {
-        alertModal.primaryButton.on("click", message.primaryAction);
+        alertModal.primaryButton.on("click", (e) => message.primaryAction.call(e));
       }
 
       if (message.primaryLabel) {

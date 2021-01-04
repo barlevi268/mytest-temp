@@ -318,8 +318,5 @@ hr {
 
 .signature-canvas {
   border-radius: 0.8rem;
-  font-weight: 500;
-  border: none;
-  padding: 20px;
   background-color: var(--input-bg);
 }
