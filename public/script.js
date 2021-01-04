@@ -54,14 +54,15 @@ var alertModal = {
       if (message.onInit) {
         message.onInit.call();
       }
+
+      if (message.afterInit) {
+        alertModal.subView.on('shown.bs.modal', () => message.afterInit.call())
+      }
+
     } else if (typeof message == "string") {
       alertModal.content.html(message);
     }
     alertModal.show();
-
-    if (message.afterInit) {
-      message.afterInit.call();
-    }
   },
   init: () => {
     alertModal.content = alertModal.subView.find(".modal-message");

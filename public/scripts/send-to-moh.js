@@ -154,7 +154,7 @@ function initSignaturePad() {
         btn.prop('disabled', signaturePad.isEmpty() ? true : false) 
     })
 
-    canvas.css('width', canvas.parent().width())
+    canvas.css('width',canvas.parent().width())
     
     signaturePad.on();
 
@@ -172,9 +172,7 @@ $(() => {
     alertModal.display({
         modalId:'dispatchModal',
         primaryLabel:'מאשר קבלה',
-        afterInit: () => {
-            initSignaturePad()
-        }
+        afterInit: () => initSignaturePad()
     })
 
 })
