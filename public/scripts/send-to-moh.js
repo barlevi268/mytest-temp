@@ -129,6 +129,7 @@ var barcodeReader = {
 
 function initSignaturePad() {
     var canvas = document.querySelector("canvas");
+    var btn = $('.submit-dispatch-btn')
     
     var signaturePad = new SignaturePad(canvas);
 
@@ -140,8 +141,10 @@ function initSignaturePad() {
     // Draws signature image from an array of point groups
     signaturePad.fromData(data);
 
-    // Clears the canvas
-    signaturePad.clear();
+    $('.clean-canvas-button').on('click', (e) => {
+        signaturePad.clear();
+    })
+    
 
     // Returns true if canvas is empty, otherwise returns false
     signaturePad.isEmpty();
@@ -149,7 +152,9 @@ function initSignaturePad() {
     // Rebinds all event handlers
     signaturePad.on();
 
-    canvas.addEventListener('click', (e) => console.log(e))
+    canvas.addEventListener('mouseup', (e) => {
+        btn.prop('disabled', signaturePad.isEmpty() ? true : false) 
+    })
 
 }
 $(() => {
