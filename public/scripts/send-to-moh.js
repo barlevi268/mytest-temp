@@ -128,33 +128,30 @@ var barcodeReader = {
 };
 
 function initSignaturePad() {
-    var canvas = document.querySelector("canvas");
+    var canvas = $("signatucanvas");
     var btn = $('.submit-dispatch-btn')
     
     var signaturePad = new SignaturePad(canvas);
 
-    signaturePad.toDataURL(); // save image as PNG
+    // signaturePad.toDataURL(); // save image as PNG
 
     // Returns signature image as an array of point groups
-    const data = signaturePad.toData();
+    // const data = signaturePad.toData();
 
     // Draws signature image from an array of point groups
-    signaturePad.fromData(data);
+    // signaturePad.fromData(data);
 
-    $('.clean-canvas-button').on('click', (e) => {
+    $('.clean-canvas-btn').on('click', (e) => {
+        e.preventDefault()
         signaturePad.clear();
+        btn.prop('disabled', true)
     })
-    
 
-    // Returns true if canvas is empty, otherwise returns false
-    signaturePad.isEmpty();
-
-    // Rebinds all event handlers
-    signaturePad.on();
-
-    canvas.addEventListener('mouseup', (e) => {
+    $(canvas).on('mouseup touchend', (e) => {
         btn.prop('disabled', signaturePad.isEmpty() ? true : false) 
     })
+
+    signaturePad.on();
 
 }
 $(() => {
