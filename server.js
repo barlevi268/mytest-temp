@@ -28,6 +28,9 @@ app.get("/selfService", (request, response) => {
   response.sendFile(__dirname + "/views/registerSelfService.html");
 });
 
+app.get("/test", (request, response) => {
+  response.sendFile(__dirname + "/views/test.html");
+});
 
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
