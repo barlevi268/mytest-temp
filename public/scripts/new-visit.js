@@ -1,58 +1,29 @@
 function initBarcodeDetect() {
-  const quaggaConfig = {
-    numOfWorkers: 4,
-    decoder: {
-      readers: ["ean_reader", "code_128_reader"],
-      multiple: true
-    },
-    locate: true,
-    src: null
-  };
-  
+
   function decode(src) {
-    config = $.extend({}, self.state, { src: src });
+    var config = {
+      numOfWorkers: 4,
+      decoder: {
+        readers: ["ean_reader", "code_128_reader"],
+        multiple: false
+      },
+      locate: true,
+      src: src
+    }
 
     Quagga.decodeSingle(config, function(result) {
-      console.log(result);
-    });
-  }
-  $("#uploadBarcode").on("change", function(e) {
-    if (e.target.files && e.target.files.length) {
-      barcodeReader.decode(URL.createObjectURL(e.target.files[0]));
-    }
-  });
-}
-
-var barcodeReader = {
-  init: function() {
-    barcodeReader.attachListeners();
-
-    Quagga.onDetected(function(result) {
-      var code = result[0].codeResult.code;
+      var code = result.codeResult.code;
       $('[name="test_barcode"]').val(code);
     });
-  },
-  attachListeners: function() {
-    var self = this;
-  },
-  decode: function(src) {
-    var self = this,
-      config = $.extend({}, self.state, { src: src });
-
-    Quagga.decodeSingle(config, function(result) {
-      console.log(result);
-    });
-  },
-  state: {
-    numOfWorkers: 4,
-    decoder: {
-      readers: ["ean_reader", "code_128_reader"],
-      multiple: true
-    },
-    locate: true,
-    src: null
   }
-};
+
+  $("#uploadBarcode").on("change", function(e) {
+    if (e.target.files && e.target.files.length) {
+      decode(URL.createObjectURL(e.target.files[0]));
+    }
+  });
+  
+}
 
 const fakeVisit = {
   fullName: "חיים רפאלי",
@@ -104,7 +75,7 @@ function initConditionalFields() {
 }
 
 $(() => {
-  barcodeReader.init();
+  initBarcodeDetect();
 
   initConditionalFields();
 });
