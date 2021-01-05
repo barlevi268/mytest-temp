@@ -3,14 +3,10 @@ var barcodeReader = {
         barcodeReader.attachListeners();
 
         Quagga.onDetected(function(result) {
-            var code = result.codeResult.code;
+            var code = result[0].codeResult.code;
             $('[name="test_barcode"]').val(code);
         });
 
-    },
-    config: {
-        reader: "code_128",
-        length: 10
     },
     attachListeners: function() {
         var self = this;
@@ -26,7 +22,7 @@ var barcodeReader = {
         var self = this,
             config = $.extend({}, self.state, {src: src});
 
-        Quagga.decodeSingle(config, function(result) {});
+        Quagga.decodeSingle(config, function(result) {console.log(result)});
     },
     state: {
         inputStream: {
@@ -36,12 +32,12 @@ var barcodeReader = {
             patchSize: "medium",
             halfSample: false
         },
-        numOfWorkers: 1,
+        numOfWorkers: 4,
         decoder: {
-            readers: [{
-                format: "code_128_reader",
-                config: {}
-            }]
+            readers: [
+                "ean_reader"
+            ],
+          multiple:true
         },
         locate: true,
         src: null
