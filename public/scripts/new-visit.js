@@ -2,12 +2,17 @@ function initBarcodeDetect() {
 
   function decode(src) {
     var config = {
+      inputStream: {
+                    type: "ImageStream",
+                    length: 10,
+                    size: 1200
+                },
       numOfWorkers: 4,
       decoder: {
         readers: ["ean_reader", "code_128_reader"],
         multiple: false
       },
-      locate: true,
+      locate: false,
       src: src
     }
 
