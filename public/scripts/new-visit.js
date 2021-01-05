@@ -5,19 +5,19 @@ function initBarcodeDetect() {
       inputStream: {
                     type: "ImageStream",
                     length: 10,
-                    size: 1200
+                    size: 5000
                 },
       numOfWorkers: 4,
       decoder: {
         readers: ["ean_reader", "code_128_reader"],
         multiple: false
       },
-      locate: false,
+      locate: true,
       src: src
     }
 
     Quagga.decodeSingle(config, function(result) {
-      var code = result.codeResult.code;
+      var code = result.codeResult.code ? result.codeResult.code : '';
       $('[name="test_barcode"]').val(code);
     });
   }
