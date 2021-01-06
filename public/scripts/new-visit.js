@@ -9,7 +9,7 @@ function initBarcodeDetect() {
         inputStream: {
           type: "ImageStream",
           length: 20,
-          size: 2000
+          size: 1600
         },
         numOfWorkers: 8,
         decoder: {
