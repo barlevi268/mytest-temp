@@ -1,22 +1,19 @@
 function initBarcodeDetect() {
-  
-  async function readBarcodePromise(config) {
-    console.log(config)
+  function readBarcodePromise(config) {
     return new Promise(resolve => {
-      Quagga.decodeSingle(config, (result) => {
-        console.log(config)
-        resolve(result)
-      })
+      Quagga.decodeSingle(config, result => {
+        resolve(result);
+      });
     });
   }
 
-  function decode(src) {
-    const sizes = [800, 1200, 1800];
-
+  async function decode(src) {
     var code = "";
 
-    $.each(sizes, async (i, size) => {
-      var config = {
+    var results = [];
+
+    const config = size => {
+      return {
         inputStream: {
           type: "ImageStream",
           length: 20,
@@ -30,14 +27,19 @@ function initBarcodeDetect() {
         locate: true,
         src: src
       };
-
-      var result = await readBarcodePromise(config);
-      console.log(await result)
-      if (result.codeResult) {
-        code = result.codeResult.code;
-        $('[name="test_barcode"]').val(code);
-      }
+    };
+    
+    Quagga.decodeSingle(config(800), result => {
+      Quagga.decodeSingle(config(1200), result => {
+        Quagga.decodeSingle(config(1800), result => {});
+      });
     });
+    
+    results.push(await readBarcodePromise(config(800)));
+    results.push(await readBarcodePromise(config(1200)));
+    results.push(await readBarcodePromise(config(1800)));
+    
+    console.log(results)
   }
 
   $("#uploadBarcode").on("change", function(e) {
