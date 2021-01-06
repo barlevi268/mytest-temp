@@ -1,9 +1,9 @@
 function initBarcodeDetect() {
   function decode(src) {
-    const sizes = [800, 1200, 1600, 2000];
+    const sizes = [800];
 
     var code = "";
-
+    
     $.each(sizes, (i,size) => {
       var config = {
         inputStream: {
@@ -11,7 +11,7 @@ function initBarcodeDetect() {
           length: 20,
           size: size
         },
-        numOfWorkers: 8,
+        numOfWorkers: 1,
         decoder: {
           readers: ["ean_reader", "code_128_reader"],
           multiple: false
@@ -19,12 +19,12 @@ function initBarcodeDetect() {
         locate: true,
         src: src
       };
-      
+      console.log(config)
       Quagga.decodeSingle(config, result => {
-        console.log(config,result)
+        console.log(result)
         if (result.codeResult) {
           code = result.codeResult.code;
-          
+          console.log(code)
         }
       });
     })
