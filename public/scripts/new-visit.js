@@ -1,9 +1,10 @@
 function initBarcodeDetect() {
   
-  function readBarcodePromise(config) {
+  async function readBarcodePromise(config) {
+    console.log(config)
     return new Promise(resolve => {
-      Quagga.decodeSingle(config, result => {
-        console.log(result)
+      Quagga.decodeSingle(config, (result) => {
+        console.log(config)
         resolve(result)
       })
     });
