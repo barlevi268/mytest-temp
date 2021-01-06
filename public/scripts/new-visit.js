@@ -2,7 +2,10 @@ function initBarcodeDetect() {
   
   function readBarcodePromise(config) {
     return new Promise(resolve => {
-      Quagga.decodeSingle(config, result => resolve(result))
+      Quagga.decodeSingle(config, result => {
+        console.log(result)
+        resolve(result)
+      })
     });
   }
 
@@ -28,7 +31,7 @@ function initBarcodeDetect() {
       };
 
       var result = await readBarcodePromise(config);
-      console.log(result)
+      console.log(await result)
       if (result.codeResult) {
         code = result.codeResult.code;
         $('[name="test_barcode"]').val(code);
