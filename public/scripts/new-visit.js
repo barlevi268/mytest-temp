@@ -16,11 +16,21 @@ function initBarcodeDetect() {
         src: src
       };
     };
+    
+    const processImage = () => {
+      Quagga.decodeSingle(config(800), (result) => {
 
-    Quagga.decodeSingle(config(800), function(result) {
-      var code = "";
-      console.log(result.codeResult.code);
-      $('[name="test_barcode"]').val(code);
+    } 
+    
+    Quagga.decodeSingle(config(800), (result) => {
+      const code = () => {
+        if (result.codeResult) {
+          return result.codeResult.code
+        } else {
+          
+        }
+      } 
+      $('[name="test_barcode"]').val(code());
     });
   }
 
