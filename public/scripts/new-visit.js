@@ -1,23 +1,22 @@
 function initBarcodeDetect() {
-
   function decode(src) {
     var config = {
       inputStream: {
-                    type: "ImageStream",
-                    length: 10,
-                    size: 5000
-                },
-      numOfWorkers: 4,
+        type: "ImageStream",
+        length: 20,
+        size: 1200
+      },
+      numOfWorkers: 8,
       decoder: {
         readers: ["ean_reader", "code_128_reader"],
         multiple: false
       },
       locate: true,
       src: src
-    }
+    };
 
     Quagga.decodeSingle(config, function(result) {
-      var code = result.codeResult.code ? result.codeResult.code : '';
+      var code = result.codeResult.code ? result.codeResult.code : "";
       $('[name="test_barcode"]').val(code);
     });
   }
@@ -27,7 +26,6 @@ function initBarcodeDetect() {
       decode(URL.createObjectURL(e.target.files[0]));
     }
   });
-  
 }
 
 const fakeVisit = {
