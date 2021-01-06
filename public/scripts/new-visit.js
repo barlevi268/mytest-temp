@@ -1,7 +1,14 @@
 function initBarcodeDetect() {
+  
   function decode(src) {
-    const config = scanSurface => {
-      return {
+    
+      const sizes = [800,1200,1600,2000]
+      
+      var code = ''
+      
+      for (var i = 0; i < sizes.length; i++) {
+        
+        var config = {
         inputStream: {
           type: "ImageStream",
           length: 20,
@@ -14,24 +21,20 @@ function initBarcodeDetect() {
         },
         locate: true,
         src: src
-      };
+      }
+              
+        Quagga.decodeSingle(config, (result) => {
+          if (result.codeResult) {
+            code = result.codeResult.code
+          }
+        })
+      }
+      $('[name="test_barcode"]').val(code)
+    
+    
+
     };
     
-    const processImage = () => {
-      Quagga.decodeSingle(config(800), (result) => {
-
-    } 
-    
-    Quagga.decodeSingle(config(800), (result) => {
-      const code = () => {
-        if (result.codeResult) {
-          return result.codeResult.code
-        } else {
-          
-        }
-      } 
-      $('[name="test_barcode"]').val(code());
-    });
   }
 
   $("#uploadBarcode").on("change", function(e) {
