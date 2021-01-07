@@ -4,12 +4,14 @@ function initBarcodeDetect() {
     var code = "";
 
     var results = [];
-
-    const config = {
+    
+    var surfaceSize = 800
+    
+    var config = {
         inputStream: {
           type: "ImageStream",
           length: 20,
-          size: 1600
+          size: surfaceSize
         },
         numOfWorkers: 8,
         decoder: {
@@ -21,11 +23,16 @@ function initBarcodeDetect() {
       };
     
     Quagga.decodeSingle(config, result => {
-      results.push(result)
+      config.inputStream.size = 1200
+      console.log(result,Date.now())
+      result ? result.codeReult ? code = result.codeResult.code : '' : ''
       Quagga.decodeSingle(config, result => {
+        config.inputStream.size = 1600
+        console.log(result,Date.now())
         results.push(result)
         Quagga.decodeSingle(config, result => {
-
+          console.log(result,Date.now())
+          results.push(result)
         })
       })
                             
