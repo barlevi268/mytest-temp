@@ -5,15 +5,11 @@ function initBarcodeDetect() {
     const codeField = $('[name="test_barcode"]')
     var code = "";
 
-    var results = [];
-
-    var surfaceSize = 800;
-
     var config = {
       inputStream: {
         type: "ImageStream",
         length: 20,
-        size: surfaceSize
+        size: 800
       },
       numOfWorkers: 8,
       decoder: {

@@ -73,6 +73,30 @@ var alertModal = {
   }
 };
 
+
+
+
+var quaggaDefaultConfig = {
+  inputStream: {
+    type: "ImageStream",
+    length: 20,
+    size: 800
+  },
+  numOfWorkers: 8,
+  decoder: {
+    readers: ["ean_reader", "code_128_reader"],
+    multiple: false
+  },
+  locate: true,
+};
+
+function decodeBarcode(src,config, cb) {
+  
+  config.src = src
+  
+  
+}
+
 function initSelect2() {
   $.each($("[select2-type]"), (i, val) => {
     var displayMode = $(val).attr("select2-type");
