@@ -1,6 +1,6 @@
 function initBarcodeDetect() {
 
-  async function decode(src) {
+  function decode(src) {
     var code = "";
 
     var results = [];
@@ -21,7 +21,16 @@ function initBarcodeDetect() {
       };
     
     Quagga.decodeSingle(config, result => {
-      console.log(result)
+      results.push(result)
+      Quagga.decodeSingle(config, result => {
+        results.push(result)
+        Quagga.decodeSingle(config, result => {
+
+        })
+      })
+                            
+      
+      
     });
   }
 
@@ -57,7 +66,6 @@ function fakeVisitSuccess() {
 function initConditionalFields() {
   $(".form-group").on("change", e => {
     var $target = $(e.target);
-    console.log($('[name="pcrTestType"]').val());
     switch ($target.attr("name")) {
       case "testType":
         if ($('[name="testType"]:checked').val() == "PCR") {
