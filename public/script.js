@@ -112,12 +112,12 @@ function decodeBarcode(src, config, cb) {
           result.codeResult ? (response = result.codeResult.code) : "";
         }
 
-        config.inputStream.size = 2000;
+        config.inputStream.size = 1800;
 
         Quagga.decodeSingle(config, result => {
           if (result) {
             result.codeResult ? (response = result.codeResult.code) : "";
-          }
+          } 
 
           cb(response);
         });

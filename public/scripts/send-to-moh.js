@@ -90,8 +90,6 @@ function initBarcodeDetect() {
       });
     }
   });
-  
-  $()
 }
 
 function initSignaturePad() {
