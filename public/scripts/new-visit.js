@@ -4,41 +4,52 @@ function initBarcodeDetect() {
     var code = "";
 
     var results = [];
-    
-    var surfaceSize = 800
-    
+
+    var surfaceSize = 800;
+
     var config = {
-        inputStream: {
-          type: "ImageStream",
-          length: 20,
-          size: surfaceSize
-        },
-        numOfWorkers: 8,
-        decoder: {
-          readers: ["ean_reader", "code_128_reader"],
-          multiple: false
-        },
-        locate: true,
-        src: src
-      };
+      inputStream: {
+        type: "ImageStream",
+        length: 20,
+        size: surfaceSize
+      },
+      numOfWorkers: 8,
+      decoder: {
+        readers: ["ean_reader", "code_128_reader"],
+        multiple: false
+      },
+      locate: true,
+      src: src
+    };
+    
+    alertModal.display()
     
     Quagga.decodeSingle(config, result => {
-      config.inputStream.size = 1200
-      console.log(result,Date.now())
-      result ? result.codeReult ? code = result.codeResult.code : '' : ''
+      config.inputStream.size = 1200;
+      console.log(result, Date.now());
+      if (result) {
+        result.codeResult ? (code = result.codeResult.code) : "";
+        console.log(code);
+      }
+      console.log(code);
       Quagga.decodeSingle(config, result => {
-        config.inputStream.size = 1600
-        console.log(result,Date.now())
-        results.push(result)
+        config.inputStream.size = 1600;
+        console.log(result, Date.now());
+        if (result) {
+          result.codeResult ? (code = result.codeResult.code) : "";
+          console.log(code);
+        }
         Quagga.decodeSingle(config, result => {
-          console.log(result,Date.now())
-          results.push(result)
-        })
-      })
-                            
-      
-      
+          console.log(result, Date.now());
+          if (result) {
+            result.codeResult ? (code = result.codeResult.code) : "";
+            console.log(code);
+          }
+          alertModal.hide()
+        });
+      });
     });
+    
   }
 
   $("#uploadBarcode").on("change", function(e) {
