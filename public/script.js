@@ -90,11 +90,42 @@ var quaggaDefaultConfig = {
   locate: true,
 };
 
-function decodeBarcode(src,config, cb) {
-  
-  config.src = src
-  
-  
+function decodeBarcode(src, config, cb) {
+  var response;
+
+  config.src = src;
+
+  Quagga.decodeSingle(config, result => {
+    if (result) {
+      result.codeResult ? (response = result.codeResult.code) : "";
+    }
+
+    config.inputStream.size = 1200;
+
+    Quagga.decodeSingle(config, result => {
+      if (result) {
+        result.codeResult ? (response = result.codeResult.code) : "";
+      }
+
+      config.inputStream.size = 1600;
+
+      Quagga.decodeSingle(config, result => {
+        if (result) {
+          result.codeResult ? (response = result.codeResult.code) : "";
+        }
+
+        config.inputStream.size = 2000;
+
+        Quagga.decodeSingle(config, result => {
+          if (result) {
+            result.codeResult ? (response = result.codeResult.code) : "";
+          }
+
+          cb(response);
+        });
+      });
+    });
+  });
 }
 
 function initSelect2() {

@@ -1,52 +1,23 @@
 function initBarcodeDetect() {
-
-  function decode(src) {
-    
-    const codeField = $('[name="test_barcode"]')
+  
+  function detectCodeInImage(src) {
+    const codeField = $('[name="test_barcode"]');
     var code = "";
 
-    var config = {
-      inputStream: {
-        type: "ImageStream",
-        length: 20,
-        size: 800
-      },
-      numOfWorkers: 8,
-      decoder: {
-        readers: ["ean_reader", "code_128_reader"],
-        multiple: false
-      },
-      locate: true,
-      src: src
-    };
-    
-    codeField.attr('placeholder','...מחפש ברקוד בתמונה...')
-    console.log(codeField)
-    Quagga.decodeSingle(config, result => {
-      config.inputStream.size = 1200;
-      if (result) {
-        result.codeResult ? (code = result.codeResult.code) : "";
-      }
-      Quagga.decodeSingle(config, result => {
-        config.inputStream.size = 1600;
-        if (result) {
-          result.codeResult ? (code = result.codeResult.code) : "";
-        }
-        Quagga.decodeSingle(config, result => {
-          if (result) {
-            result.codeResult ? (code = result.codeResult.code) : "";
-          }
-          codeField.attr('placeholder','הזן ברקוד')
-          codeField.val(code)
-        });
-      });
+    var config = quaggaDefaultConfig;
+
+    codeField.attr("placeholder", "...מחפש ברקוד בתמונה...");
+
+    decodeBarcode(src, config, result => {
+      result ? (code = result) : "";
+      codeField.attr("placeholder", "הזן ברקוד");
+      codeField.val(code);
     });
-    
   }
 
   $("#uploadBarcode").on("change", function(e) {
     if (e.target.files && e.target.files.length) {
-      decode(URL.createObjectURL(e.target.files[0]));
+      detectCodeInImage(URL.createObjectURL(e.target.files[0]));
     }
   });
 }
