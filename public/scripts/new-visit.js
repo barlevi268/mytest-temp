@@ -1,6 +1,8 @@
 function initBarcodeDetect() {
 
   function decode(src) {
+    
+    const codeField = $('[name="test_barcode"]')
     var code = "";
 
     var results = [];
@@ -22,30 +24,24 @@ function initBarcodeDetect() {
       src: src
     };
     
-    alertModal.display()
-    
+    codeField.attr('placeholder','...מחפש ברקוד בתמונה...')
+    console.log(codeField)
     Quagga.decodeSingle(config, result => {
       config.inputStream.size = 1200;
-      console.log(result, Date.now());
       if (result) {
         result.codeResult ? (code = result.codeResult.code) : "";
-        console.log(code);
       }
-      console.log(code);
       Quagga.decodeSingle(config, result => {
         config.inputStream.size = 1600;
-        console.log(result, Date.now());
         if (result) {
           result.codeResult ? (code = result.codeResult.code) : "";
-          console.log(code);
         }
         Quagga.decodeSingle(config, result => {
-          console.log(result, Date.now());
           if (result) {
             result.codeResult ? (code = result.codeResult.code) : "";
-            console.log(code);
           }
-          alertModal.hide()
+          codeField.attr('placeholder','הזן ברקוד')
+          codeField.val(code)
         });
       });
     });
