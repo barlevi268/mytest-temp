@@ -74,8 +74,6 @@ var alertModal = {
 };
 
 
-
-
 var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",

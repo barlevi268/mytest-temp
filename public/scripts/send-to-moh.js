@@ -76,59 +76,21 @@ function showTestApprovale(test) {
     })
 }
 
-var barcodeReader = {
-    init: function() {
-        barcodeReader.attachListeners();
+function initBarcodeDetect() {
+  var config = quaggaDefaultConfig;
 
-        Quagga.onDetected(function(result) {
-            var code = result.codeResult.code;
-        });
-
-    },
-    config: {
-        reader: "code_128",
-        length: 10
-    },
-    attachListeners: function() {
-        var self = this;
-
-        $("#scanTest").on("change", function(e) {
-            if (e.target.files && e.target.files.length) {
-                barcodeReader.decode(URL.createObjectURL(e.target.files[0]));
-                $('[for="scanTest"]').removeClass('d-flex')
-                // fake find
-                showTestApprovale(fakeTests[2])
-            }
-        });
-    },
-    decode: function(src) {
-        var self = this,
-            config = $.extend({}, self.state, {src: src});
-
-        Quagga.decodeSingle(config, function(result) {});
-    },
-    state: {
-        inputStream: {
-            size: 800
-        },
-        locator: {
-            patchSize: "medium",
-            halfSample: false
-        },
-        numOfWorkers: 1,
-        decoder: {
-            readers: [{
-                format: "code_128_reader",
-                config: {}
-            }]
-        },
-        locate: true,
-        src: null
+  $("#scanTest").on("change", function(e) {
+    if (e.target.files && e.target.files.length) {
+      var src = URL.createObjectURL(e.target.files[0]);
+      decodeBarcode(src, config, result => {
+        if (result) {
+          $('[for="scanTest"]').removeClass("d-flex");
+          showTestApprovale(fakeTests[2]);
+        }
+      });
     }
-};
-
-
-
+  });
+}
 
 function initSignaturePad() {
     var canvas = $('.signature-canvas');
@@ -167,7 +129,7 @@ $(() => {
 
     testCards.init()
 
-    barcodeReader.init()
+    initBarcodeDetect()
 
     testCards.updateList(fakeTests)
 
