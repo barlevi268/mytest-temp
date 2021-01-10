@@ -77,10 +77,10 @@ var alertModal = {
 var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",
-    length: 20,
+    length: 10,
     size: 400
   },
-  numOfWorkers: 4,
+  numOfWorkers: 10,
   decoder: {
     readers: ["ean_reader", "code_128_reader"],
     multiple: false
@@ -98,28 +98,28 @@ function decodeBarcode(src, config, cb) {
       result.codeResult ? (response = result.codeResult.code) : "";
     }
 
-    config.inputStream.size = 1200;
+    config.inputStream.size = 800;
 
     Quagga.decodeSingle(config, result => {
       if (result) {
         result.codeResult ? (response = result.codeResult.code) : "";
       }
 
-      config.inputStream.size = 1600;
+      config.inputStream.size = 1200;
 
       Quagga.decodeSingle(config, result => {
         if (result) {
           result.codeResult ? (response = result.codeResult.code) : "";
         }
 
-        config.inputStream.size = 1800;
+        config.inputStream.size = 1400;
 
         Quagga.decodeSingle(config, result => {
           if (result) {
             result.codeResult ? (response = result.codeResult.code) : "";
           }
 
-          config.inputStream.size = 1800;
+          config.inputStream.size = 1600;
 
           Quagga.decodeSingle(config, result => {
             if (result) {
@@ -131,10 +131,17 @@ function decodeBarcode(src, config, cb) {
               if (result) {
                 result.codeResult ? (response = result.codeResult.code) : "";
               }
+
+              config.inputStream.size = 2000;
+
+              Quagga.decodeSingle(config, result => {
+                if (result) {
+                  result.codeResult ? (response = result.codeResult.code) : "";
+                }
+                cb(response);
+              });
             });
           });
-
-          cb(response);
         });
       });
     });
