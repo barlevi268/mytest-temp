@@ -78,9 +78,9 @@ var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",
     length: 20,
-    size: 800
+    size: 400
   },
-  numOfWorkers: 8,
+  numOfWorkers: 4,
   decoder: {
     readers: ["ean_reader", "code_128_reader"],
     multiple: false
@@ -117,7 +117,22 @@ function decodeBarcode(src, config, cb) {
         Quagga.decodeSingle(config, result => {
           if (result) {
             result.codeResult ? (response = result.codeResult.code) : "";
-          } 
+          }
+
+          config.inputStream.size = 1800;
+
+          Quagga.decodeSingle(config, result => {
+            if (result) {
+              result.codeResult ? (response = result.codeResult.code) : "";
+            }
+            config.inputStream.size = 1800;
+
+            Quagga.decodeSingle(config, result => {
+              if (result) {
+                result.codeResult ? (response = result.codeResult.code) : "";
+              }
+            });
+          });
 
           cb(response);
         });
