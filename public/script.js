@@ -80,7 +80,7 @@ var quaggaDefaultConfig = {
     length: 30,
     size: 400
   },
-  numOfWorkers: 10,
+  numOfWorkers: 8,
   decoder: {
     readers: ["ean_reader", "code_128_reader"],
     multiple: false
