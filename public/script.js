@@ -77,7 +77,7 @@ var alertModal = {
 var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",
-    length: 10,
+    length: 30,
     size: 400
   },
   numOfWorkers: 10,

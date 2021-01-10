@@ -6,10 +6,15 @@ function initBarcodeDetect() {
 
     var config = quaggaDefaultConfig;
 
-    codeField.attr("placeholder", "...מחפש ברקוד בתמונה...");
+    $('.barcode-loader').removeClass('d-none')
+    codeField.parent().removeClass('col-12').addClass('col-10')
 
     decodeBarcode(src, config, result => {
       result ? (code = result) : "";
+
+      codeField.parent().addClass('col-12').removeClass('col-10')
+      $('.barcode-loader').addClass('d-none')
+      
       codeField.attr("placeholder", "הזן ברקוד");
       codeField.val(code);
     });
