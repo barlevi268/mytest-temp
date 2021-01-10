@@ -6,9 +6,9 @@ function initBarcodeDetect() {
 
     var config = quaggaDefaultConfig;
 
+    codeField.parent().addClass('col-10').removeClass('col-12')
     $('.barcode-loader').removeClass('d-none')
-    codeField.parent().removeClass('col-12').addClass('col-10')
-
+    
     decodeBarcode(src, config, result => {
       result ? (code = result) : "";
 
