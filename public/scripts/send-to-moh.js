@@ -95,7 +95,7 @@ function initBarcodeDetect() {
 function initSignaturePad() {
     var canvas = $('.signature-canvas');
     var btn = $('.submit-dispatch-btn')
-    var signaturePad = new SignaturePad(canvas[0]);
+    // var signaturePad = new SignaturePad(canvas[0]);
 
     $('.clean-canvas-btn').on('click', (e) => {
         e.preventDefault()
@@ -113,7 +113,6 @@ function initSignaturePad() {
 
     canvas.css('width',canvas.parent().width() + 10)
     
-    signaturePad.on();
 
 }
 
