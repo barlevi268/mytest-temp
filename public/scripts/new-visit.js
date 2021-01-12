@@ -10,7 +10,8 @@ function initBarcodeDetect() {
     $('.barcode-loader').show('fast');
     
     decodeBarcode(src, config, result => {
-      result ? (code = result) : "";
+      result ? code = result : "";
+      console.log(result)
       
       $('.barcode-loader').hide('fast');
       

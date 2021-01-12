@@ -78,7 +78,7 @@ var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",
     length: 10,
-    size: 400
+    size: 600
   },
   numOfWorkers: 1,
   decoder: {
@@ -109,28 +109,23 @@ function decodeBarcode(src, config, cb) {
   Quagga.decodeSingle(config, result => {
     handleResults(result)
     
-    config.inputStream.size = 600;
+    config.inputStream.size = 1200;
 
     Quagga.decodeSingle(config, result => {
       handleResults(result)
 
-      config.inputStream.size = 1200;
+      config.inputStream.size = 1600;
 
       Quagga.decodeSingle(config, result => {
         handleResults(result)
 
-        config.inputStream.size = 1400;
+        config.inputStream.size = 1800;
 
         Quagga.decodeSingle(config, result => {
           handleResults(result)
-
-          config.inputStream.size = 1600;
-
-          Quagga.decodeSingle(config, result => {
-            handleResults(result)
-            console.timeEnd("time to scan barcode")
-            cb(result)
-          });
+          
+          console.timeEnd("time to scan barcode")
+          cb(false)
         });
       });
     });
