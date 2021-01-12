@@ -78,9 +78,9 @@ var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",
     length: 10,
-    size: 600
+    size: 1800
   },
-  numOfWorkers: 1,
+  numOfWorkers:1,
   decoder: {
     readers: ["code_128_reader"],
     multiple: false
@@ -89,6 +89,7 @@ var quaggaDefaultConfig = {
 };
 
 function decodeBarcode(src, config, cb) {
+  var progressBar = $('<div cla')
   var response;
   
   function handleResults(result) {
@@ -109,17 +110,17 @@ function decodeBarcode(src, config, cb) {
   Quagga.decodeSingle(config, result => {
     handleResults(result)
     
-    config.inputStream.size = 1200;
+    config.inputStream.size = 1600;
 
     Quagga.decodeSingle(config, result => {
       handleResults(result)
 
-      config.inputStream.size = 1600;
+      config.inputStream.size = 1200;
 
       Quagga.decodeSingle(config, result => {
         handleResults(result)
 
-        config.inputStream.size = 2000;
+        config.inputStream.size = 600;
 
         Quagga.decodeSingle(config, result => {
           handleResults(result)
