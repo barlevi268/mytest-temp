@@ -77,10 +77,10 @@ var alertModal = {
 var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",
-    length: 30,
+    length: 10,
     size: 400
   },
-  numOfWorkers: 8,
+  numOfWorkers: 1,
   decoder: {
     readers: ["ean_reader", "code_128_reader"],
     multiple: false
@@ -92,46 +92,46 @@ function decodeBarcode(src, config, cb) {
   var response;
 
   config.src = src;
-  console.time("scan");
+  console.time("time to scan barcode");
   Quagga.decodeSingle(config, result => {
     if (result) {
-      result.codeResult ? (response = result.codeResult.code) : "";
+      result.codeResult ? cb(result.codeResult.code) : "";
     }
 
     config.inputStream.size = 800;
 
     Quagga.decodeSingle(config, result => {
       if (result) {
-        result.codeResult ? (response = result.codeResult.code) : "";
+        result.codeResult ? cb(result.codeResult.code) : "";
       }
 
       config.inputStream.size = 1200;
 
       Quagga.decodeSingle(config, result => {
         if (result) {
-          result.codeResult ? (response = result.codeResult.code) : "";
+          result.codeResult ? cb(result.codeResult.code) : "";
         }
 
         config.inputStream.size = 1400;
 
         Quagga.decodeSingle(config, result => {
           if (result) {
-            result.codeResult ? (response = result.codeResult.code) : "";
+            result.codeResult ? cb(result.codeResult.code) : "";
           }
 
           config.inputStream.size = 1600;
 
           Quagga.decodeSingle(config, result => {
             if (result) {
-              result.codeResult ? (response = result.codeResult.code) : "";
+              result.codeResult ? cb(result.codeResult.code) : "";
             }
             config.inputStream.size = 1800;
 
             Quagga.decodeSingle(config, result => {
               if (result) {
-                result.codeResult ? (response = result.codeResult.code) : "";
+                result.codeResult ? cb(result.codeResult.code) : "";
               }
-              console.timeEnd("scan")
+              console.timeEnd("time to scan barcode")
               cb(response);
             });
           });
