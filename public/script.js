@@ -91,53 +91,46 @@ var quaggaDefaultConfig = {
 function decodeBarcode(src, config, cb) {
   var response;
   
-  function callBack(data) {
-    console.timeEnd("time to scan barcode")
-    console.log(data)
-    cb(data)
+  function handleResults(result) {
+    if (result) {
+      if (result.codeResult) {
+        console.timeEnd("time to scan barcode")
+        cb(data)
+      } 
+    }
   }
   
   config.src = src;
   console.time("time to scan barcode");
+  
   Quagga.decodeSingle(config, result => {
-    if (result) {
-      result.codeResult ? cb(result.codeResult.code) : "";
-    }
+
 
     config.inputStream.size = 800;
 
     Quagga.decodeSingle(config, result => {
-      if (result) {
-        result.codeResult ? cb(result.codeResult.code) : "";
-      }
+      handleResults(result)
 
       config.inputStream.size = 1200;
 
       Quagga.decodeSingle(config, result => {
-        if (result) {
-          result.codeResult ? callBack(result) : "";
-        }
+        handleResults(result)
 
         config.inputStream.size = 1400;
 
         Quagga.decodeSingle(config, result => {
-          if (result) {
-            result.codeResult ? callBack(result) : "";
-          }
+          handleResults(result)
 
           config.inputStream.size = 1600;
 
           Quagga.decodeSingle(config, result => {
-            if (result) {
-              result.codeResult ? callBack(result) : "";
-            }
+            handleResults(result)
             config.inputStream.size = 1800;
 
             Quagga.decodeSingle(config, result => {
-              if (result) {
-                result.codeResult ? callBack(result) : "";
-              }
-              callBack(result)
+              handleResults(result)
+              console.timeEnd("time to scan barcode")
+              cb(data)
             });
           });
         });
