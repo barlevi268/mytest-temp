@@ -85,15 +85,17 @@ var quaggaDefaultConfig = {
     readers: ["code_128_reader"],
     multiple: false
   },
-  locate: true
+  locate: true,
+  locator: {
+    patchSize: "medium",
+    halfSample: true
+  }
 };
 
 function decodeBarcode(src, config, cb) {
-  var progressBar = $('<div cla')
-  var response;
-  
+
   function handleResults(result) {
-    // alert(result ? JSON.stringify(result) : null)
+
     console.log(config.inputStream.size)
     console.log(result)
     if (result) {
