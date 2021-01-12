@@ -1,4 +1,5 @@
 function initBarcodeDetect() {
+  $('.barcode-loader').hide()
   
   function detectCodeInImage(src) {
     const codeField = $('[name="test_barcode"]');
@@ -6,14 +7,12 @@ function initBarcodeDetect() {
 
     var config = quaggaDefaultConfig;
 
-    codeField.parent().addClass('col-10').removeClass('col-12')
-    $('.barcode-loader').removeClass('d-none')
+    $('.barcode-loader').show('fast');
     
     decodeBarcode(src, config, result => {
       result ? (code = result) : "";
-
-      codeField.parent().addClass('col-12').removeClass('col-10')
-      $('.barcode-loader').addClass('d-none')
+      
+      $('.barcode-loader').hide('fast');
       
       codeField.attr("placeholder", "הזן ברקוד");
       codeField.val(code);
@@ -55,9 +54,9 @@ function initConditionalFields() {
     switch ($target.attr("name")) {
       case "testType":
         if ($('[name="testType"]:checked').val() == "PCR") {
-          $(".pcr-test-types").show("fast");
+          $(".pcr-test-types").show('fast');
         } else {
-          $(".pcr-test-types").hide("fast");
+          $(".pcr-test-types").hide('fast');
         }
         break;
       case "pcrTestType":
