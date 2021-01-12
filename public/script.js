@@ -92,6 +92,7 @@ function decodeBarcode(src, config, cb) {
   var response;
   
   function handleResults(result) {
+    alert(result ? JSON.parse(result) : null)
     if (result) {
       if (result.codeResult) {
         console.timeEnd("time to scan barcode")
@@ -104,8 +105,8 @@ function decodeBarcode(src, config, cb) {
   console.time("time to scan barcode");
   
   Quagga.decodeSingle(config, result => {
-
-
+    handleResults(result)
+    
     config.inputStream.size = 800;
 
     Quagga.decodeSingle(config, result => {
@@ -125,13 +126,8 @@ function decodeBarcode(src, config, cb) {
 
           Quagga.decodeSingle(config, result => {
             handleResults(result)
-            config.inputStream.size = 1800;
-
-            Quagga.decodeSingle(config, result => {
-              handleResults(result)
-              console.timeEnd("time to scan barcode")
-              cb(data)
-            });
+            console.timeEnd("time to scan barcode")
+            cb(result)
           });
         });
       });
