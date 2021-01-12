@@ -82,7 +82,7 @@ var quaggaDefaultConfig = {
   },
   numOfWorkers: 1,
   decoder: {
-    readers: ["ean_reader", "code_128_reader"],
+    readers: ["code_128_reader"],
     multiple: false
   },
   locate: true
@@ -119,7 +119,7 @@ function decodeBarcode(src, config, cb) {
       Quagga.decodeSingle(config, result => {
         handleResults(result)
 
-        config.inputStream.size = 1800;
+        config.inputStream.size = 2000;
 
         Quagga.decodeSingle(config, result => {
           handleResults(result)
