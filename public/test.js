@@ -35,9 +35,7 @@
 
 
 $(() => {
-  Quagga.decodeSingle(quaggaDefaultConfig, result => {
-    console.log(result)
-    $('.test-text').html(result)
-  })
+  console.log('result')
+
 })
 

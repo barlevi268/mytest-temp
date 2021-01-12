@@ -92,7 +92,7 @@ function decodeBarcode(src, config, cb) {
   var response;
 
   config.src = src;
-
+  console.time("scan");
   Quagga.decodeSingle(config, result => {
     if (result) {
       result.codeResult ? (response = result.codeResult.code) : "";
@@ -131,15 +131,8 @@ function decodeBarcode(src, config, cb) {
               if (result) {
                 result.codeResult ? (response = result.codeResult.code) : "";
               }
-
-              config.inputStream.size = 2000;
-
-              Quagga.decodeSingle(config, result => {
-                if (result) {
-                  result.codeResult ? (response = result.codeResult.code) : "";
-                }
-                cb(response);
-              });
+              console.timeEnd("scan")
+              cb(response);
             });
           });
         });
