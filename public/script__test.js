@@ -78,69 +78,61 @@ var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",
     length: 10,
-    size: 400
+    size: 1800
   },
-  numOfWorkers: 10,
+  numOfWorkers:1,
   decoder: {
-    readers: ["ean_reader", "code_128_reader"],
+    readers: ["code_128_reader"],
     multiple: true
   },
-  locate: true
+  locate: true,
+  locator: {
+    patchSize: "medium",
+    halfSample: true
+  }
 };
 
 function decodeBarcode(src, config, cb) {
-  var response;
 
+  function handleResults(result) {
+
+    console.log(config.inputStream.size)
+    console.log(result)
+    fetch('/test',{
+       method: "POST",
+      body: "123123"
+    })
+    // if (result) {
+    //   if (result.codeResult) {
+    //     console.timeEnd("time to scan barcode")
+    //     cb(result.codeResult.code)
+    //   } 
+    // }
+  }
+  
   config.src = src;
   console.time("time to scan barcode");
+  
   Quagga.decodeSingle(config, result => {
-    console.log(result)
-    if (result) {
-      result.codeResult ? cb(result.codeResult.code) : "";
-    }
-
-    config.inputStream.size = 1200;
+    handleResults(result)
+    
+    config.inputStream.size = 1600;
 
     Quagga.decodeSingle(config, result => {
-      console.log(result)
-      if (result) {
-        result.codeResult ? cb(result.codeResult.code,console.timeEnd("time to scan barcode")) : "";
-      }
+      handleResults(result)
 
-      config.inputStream.size = 1400;
+      config.inputStream.size = 1200;
 
       Quagga.decodeSingle(config, result => {
-        console.log(result)
-        if (result) {
-          result.codeResult ? cb(result.codeResult.code,console.timeEnd("time to scan barcode")) : "";
-        }
+        handleResults(result)
 
-        config.inputStream.size = 1800;
+        config.inputStream.size = 600;
 
         Quagga.decodeSingle(config, result => {
-          console.log(result)
-          if (result) {
-            result.codeResult ? cb(result.codeResult.code,console.timeEnd("time to scan barcode")) : "";
-          }
-
-          config.inputStream.size = 2000;
-
-          Quagga.decodeSingle(config, result => {
-            console.log(result)
-            if (result) {
-              result.codeResult ? cb(result.codeResult.code,console.timeEnd("time to scan barcode")) : "";
-            }
-            config.inputStream.size = 2200;
-
-            Quagga.decodeSingle(config, result => {
-              console.log(result)
-              if (result) {
-                result.codeResult ? cb(result.codeResult.code,console.timeEnd("time to scan barcode")) : "";
-              }
-              console.timeEnd("time to scan barcode")
-              cb(response);
-            });
-          });
+          handleResults(result)
+          
+          console.timeEnd("time to scan barcode")
+          cb(false)
         });
       });
     });
@@ -243,3 +235,4 @@ $(() => {
 
   initMandatoryFields();
 });
+  

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 app.use(express.static("public"));
+app.use(express.json())
 
 
 app.get("/", (request, response) => {
@@ -26,6 +27,10 @@ app.get("/moh", (request, response) => {
 
 app.get("/selfService", (request, response) => {
   response.sendFile(__dirname + "/views/registerSelfService.html");
+});
+
+app.post("/test", (request, response) => {
+  console.log(request)
 });
 
 app.get("/test", (request, response) => {
