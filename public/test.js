@@ -35,7 +35,7 @@
 class PassportDetails {
   constructor(text) {
     const regex = /P<([\s\S]*)/;
-    
+    var mrz = text.replace(/(\r\n|\n|\r)/gm, "")
     var array = mrz.match(regex)[0].split('<');
     
     this.lastName = array[1].substring(3)
@@ -48,15 +48,19 @@ $(() => {
   Tesseract.recognize(
     "https://cdn.glitch.com/51421fab-5312-472c-b55e-cf03f12cfde7%2FPhoto%20on%2006-01-2021%20at%2014.41.jpg?v=1610550825808",
     "eng",
-    { logger: m => console.log(m) }
+    { logger: m => {
+      console.log(m);
+      m.status == 'recognizing text' ? $('.progress-bar').css('width',(m.progress * 100) + '%') : '';
+    } }
   ).then(({ data: { text } }) => {
     console.log(text);
-    var li = LiItem.clone()
+    
     const regex = /P<([\s\S]*)/;
     const mrz = text.match(regex)[0].split('<');
     console.log(new PassportDetails(text))
-    li.html(mrz)
     
+    var li = LiItem.clone()
+    li.html(mrz)
     $('ul').append(li)
     
     
