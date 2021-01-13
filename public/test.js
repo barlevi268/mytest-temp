@@ -2,20 +2,7 @@
 //   const codeReader = new ZXing.BrowserBarcodeReader();
 //   console.log("ZXing code reader initialized");
 
-//   $('[type="file"]').on("change", function(e) {
-//     function readURL(input) {
-//       if (input.files && input.files[0]) {
-//         var reader = new FileReader();
-//         reader.onload = e => {
-//           $("img").attr("src", e.target.result);
-//         };
 
-//         reader.readAsDataURL(input.files[0]);
-//       }
-//     }
-
-//     e.target.files && e.target.files.length ? readURL(e.target) : "";
-//   });
 
 //   document.getElementById("decodeFile").addEventListener("click", e => {
 //     e.preventDefault();
@@ -32,6 +19,26 @@
 //       });
 //   });
 // });
+
+
+
+$('[type="file"]').on("change", function(e) {
+
+      function readURL2(input) {
+        
+        if (input.files && input.files[0]) {
+          
+          var reader = new FileReader();
+          
+          reader.onload = e => detectMrz(e.target.result)
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+  
+    e.target.files && e.target.files.length ? readURL2(e.target) : "";
+});
+
 class PassportDetails {
   constructor(text) {
     const regex = /P<([\s\S]*)/;
@@ -44,26 +51,39 @@ class PassportDetails {
   }
 }
 const LiItem = $('.test-text').clone()
-$(() => {
-  Tesseract.recognize(
-    "https://cdn.glitch.com/51421fab-5312-472c-b55e-cf03f12cfde7%2FPhoto%20on%2006-01-2021%20at%2014.41.jpg?v=1610550825808",
+
+function detectMrz(src) {
+    Tesseract.recognize(
+    src,
     "eng",
     { logger: m => {
       console.log(m);
       m.status == 'recognizing text' ? $('.progress-bar').css('width',(m.progress * 100) + '%') : '';
+      m.progress === 1 && m.status == 'recognizing text' ? $('.progress-bar').addClass('bg-success') : '';
     } }
   ).then(({ data: { text } }) => {
     console.log(text);
     
     const regex = /P<([\s\S]*)/;
     const mrz = text.match(regex)[0].split('<');
-    console.log(new PassportDetails(text))
+      
+    var passportDetails = new PassportDetails(text)
     
-    var li = LiItem.clone()
-    li.html(mrz)
+    console.log(passportDetails)
+    
+    var li1 = LiItem.clone(),
+        li2 = LiItem.clone(),
+        li3 = LiItem.clone()
+    li1.html(passportDetails.firstName)
+      li1.html(passportDetails.firstName)
+      li1.html(passportDetails.firstName)
     $('ul').append(li)
     
     
   });
+}
+$(() => {
+  
+  $('#decodeFile').on('click', e => detectMrz())
 });
 
