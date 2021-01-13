@@ -33,7 +33,7 @@
 //   });
 // });
 
-const LiItem = $('.class="test-text"').clone()
+const LiItem = $('.test-text').clone()
 $(() => {
   Tesseract.recognize(
     "https://cdn.glitch.com/51421fab-5312-472c-b55e-cf03f12cfde7%2FPhoto%20on%2006-01-2021%20at%2014.41.jpg?v=1610550825808",
@@ -42,8 +42,12 @@ $(() => {
   ).then(({ data: { text } }) => {
     console.log(text);
     var li = LiItem.clone()
-    var mrz = text.
-    li.html()
+    const regex = /P<([\s\S]*)/;
+    const mrz = text.match(regex)[0].split('<');
+    console.log(mrz)
+    li.html(mrz)
+    
+    $('ul').append(li)
     
     
   });
