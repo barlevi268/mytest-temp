@@ -32,7 +32,17 @@
 //       });
 //   });
 // });
-
+class PassportDetails {
+  constructor(text) {
+    const regex = /P<([\s\S]*)/;
+    
+    var array = mrz.match(regex)[0].split('<');
+    
+    this.lastName = array[1].substring(3)
+    this.firstName = array[3]
+    this.documentNumber = array[26]
+  }
+}
 const LiItem = $('.test-text').clone()
 $(() => {
   Tesseract.recognize(
@@ -44,7 +54,7 @@ $(() => {
     var li = LiItem.clone()
     const regex = /P<([\s\S]*)/;
     const mrz = text.match(regex)[0].split('<');
-    console.log(mrz)
+    console.log(new PassportDetails(text))
     li.html(mrz)
     
     $('ul').append(li)
