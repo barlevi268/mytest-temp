@@ -53,37 +53,38 @@ class PassportDetails {
 const LiItem = $('.test-text').clone()
 
 function detectMrz(src) {
-    Tesseract.recognize(
-    src,
-    "eng",
-    { logger: m => {
+  $(".progress").show('fast')
+  Tesseract.recognize(src, "eng", {
+    logger: m => {
       console.log(m);
-      m.status == 'recognizing text' ? $('.progress-bar').css('width',(m.progress * 100) + '%') : '';
-      m.progress === 1 && m.status == 'recognizing text' ? $('.progress-bar').addClass('bg-success') : '';
-    } }
-  ).then(({ data: { text } }) => {
+      m.status == "recognizing text"
+        ? $(".progress-bar").css("width", m.progress * 100 + "%")
+        : "";
+      m.progress === 1 && m.status == "recognizing text"
+        ? $(".progress-bar").addClass("bg-success")
+        : "";
+    }
+  }).then(({ data: { text } }) => {
     console.log(text);
-    
+
     const regex = /P<([\s\S]*)/;
-    const mrz = text.match(regex)[0].split('<');
-      
-    var passportDetails = new PassportDetails(text)
-    
-    console.log(passportDetails)
-    
+    const mrz = text.match(regex)[0].split("<");
+
+    var passportDetails = new PassportDetails(text);
+
+    console.log(passportDetails);
+
     var li1 = LiItem.clone(),
-        li2 = LiItem.clone(),
-        li3 = LiItem.clone()
-    li1.html(passportDetails.firstName)
-      li1.html(passportDetails.firstName)
-      li1.html(passportDetails.firstName)
-    $('ul').append(li)
-    
-    
+      li2 = LiItem.clone(),
+      li3 = LiItem.clone();
+    li1.html("First Name: " + passportDetails.firstName);
+    li2.html("Last Name:" + passportDetails.lastName);
+    li3.html("Document Number:" + passportDetails.documentNumber);
+
+    $("ul").append(li1,li2,li3);
   });
 }
 $(() => {
-  
-  $('#decodeFile').on('click', e => detectMrz())
+  $(".progress").hide()
 });
 
