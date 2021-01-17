@@ -82,7 +82,7 @@ var quaggaDefaultConfig = {
   },
   numOfWorkers:4,
   decoder: {
-    readers: ["code_128_reader"],
+    readers: ["2of5_reader"],
     multiple: false
   },
   locate: true,
