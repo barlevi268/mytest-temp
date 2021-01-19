@@ -29,7 +29,7 @@ function fakeFindPatient() {
             modalId:"patientDetailsModal",
             primaryLabel:"צור ביקור",
             secondaryLabel:"החלף מטופל",
-            primaryAction: () => location.href = '/newvisit',
+            primaryAction: () => myFunction(),
             onInit: () => {
                 $('#patientFullNameLabel').html(fakePatient.fullName)
                 $('#patientIdLabel').html(fakePatient.patientId)
