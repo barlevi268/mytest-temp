@@ -29,6 +29,10 @@ app.get("/selfService", (request, response) => {
   response.sendFile(__dirname + "/views/registerSelfService.html");
 });
 
+app.get("/bp", (request, response) => {
+  response.sendFile(__dirname + "/views/boardingpass.html");
+});
+
 app.post("/test", (request, response) => {
   console.log(request)
 });
