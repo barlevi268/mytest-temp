@@ -43,8 +43,9 @@
     <script src="/plugins/select2/select2.full.min.js"></script>
     <script src="/plugins/segment/segment.js"></script>
     <script src="/plugins/barcode/javascript-barcode-reader.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
     <script src="/script.js" defer></script>
-    <script src="/scripts/new-visit.js" defer></script>
+    <script src="/scripts/bp.js" defer></script>
   </head>
   <body>
     <!-- start::modal template -->
@@ -90,9 +91,9 @@
         כרטיס נבדק
       </h3>
       <div class="bp-wrapper">
-        <div class="bp-details-wrapper p-5 rounded bg-primary container">
+        <div class="bp-details-wrapper p-5 rounded-lg bg-primary container">
           <div class="bp-details">
-            <div class="row text-white pb-4">
+            <div class="row text-white pb-5">
               <div class="col">
                 <label>שם פרטי</label>
                 <h2>
@@ -122,9 +123,11 @@
             </div>
           </div>
         </div>
-        <div class="bp-barcode-wrapper">
-          <div class="bp-barcode">
-            
+        <div class="bp-barcode-wrapper rounded-lg bg-primary">
+          <div class="bp-barcode p-5">
+            <svg id="barcodePlaceholder">
+              
+            </svg>
           </div>
         </div>
       </div>

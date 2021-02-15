@@ -320,3 +320,11 @@ hr {
   border-radius: 0.8rem;
   background-color: var(--input-bg);
 }
+
+.rounded-lg {
+  border-radius:10px;
+}
+
+.text-white label, h2 {
+  color:white;
+}
