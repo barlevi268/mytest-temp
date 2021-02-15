@@ -325,6 +325,11 @@ hr {
   border-radius:10px;
 }
 
-.text-white label, h2 {
+.rounded-top-lg {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.text-white label,.text-white h2 {
   color:white;
 }
