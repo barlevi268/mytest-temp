@@ -87,14 +87,16 @@
     <!-- end::modal template -->
     <!-- start::page content -->
     <div class="wrapper px-4-5 pt-5">
-      <h3 class="pb-3">
-        כרטיס נבדק
-      </h3>
-      <div class="bp-wrapper">
-        <div class="bp-details-wrapper border border rounded-lg container">
-          <div class="bp-header rounded-top-lg bg-primary p-4">
-            <div class="bp-logo text-right">
-              <img src="media/logo-dark.svg" />
+      <div class="bp-wrapper rounded-lg border">
+        <div class="bp-details-wrapper container">
+          <div class="bp-header row rounded-top-lg bg-primary p-4">
+            <div class="bp-logo text-right col">
+              <img height="30px" src="media/logo-dark.svg" />
+            </div>
+            <div class="col">
+              <h3 class="text-white p-0 text-left">
+                כרטיס נבדק
+              </h3>
             </div>
           </div>
           <div class="bp-details p-5">
@@ -128,11 +130,9 @@
             </div>
           </div>
         </div>
-        <div class="bp-barcode-wrapper border rounded-lg">
+        <div class="bp-barcode-wrapper border-top">
           <div class="bp-barcode p-5">
-            <svg id="barcodePlaceholder">
-              
-            </svg>
+            <svg id="barcodePlaceholder"></svg>
           </div>
         </div>
       </div>
