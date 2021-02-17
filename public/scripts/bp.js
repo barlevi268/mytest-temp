@@ -11,10 +11,10 @@ const patient = {
 // make png function //
 function makePNGfromSVG(svgCode) {
   const svg = svgCode;
-  
+
   svgToPng(svg, imgData => {
     const pngImage = document.createElement("img");
-    $('.bp-barcode').append(pngImage);
+    $(".bp-barcode").append(pngImage);
     pngImage.src = imgData;
   });
 
@@ -23,7 +23,7 @@ function makePNGfromSVG(svgCode) {
     svgUrlToPng(url, imgData => {
       callback(imgData);
       URL.revokeObjectURL(url);
-      $('#pngCaddy').hide()
+      $("#pngCaddy").hide();
     });
   }
 
@@ -33,7 +33,7 @@ function makePNGfromSVG(svgCode) {
 
   function svgUrlToPng(svgUrl, callback) {
     const svgImage = document.createElement("img");
-    svgImage.id = "pngCaddy"
+    svgImage.id = "pngCaddy";
     document.body.appendChild(svgImage);
     svgImage.onload = function() {
       const canvas = document.createElement("canvas");
@@ -43,7 +43,6 @@ function makePNGfromSVG(svgCode) {
       canvasCtx.drawImage(svgImage, 0, 0);
       const imgData = canvas.toDataURL("image/png");
       callback(imgData);
-      // document.body.removeChild(imgPreview);
     };
     svgImage.src = svgUrl;
   }
@@ -53,14 +52,16 @@ function makePNGfromSVG(svgCode) {
 function saveSnip(selector) {
   html2canvas($(selector)[0]).then(canvas => {
     canvas.toBlob(blob => {
-      saveAs(blob, "Dashboard.png");
+      saveAs(blob, `${patient.id}.png`);
     });
   });
 }
 
 // save SVG from ELM
 function saveSVGfromELM(selector) {
-  var svgBlob = new Blob([$(selector)[0].outerHTML], { type: "image/svg+xml;charset=utf-8" });
+  var svgBlob = new Blob([$(selector)[0].outerHTML], {
+    type: "image/svg+xml;charset=utf-8"
+  });
   var svgUrl = URL.createObjectURL(svgBlob);
   var downloadLink = document.createElement("a");
   downloadLink.href = svgUrl;
@@ -70,8 +71,16 @@ function saveSVGfromELM(selector) {
   document.body.removeChild(downloadLink);
 }
 
-// on Document Ready //
-$(() => {
+// init functions
+function initPatient() {
+  $('.patient-first-name').text(patient.firstName)
+  $('.patient-last-name').text(patient.lastName)
+  $('.patient-id').text(patient.id)
+  $('.patient-birthDate').text(patient.birthDate)
+}
+
+
+function initBarcodeImage() {
   const barcodeSVGConfig = {
     format: "code128",
     width: 2,
@@ -81,17 +90,23 @@ $(() => {
     displayValue: false
   };
 
-  const fakeID = "313521924";
-
   const svgElmSelector = "#barcodePlaceholder";
 
-  JsBarcode(svgElmSelector, fakeID, barcodeSVGConfig);
+  JsBarcode(svgElmSelector, patient.id, barcodeSVGConfig);
 
-  $("#saveAsImage").on("click", e => {
-    makePNGfromSVG($('#barcodePlaceholder')[0].outerHTML)
-    $("#barcodePlaceholder").remove()
-    saveSnip('#bpDiv')
-  });
+  makePNGfromSVG($("#barcodePlaceholder")[0].outerHTML);
+  $("#barcodePlaceholder").remove();
+}
+
+// on Document Ready //
+$(() => {
   
-  const svg = $("#barcodePlaceholder")[0].outerHTML;
+  initPatient()
+  
+  initBarcodeImage()
+  
+  $("#saveAsImage").on("click", e => {
+    saveSnip("#bpDiv");
+  });
+
 });
