@@ -11,9 +11,10 @@ const patient = {
 // make png function //
 function makePNGfromSVG(svgCode) {
   const svg = svgCode;
+  
   svgToPng(svg, imgData => {
     const pngImage = document.createElement("img");
-    document.body.appendChild(pngImage);
+    $('.bp-barcode').append(pngImage);
     pngImage.src = imgData;
   });
 
@@ -87,6 +88,10 @@ $(() => {
   $("#saveAsImage").on("click", e => {
     makePNGfromSVG($('#barcodePlaceholder')[0].outerHTML)
   });
-
+  
+  $("#bpDiv").on('click', e=> {
+    saveSnip('#bpDiv')
+  })
+  
   const svg = $("#barcodePlaceholder")[0].outerHTML;
 });
