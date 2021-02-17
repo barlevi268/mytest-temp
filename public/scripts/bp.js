@@ -76,7 +76,7 @@ function initPatient() {
   $('.patient-first-name').text(patient.firstName)
   $('.patient-last-name').text(patient.lastName)
   $('.patient-id').text(patient.id)
-  $('.patient-birthDate').text(patient.birthDate)
+  $('.patient-birth-date').text(patient.birthDate)
 }
 
 
