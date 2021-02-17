@@ -23,6 +23,7 @@ function makePNGfromSVG(svgCode) {
     svgUrlToPng(url, imgData => {
       callback(imgData);
       URL.revokeObjectURL(url);
+      $('#pngCaddy').hide()
     });
   }
 
@@ -32,6 +33,7 @@ function makePNGfromSVG(svgCode) {
 
   function svgUrlToPng(svgUrl, callback) {
     const svgImage = document.createElement("img");
+    svgImage.id = "pngCaddy"
     document.body.appendChild(svgImage);
     svgImage.onload = function() {
       const canvas = document.createElement("canvas");
@@ -87,6 +89,7 @@ $(() => {
 
   $("#saveAsImage").on("click", e => {
     makePNGfromSVG($('#barcodePlaceholder')[0].outerHTML)
+    $("#barcodePlaceholder").remove()
   });
   
   $("#bpDiv").on('click', e=> {
