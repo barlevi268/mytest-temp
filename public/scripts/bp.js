@@ -23,16 +23,18 @@ $(() => {
 
   JsBarcode(svgElmSelector, fakeID, barcodeSVGConfig);
 
-  $("#saveAsImage").on("click", e => {
-    html2canvas($("#bpDiv"), {
-      onrendered: canvas => {
-        theCanvas = canvas;
+  $("#saveAsImage").on("click", e => {});
+  html2canvas($("#bpDiv")[0], {
+    onrendered: canvas => {
+      theCanvas = canvas;
 
-        canvas.toBlob(blob => {
-          saveAs(blob, "Dashboard.png");
-        });
-      }
+      canvas.toBlob(blob => {
+        saveAs(blob, "Dashboard.png");
+      });
+    }
+  }).then(canvas => {
+    canvas.toBlob(blob => {
+      saveAs(blob, "Dashboard.png");
     });
   });
-  
 });
