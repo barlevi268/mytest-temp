@@ -47,13 +47,24 @@ function makePNGfromSVG(svgCode) {
 }
 
 // HTML to Canvas save Screenshot
-
 function saveSnip(selector) {
   html2canvas($(selector)[0]).then(canvas => {
     canvas.toBlob(blob => {
       saveAs(blob, "Dashboard.png");
     });
   });
+}
+
+// save SVG from ELM
+function saveSVGfromELM(selector) {
+  var svgBlob = new Blob([$(selector)[0].outerHTML], { type: "image/svg+xml;charset=utf-8" });
+  var svgUrl = URL.createObjectURL(svgBlob);
+  var downloadLink = document.createElement("a");
+  downloadLink.href = svgUrl;
+  downloadLink.download = "newesttree.svg";
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
 }
 
 // on Document Ready //
@@ -73,16 +84,9 @@ $(() => {
 
   JsBarcode(svgElmSelector, fakeID, barcodeSVGConfig);
 
-  $("#saveAsImage").on("click", e => {});
+  $("#saveAsImage").on("click", e => {
+    makePNGfromSVG($('#barcodePlaceholder')[0].outerHTML)
+  });
 
   const svg = $("#barcodePlaceholder")[0].outerHTML;
-
-  var svgBlob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
-  var svgUrl = URL.createObjectURL(svgBlob);
-  var downloadLink = document.createElement("a");
-  downloadLink.href = svgUrl;
-  downloadLink.download = "newesttree.svg";
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
 });
