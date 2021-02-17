@@ -45,6 +45,7 @@
     <script src="/plugins/barcode/javascript-barcode-reader.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
     <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous"></script>
     <script src="/script.js" defer></script>
     <script src="/scripts/bp.js" defer></script>
   </head>
@@ -88,7 +89,8 @@
     <!-- end::modal template -->
     <!-- start::page content -->
     <div class="wrapper px-4-5 pt-5 ">
-      <div class="bp-wrapper rounded-lg shadow-lg">
+
+      <div id="bpDiv" class="bp-wrapper rounded-lg shadow-lg">
         <div class="bp-details-wrapper container">
           <div class="bp-header row rounded-top-lg w-100 m-0 bg-primary p-4">
             <div class="bp-logo text-right col">
@@ -137,6 +139,12 @@
           </div>
         </div>
       </div>
+      <div class="btn-group">
+        <button class="btn btn-primary p-3 btn-icon mt-4">
+        שמור כתמונה
+        </button>
+      </div>
+
     </div>
     <!-- end::page content -->
   </body>
