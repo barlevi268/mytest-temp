@@ -90,11 +90,8 @@ $(() => {
   $("#saveAsImage").on("click", e => {
     makePNGfromSVG($('#barcodePlaceholder')[0].outerHTML)
     $("#barcodePlaceholder").remove()
-  });
-  
-  $("#bpDiv").on('click', e=> {
     saveSnip('#bpDiv')
-  })
+  });
   
   const svg = $("#barcodePlaceholder")[0].outerHTML;
 });
