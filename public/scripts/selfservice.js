@@ -10,27 +10,33 @@ function initCities() {
 
 async function sendPatiant() {
   
-  const proceesToCard = () => location.href = `\bp?id=${}&firstName=${}&lastName=${}&`
+  
   const formData = {
     clinicCode: "BH",
-    IdNum: "336878467",
-    FirstName: "שרה",
-    LastName: "גרינוולד",
-    DOB: "12/12/2012",
-    Gender: "נ",
-    HMO: 3,
-    cityCode: 383,
-    streetName: "הפסגה",
-    streetNumber: 64,
-    telHome: "026411157",
-    mobile: "0504166626",
-    email: "",
+    IdNum: $('[name="IdNum"]').val(),
+    FirstName: $('[name="FirstName"]').val(),
+    LastName: $('[name="LastName"]').val(),
+    DOB: $('[name="DOB"]').val(),
+    Gender: $('[name="Gender"]').val(),
+    HMO: $('[name="HMO"]').val(),
+    cityCode: $('[name="cityCode"]').val(),
+    streetName: $('[name="streetName"]').val(),
+    streetNumber: $('[name="streetNumber"]').val(),
+    telHome: $('[name="telHome"]').val(),
+    mobile: $('[name="mobile"]').val(),
+    email: $('[name="email"]').val(),
     Comment: "selfe service patient"
   };
-
-  const networkCheck = await fetch(
-    "https://patients.terem.com/myvisit/covidLab/savePatient"
-  );
+  
+  const proceesToCard = () => location.href = `\bp?id=${formData.IdNum}&firstName=${formData.FirstName}&lastName=${formData.LastName}&birthDate=${formData.DOB}`
+  
+  await fetch(
+    "https://httpbin.org/status/200"
+  ).then(response => {
+    if (response.status == 200) {
+      proceesToCard()
+    }
+  })
 
   const actualRequest = await fetch(
     "https://patients.terem.com/myvisit/covidLab/savePatient",
