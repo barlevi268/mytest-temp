@@ -112,7 +112,7 @@ $(() => {
     $('.bp-wrapper').addClass('border')
     
     alertModal.display({
-      
+      modalId:"loaderModal"
     })
     // saveSnip("#bpDiv", () => {
     //   $('#bpDiv').removeClass('p-4')
