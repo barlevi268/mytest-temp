@@ -49,10 +49,11 @@ function makePNGfromSVG(svgCode) {
 }
 
 // HTML to Canvas save Screenshot
-function saveSnip(selector) {
+function saveSnip(selector,cb) {
   html2canvas($(selector)[0]).then(canvas => {
     canvas.toBlob(blob => {
       saveAs(blob, `${patient.id}.png`);
+      cb()
     });
   });
 }
@@ -106,7 +107,16 @@ $(() => {
   initBarcodeImage()
   
   $("#saveAsImage").on("click", e => {
-    saveSnip("#bpDiv");
+    
+    $('#bpDiv').addClass('p-4')
+    $('.bp-wrapper').addClass('border')
+    
+    alertModal.display()
+    saveSnip("#bpDiv", () => {
+      $('#bpDiv').removeClass('p-4')
+      $('.bp-wrapper').removeClass('border')
+    });
+    
   });
 
 });
