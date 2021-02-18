@@ -23,6 +23,8 @@ async function sendPatiant() {
   
   const actualRequest = await fetch("https://patients.terem.com/myvisit/covidLab/savePatient", {
     headers: {
+      Host:"patients.terem.com",
+      "Content-Type": "application/json",
       username:'adminLab19',
       pw:'labws12!'
     }
