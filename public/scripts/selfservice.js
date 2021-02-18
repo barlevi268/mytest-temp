@@ -30,23 +30,33 @@ async function sendPatiant() {
   
   const proceesToCard = () => location.href = `\bp?id=${formData.IdNum}&firstName=${formData.FirstName}&lastName=${formData.LastName}&birthDate=${formData.DOB}`
   
-  await fetch(
-    "https://httpbin.org/status/200"
-  ).then(response => {
-    if (response.status == 200) {
-      proceesToCard()
-    }
-  })
+  // await fetch(
+  //   "https://httpbin.org/status/200"
+  // ).then(response => {
+  //   if (response.status == 200) {
+  //     proceesToCard()
+  //   } else {
+  //     alertModal.display({
+  //       content:'מתנצלים, לא הצלחנו לשלוח את הטופס...',
+  //       primaryLabel:'נסה שוב',
+  //       hideSecondary:true
+  //     })
+  //   }
+  // })
 
+  const testRequest = await fetch("https://patients.terem.com/myvisit/covidLab/savePatient");
+  
   const actualRequest = await fetch(
     "https://patients.terem.com/myvisit/covidLab/savePatient",
     {
+      method:"",
       headers: {
         Host: "patients.terem.com",
         "Content-Type": "application/json",
         username: "adminLab19",
         pw: "labws12!"
-      }
+      },
+      body: JSON.stringify(formData)
     }
   );
 }

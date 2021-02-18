@@ -96,35 +96,35 @@
           <div class="row">
             <div class="form-group col-6">
               <label>שם פרטי</label>
-              <input class="form-control" type="text" placeholder="הזן שם פרטי" name="FirstName"/>
+              <input  mandatory class="form-control" type="text" placeholder="הזן שם פרטי" name="FirstName"/>
             </div>
             <div class="form-group col-6">
               <label>שם משפחה</label>
-              <input class="form-control" type="text" placeholder="הזן שם משפחה" name="LastName"/>
+              <input  mandatory class="form-control" type="text" placeholder="הזן שם משפחה" name="LastName"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
               <label>תעודת זהות \ דרכון</label>
-              <input class="form-control" type="number" placeholder="הזן ת.ז. \ דרכון" name="id_number"/>
+              <input  mandatory class="form-control" type="number" placeholder="הזן ת.ז. \ דרכון" name="id_number"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
               <label>מס' נייד</label>
-              <input class="form-control" type="phone" placeholder="הזן מס' נייד" name="mobile"/>
+              <input  mandatory class="form-control" type="phone" placeholder="הזן מס' נייד" name="mobile"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
               <label>תאריך לידה</label>
-              <input class="form-control" type="date" placeholder="הזן תאריך לידה" name="DOB"/>
+              <input  mandatory class="form-control" type="date" placeholder="הזן תאריך לידה" name="DOB"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-6">
               <label>קופה</label>
-              <select select2-type="regular" name="HMO" placeholder="בחר קופה">
+              <select mandatory  select2-type="regular" name="HMO" placeholder="בחר קופה">
                 <option></option>
                 <option value="1">כללית</option>
                 <option value="2">לאומית</option>
@@ -135,7 +135,7 @@
             </div>
             <div class="form-group col-6">
               <label>מין</label>
-              <select select2-type="regular" name="Gender">
+              <select mandatory  select2-type="regular" name="Gender">
                 <option value="ז">זכר</option>
                 <option value="נ">נקבה</option>
               </select>
@@ -144,7 +144,7 @@
           <div class="row">
             <div class="form-group col">
               <label>עיר מגורים</label>
-              <select select2-type="search" placeholder="בחר עיר מגורים" name="cityCode">
+              <select mandatory  select2-type="search" placeholder="בחר עיר מגורים" name="cityCode">
                 <option></option>
               </select>
             </div>
@@ -152,11 +152,11 @@
           <div class="row">
             <div class="form-group col-6">
               <label>רחוב</label>
-              <input class="form-control" type="text" placeholder="הזן רחוב" name="streetName"/>
+              <input  mandatory class="form-control" type="text" placeholder="הזן רחוב" name="streetName"/>
             </div>
             <div class="form-group col-6">
               <label>מס' בית</label>
-              <input class="form-control" type="number" placeholder="הזן מס' בית" name="streetNumber"/>
+              <input  mandatory class="form-control" type="number" placeholder="הזן מס' בית" name="streetNumber"/>
             </div>
           </div>
         </div>
