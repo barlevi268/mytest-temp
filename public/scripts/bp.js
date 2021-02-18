@@ -111,7 +111,9 @@ $(() => {
     $('#bpDiv').addClass('p-4')
     $('.bp-wrapper').addClass('border')
     
-    alertModal.display()
+    alertModal.display({
+      
+    })
     saveSnip("#bpDiv", () => {
       $('#bpDiv').removeClass('p-4')
       $('.bp-wrapper').removeClass('border')
