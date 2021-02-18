@@ -8,7 +8,9 @@ function initCities() {
   );
 }
 
-async function sendPatiant() {
+$('form').on('submit', async e => {
+  e.preventDefault();
+  
   const formData = {
     clinicCode: "BH",
     IdNum: $('[name="IdNum"]').val(),
@@ -42,28 +44,12 @@ async function sendPatiant() {
     email: "",
     Comment: "testg2"
   };
+  
+  
   const proceesToCard = () =>
     (location.href = `\bp?id=${formData.IdNum}&firstName=${formData.FirstName}&lastName=${formData.LastName}&birthDate=${formData.DOB}`);
 
-  // await fetch(
-  //   "https://httpbin.org/status/200"
-  // ).then(response => {
-  //   if (response.status == 200) {
-  //     proceesToCard()
-  //   } else {
-  //     alertModal.display({
-  //       content:'מתנצלים, לא הצלחנו לשלוח את הטופס...',
-  //       primaryLabel:'נסה שוב',
-  //       hideSecondary:true
-  //     })
-  //   }
-  // })
-
-  // const testRequest = await fetch(
-  //   "https://patients.terem.com/myvisit/covidLab/savePatient"
-  // );
-
-  const actualRequest = await fetch(
+  await fetch(
     "https://patients.terem.com/myvisit/covidLab/savePatient",
     {
       method: "POST",
@@ -75,8 +61,18 @@ async function sendPatiant() {
       },
       body: JSON.stringify(formData)
     }
-  );
-}
+  ).then(response => {
+    if (response.status == 200) {
+      proceesToCard()
+    } else {
+      alertModal.display({
+        content:'מתנצלים, לא הצלחנו לשלוח את הטופס...',
+        primaryLabel:'נסה שוב',
+        hideSecondary:true
+      })
+    }
+  })
+})
 
 $(() => {
   initCities();

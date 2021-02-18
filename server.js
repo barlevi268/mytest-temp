@@ -30,7 +30,7 @@ app.get("/selfService", (request, response) => {
 });
 
 app.get("/bp", (request, response) => {
-  response.sendFile(__dirname + "/views/boardingpass.html");
+  response.sendFile(__dirname + "/views/bpcard.html");
 });
 
 app.post("/test", (request, response) => {
