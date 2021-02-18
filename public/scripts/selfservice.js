@@ -10,7 +10,7 @@ function initCities() {
 
 async function sendPatiant() {
   
-  const proceesToCard = () => location.href = '\bp?'
+  const proceesToCard = () => location.href = `\bp?id=${}&firstName=${}&lastName=${}&`
   const formData = {
     clinicCode: "BH",
     IdNum: "336878467",
