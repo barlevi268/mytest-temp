@@ -114,10 +114,15 @@ $(() => {
     alertModal.display({
       modalId:"loaderModal"
     })
-    // saveSnip("#bpDiv", () => {
-    //   $('#bpDiv').removeClass('p-4')
-    //   $('.bp-wrapper').removeClass('border')
-    // });
+    
+    setTimeout(() => {
+      saveSnip("#bpDiv", () => {
+        $('#bpDiv').removeClass('p-4')
+        $('.bp-wrapper').removeClass('border')
+        alertModal.hide()
+      });
+    }, 1000)
+
     
   });
 
