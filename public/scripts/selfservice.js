@@ -25,7 +25,7 @@ $('form').on('submit', async e => {
     telHome: "",
     mobile: $('[name="mobile"]').val(),
     email: "",
-    Comment: "selfe service patient"
+    Comment: "self service patient"
   };
 
   const testData = {
@@ -47,7 +47,7 @@ $('form').on('submit', async e => {
   
   
   const proceesToCard = () =>
-    (location.href = `\bp?id=${formData.IdNum}&firstName=${formData.FirstName}&lastName=${formData.LastName}&birthDate=${formData.DOB}`);
+    (location.href = `/bp?id=${formData.IdNum}&firstName=${formData.FirstName}&lastName=${formData.LastName}&birthDate=${formData.DOB}`);
 
   await fetch(
     "https://patients.terem.com/myvisit/covidLab/savePatient",
@@ -61,8 +61,10 @@ $('form').on('submit', async e => {
       },
       body: JSON.stringify(formData)
     }
-  ).then(response => {
-    if (response.status == 200) {
+  ).then(async response => {
+    const responseText = await response.text()
+    console.log(typeof responseText)
+    if (response.status == 200 && responseText) {
       proceesToCard()
     } else {
       alertModal.display({
