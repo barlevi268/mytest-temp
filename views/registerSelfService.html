@@ -41,8 +41,6 @@
     <script src="/plugins/jquery/js/jquery-3.5.1.min.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/select2/select2.full.min.js"></script>
-    <script src="/plugins/segment/segment.js"></script>
-    <script src="/plugins/barcode/javascript-barcode-reader.umd.min.js"></script>
     <script src="/script.js" defer></script>
     <script src="/scripts/selfservice.js" defer></script>
   </head>
@@ -166,7 +164,7 @@
           <div class="form-footer mt-3">
             <button
               type="button"
-              onclick="fakeVisitSuccess()"
+              onclick="sendPatiant()"
               class="btn btn-primary btn-block"
             >
               שלח טופס
