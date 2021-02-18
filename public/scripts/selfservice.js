@@ -1,4 +1,13 @@
-function initCities() {}
+function initCities() {
+  
+  $.getJSON("/media/cities.json", function(data) {
+    $.each(data, function(i, val) {
+      $('[name="city"]').append(`<option value="${val.City_Code}">${val.CityName_Hebrew}</option>`)
+    });
+
+  });
+  
+}
 
 async function sendPatiant() {
   
@@ -34,4 +43,8 @@ async function sendPatiant() {
   
 }
 
-$(() => {});
+$(() => {
+  
+  initCities()
+  
+});
