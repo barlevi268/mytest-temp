@@ -114,10 +114,10 @@ $(() => {
     alertModal.display({
       
     })
-    saveSnip("#bpDiv", () => {
-      $('#bpDiv').removeClass('p-4')
-      $('.bp-wrapper').removeClass('border')
-    });
+    // saveSnip("#bpDiv", () => {
+    //   $('#bpDiv').removeClass('p-4')
+    //   $('.bp-wrapper').removeClass('border')
+    // });
     
   });
 
