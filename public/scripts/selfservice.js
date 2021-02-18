@@ -9,8 +9,6 @@ function initCities() {
 }
 
 async function sendPatiant() {
-  
-  
   const formData = {
     clinicCode: "BH",
     IdNum: $('[name="IdNum"]').val(),
@@ -18,18 +16,35 @@ async function sendPatiant() {
     LastName: $('[name="LastName"]').val(),
     DOB: $('[name="DOB"]').val(),
     Gender: $('[name="Gender"]').val(),
-    HMO: $('[name="HMO"]').val(),
-    cityCode: $('[name="cityCode"]').val(),
+    HMO: parseInt($('[name="HMO"]').val()),
+    cityCode: parseInt($('[name="cityCode"]').val()),
     streetName: $('[name="streetName"]').val(),
-    streetNumber: $('[name="streetNumber"]').val(),
-    telHome: $('[name="telHome"]').val(),
+    streetNumber: parseInt($('[name="streetNumber"]').val()),
+    telHome: "",
     mobile: $('[name="mobile"]').val(),
-    email: $('[name="email"]').val(),
+    email: "",
     Comment: "selfe service patient"
   };
-  
-  const proceesToCard = () => location.href = `\bp?id=${formData.IdNum}&firstName=${formData.FirstName}&lastName=${formData.LastName}&birthDate=${formData.DOB}`
-  
+
+  const testData = {
+    clinicCode: "BH",
+    IdNum: "336878467",
+    FirstName: "שרה",
+    LastName: "גרינוולד",
+    DOB: "12/12/2012",
+    Gender: "נ",
+    HMO: 3,
+    cityCode: 383,
+    streetName: "הפסגה",
+    streetNumber: 64,
+    telHome: "026411157",
+    mobile: "0504166626",
+    email: "",
+    Comment: "testg2"
+  };
+  const proceesToCard = () =>
+    (location.href = `\bp?id=${formData.IdNum}&firstName=${formData.FirstName}&lastName=${formData.LastName}&birthDate=${formData.DOB}`);
+
   // await fetch(
   //   "https://httpbin.org/status/200"
   // ).then(response => {
@@ -44,12 +59,14 @@ async function sendPatiant() {
   //   }
   // })
 
-  const testRequest = await fetch("https://patients.terem.com/myvisit/covidLab/savePatient");
-  
+  // const testRequest = await fetch(
+  //   "https://patients.terem.com/myvisit/covidLab/savePatient"
+  // );
+
   const actualRequest = await fetch(
     "https://patients.terem.com/myvisit/covidLab/savePatient",
     {
-      method:"",
+      method: "POST",
       headers: {
         Host: "patients.terem.com",
         "Content-Type": "application/json",
