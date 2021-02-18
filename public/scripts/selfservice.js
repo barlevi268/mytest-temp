@@ -63,8 +63,9 @@ $('form').on('submit', async e => {
     }
   ).then(async response => {
     const responseText = await response.text()
-    console.log(typeof responseText)
-    if (response.status == 200 && responseText) {
+    
+    // parseInt only working method to verify correct response.
+    if (response.status == 200 && parseInt(responseText)) {
       proceesToCard()
     } else {
       alertModal.display({
