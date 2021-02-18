@@ -108,6 +108,7 @@ $(() => {
   
   $("#saveAsImage").on("click", e => {
     
+    $('.wrapper').removeClass('px-4-5 py-5').addClass('p-3')
     $('#bpDiv').addClass('p-4')
     $('.bp-wrapper').addClass('border')
     
@@ -119,9 +120,10 @@ $(() => {
       saveSnip("#bpDiv", () => {
         $('#bpDiv').removeClass('p-4')
         $('.bp-wrapper').removeClass('border')
+        $('.wrapper').addClass('px-4-5 py-5').removeClass('p-3')
         alertModal.hide()
       });
-    }, 1000)
+    }, 500)
 
     
   });
