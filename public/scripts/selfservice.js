@@ -1,3 +1,23 @@
+function initRegexChecks() {
+  const submitButton = $('[type="submit"]')
+  
+  submitButton.prop('disabled', false)
+  
+  
+  $('[name="FirstName"],[name="LastName"]').on('input', e => {
+    const inputText = e.target.value
+    const $target = $(e.target)
+    
+    const inputIsLegal = inputText.match(/^[a-z\u0590-\u05fe \-',`]+$/i)
+    
+    if (inputIsLegal) {
+      submitButton.prop('disabled', false)
+    } else {
+      submitButton.prop('disabled', false)
+    }
+  })
+}
+
 function initCities() {
   $.getJSON("/media/cities.json", data =>
     $.each(data, (i, val) =>
@@ -27,24 +47,6 @@ $('form').on('submit', async e => {
     email: "",
     Comment: "self service patient"
   };
-
-  const testData = {
-    clinicCode: "BH",
-    IdNum: "336878467",
-    FirstName: "שרה",
-    LastName: "גרינוולד",
-    DOB: "12/12/2012",
-    Gender: "נ",
-    HMO: 3,
-    cityCode: 383,
-    streetName: "הפסגה",
-    streetNumber: 64,
-    telHome: "026411157",
-    mobile: "0504166626",
-    email: "",
-    Comment: "testg2"
-  };
-  
   
   const proceesToCard = () =>
     (location.href = `/bp?id=${formData.IdNum}&firstName=${formData.FirstName}&lastName=${formData.LastName}&birthDate=${formData.DOB}`);
@@ -79,4 +81,5 @@ $('form').on('submit', async e => {
 
 $(() => {
   initCities();
+  initRegexChecks();
 });
