@@ -12,22 +12,22 @@ function initRegexChecks() {
   $('[name="FirstName"],[name="LastName"]').on('input', e => {
     const inputText = e.target.value
     const $target = $(e.target)
-    console.log(e.target.name)
+    
     const inputIsLegal = inputText.match(/^[a-z\u0590-\u05fe \-',`]+$/i)
     
+    $target.parent().find('.field-message').remove()
+    
     if (inputIsLegal) {
+      $target.removeClass("border border-danger");
       isValid[e.target.name] = true 
     } else {
-      $target.after('<span class="field-message text-danger">שדה חובה</span>');
+      $target.after('<span class="field-message text-danger">יש להזין אותיות בעברית או באנגלית</span>');
       $target.addClass("border border-danger");
       isValid[e.target.name] = false
     }
     
-    if (isValid.FirstName && isValid.LastName) {
-      submitButton.prop('disabled', false)
-    } else {
-      submitButton.prop('disabled', true)
-    }
+    isValid.FirstName && isValid.LastName ? submitButton.prop('disabled', false) : submitButton.prop('disabled', true);
+    
   })
 }
 
