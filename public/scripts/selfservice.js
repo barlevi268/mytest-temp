@@ -1,19 +1,32 @@
 function initRegexChecks() {
   const submitButton = $('[type="submit"]')
   
-  submitButton.prop('disabled', false)
+  var isValid = {
+    FirstName:false,
+    LastName:false
+  }
+  
+  submitButton.prop('disabled', true)
   
   
   $('[name="FirstName"],[name="LastName"]').on('input', e => {
     const inputText = e.target.value
     const $target = $(e.target)
-    
+    console.log(e.target.name)
     const inputIsLegal = inputText.match(/^[a-z\u0590-\u05fe \-',`]+$/i)
     
     if (inputIsLegal) {
+      isValid[e.target.name] = true 
+    } else {
+      $target.after('<span class="field-message text-danger">שדה חובה</span>');
+      $target.addClass("border border-danger");
+      isValid[e.target.name] = false
+    }
+    
+    if (isValid.FirstName && isValid.LastName) {
       submitButton.prop('disabled', false)
     } else {
-      submitButton.prop('disabled', false)
+      submitButton.prop('disabled', true)
     }
   })
 }
