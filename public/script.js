@@ -66,6 +66,7 @@ var alertModal = {
     alertModal.show();
   },
   init: () => {
+    alertModal.subView.modal({backdrop: 'static', keyboard: false})
     alertModal.content = alertModal.subView.find(".modal-message");
     alertModal.successIcon = alertModal.subView.find(".modal-icon");
     alertModal.primaryButton = alertModal.subView.find(".primary-action");
