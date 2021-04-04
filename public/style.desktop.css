@@ -10,6 +10,7 @@
   --bg-light: #F0F0F0;
   --bg-primary: #131f52;
   --border: #E5E5E5;
+  --font-size-defualt: 12px;
   --elm-radius: 0.5rem;
 }
 
@@ -220,6 +221,7 @@ input::-webkit-inner-spin-button {
 .btn {
   border-radius: var(--elm-radius);
   border: none;
+  font-size:var(--font-size-defualt);
   font-weight: 500;
   padding: 10px 30px;
 }
