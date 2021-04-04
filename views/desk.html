@@ -138,165 +138,22 @@
     <!-- start::page content -->
 
     <div class="container">
-      <div class="nav-header mb-2 d-flex justify-content-between">
-        <a href="javascript:history.back()"><img src="media/back-icon.svg"/></a>
-        <div>מצא \ צור ביקור</div>
-        <div></div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              123
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              123
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="wrapper px-4-5 animate__animated animate__fadeInLeft">
-      <form class="form" id="findPatient">
-        <div class="container">
-          <div class="row mb-2">
-            <div class="text-muted">מס' ביקור</div>
-            <h3 id="visitIdLabel">3122468</h3>
-          </div>
-          <div class="row mb-2">
-            <div class="text-muted">שם מטופל</div>
-            <h3 id="patientFullNameLabel">אברהם מנשה</h3>
-          </div>
-          <div class="row mb-2">
-            <div class="text-muted">תאריך ביקור</div>
-            <h3 id="visitTimeLabel">22/12/20 13:42</h3>
-          </div>
-          <div class="row">
-            <div class="form-group col-6">
-              <label>מיקום</label>
-              <select select2-type="search" placeholder="בחר מיקום">
-                <option></option>
-                <option>פרוטאה בכפר</option>
-              </select>
-            </div>
-            <div class="form-group col-6">
-              <label>קופה</label>
-              <select select2-type="regular" placeholder="בחר קופה">
-                <option></option>
-                <option value="clalit">כללית</option>
-                <option value="leumit">לאומית</option>
-                <option value="maccabi">מכבי</option>
-                <option value="meuhedet">מאוחדת</option>
-              </select>
-            </div>
-          </div>
-          <div class="row easy-radio">
-            <label>סוג נבדק</label>
-            <div class="form-group col-4">
-              <input
-                type="radio"
-                id="resident"
-                name="testeeType"
-                class="d-none"
-                checked
-              />
-              <label for="resident" class="form-control text-center">
-                דייר
-              </label>
-            </div>
-            <div class="form-group col-4">
-              <input type="radio" id="crew" name="testeeType" class="d-none" />
-              <label for="crew" class="form-control text-center"> צוות </label>
-            </div>
-            <div class="form-group col-4">
-              <input
-                type="radio"
-                id="civilian"
-                name="testeeType"
-                class="d-none"
-              />
-              <label for="civilian" class="form-control text-center">
-                אזרח
-              </label>
-            </div>
-          </div>
-          <div class="row easy-radio">
-            <label>אופן בדיקה</label>
-            <div class="form-group col-6">
-              <input
-                type="radio"
-                id="PCRTest"
-                value="PCR"
-                name="testType"
-                class="d-none"
-                checked
-              />
-              <label for="PCRTest" class="form-control text-center">
-                PCR
-              </label>
-            </div>
-            <div class="form-group col-6">
-              <input type="radio" id="cerologyTest" name="testType" value="cerology" class="d-none" />
-              <label for="cerologyTest" class="form-control text-center"> סרולוגיה </label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="pcr-test-types form-group col">
-              <label>סוג בדיקה</label>
-              <select select2-type="regular" name="pcrTestType" placeholder="בחר בחר סוג בדיקה">
-                <option value="singular">בדיקה יחידנית</option>
-                <option value="personal">עיגום פרטני</option>
-                <option value="regular">עיגום רגיל</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label>תמונה</label>
-              <label for="uploadBarcode" class="form-control text-center py-3">
-                <img style="height: 40px" class="upload-caddy" />
-                <u>צלם תמונה</u>
-              </label>
-              <input type="file" id="uploadBarcode" class="d-none" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label>ברקוד</label>
-              <input
-                type="number"
-                name="test_barcode"
-                class="form-control"
-                placeholder="העלאה תמונה או הזן ברקוד"
-              />
-            </div>
-            <div class="barcode-loader form-group col-2">
-              <div class="spinner-border mt-5" role="status">
-                
-              </div>
-            </div>
-            <div class="impair-test-barcode d-none form-group col">
-              <label>ברקוד עיגום</label>
-              <input
-                type="number"
-                name="impair_test_barcode"
-                class="form-control"
-                placeholder="העלאה תמונה או הזן ברקוד"
-              />
-            </div>
-          </div>
-          <div class="row easy-radio">
-            <label>האם קיימים תסמינים</label>
-            <div class="form-group col-6">
-              <input type="radio" id="hasSymp" name="symptoms" class="d-none" />
-              <label for="hasSymp" class="form-control text-center"> כן </label>
-            </div>
-            <div class="form-group col-6">
-              <input type="radio" id="noSymp" name="symptoms" class="d-none" />
-              <label for="noSymp" class="form-control text-center"> לא </label>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-footer mt-3">
-            <button
-              type="button"
-              onclick="fakeVisitSuccess()"
-              class="btn btn-primary btn-block"
-            >
-              סיים ושלח ביקור
-            </button>
-          </div>
-        </div>
-      </form>
     </div>
     <!-- end::page content -->
   </body>

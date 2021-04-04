@@ -10,6 +10,7 @@
   --bg-light: #F0F0F0;
   --bg-primary: #131f52;
   --border: #E5E5E5;
+  --elm-radius: 0.5rem;
 }
 
 * {
@@ -23,6 +24,7 @@
 
 body {
   font-family: "Rubik", sans-serif;
+  backgournd-color:var(--bg);
   margin: 0 0 3rem 0;
 }
 
@@ -73,8 +75,8 @@ h4 {
 
 .card {
   border: none;
-  border-radius: 0.8rem;
-  padding: 0 25px;
+  border-radius: var(--elm-radius);
+  padding: 0 20px;
 }
 
 .form-check-input {
@@ -121,10 +123,10 @@ input::-webkit-inner-spin-button {
 }
 
 .form-control {
-  border-radius: 0.8rem;
+  border-radius: var(--elm-radius);
   font-weight: 500;
   border: none;
-  padding: 20px;
+  padding: 10px;
   background-color: var(--input-bg);
   text-align: right;
 }
@@ -168,10 +170,10 @@ input::-webkit-inner-spin-button {
 }
 
 .select2-container--default .select2-selection--single {
-  border-radius: 0.8rem;
+  border-radius: var(--elm-radius);
   font-weight: 500;
   border: none;
-  padding: 20px 0;
+  padding: 10px 0;
   background-color: var(--input-bg);
 }
 
@@ -200,7 +202,7 @@ input::-webkit-inner-spin-button {
 .select2-container--default
   .select2-selection--single
   .select2-selection__arrow {
-  height: 60px;
+  height: 35px;
 }
 
 .select2-container--default[dir="rtl"]
@@ -217,7 +219,7 @@ input::-webkit-inner-spin-button {
 }
 
 .btn {
-  border-radius: 0.8rem;
+  border-radius: var(--elm-radius);
   border: none;
   font-weight: 500;
   padding: 20px 30px;
@@ -316,7 +318,7 @@ hr {
 
 
 .signature-canvas {
-  border-radius: 0.8rem;
+  border-radius: var(--elm-radius);
   background-color: var(--input-bg);
 }
 
