@@ -221,7 +221,7 @@ input::-webkit-inner-spin-button {
   border-radius: var(--elm-radius);
   border: none;
   font-weight: 500;
-  padding: 20px 30px;
+  padding: 10px 30px;
 }
 
 .btn-block {
