@@ -33,6 +33,10 @@ app.get("/bp", (request, response) => {
   response.sendFile(__dirname + "/views/bpcard.html");
 });
 
+app.get("/desk", (request, response) => {
+  response.sendFile(__dirname + "/views/desk.html");
+});
+
 app.post("/test", (request, response) => {
   console.log(request)
 });
