@@ -76,7 +76,6 @@ h4 {
 .card {
   border: none;
   border-radius: var(--elm-radius);
-  padding: 0 20px;
 }
 
 .form-check-input {
