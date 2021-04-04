@@ -24,7 +24,7 @@
 
 body {
   font-family: "Rubik", sans-serif;
-  backgournd-color:var(--bg);
+  background-color:var(--bg-light);
   margin: 0 0 3rem 0;
 }
 
