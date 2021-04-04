@@ -126,6 +126,7 @@ input::-webkit-inner-spin-button {
   border-radius: var(--elm-radius);
   font-weight: 500;
   border: none;
+  font-size:var(--font-size-defualt);
   padding: 10px;
   background-color: var(--input-bg);
   text-align: right;
