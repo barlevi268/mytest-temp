@@ -2,6 +2,7 @@
 :root {
   --primary: #131f52;
   --primary-hover: #1B3086;
+  --defualt-hover: rgb(249,249,249)
   --secondary: transparent;
   --text-primary: #2c3350;
   --text-light: #676767;
@@ -260,6 +261,15 @@ input::-webkit-inner-spin-button {
 .btn-secondary:hover {
   background-color: var(--bg-light);
   color: var(--primary);
+}
+
+.btn-default {
+    background-color: white;
+    color: var(--primary);
+}
+
+.btn-default:hover {
+  background-color:rgb(249,249,249)
 }
 
 .btn-primary:disabled {
