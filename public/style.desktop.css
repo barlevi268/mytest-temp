@@ -111,6 +111,10 @@ form label {
   margin-bottom: 25px;
 }
 
+.form-group>label {
+  margin-bottom:0.3rem;
+}
+
 .form-control::placeholder {
   color: var(--text-muted);
   font-weight: 400;

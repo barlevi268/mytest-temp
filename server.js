@@ -1,14 +1,15 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 app.use(express.static("public"));
 app.use(express.json())
+app.use(cookieParser());
 
 
 app.get("/", (request, response) => {
   var ip = request.headers['x-forwarded-for'];
-  // response.json({ip:ip.split(',')[0]})
-  response.sendFile(__dirname + (ip == "5.29.60.143" ? "/views/desk.html" : "/views/index.html"));
+  response.sendFile(__dirname + (request.cookies.bar ? "/views/desk.html" : "/views/index.html"));
 });
 
 app.get("/menu", (request, response) => {
