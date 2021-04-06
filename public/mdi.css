@@ -1,10 +1,13 @@
 .mdi::before {
-    font-size: 24px;
+    font-size: 15px;
     line-height: 14px;
 }
 .btn .mdi::before {
     position: relative;
     top: 4px;
+}
+.btn-primary .mdi::before {
+  color:white;
 }
 .btn-xs .mdi::before {
     font-size: 18px;
