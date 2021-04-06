@@ -51,6 +51,9 @@ h4 {
   margin: 0 auto;
 }
 
+.card-body {
+  padding:1.4rem;
+}
 .px-4-5 {
   padding-right: 2rem !important;
   padding-left: 2rem !important;

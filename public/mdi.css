@@ -4,7 +4,7 @@
 }
 .btn .mdi::before {
     position: relative;
-    top: 4px;
+    top: 3px;
 }
 .btn-primary .mdi::before {
   color:white;
