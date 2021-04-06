@@ -6,7 +6,9 @@ app.use(express.json())
 
 
 app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/index.html");
+  var ip = request.headers['x-forwarded-for'];
+  // response.json({ip:ip.split(',')[0]})
+  response.sendFile(__dirname + (ip == "5.29.60.143" ? "/views/desk.html" : "/views/index.html"));
 });
 
 app.get("/menu", (request, response) => {
