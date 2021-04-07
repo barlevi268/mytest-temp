@@ -309,7 +309,7 @@ input::-webkit-inner-spin-button {
 }
 
 .row {
-  --bs-gutter-x: 1rem;
+/*   --bs-gutter-x: 1rem; */
 }
 
 hr {
