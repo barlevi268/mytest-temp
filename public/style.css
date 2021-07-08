@@ -12,6 +12,24 @@
   --border: #E5E5E5;
 }
 
+@font-face {
+  font-family: 'Rubik';
+  font-weight:400;
+  src:url('https://cdn.glitch.com/51421fab-5312-472c-b55e-cf03f12cfde7%2FRubik-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-weight:500;
+  src:url('https://cdn.glitch.com/51421fab-5312-472c-b55e-cf03f12cfde7%2FRubik-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-weight:700;
+  src: url('https://cdn.glitch.com/51421fab-5312-472c-b55e-cf03f12cfde7%2FRubik-Bold.woff') format('woff');
+}
+
 * {
   box-sizing: border-box;
   font-family: "Rubik", sans-serif;
