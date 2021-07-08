@@ -1,3 +1,9 @@
+var isMobile =  ('ontouchstart' in window)
+if (isMobile) {
+  document.body.style.backgroundColor = 'red'
+}
+
+
 var alertModal = {
   subView: $("#alertModal"),
   show: () => alertModal.subView.modal("show"),
