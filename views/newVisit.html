@@ -44,6 +44,54 @@
     <script src="/plugins/barcode/javascript-barcode-reader.umd.min.js"></script>
     <script src="/script.js" defer></script>
     <script src="/scripts/new-visit.js" defer></script>
+    <style>
+      /* CSS comes here */
+      #video {
+        border: 1px solid black;
+        width: 320px;
+        height: 240px;
+      }
+
+      #photo {
+        border: 1px solid black;
+        width: 320px;
+        height: 240px;
+      }
+
+      #canvas {
+        display: none;
+      }
+
+      .camera {
+        width: 340px;
+        display: inline-block;
+      }
+
+      .output {
+        width: 340px;
+        display: inline-block;
+      }
+
+      #startbutton {
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        bottom: 36px;
+        padding: 5px;
+        background-color: #6a67ce;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+        color: rgba(255, 255, 255, 1);
+        cursor: pointer;
+      }
+
+      .contentarea {
+        font-size: 16px;
+        font-family: Arial;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <!-- start::modal template -->
@@ -82,7 +130,7 @@
         </div>
       </div>
     </div>
-        <div
+    <div
       class="modal fade"
       id="webcamModal"
       tabindex="-1"
@@ -90,13 +138,21 @@
       aria-labelledby="alertModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog" role="document" style="mac-width:unset;">
         <div class="modal-content">
           <div class="modal-body">
             <div class="modal-icon d-none text-center pt-4 pb-3">
               <img src="/media/success-icon.svg" />
             </div>
-            <div class="modal-message">{{modal message}}</div>
+            <div class="contentarea">
+              <h1>
+                צלם ברקוד
+              </h1>
+              <div class="camera">
+                <video id="video">Video stream not available.</video>
+              </div>
+              <canvas id="canvas"></canvas>
+            </div>
             <div calss="modal-actiosn container-fluid">
               <div class="row justify-content-between">
                 <button
@@ -260,14 +316,26 @@
               </label>
             </div>
             <div class="form-group col-6">
-              <input type="radio" id="cerologyTest" name="testType" value="cerology" class="d-none" />
-              <label for="cerologyTest" class="form-control text-center"> סרולוגיה </label>
+              <input
+                type="radio"
+                id="cerologyTest"
+                name="testType"
+                value="cerology"
+                class="d-none"
+              />
+              <label for="cerologyTest" class="form-control text-center">
+                סרולוגיה
+              </label>
             </div>
           </div>
           <div class="row">
             <div class="pcr-test-types form-group col">
               <label>סוג בדיקה</label>
-              <select select2-type="regular" name="pcrTestType" placeholder="בחר בחר סוג בדיקה">
+              <select
+                select2-type="regular"
+                name="pcrTestType"
+                placeholder="בחר בחר סוג בדיקה"
+              >
                 <option value="singular">בדיקה יחידנית</option>
                 <option value="personal">עיגום פרטני</option>
                 <option value="regular">עיגום רגיל</option>
@@ -295,9 +363,7 @@
               />
             </div>
             <div class="barcode-loader form-group col-2">
-              <div class="spinner-border mt-5" role="status">
-                
-              </div>
+              <div class="spinner-border mt-5" role="status"></div>
             </div>
             <div class="impair-test-barcode d-none form-group col">
               <label>ברקוד עיגום</label>
