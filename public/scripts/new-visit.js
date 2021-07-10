@@ -82,9 +82,9 @@ function initBarcodeImagePicker() {
       e.preventDefault()
       alertModal.display({
         modalId:'webcamModal',
-        afterInit: () => {
-          initWebcamWidget()
-        }
+        primaryLabel:"צלם",
+        primaryAction: () => handleCapture(),
+        afterInit: () => initWebcamWidget()
       })
     })
   }
