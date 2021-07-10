@@ -1,24 +1,24 @@
+function detectCodeInImage(src) {
+  const codeField = $('[name="test_barcode"]');
+  var code = "";
+
+  var config = quaggaDefaultConfig;
+
+  $(".barcode-loader").show("fast");
+
+  decodeBarcode(src, config, result => {
+    result ? (code = result) : "";
+    console.log(result);
+
+    $(".barcode-loader").hide("fast");
+
+    codeField.attr("placeholder", "הזן ברקוד");
+    codeField.val(code);
+  });
+}
+
 function initBarcodeDetect() {
   $(".barcode-loader").hide();
-
-  function detectCodeInImage(src) {
-    const codeField = $('[name="test_barcode"]');
-    var code = "";
-
-    var config = quaggaDefaultConfig;
-
-    $(".barcode-loader").show("fast");
-
-    decodeBarcode(src, config, result => {
-      result ? (code = result) : "";
-      console.log(result);
-
-      $(".barcode-loader").hide("fast");
-
-      codeField.attr("placeholder", "הזן ברקוד");
-      codeField.val(code);
-    });
-  }
 
   $("#uploadBarcode").on("change", function(e) {
     if (e.target.files && e.target.files.length) {
@@ -80,7 +80,7 @@ var webcam = (function() {
     context.drawImage(video, 0, 0, width, height);
 
     var data = canvas.toDataURL('image/png');
-    detectCodeInImage(dataURItoBlob(data))
+    detectCodeInImage(URL.createObjectURL(dataURItoBlob(data)))
   }
 
   function initBarcodeImagePicker() {
