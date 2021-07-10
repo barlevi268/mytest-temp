@@ -22,6 +22,7 @@ function initBarcodeDetect() {
 
   $("#uploadBarcode").on("change", function(e) {
     if (e.target.files && e.target.files.length) {
+      console.log(URL.createObjectURL(e.target.files[0]))
       detectCodeInImage(URL.createObjectURL(e.target.files[0]));
     }
   });
@@ -80,8 +81,6 @@ var webcam = (function() {
 
     var data = canvas.toDataURL('image/png');
     detectCodeInImage(dataURItoBlob(data))
-    form.append('myFile', dataURItoBlob(data))
-    
   }
 
   function initBarcodeImagePicker() {
@@ -156,6 +155,6 @@ function initConditionalFields() {
 
 $(() => {
   initBarcodeDetect();
-  initBarcodeImagePicker();
+  webcam.init();
   initConditionalFields();
 });

@@ -1,4 +1,4 @@
-var isMobile =  ('ontouchstart' in window)
+var isMobile =  !('ontouchstart' in window)
 
 var alertModal = {
   subView: $("#alertModal"),
