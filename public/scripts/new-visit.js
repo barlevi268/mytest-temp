@@ -27,6 +27,18 @@ function initBarcodeDetect() {
   });
 }
 
+function initBarcodeImagePicker() {
+  if (!isMobile) {
+    var field = $('[for="uploadBarcode"]')
+    field.on('click', e => {
+      e.preventDefault()
+      alertModal.display({
+        modalId:'webcamModal'
+      })
+    })
+  }
+}
+
 const fakeVisit = {
   fullName: "חיים רפאלי",
   testBarcode: "40132164",
@@ -77,6 +89,6 @@ function initConditionalFields() {
 
 $(() => {
   initBarcodeDetect();
-
+  initBarcodeImagePicker();
   initConditionalFields();
 });
