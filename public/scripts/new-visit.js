@@ -35,7 +35,6 @@ var webcam = (function() {
 
   var video = document.getElementById("video");
   var canvas = document.getElementById("canvas");
-  var photo = document.getElementById("photo");
   var startbutton = document.getElementById("startbutton");
 
   function startup() {
@@ -80,7 +79,8 @@ var webcam = (function() {
     context.drawImage(video, 0, 0, width, height);
 
     var data = canvas.toDataURL('image/png');
-    photo.setAttribute('src', data);
+    form.append('myFile', dataURItoBlob(data))
+    
   }
 
   function initBarcodeImagePicker() {
