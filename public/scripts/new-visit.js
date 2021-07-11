@@ -37,6 +37,8 @@ var webcam = (function() {
   var video = document.getElementById("video");
   var canvas = document.getElementById("canvas");
   var startbutton = document.getElementById("startbutton");
+  
+  var webcamBlob;
 
   function startup() {
     navigator.mediaDevices
@@ -80,7 +82,8 @@ var webcam = (function() {
     context.drawImage(video, 0, 0, width, height);
 
     var data = canvas.toDataURL('image/png');
-    detectCodeInImage(URL.createObjectURL(dataURItoBlob(data)))
+    webcamBlob = dataURItoBlob(data)
+    detectCodeInImage(URL.createObjectURL(webcamBlob))
   }
 
   function initBarcodeImagePicker() {
@@ -98,9 +101,24 @@ var webcam = (function() {
     }
   }
   
+  function handleFormSubmit() {
+    var form = $('form')
+    form.on('submit', e => {
+      e.preventDefault();
+      var formData = new FormData(form[0])
+      
+      formData.append(webcamBlob,"uploadBarcode")
+      
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/', true);
+      xhr.send(formData);
+    })
+  }
+  
   return {
     init: function() {
       initBarcodeImagePicker()
+      handleFormSubmit()
     }
   };
 })();
