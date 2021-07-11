@@ -15,7 +15,7 @@
 @font-face {
   font-family: 'Rubik';
   font-weight:400;
-  src:url('fonts/Rubik-Regular.woff') format('woff');
+  src:url('../fonts/Rubik-Regular.woff') format('woff');
 }
 
 @font-face {
