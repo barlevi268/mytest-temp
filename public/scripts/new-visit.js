@@ -67,12 +67,18 @@ var webcam = (function() {
   }
   
   function approveCapture() {
-    
+      var data = canvas.toDataURL('image/png');
+      webcamBlob = dataURItoBlob(data)
+      detectCodeInImage(URL.createObjectURL(webcamBlob))
+      $("#webcamModal").modal('hide')
+  }
+         
+  function retakeCapture() {
+    $('[for="uploadBarcode"]')[0].click()
   }
   
-  function retakeCapture() {
-    
-  }
+  $('#approveCapture').on('click', e => approveCapture() )
+  $('#retakeCapture').on('click', e => retakeCapture() )
   
   function startup() {
     
@@ -112,10 +118,6 @@ var webcam = (function() {
   
   function handleCapture() {
     takepicture()
-
-    var data = canvas.toDataURL('image/png');
-    webcamBlob = dataURItoBlob(data)
-    detectCodeInImage(URL.createObjectURL(webcamBlob))
   }
 
   function initBarcodeImagePicker() {
