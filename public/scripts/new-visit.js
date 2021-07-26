@@ -51,6 +51,7 @@ var webcam = (function() {
   }
   
   function takepicture() {
+    $('.pre-capture').hide()
     $('.post-capture').show()
     var context = canvas.getContext('2d');
     if (width && height) {
@@ -74,7 +75,6 @@ var webcam = (function() {
   }
   
   function startup() {
-    $('.post-capture').hide()
     
     navigator.mediaDevices
       .getUserMedia({
@@ -127,6 +127,11 @@ var webcam = (function() {
           modalId: "webcamModal",
           primaryLabel: "צלם",
           primaryAction: () => handleCapture(),
+          preventPrimaryDismiss: true,
+          onInit: () => {
+            $('.pre-capture').show()
+            $('.post-capture').hide()
+          },
           afterInit: () => startup()
         });
       });

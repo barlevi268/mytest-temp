@@ -31,6 +31,11 @@ var alertModal = {
           message.primaryAction.call(e)
         );
       }
+      if (message.preventPrimaryDismiss) {
+        alertModal.primaryButton.off().on("click", e =>
+          message.primaryAction.call(e)
+        );
+      }
 
       if (message.primaryLabel) {
         alertModal.primaryButton.html(message.primaryLabel);
