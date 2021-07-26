@@ -36,11 +36,46 @@ var webcam = (function() {
 
   var video = document.getElementById("video");
   var canvas = document.getElementById("canvas");
+  var photo = document.getElementById("photo");
   var startbutton = document.getElementById("startbutton");
   
   var webcamBlob;
+  
+  function clearphoto() {
+    var context = canvas.getContext('2d');
+    context.fillStyle = "#AAA";
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
+    var data = canvas.toDataURL('image/png');
+    photo.setAttribute('src', data);
+  }
+  
+  function takepicture() {
+    $('.post-capture').show()
+    var context = canvas.getContext('2d');
+    if (width && height) {
+        canvas.width = width;
+        canvas.height = height;
+        context.drawImage(video, 0, 0, width, height);
+
+        var data = canvas.toDataURL('image/png');
+        photo.setAttribute('src', data);
+    } else {
+        clearphoto();
+    }
+  }
+  
+  function approveCapture() {
+    
+  }
+  
+  function retakeCapture() {
+    
+  }
+  
   function startup() {
+    $('.post-capture').hide()
+    
     navigator.mediaDevices
       .getUserMedia({
         video: true,
@@ -76,10 +111,7 @@ var webcam = (function() {
   }
   
   function handleCapture() {
-    var context = canvas.getContext('2d');
-    canvas.width = width;
-    canvas.height = height;
-    context.drawImage(video, 0, 0, width, height);
+    takepicture()
 
     var data = canvas.toDataURL('image/png');
     webcamBlob = dataURItoBlob(data)

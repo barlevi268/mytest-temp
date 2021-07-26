@@ -46,22 +46,16 @@
     <script src="/scripts/new-visit.js" defer></script>
     <style>
       /* CSS comes here */
-      #video, #capturePreviewImage {
+      #video, #photo {
         border: none;
         width: 480px;
         height: 360px;
       }
       
-      #capturePreviewImage {
+      #photo {
         border: 5px solid green!important;
         width: 480px;
         display: inline-block;
-      }
-
-      #photo {
-        border: 1px solid black;
-        width: 320px;
-        height: 240px;
       }
 
       #canvas {
@@ -70,11 +64,6 @@
 
       .camera {
         width: 480px;
-        display: inline-block;
-      }
-
-      .output {
-        width: 340px;
         display: inline-block;
       }
 
@@ -154,9 +143,10 @@
               <h1>
                 צלם ברקוד
               </h1>
-              <div  class="post-cature" id="capturePreview">
-                <div class="shadow rounded-lg mb-5 mt-4 border" id="capturePreviewImage">
-                  <canvas id="canvas"></canvas>
+              <div  class="post-capture" id="capturePreview">
+                <canvas id="canvas"></canvas>
+                <div class="output">
+                    <img id="photo" class="shadow rounded-lg mb-5 mt-4 " alt="The screen capture will appear in this box."> 
                 </div>
               </div>
               <div class="camera">
@@ -166,7 +156,7 @@
               
             </div>
             <div calss="modal-actiosn container-fluid">
-               <div class="post-cature row justify-content-between">
+               <div class="post-capture row justify-content-between">
                 <button
                   type="button"
                         id="approveCapture"
