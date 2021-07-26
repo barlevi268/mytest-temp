@@ -46,10 +46,16 @@
     <script src="/scripts/new-visit.js" defer></script>
     <style>
       /* CSS comes here */
-      #video {
+      #video, #capturePreviewImage {
         border: none;
         width: 480px;
         height: 360px;
+      }
+      
+      #capturePreviewImage {
+        border: 5px solid green!important;
+        width: 480px;
+        display: inline-block;
       }
 
       #photo {
@@ -148,12 +154,34 @@
               <h1>
                 צלם ברקוד
               </h1>
+              <div  class="post-cature" id="capturePreview">
+                <div class="shadow rounded-lg mb-5 mt-4 border" id="capturePreviewImage">
+                  <canvas id="canvas"></canvas>
+                </div>
+              </div>
               <div class="camera">
                 <video class="shadow rounded-lg mb-5 mt-4" id="video">Video stream not available.</video>
               </div>
-              <canvas id="canvas"></canvas>
+
+              
             </div>
             <div calss="modal-actiosn container-fluid">
+               <div class="post-cature row justify-content-between">
+                <button
+                  type="button"
+                        id="approveCapture"
+                  class="btn btn-primary btn-block col-6 col-spaced"
+                >
+                  אישור
+                </button>
+                <button
+                  type="button"
+                        id="retakeCapture"
+                  class="btn btn-secondary btn-block col-6 col-spaced"
+                >
+                  צלם שוב
+                </button>
+              </div>
               <div class="row justify-content-between">
                 <button
                   type="button"
