@@ -49,6 +49,25 @@
     ></script>
     <script src="/script.js" defer></script>
     <script src="/scripts/bp.js" defer></script>
+    
+    <style>
+      @media print {
+        #bpDiv {
+          background-color: white;
+          height: 550px;
+          width: 350px;
+          position: fixed;
+          border:1px solid grey;
+          border-radius:20px;
+          top: 0;
+          left: 0;
+          margin: 0;
+          padding: 15px;
+          font-size: 14px;
+          line-height: 18px;
+        }
+      }
+    </style>
   </head>
   <body>
        <!-- start::modal template -->
@@ -133,7 +152,7 @@
       </div>
 
       <div class="" style="text-align:left; float:left; top:-10px;">
-        <button onclick="window.print()" class="btn btn-ligh-primary p-3 btn-icon mt-4">
+        <button onclick="window.print()" class="btn btn-secondary p-3 btn-icon mt-4">
           הדפס
         </button>
         <button id="saveAsImage" class="btn btn-primary p-3 btn-icon mt-4">
