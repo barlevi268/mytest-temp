@@ -58,12 +58,15 @@ function detectCodeInImage(src) {
 
   var config = quaggaDefaultConfig;
   
-  $('.cam-icon').hide()
   $('.barcode-loader').show()
+  $('.cam-icon').hide()
 
   decodeBarcode(src, config, result => {
     result ? (code = result) : "";
     console.log(result);
+    
+    $('.cam-icon').show()
+    $('.barcode-loader').hide()
 
     codeField.attr("placeholder", "ת.ז.");
     codeField.val(code);
