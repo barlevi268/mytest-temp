@@ -54,6 +54,15 @@ const fakePatient = {
 
 $(() => {
     initIdPassportField()
+  
+  const getKS = () => {
+        $(window).scrollTop(10);
+        var ks = $(window).scrollTop() > 0;
+        $(window).scrollTop(0);
+    return ks
+  }
+  $('input').on('input', e => alert(getKS()))
+  $('.camera-icon').on('click', e => alert(getKS()))
 })
 
 
