@@ -52,8 +52,39 @@ const fakePatient = {
     city:"רחובות"
 }
 
+function detectCodeInImage(src) {
+  const codeField = $('[name="patient_id"]');
+  var code = "";
+
+  var config = quaggaDefaultConfig;
+  
+  $('.cam-icon').hide()
+  $('.barcode-loader').show()
+
+  decodeBarcode(src, config, result => {
+    result ? (code = result) : "";
+    console.log(result);
+
+    codeField.attr("placeholder", "ת.ז.");
+    codeField.val(code);
+  });
+}
+
+function initBarcodeDetect() {
+  $(".barcode-loader").hide();
+
+  $("#idPicture").on("change", function(e) {
+    if (e.target.files && e.target.files.length) {
+      console.log(URL.createObjectURL(e.target.files[0]))
+      detectCodeInImage(URL.createObjectURL(e.target.files[0]));
+    }
+  });
+}
+
 $(() => {
+    initBarcodeDetect()
     initIdPassportField()
+  
 })
 
 

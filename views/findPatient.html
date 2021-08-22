@@ -41,17 +41,20 @@
     <script src="/plugins/jquery/js/jquery-3.5.1.min.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/select2/select2.full.min.js"></script>
+    <script src="/plugins/barcode/javascript-barcode-reader.umd.min.js"></script>
     <script src="/script.js" defer></script>
     <script src="/scripts/find-patient.js" defer></script>
   </head>
   <style>
     
-    
+    .cam-icon {
+      font-size:22pt;
+    }
     .camera-icon {
       position:absolute;
-      font-size:22pt;
       padding:0!important;
       margin:0!important;
+      line-height:2;
       border:none;
       border-radius:50%;
       text-align:center;
@@ -187,7 +190,10 @@
     <!-- start::page content -->
     <input type="file" id="idPicture" class="d-none"/>
       <label for="idPicture"class="shadow bg-light camera-icon">
-        📷
+        <div class="barcode-loader spinner-border mb-1 d-none" role="status"></div>
+        <span class="cam-icon">
+          📷
+        </span>
       </label>
 
 
