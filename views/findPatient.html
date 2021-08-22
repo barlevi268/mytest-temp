@@ -45,13 +45,20 @@
     <script src="/scripts/find-patient.js" defer></script>
   </head>
   <style>
+    
+    
     .camera-icon {
       position:absolute;
-      font-size:24px;
-      height:30px;
-      width:30px;
-      right:15px;
-      bottom:15px;
+      font-size:22pt;
+      padding:0!important;
+      margin:0!important;
+      border:none;
+      border-radius:50%;
+      text-align:center;
+      height:60px;
+      width:60px;
+      right:20px;
+      bottom:20px;
     }
   </style>
   
@@ -178,10 +185,11 @@
     <!-- end::custom modal -->
 
     <!-- start::page content -->
-    
-    <button class="btn shadow bg-light camera-icon">
-      📷
-    </button>
+    <input type="file" id="idPicture" class="d-none"/>
+      <label for="idPicture"class="shadow bg-light camera-icon">
+        📷
+      </label>
+
 
     <div class="container">
       <div class="nav-header d-flex justify-content-between">
