@@ -100,11 +100,9 @@ function decodeBarcode(src, config, cb) {
 
   function handleResults(result) {
 
-    console.log(config.inputStream.size)
-    console.log(result)
     if (result) {
       if (result.codeResult) {
-        console.timeEnd("time to scan barcode")
+        console.timeEnd("time to success scan barcode")
         cb(result.codeResult.code)
       } 
     }
@@ -131,7 +129,7 @@ function decodeBarcode(src, config, cb) {
         Quagga.decodeSingle(config, result => {
           handleResults(result)
           
-          console.timeEnd("time to scan barcode")
+          console.timeEnd("time to failed scan barcode")
           cb(false)
         });
       });
