@@ -1,33 +1,3 @@
-function detectCodeInImage(src) {
-  const codeField = $('[name="test_barcode"]');
-  var code = "";
-
-  var config = quaggaDefaultConfig;
-
-  $(".barcode-loader").show("fast");
-
-  decodeBarcode(src, config, result => {
-    result ? (code = result) : "";
-    console.log(result);
-
-    $(".barcode-loader").hide("fast");
-
-    codeField.attr("placeholder", "הזן ברקוד");
-    codeField.val(code);
-  });
-}
-
-function initBarcodeDetect() {
-  $(".barcode-loader").hide();
-
-  $("#uploadBarcode").on("change", function(e) {
-    if (e.target.files && e.target.files.length) {
-      console.log(URL.createObjectURL(e.target.files[0]))
-      detectCodeInImage(URL.createObjectURL(e.target.files[0]));
-    }
-  });
-}
-
 var webcam = (function() {
   var width = 320;
   var height = 0;
@@ -162,6 +132,26 @@ var webcam = (function() {
   };
 })();
 
+var mobileStream = function() {
+  var modal = $('#')
+  var stream = $('')[]
+  
+  
+  function initMobileStreamModal() {
+    
+  }
+  
+  function hanldeQuaggaResults() {
+    
+  }
+  function _init() {
+    
+  }
+  return {
+    init: _init
+  }
+}
+
 const fakeVisit = {
   fullName: "חיים רפאלי",
   testBarcode: "40132164",
@@ -210,8 +200,8 @@ function initConditionalFields() {
   });
 }
 
+
 $(() => {
-  initBarcodeDetect();
   webcam.init();
   initConditionalFields();
 });
