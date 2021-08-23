@@ -66,6 +66,16 @@
         width: 480px;
         display: inline-block;
       }
+      
+      .camera-mobile {
+        width:100%;
+        display: inline-block;
+      }
+      
+      .mobile-stream {
+        width:100%;
+        height:220px;
+      }
 
       #startbutton {
         display: block;
@@ -184,6 +194,42 @@
                   class="secondary-action btn btn-secondary btn-block col-6 col-spaced"
                 >
                   ביטול
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div
+      class="modal fade"
+      id="mobileLiveScanModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="mobileLiveScanLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog mx-2" role="document">
+        <div class="modal-content">
+          <div class="modal-body px-0">
+            <div class="modal-icon d-none text-center pt-4 pb-3">
+              <img src="/media/success-icon.svg" />
+            </div>
+            <div class="contentarea">
+              <h1>
+                סרוק ברקוד
+              </h1>
+              <div class="pre-capture camera">
+                <video class="shadow rounded-lg mb-3 mt-4" id="mobileStream">Video stream not available.</video>
+              </div>
+            </div>
+            <div calss="modal-actions container-fluid">
+              <div class="pre-capture row justify-content-between">
+                <button
+                  type="button"
+                  class="secondary-action btn btn-secondary btn-block col col-spaced"
+                >
+                  סגירה
                 </button>
               </div>
             </div>
