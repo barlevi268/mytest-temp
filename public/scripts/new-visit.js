@@ -8,50 +8,49 @@ var webcam = (function() {
   var canvas = document.getElementById("canvas");
   var photo = document.getElementById("photo");
   var startbutton = document.getElementById("startbutton");
-  
+
   var webcamBlob;
-  
+
   function clearphoto() {
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext("2d");
     context.fillStyle = "#AAA";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    var data = canvas.toDataURL('image/png');
-    photo.setAttribute('src', data);
+    var data = canvas.toDataURL("image/png");
+    photo.setAttribute("src", data);
   }
-  
-  function takepicture() {
-    $('.pre-capture').hide()
-    $('.post-capture').show()
-    var context = canvas.getContext('2d');
-    if (width && height) {
-        canvas.width = width;
-        canvas.height = height;
-        context.drawImage(video, 0, 0, width, height);
 
-        var data = canvas.toDataURL('image/png');
-        photo.setAttribute('src', data);
+  function takepicture() {
+    $(".pre-capture").hide();
+    $(".post-capture").show();
+    var context = canvas.getContext("2d");
+    if (width && height) {
+      canvas.width = width;
+      canvas.height = height;
+      context.drawImage(video, 0, 0, width, height);
+
+      var data = canvas.toDataURL("image/png");
+      photo.setAttribute("src", data);
     } else {
-        clearphoto();
+      clearphoto();
     }
   }
-  
+
   function approveCapture() {
-      var data = canvas.toDataURL('image/png');
-      webcamBlob = dataURItoBlob(data)
-      detectCodeInImage(URL.createObjectURL(webcamBlob))
-      $("#webcamModal").modal('hide')
+    var data = canvas.toDataURL("image/png");
+    webcamBlob = dataURItoBlob(data);
+    detectCodeInImage(URL.createObjectURL(webcamBlob));
+    $("#webcamModal").modal("hide");
   }
-         
+
   function retakeCapture() {
-    $('[for="uploadBarcode"]')[0].click()
+    $('[for="uploadBarcode"]')[0].click();
   }
-  
-  $('#approveCapture').on('click', e => approveCapture() )
-  $('#retakeCapture').on('click', e => retakeCapture() )
-  
+
+  $("#approveCapture").on("click", e => approveCapture());
+  $("#retakeCapture").on("click", e => retakeCapture());
+
   function startup() {
-    
     navigator.mediaDevices
       .getUserMedia({
         video: true,
@@ -85,9 +84,9 @@ var webcam = (function() {
       false
     );
   }
-  
+
   function handleCapture() {
-    takepicture()
+    takepicture();
   }
 
   function initBarcodeImagePicker() {
@@ -101,66 +100,68 @@ var webcam = (function() {
           primaryAction: () => handleCapture(),
           preventPrimaryDismiss: true,
           onInit: () => {
-            $('.pre-capture').show()
-            $('.post-capture').hide()
+            $(".pre-capture").show();
+            $(".post-capture").hide();
           },
           afterInit: () => startup()
         });
       });
     }
   }
-  
+
   function handleFormSubmit() {
-    var form = $('form')
-    form.on('submit', e => {
+    var form = $("form");
+    form.on("submit", e => {
       e.preventDefault();
-      var formData = new FormData(form[0])
-      
-      formData.append(webcamBlob,"uploadBarcode")
-      
+      var formData = new FormData(form[0]);
+
+      formData.append(webcamBlob, "uploadBarcode");
+
       var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/', true);
+      xhr.open("POST", "/", true);
       xhr.send(formData);
-    })
+    });
   }
-  
+
   return {
     init: function() {
-      initBarcodeImagePicker()
-      handleFormSubmit()
+      initBarcodeImagePicker();
+      handleFormSubmit();
     }
   };
 })();
 
 var mobileStream = function() {
-  var modal = $('#mobileLiveScanModal')
-  var stream = $('.mobile-stream')[0]
-  var btn = $('.mobile-stream-btn')
-  var barcodeInput = $('[name=barcode_test]')
-  
+  var modal = $("#mobileLiveScanModal");
+  var mobileStream = $(".mobile-stream")[0];
+  var btn;
+  var barcodeInput;
+
   function initQuagga() {
-    
-    Quagga.init({
-      inputStream : {
-        name : "Live",
-        type : "LiveStream",
-        target: document.querySelector('#video')    // Or '#yourElement' (optional)
+    Quagga.init(
+      {
+        inputStream: {
+          name: "Live",
+          type: "LiveStream",
+          target: document.querySelector("#video") // Or '#yourElement' (optional)
+        },
+        decoder: {
+          readers: ["code_128_reader"]
+        }
       },
-      decoder : {
-        readers : ["code_128_reader"]
-      }
-    }, function(err) {
+      function(err) {
         if (err) {
-            console.log(err);
-            return
+          console.log(err);
+          return;
         }
         console.log("Initialization finished. Ready to start");
         Quagga.start();
-    });
-    
-    Quagga.onDetected((e) =)
+      }
+    );
+
+    Quagga.onDetected(e => hanldeQuaggaResults(e));
   }
-  
+
   function initMobileStreamModal() {
     navigator.mediaDevices
       .getUserMedia({
@@ -168,38 +169,43 @@ var mobileStream = function() {
         audio: false
       })
       .then(function(stream) {
-        stream.srcObject = stream;
-        stream.play();
+        mobileStream.srcObject = stream;
+        mobileStream.play();
+        initQuagga()
       })
       .catch(function(err) {
         console.log("An error occurred: " + err);
       });
+    
+    
   }
-  
+
   function hanldeQuaggaResults(e) {
-    if (e.codeResults) {
-      barcodeInput.val(e.codeResults.code)
-      modal.find('close-btn').trigger('click')
-      Quagga.stop()
+    console.log(e)
+    if (e.codeResult) {
+      barcodeInput.val(e.codeResult.code);
+      modal.find('.secondary-action').trigger('click')
+      Quagga.stop();
     }
   }
-  
+
   function initListeners() {
-    btn.on('click', e => {
+    btn.on("click", e => {
       alertModal.display({
-          modalId: "mobileLiveScanModal",
-          onInit: () => {},
-          afterInit: () => initMobileStreamModal()
-        });
-    })
+        modalId: "mobileLiveScanModal",
+        onInit: () => {},
+        afterInit: () => initMobileStreamModal()
+      });
+    });
   }
-  function _init() {
-    initListeners()
+  function _init({resultInput, open) {
+    barcodeInput = $(input)
+    initListeners();
   }
   return {
     init: _init
-  }
-}
+  };
+}();
 
 const fakeVisit = {
   fullName: "חיים רפאלי",
@@ -249,8 +255,8 @@ function initConditionalFields() {
   });
 }
 
-
 $(() => {
   webcam.init();
+  mobileStream.init('[name=test_barcode]');
   initConditionalFields();
 });
