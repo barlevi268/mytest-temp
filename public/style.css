@@ -13,21 +13,21 @@
 }
 
 @font-face {
-  font-family: 'Rubik';
-  font-weight:400;
-  src:url('../fonts/Rubik-Regular.woff') format('woff');
+  font-family: "Rubik";
+  font-weight: 400;
+  src: url("../fonts/Rubik-Regular.woff") format("woff");
 }
 
 @font-face {
-  font-family: 'Rubik';
-  font-weight:500;
-  src:url('fonts/Rubik-Medium.woff') format('woff');
+  font-family: "Rubik";
+  font-weight: 500;
+  src: url("fonts/Rubik-Medium.woff") format("woff");
 }
 
 @font-face {
-  font-family: 'Rubik';
-  font-weight:700;
-  src: url('fonts/Rubik-Bold.woff') format('woff');
+  font-family: "Rubik";
+  font-weight: 700;
+  src: url("fonts/Rubik-Bold.woff") format("woff");
 }
 
 * {
@@ -333,14 +333,13 @@ hr {
   font-weight: 500;
 }
 
-
 .signature-canvas {
   border-radius: 0.8rem;
   background-color: var(--input-bg);
 }
 
 .rounded-lg {
-  border-radius:10px;
+  border-radius: 10px;
 }
 
 .rounded-top-lg {
@@ -348,6 +347,24 @@ hr {
   border-top-left-radius: 10px;
 }
 
-.text-white label,.text-white h2 {
-  color:white;
+.text-white label,
+.text-white h2 {
+  color: white;
+}
+
+.camera-mobile {
+  width: 100%;
+  display: inline-block;
+}
+
+.mobile-stream {
+  width: 100%;
+  height: 220px;
+}
+
+.mobile-stream-btn {
+  font-size: 18pt;
+  padding: 11px;
+  text-align: center;
+  height: 60px;
 }

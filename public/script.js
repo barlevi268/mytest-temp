@@ -82,6 +82,83 @@ var alertModal = {
   }
 };
 
+var mobileStream = function() {
+  var modal = $("#mobileLiveScanModal");
+  var mobileStream = $(".mobile-stream")[0];
+  var btn;
+  var barcodeInput;
+
+  function initQuagga() {
+    Quagga.init(
+      {
+        inputStream: {
+          name: "Live",
+          type: "LiveStream",
+          target: document.querySelector(".mobile-stream") // Or '#yourElement' (optional)
+        },
+        decoder: {
+          readers: ["code_128_reader"]
+        }
+      },
+      function(err) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log("Initialization finished. Ready to start");
+        Quagga.start();
+      }
+    );
+
+    Quagga.onDetected(e => hanldeQuaggaResults(e));
+  }
+
+  function initMobileStreamModal() {
+    navigator.mediaDevices
+      .getUserMedia({
+        video: true,
+        audio: false
+      })
+      .then(function(stream) {
+        mobileStream.srcObject = stream;
+        mobileStream.play();
+        initQuagga()
+      })
+      .catch(function(err) {
+        console.log("An error occurred: " + err);
+      });
+    
+    
+  }
+
+  function hanldeQuaggaResults(e) {
+    console.log(e)
+    if (e.codeResult) {
+      barcodeInput.val(e.codeResult.code);
+      modal.find('.secondary-action').trigger('click')
+      Quagga.stop();
+    }
+  }
+
+  function initListeners() {
+    btn.on("click", e => {
+      alertModal.display({
+        modalId: "mobileLiveScanModal",
+        onInit: () => {},
+        afterInit: () => initMobileStreamModal()
+      });
+    });
+  }
+  function _init({resultInput, openButton}) {
+    barcodeInput = $(resultInput)
+    btn = $(openButton)
+    initListeners();
+  }
+  return {
+    init: _init
+  };
+}();
+
 var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",
