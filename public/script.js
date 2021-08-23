@@ -1,4 +1,4 @@
-var isMobile =  ('ontouchstart' in window)
+var isMobile = "ontouchstart" in window;
 
 var alertModal = {
   subView: $("#alertModal"),
@@ -32,9 +32,9 @@ var alertModal = {
         );
       }
       if (message.preventPrimaryDismiss) {
-        alertModal.primaryButton.off().on("click", e =>
-          message.primaryAction.call(e)
-        );
+        alertModal.primaryButton
+          .off()
+          .on("click", e => message.primaryAction.call(e));
       }
 
       if (message.primaryLabel) {
@@ -73,7 +73,7 @@ var alertModal = {
     alertModal.show();
   },
   init: () => {
-    alertModal.subView.modal({backdrop: 'static', keyboard: false})
+    alertModal.subView.modal({ backdrop: "static", keyboard: false });
     alertModal.content = alertModal.subView.find(".modal-message");
     alertModal.successIcon = alertModal.subView.find(".modal-icon");
     alertModal.primaryButton = alertModal.subView.find(".primary-action");
@@ -82,7 +82,7 @@ var alertModal = {
   }
 };
 
-var mobileStream = function() {
+var mobileStream = (function() {
   var modal = $("#mobileLiveScanModal");
   var mobileStream = $(".mobile-stream")[0];
   var btn;
@@ -116,25 +116,28 @@ var mobileStream = function() {
   function initMobileStreamModal() {
     navigator.mediaDevices
       .getUserMedia({
-        video: {facingMode: { exact: "environment" }}
+        video: { facingMode: { exact: "environment" } }
       })
       .then(function(stream) {
-        mobileStream.srcObject = stream;
-        mobileStream.play();
-        initQuagga()
+        if ("srcObject" in mobileStream) {
+          mobileStream.srcObject = stream;
+          mobileStream.play();
+        } else {
+          mobileStream.src = window.URL.createObjectURL(stream);
+        }
+
+        initQuagga();
       })
       .catch(function(err) {
         console.log("An error occurred: " + err);
       });
-    
-    
   }
 
   function hanldeQuaggaResults(e) {
-    console.log(e)
+    console.log(e);
     if (e.codeResult) {
       barcodeInput.val(e.codeResult.code);
-      modal.find('.secondary-action').trigger('click')
+      modal.find(".secondary-action").trigger("click");
       Quagga.stop();
     }
   }
@@ -148,15 +151,15 @@ var mobileStream = function() {
       });
     });
   }
-  function _init({resultInput, openButton}) {
-    barcodeInput = $(resultInput)
-    btn = $(openButton)
+  function _init({ resultInput, openButton }) {
+    barcodeInput = $(resultInput);
+    btn = $(openButton);
     initListeners();
   }
   return {
     init: _init
   };
-}();
+})();
 
 var quaggaDefaultConfig = {
   inputStream: {
@@ -164,7 +167,7 @@ var quaggaDefaultConfig = {
     length: 10,
     size: 1800
   },
-  numOfWorkers:1,
+  numOfWorkers: 1,
   locate: true,
   locator: {
     patchSize: "medium",
@@ -173,40 +176,38 @@ var quaggaDefaultConfig = {
 };
 
 function decodeBarcode(src, config, cb) {
-
   function handleResults(result) {
-
     if (result) {
       if (result.codeResult) {
-        console.timeEnd("time to success scan barcode")
-        cb(result.codeResult.code)
-      } 
+        console.timeEnd("time to success scan barcode");
+        cb(result.codeResult.code);
+      }
     }
   }
-  
+
   config.src = src;
   console.time("time to scan barcode");
-  
+
   Quagga.decodeSingle(config, result => {
-    handleResults(result)
-    
+    handleResults(result);
+
     config.inputStream.size = 1600;
 
     Quagga.decodeSingle(config, result => {
-      handleResults(result)
+      handleResults(result);
 
       config.inputStream.size = 1200;
 
       Quagga.decodeSingle(config, result => {
-        handleResults(result)
+        handleResults(result);
 
         config.inputStream.size = 600;
 
         Quagga.decodeSingle(config, result => {
-          handleResults(result)
-          
-          console.timeEnd("time to failed scan barcode")
-          cb(false)
+          handleResults(result);
+
+          console.timeEnd("time to failed scan barcode");
+          cb(false);
         });
       });
     });
@@ -301,20 +302,22 @@ function initMandatoryFields() {
 }
 
 function dataURItoBlob(dataURI) {
+  var byteString = atob(dataURI.split(",")[1]);
 
-    var byteString = atob(dataURI.split(',')[1]);
+  // separate out the mime component
+  var mimeString = dataURI
+    .split(",")[0]
+    .split(":")[1]
+    .split(";")[0];
 
-    // separate out the mime component
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+  // write the bytes of the string to an ArrayBuffer
+  var ab = new ArrayBuffer(byteString.length);
+  var ia = new Uint8Array(ab);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
 
-    // write the bytes of the string to an ArrayBuffer
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    return new Blob([ab], {type: mimeString});
+  return new Blob([ab], { type: mimeString });
 }
 
 $(() => {
@@ -326,4 +329,3 @@ $(() => {
 
   initMandatoryFields();
 });
-  
