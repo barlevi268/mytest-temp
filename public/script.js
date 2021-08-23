@@ -116,8 +116,7 @@ var mobileStream = function() {
   function initMobileStreamModal() {
     navigator.mediaDevices
       .getUserMedia({
-        video: true,
-        audio: false
+        video: {facingMode: { exact: "environment" }}
       })
       .then(function(stream) {
         mobileStream.srcObject = stream;
