@@ -135,7 +135,8 @@ var webcam = (function() {
 var mobileStream = function() {
   var modal = $('#')
   var stream = $('')[]
-  var barcodeInput = $('[name=barcode]')
+  var btn = $('.mobile-stream-btn')
+  var barcodeInput = $('[name=barcode_test]')
   
   function initMobileStreamModal() {
     
