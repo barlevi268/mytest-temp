@@ -133,20 +133,68 @@ var webcam = (function() {
 })();
 
 var mobileStream = function() {
-  var modal = $('#')
-  var stream = $('')[]
+  var modal = $('#mobileLiveScanModal')
+  var stream = $('.mobile-stream')[0]
   var btn = $('.mobile-stream-btn')
   var barcodeInput = $('[name=barcode_test]')
   
-  function initMobileStreamModal() {
+  function initQuagga() {
     
+    Quagga.init({
+      inputStream : {
+        name : "Live",
+        type : "LiveStream",
+        target: document.querySelector('#video')    // Or '#yourElement' (optional)
+      },
+      decoder : {
+        readers : ["code_128_reader"]
+      }
+    }, function(err) {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log("Initialization finished. Ready to start");
+        Quagga.start();
+    });
+    
+    Quagga.onDetected((e) =)
   }
   
-  function hanldeQuaggaResults() {
-    
+  function initMobileStreamModal() {
+    navigator.mediaDevices
+      .getUserMedia({
+        video: true,
+        audio: false
+      })
+      .then(function(stream) {
+        stream.srcObject = stream;
+        stream.play();
+      })
+      .catch(function(err) {
+        console.log("An error occurred: " + err);
+      });
+  }
+  
+  function hanldeQuaggaResults(e) {
+    if (e.codeResults) {
+      barcodeInput.val(e.codeResults.code)
+      modal.find('close-btn').trigger('click')
+      Quagga.stop()
+    }
+  }
+  
+  function initListeners() {
+    btn.on('click', e => {
+      alertModal.display({
+          modalId: "mobileLiveScanModal",
+          onInit: () => {},
+          afterInit: () => initMobileStreamModal()
+        });
+    })
   }
   function _init() {
-    
+    initListeners()
   }
   return {
     init: _init
