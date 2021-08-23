@@ -136,9 +136,11 @@ var mobileStream = (function() {
   function hanldeQuaggaResults(e) {
     console.log(e);
     if (e.codeResult) {
-      barcodeInput.val(e.codeResult.code);
-      modal.find(".secondary-action").trigger("click");
-      Quagga.stop();
+      if (e.codeResult.code.length > 8) {
+        barcodeInput.val(e.codeResult.code);
+        modal.find(".secondary-action").trigger("click");
+        Quagga.stop();
+      }
     }
   }
 
