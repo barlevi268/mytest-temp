@@ -6,6 +6,7 @@ var initLocalizations = async function() {
   var lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'HE'
   var langRequest = await fetch(`/translations/${lang}.json`)
   var langResults = await langRequest.json()
+  document.querySelector('html').setAttribute('dir',langResults.dir)
   const translateValue = (value) => {
       var text = langResults.values[value]
       return text ? text : value;
