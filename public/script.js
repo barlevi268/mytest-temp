@@ -1,6 +1,6 @@
 var isMobile = "ontouchstart" in window;
 
-var initLocalizations = async function() {
+var localizations = async function() {
   var labels = document.querySelectorAll('trns')
   var inputs = document.querySelectorAll('input')
   var lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'HE'
@@ -19,6 +19,14 @@ var initLocalizations = async function() {
     input.setAttribute('placeholder', translateValue(input.getAttribute('placeholder')))
   })
   
+  return {
+    init: () => {
+      document.querySelector('.floating-lang').addEventListener('change', e => {
+        localStorage.setItem('lang', e.target.value)
+        location.reload()
+      })
+    }
+  }
 }()
 
 var alertModal = {
@@ -344,6 +352,9 @@ function dataURItoBlob(dataURI) {
 }
 
 $(() => {
+  
+  localizations.init()
+  
   alertModal.init();
 
   initSelect2();
