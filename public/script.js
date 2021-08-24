@@ -1,5 +1,25 @@
 var isMobile = "ontouchstart" in window;
 
+var initLocalizations = async function() {
+  var labels = document.querySelectorAll('trns')
+  var inputs = document.querySelectorAll('input')
+  var lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'HE'
+  var langRequest = await fetch(`/translations/${lang}.json`)
+  var langResults = await langRequest.json()
+  const translateValue = (value) => {
+      var text = langResults.values[value]
+      return text ? text : value;
+  }
+  labels.forEach(label => {
+    label.textContent = translateValue(label.textContent)
+  })
+  
+  inputs.forEach(input => {
+    input.setAttribute('placeholder', translateValue(input.getAttribute('placeholder')))
+  })
+  
+}()
+
 var alertModal = {
   subView: $("#alertModal"),
   show: () => alertModal.subView.modal("show"),
