@@ -2,6 +2,16 @@
   "dir":"rtl",
   "values": {
     "Patient Registrations":"הרשמת נבדק",
-    "Type User Name":"הזן שם משתמש"
+    "Fisrt Name":"שם פרטי",
+    "Last Name":"שם משפחה",
+    "ID Number / Passport":"תעודכת זהות / דרכון",
+    "Phone Number":"מס' נייד",
+    "Birth Date":"תאריך לידה",
+    "Kupa":"קופה",
+    "Gender":"מין",
+    "Residence City":"עיר מגורים",
+    "Street Name":"",
+    "Street Number":"",
+    "Send Form":""
   }
 }

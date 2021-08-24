@@ -1,33 +1,38 @@
 var isMobile = "ontouchstart" in window;
 
-var localizations = async function() {
-  var labels = document.querySelectorAll('trns')
-  var inputs = document.querySelectorAll('input')
-  var lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'HE'
-  var langRequest = await fetch(`/translations/${lang}.json`)
-  var langResults = await langRequest.json()
-  document.querySelector('html').setAttribute('dir',langResults.dir)
-  const translateValue = (value) => {
-      var text = langResults.values[value]
-      return text ? text : value;
-  }
+var localizations = (async function() {
+  var labels = document.querySelectorAll("trns");
+  var inputs = document.querySelectorAll("input");
+  var lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "HE";
+  var langRequest = await fetch(`/translations/${lang}.json`);
+  var langResults = await langRequest.json();
+  document.querySelector("html").setAttribute("dir", langResults.dir);
+  const translateValue = value => {
+    var text = langResults.values[value];
+    return text ? text : value;
+  };
   labels.forEach(label => {
-    label.textContent = translateValue(label.textContent)
-  })
-  
+    label.textContent = translateValue(label.textContent);
+  });
+
   inputs.forEach(input => {
-    input.setAttribute('placeholder', translateValue(input.getAttribute('placeholder')))
-  })
-  
-  return {
-    init: () => {
-      document.querySelector('.floating-lang').addEventListener('change', e => {
-        localStorage.setItem('lang', e.target.value)
-        location.reload()
-      })
-    }
+    input.setAttribute(
+      "placeholder",
+      translateValue(input.getAttribute("placeholder"))
+    );
+  });
+
+  function _init() {
+    var selectLang = document.querySelector(".floating-lang");
+    selectLang.value = lang;
+    selectLang.addEventListener("change", e => {
+      localStorage.setItem("lang", e.target.value);
+      location.reload();
+    });
   }
-}()
+
+  _init();
+})();
 
 var alertModal = {
   subView: $("#alertModal"),
@@ -352,9 +357,6 @@ function dataURItoBlob(dataURI) {
 }
 
 $(() => {
-  
-  localizations.init()
-  
   alertModal.init();
 
   initSelect2();
