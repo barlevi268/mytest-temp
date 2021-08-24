@@ -3,14 +3,19 @@ var isMobile = "ontouchstart" in window;
 var localizations = (async function() {
   var labels = document.querySelectorAll("trns");
   var inputs = document.querySelectorAll("input");
+  
   var lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "HE";
+  
   var langRequest = await fetch(`/translations/${lang}.json`);
   var langResults = await langRequest.json();
+  
   document.querySelector("html").setAttribute("dir", langResults.dir);
+  
   const translateValue = value => {
     var text = langResults.values[value];
     return text ? text : value;
   };
+  
   labels.forEach(label => {
     label.textContent = translateValue(label.textContent);
   });
