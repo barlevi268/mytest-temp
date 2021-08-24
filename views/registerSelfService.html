@@ -43,6 +43,15 @@
     <script src="/plugins/select2/select2.full.min.js"></script>
     <script src="/script.js" defer></script>
     <script src="/scripts/selfservice.js" defer></script>
+    
+    <style>
+      .floating-lang {
+        position:absolute;
+        bottom:15px;
+        left:15px;
+        width:50px!important;
+      }
+    </style>
   </head>
   <body>
     <!-- start::modal template -->
@@ -173,5 +182,8 @@
       </form>
     </div>
     <!-- end::page content -->
+    <select class="floating-lang form-control">
+      <option>🇮🇱</option>
+    </select>
   </body>
 </html>
