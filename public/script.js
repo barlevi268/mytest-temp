@@ -35,6 +35,8 @@ var localizations = (async function() {
       localStorage.setItem("lang", e.target.value);
       location.reload();
     });
+    window['_translations'] = langResults
+    initSelect2();
   }
 
   _init();
@@ -261,6 +263,7 @@ function initSelect2() {
     var displayMode = $(val).attr("select2-type");
     var settings = {
       width: "100%",
+      dir:_translations.dir,
       placeholder: $(val).attr("placeholder")
     };
     displayMode != "search"
@@ -364,8 +367,6 @@ function dataURItoBlob(dataURI) {
 
 $(() => {
   alertModal.init();
-
-  initSelect2();
 
   initUploadField();
 
