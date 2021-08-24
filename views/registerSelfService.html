@@ -46,10 +46,14 @@
     
     <style>
       .floating-lang {
-        position:absolute;
+        position:sticky;
+        right:15px;
         bottom:15px;
-        left:15px;
-        width:50px!important;
+        font-size: 22pt;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        padding: 5px 10px 5px 5px;
       }
     </style>
   </head>
@@ -182,8 +186,12 @@
       </form>
     </div>
     <!-- end::page content -->
-    <select class="floating-lang form-control">
-      <option>🇮🇱</option>
+    <select class="floating-lang shadow form-control">
+      <option value="HE">🇮🇱</option>
+      <option value="AR">🇸🇦</option>
+      <option value="EN">🇬🇧</option>
+      <option value="AMH">🇪🇹</option>
+      <option value="RU">🇷🇺</option>
     </select>
   </body>
 </html>
