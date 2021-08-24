@@ -55,7 +55,8 @@
         width: 50px;
         height: 50px;
         text-align: center;
-        padding: 5px 10px 5px 5px;
+        border-radius: 45%;
+        padding: 5px 11px 5px 5px;
       }
     </style>
   </head>
@@ -110,68 +111,68 @@
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label><trns>שם פרטי</trns></label>
-              <input  mandatory class="form-control" type="text" placeholder="הזן שם פרטי" name="FirstName"/>
+              <label trns>First Name</label>
+              <input  mandatory class="form-control" type="text" placeholder="Set first name" name="FirstName"/>
             </div>
             <div class="form-group col-6">
-              <label><trns>שם משפחה</trns></label>
-              <input  mandatory class="form-control" type="text" placeholder="הזן שם משפחה" name="LastName"/>
+              <label trns>Last Name</label>
+              <input  mandatory class="form-control" type="text" placeholder="Set last Name" name="LastName"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label><trns>תעודת זהות \ דרכון</trns></label>
-              <input  mandatory class="form-control" type="number" placeholder="הזן ת.ז. \ דרכון" name="IdNum"/>
+              <label trns>ID Number / Passport</label>
+              <input  mandatory class="form-control" type="number" placeholder="ID Number / Passport" name="IdNum"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label><trns>מס' נייד</trns></label>
-              <input  mandatory class="form-control" type="phone" placeholder="הזן מס' נייד" name="mobile"/>
+              <label trns>Phone Number</label>
+              <input  mandatory class="form-control" type="phone" placeholder="Set Phone Number" name="mobile"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label><trns>תאריך לידה</trns></label>
+              <label trns>Birth Date</label>
               <input  mandatory class="form-control" type="date" placeholder="הזן תאריך לידה" name="DOB"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label><trns>קופה</trns></label>
-              <select mandatory  select2-type="regular" name="HMO" placeholder="בחר קופה">
+              <label trns>Kupa</label>
+              <select mandatory  select2-type="regular" name="HMO" placeholder="Select Kupa">
                 <option></option>
-                <option value="1">כללית</option>
-                <option value="2">לאומית</option>
-                <option value="4">מכבי</option>
-                <option value="3">מאוחדת</option>
-                <option value="9">פרטי</option>
+                <option trns value="1">Clalit</option>
+                <option trns value="2">Leumit</option>
+                <option trns value="4">Maccabi</option>
+                <option trns value="3">Meuhedet</option>
+                <option trns value="9">Private</option>
               </select>
             </div>
             <div class="form-group col-6">
-              <label><trns>מין</trns></label>
+              <label trns>Gender</label>
               <select mandatory  select2-type="regular" name="Gender">
-                <option value="ז"><trns>Male</trns></option>
-                <option value="נ"><trns>Female</trns></option>
+                <option trns value="ז">Male</option>
+                <option trns value="נ">Female</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label><trns>עיר מגורים</trns></label>
-              <select mandatory  select2-type="search" placeholder="בחר עיר מגורים" name="cityCode">
+              <label trns>Residence City</label>
+              <select mandatory  select2-type="search" placeholder="Set Residence City" name="cityCode">
                 <option></option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label><trns>רחוב</trns></label>
-              <input  mandatory class="form-control" type="text" placeholder="הזן רחוב" name="streetName"/>
+              <label trns>Street Name</label>
+              <input  mandatory class="form-control" type="text" placeholder="Set Street Name" name="streetName"/>
             </div>
             <div class="form-group col-6">
-              <label><trns>מס' בית</trns></label>
-              <input  mandatory class="form-control" type="number" placeholder="הזן מס' בית" name="streetNumber"/>
+              <label trns>Street Number</label>
+              <input  mandatory class="form-control" type="number" placeholder="Set Street Number" name="streetNumber"/>
             </div>
           </div>
         </div>
@@ -181,7 +182,7 @@
               type="submit"
               class="btn btn-primary btn-block"
             >
-              שלח טופס
+              Send Form
             </button>
           </div>
         </div>
@@ -197,4 +198,5 @@
     </select>
   </body>
 </html>
+
 

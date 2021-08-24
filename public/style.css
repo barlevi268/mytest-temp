@@ -145,7 +145,7 @@ input::-webkit-inner-spin-button {
   border: none;
   padding: 20px;
   background-color: var(--input-bg);
-  text-align: right;
+  text-align: -webkit-match-parent;
 }
 
 .form-control-pin {
