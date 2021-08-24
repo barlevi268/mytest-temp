@@ -1,8 +1,8 @@
 {
   "dir":"rtl",
   "values": {
-    "Patient Registrations":"הרשמת נבדק",
-    "patient_message":"הרשמת נבדק",
+    "Patient Registration":"הרשמת נבדק",
+    "patient_message":"הלנוחיותכם, ניתן למלא פרטים אישיים בטופס זה לצורך זירוז תהליך הרישום במעמד מסירת הבדיקה.",
     "Fisrt Name":"שם פרטי",
     "Last Name":"שם משפחה",
     "ID Number / Passport":"תעודכת זהות / דרכון",

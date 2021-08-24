@@ -53,10 +53,9 @@
         bottom:15px;
         font-size: 22pt;
         width: 50px;
-        border-radius:40%;
         height: 50px;
         text-align: center;
-        padding: 5px 11px 5px 5px;
+        padding: 5px 10px 5px 5px;
       }
     </style>
   </head>
@@ -106,40 +105,40 @@
             <img src="media/logo-light.svg" />
           </div>
           <div class="row mt-2 mb-4">
-            <h3>הרשמת נבדק</h3>
-            <div>לנוחיותכם, ניתן למלא פרטים אישיים בטופס זה לצורך זירוז תהליך הרישום במעמד מסירת הבדיקה.</div>
+            <h3 trns>Patient Registration</h3>
+            <div><trns>patient_message<trns></div>
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label>שם פרטי</label>
+              <label><trns>שם פרטי</trns></label>
               <input  mandatory class="form-control" type="text" placeholder="הזן שם פרטי" name="FirstName"/>
             </div>
             <div class="form-group col-6">
-              <label>שם משפחה</label>
+              <label><trns>שם משפחה</trns></label>
               <input  mandatory class="form-control" type="text" placeholder="הזן שם משפחה" name="LastName"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label>תעודת זהות \ דרכון</label>
+              <label><trns>תעודת זהות \ דרכון</trns></label>
               <input  mandatory class="form-control" type="number" placeholder="הזן ת.ז. \ דרכון" name="IdNum"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label>מס' נייד</label>
+              <label><trns>מס' נייד</trns></label>
               <input  mandatory class="form-control" type="phone" placeholder="הזן מס' נייד" name="mobile"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label>תאריך לידה</label>
+              <label><trns>תאריך לידה</trns></label>
               <input  mandatory class="form-control" type="date" placeholder="הזן תאריך לידה" name="DOB"/>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label>קופה</label>
+              <label><trns>קופה</trns></label>
               <select mandatory  select2-type="regular" name="HMO" placeholder="בחר קופה">
                 <option></option>
                 <option value="1">כללית</option>
@@ -150,16 +149,16 @@
               </select>
             </div>
             <div class="form-group col-6">
-              <label>מין</label>
+              <label><trns>מין</trns></label>
               <select mandatory  select2-type="regular" name="Gender">
-                <option value="ז">זכר</option>
-                <option value="נ">נקבה</option>
+                <option value="ז"><trns>Male</trns></option>
+                <option value="נ"><trns>Female</trns></option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label>עיר מגורים</label>
+              <label><trns>עיר מגורים</trns></label>
               <select mandatory  select2-type="search" placeholder="בחר עיר מגורים" name="cityCode">
                 <option></option>
               </select>
@@ -167,11 +166,11 @@
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label>רחוב</label>
+              <label><trns>רחוב</trns></label>
               <input  mandatory class="form-control" type="text" placeholder="הזן רחוב" name="streetName"/>
             </div>
             <div class="form-group col-6">
-              <label>מס' בית</label>
+              <label><trns>מס' בית</trns></label>
               <input  mandatory class="form-control" type="number" placeholder="הזן מס' בית" name="streetNumber"/>
             </div>
           </div>
@@ -198,3 +197,4 @@
     </select>
   </body>
 </html>
+

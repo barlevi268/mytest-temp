@@ -2,6 +2,7 @@ var isMobile = "ontouchstart" in window;
 
 var localizations = (async function() {
   var labels = document.querySelectorAll("trns");
+  var elements = document.querySelectorAll("[trns]");
   var inputs = document.querySelectorAll("input");
   
   var lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "HE";
@@ -16,8 +17,8 @@ var localizations = (async function() {
     return text ? text : value;
   };
   
-  labels.forEach(label => {
-    label.textContent = translateValue(label.textContent);
+  [...labels,...elements].forEach(item => {
+    item.textContent = translateValue(item.textContent);
   });
 
   inputs.forEach(input => {
