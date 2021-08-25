@@ -1,9 +1,9 @@
 var isMobile = "ontouchstart" in window;
 
 var localizations = (async function() {
-  var labels = document.querySelectorAll("trns");
   var elements = document.querySelectorAll("[trns]");
   var inputs = document.querySelectorAll("input");
+  var selects = document.querySelectorAll("select");
   
   var lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "HE";
   
@@ -17,11 +17,11 @@ var localizations = (async function() {
     return text ? text : value;
   };
   
-  [...labels,...elements].forEach(item => {
+  elements.forEach(item => {
     item.textContent = translateValue(item.textContent);
   });
 
-  inputs.forEach(input => {
+  [...selects,...inputs].forEach(input => {
     input.setAttribute(
       "placeholder",
       translateValue(input.getAttribute("placeholder"))
