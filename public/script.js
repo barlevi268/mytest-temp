@@ -161,7 +161,6 @@ var mobileStream = (function() {
   }
 
   function hanldeQuaggaResults(e) {
-    console.log(e);
     if (e.codeResult) {
       if (e.codeResult.code.length > 8) {
         barcodeInput.val(e.codeResult.code);
