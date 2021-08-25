@@ -141,7 +141,7 @@ var mobileStream = (function() {
         inputStream: {
           name: "Live",
           type: "LiveStream",
-          target: document.querySelector(".mobile-stream") // Or '#yourElement' (optional)
+          target: ".mobile-stream"
         },
         decoder: {
           readers: ["code_128_reader"]
@@ -160,21 +160,6 @@ var mobileStream = (function() {
     Quagga.onDetected(e => hanldeQuaggaResults(e));
   }
 
-  function initMobileStreamModal() {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: { facingMode: { exact: "environment" } }
-      })
-      .then(async function(stream) {
-        mobileStream.srcObject = stream;
-        await mobileStream.play();
-        initQuagga();
-      })
-      .catch(function(err) {
-        console.log("An error occurred: " + err);
-      });
-  }
-
   function hanldeQuaggaResults(e) {
     console.log(e);
     if (e.codeResult) {
@@ -190,7 +175,7 @@ var mobileStream = (function() {
     btn.on("click", e => {
       alertModal.display({
         modalId: "mobileLiveScanModal",
-        onInit: () => initMobileStreamModal(),
+        onInit: () => initQuagga(),
         afterInit: () => {}
       });
     });

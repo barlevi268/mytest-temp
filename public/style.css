@@ -357,9 +357,12 @@ hr {
   display: inline-block;
 }
 
-.mobile-stream {
+.mobile-stream>video {
   width: 100%;
   height: 220px;
+}
+.mobile-stream>canvas {
+  display:none;
 }
 
 .mobile-stream-btn {
