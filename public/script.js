@@ -163,14 +163,9 @@ var mobileStream = (function() {
       .getUserMedia({
         video: { facingMode: { exact: "environment" } }
       })
-      .then(function(stream) {
-        if ("srcObject" in mobileStream) {
-          mobileStream.srcObject = stream;
-          mobileStream.play();
-        } else {
-          mobileStream.src = window.URL.createObjectURL(stream);
-        }
-
+      .then(async function(stream) {
+        mobileStream.srcObject = stream;
+        await mobileStream.play();
         initQuagga();
       })
       .catch(function(err) {
@@ -193,8 +188,8 @@ var mobileStream = (function() {
     btn.on("click", e => {
       alertModal.display({
         modalId: "mobileLiveScanModal",
-        onInit: () => {},
-        afterInit: () => initMobileStreamModal()
+        onInit: () => initMobileStreamModal(),
+        afterInit: () => {}
       });
     });
   }
