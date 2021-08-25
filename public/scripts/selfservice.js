@@ -74,7 +74,7 @@ $("form").on("submit", async e => {
     headers: {
       Host: "patients.terem.com",
       "Content-Type": "application/json",
-      username: "adminLab19",
+      username: " ",
       pw: "labws12!"
     },
     body: JSON.stringify(formData)
