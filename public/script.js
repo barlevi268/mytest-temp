@@ -29,6 +29,8 @@ var localizations = (async function() {
   });
 
   function _init() {
+    $('.form-loader').remove()
+    $('.container').show()
     var selectLang = document.querySelector(".floating-lang");
     if (selectLang) {
       selectLang.value = lang;

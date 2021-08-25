@@ -101,10 +101,15 @@
     <!-- start::page content -->
     <div class="wrapper px-4-5 pt-5">
       <form class="form" id="findPatient">
-        <div class="container">
-          <div class="form-header mt-3 mb-5">
-            <img src="media/logo-light.svg" />
+        <div class="form-header mt-3 mb-5">
+          <img src="media/logo-light.svg" />
+        </div>
+        
+        <div class="form-loader d-flex justify-content-center">
+          <div class="spinner-border" style="color:var(--text-primary);width: 3rem;height: 3rem;" role="status">
           </div>
+        </div>
+        <div class="container" style="display:none;">
           <div class="row mt-2 mb-4">
             <h3 trns>Patient Registration</h3>
             <div trns>patient_message</div>
@@ -112,11 +117,11 @@
           <div class="row">
             <div class="form-group col-6">
               <label trns>First Name</label>
-              <input  mandatory class="form-control" type="text" placeholder="Set first name" name="FirstName"/>
+              <input  mandatory class="form-control" type="text" placeholder="Set First Name" name="FirstName"/>
             </div>
             <div class="form-group col-6">
               <label trns style="width:100%">Last Name</label>
-              <input  mandatory class="form-control" type="text" placeholder="Set last Name" name="LastName"/>
+              <input  mandatory class="form-control" type="text" placeholder="Set Last Name" name="LastName"/>
             </div>
           </div>
           <div class="row">
@@ -129,6 +134,12 @@
             <div class="form-group col">
               <label trns>Phone Number</label>
               <input  mandatory class="form-control" type="phone" placeholder="Set Phone Number" name="mobile"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label trns>Email</label>
+              <input  mandatory class="form-control" type="email" placeholder="Enter Email Address" name="mobile"/>
             </div>
           </div>
           <div class="row">
@@ -175,8 +186,7 @@
               <input  mandatory class="form-control" type="number" placeholder="Set Street Number" name="streetNumber"/>
             </div>
           </div>
-        </div>
-        <div class="row">
+          <div class="row">
           <div class="form-footer mt-3">
             <button
                     trns
@@ -187,6 +197,8 @@
             </button>
           </div>
         </div>
+        </div>
+        
       </form>
     </div>
     <!-- end::page content -->
