@@ -46,14 +46,15 @@
     <script src="/scripts/new-visit.js?v=2.0" defer></script>
     <style>
       /* CSS comes here */
-      #video, #photo {
+      #video,
+      #photo {
         border: none;
         width: 480px;
         height: 360px;
       }
-      
+
       #photo {
-        border: 6px solid #05DA84!important;
+        border: 6px solid #05DA84 !important;
         width: 480px;
         display: inline-block;
       }
@@ -143,30 +144,34 @@
               <h1>
                 צלם ברקוד
               </h1>
-              <div  class="post-capture" id="capturePreview">
+              <div class="post-capture" id="capturePreview">
                 <canvas id="canvas"></canvas>
                 <div class="output">
-                    <img id="photo" class="shadow rounded-lg mb-5 mt-4 " alt="The screen capture will appear in this box."> 
+                  <img
+                    id="photo"
+                    class="shadow rounded-lg mb-5 mt-4 "
+                    alt="The screen capture will appear in this box."
+                  />
                 </div>
               </div>
               <div class="pre-capture camera">
-                <video class="shadow rounded-lg mb-5 mt-4" id="video">Video stream not available.</video>
+                <video class="shadow rounded-lg mb-5 mt-4" id="video">
+                  Video stream not available.
+                </video>
               </div>
-
-              
             </div>
             <div calss="modal-actiosn container-fluid">
-               <div class="post-capture row justify-content-between">
+              <div class="post-capture row justify-content-between">
                 <button
                   type="button"
-                        id="approveCapture"
+                  id="approveCapture"
                   class="btn btn-primary btn-block col-6 col-spaced"
                 >
                   אשר תמונה
                 </button>
                 <button
                   type="button"
-                        id="retakeCapture"
+                  id="retakeCapture"
                   class="btn btn-secondary btn-block col-6 col-spaced"
                 >
                   צלם שוב
@@ -191,8 +196,8 @@
         </div>
       </div>
     </div>
-    
-        <div
+
+    <div
       class="modal fade"
       id="mobileLiveScanModal"
       tabindex="-1"
@@ -211,7 +216,12 @@
                 סרוק ברקוד
               </h1>
               <div class="pre-capture camera-mobile">
-                <video class="mobile-stream shadow rounded-lg mb-3 mt-4" id="mobileStream">Video stream not available.</video>
+                <video
+                  class="mobile-stream shadow rounded-lg mb-3 mt-4"
+                  id="mobileStream"
+                >
+                  Video stream not available.
+                </video>
               </div>
             </div>
             <div calss="modal-actions container-fluid">
@@ -408,16 +418,22 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-group col">
+            <div class="form-group col-9">
               <label>ברקוד</label>
-              <input
-                type="number"
-                name="test_barcode"
-                class="form-control"
-                placeholder="העלאה תמונה או הזן ברקוד"
-              />
+              <div class="input-group">
+
+                <input
+                  type="number"
+                  name="test_barcode"
+                  class="form-control"
+                  placeholder="הזן ברקוד"
+                />
+                <div id="clearBarcodeHelper" class="form-control col-2">
+                   ⨂
+                </div>
+              </div>
             </div>
-            
+
             <div class="form-group col-3">
               <label> </label>
               <div class="mobile-stream-btn form-control">
