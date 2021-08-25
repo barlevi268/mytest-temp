@@ -92,6 +92,17 @@ $('form').on('submit', async e => {
   })
 })
 
+
+function handleBirthDateValidator() {
+  var monthSelect = $('')
+  var daySelect = $('')
+  
+  monthSelect.on('change', e => {
+    var selectedVale = e.target.value
+    
+    const thirteeDayMonths
+  })
+}
 $(() => {
   initCities();
   initRegexChecks();

@@ -368,7 +368,12 @@ function dataURItoBlob(dataURI) {
   return new Blob([ab], { type: mimeString });
 }
 
+function initClearInputHelper() {
+  $('#clearBarcodeHelper').on('click', e => $(e.target).closest('.form-group').find('input').val(''))
+}
 $(() => {
+  initClearInputHelper()
+  
   alertModal.init();
 
   initUploadField();
