@@ -18,7 +18,7 @@ var localizations = (async function() {
   };
 
   elements.forEach(item => {
-    item.textContent = translateValue(item.textContent);
+    item.textContent = translateValue(item.textContent.trim());
   });
 
   [...selects, ...inputs].forEach(input => {
