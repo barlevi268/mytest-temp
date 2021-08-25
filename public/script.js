@@ -371,6 +371,7 @@ function dataURItoBlob(dataURI) {
 function initClearInputHelper() {
   $('#clearBarcodeHelper').on('click', e => $(e.target).closest('.form-group').find('input').val(''))
 }
+
 $(() => {
   initClearInputHelper()
   

@@ -1,34 +1,39 @@
 function initRegexChecks() {
-  const submitButton = $('[type="submit"]')
-  
+  const submitButton = $('[type="submit"]');
+
   var isValid = {
-    FirstName:false,
-    LastName:false
-  }
-  
-  submitButton.prop('disabled', true)
-  
-  
-  $('[name="FirstName"],[name="LastName"]').on('input', e => {
-    const inputText = e.target.value
-    const $target = $(e.target)
-    
-    const inputIsLegal = inputText.match(/^[a-z\u0590-\u05fe \-',`]+$/i)
-    
-    $target.parent().find('.field-message').remove()
-    
+    FirstName: false,
+    LastName: false
+  };
+
+  submitButton.prop("disabled", true);
+
+  $('[name="FirstName"],[name="LastName"]').on("input", e => {
+    const inputText = e.target.value;
+    const $target = $(e.target);
+
+    const inputIsLegal = inputText.match(/^[a-z\u0590-\u05fe \-',`]+$/i);
+
+    $target
+      .parent()
+      .find(".field-message")
+      .remove();
+
     if (inputIsLegal) {
       $target.removeClass("border border-danger");
-      isValid[e.target.name] = true 
+      isValid[e.target.name] = true;
     } else {
-      $target.after('<span class="field-message text-danger">יש להזין אותיות בעברית או באנגלית</span>');
+      $target.after(
+        '<span class="field-message text-danger">יש להזין אותיות בעברית או באנגלית</span>'
+      );
       $target.addClass("border border-danger");
-      isValid[e.target.name] = false
+      isValid[e.target.name] = false;
     }
-    
-    isValid.FirstName && isValid.LastName ? submitButton.prop('disabled', false) : submitButton.prop('disabled', true);
-    
-  })
+
+    isValid.FirstName && isValid.LastName
+      ? submitButton.prop("disabled", false)
+      : submitButton.prop("disabled", true);
+  });
 }
 
 function initCities() {
@@ -41,9 +46,9 @@ function initCities() {
   );
 }
 
-$('form').on('submit', async e => {
+$("form").on("submit", async e => {
   e.preventDefault();
-  
+
   const formData = {
     clinicCode: "BH",
     IdNum: $('[name="IdNum"]').val(),
@@ -60,59 +65,56 @@ $('form').on('submit', async e => {
     email: "",
     Comment: "self service patient"
   };
-  
+
   const proceesToCard = () =>
     (location.href = `/bp?id=${formData.IdNum}&firstName=${formData.FirstName}&lastName=${formData.LastName}&birthDate=${formData.DOB}`);
 
-  await fetch(
-    "https://patients.terem.com/myvisit/covidLab/savePatient",
-    {
-      method: "POST",
-      headers: {
-        Host: "patients.terem.com",
-        "Content-Type": "application/json",
-        username: "adminLab19",
-        pw: "labws12!"
-      },
-      body: JSON.stringify(formData)
-    }
-  ).then(async response => {
-    const responseText = await response.text()
-    
+  await fetch("https://patients.terem.com/myvisit/covidLab/savePatient", {
+    method: "POST",
+    headers: {
+      Host: "patients.terem.com",
+      "Content-Type": "application/json",
+      username: "adminLab19",
+      pw: "labws12!"
+    },
+    body: JSON.stringify(formData)
+  }).then(async response => {
+    const responseText = await response.text();
+
     // parseInt only working method to verify correct response.
     if (response.status == 200 && parseInt(responseText)) {
-      proceesToCard()
+      proceesToCard();
     } else {
       alertModal.display({
-        content:'מתנצלים, לא הצלחנו לשלוח את הטופס...',
-        primaryLabel:'נסה שוב',
-        hideSecondary:true
-      })
+        content: "מתנצלים, לא הצלחנו לשלוח את הטופס...",
+        primaryLabel: "נסה שוב",
+        hideSecondary: true
+      });
     }
-  })
-})
-
+  });
+});
 
 function handleBirthDateValidator() {
-  var monthSelect = $('')
-  var daySelect = $('') //Fill selector here
-  
-  monthSelect.on('change', e => {
-    var selectedValue = e.target.value
-    
-    const thirtyDayMonths = ["4","6","9","11"]
-    
+  var monthSelect = $(""); //Fill selector here
+  var daySelect = $(""); //Fill selector here
+
+  monthSelect.on("change", e => {
+    var selectedValue = e.target.value;
+
+    const thirtyDayMonths = ["4", "6", "9", "11"];
+
     if (thirtyDayMonths.includes(selectedValue)) {
-      daySelect.find('[value="31"]').attr('disabled','disabled')
+      daySelect.find('[value="31"]').attr("disabled", "disabled");
     } else if (selectedValue == "2") {
-      daySelect.find('[value="29"],[value="30"],[value="31"]').attr('disabled','disabled')
+      daySelect.find('[value="29"],[value="30"],[value="31"]').attr("disabled", "disabled");
     } else {
-      daySelect.find('option').removeAttr('disabled')
+      daySelect.find("option").removeAttr("disabled");
     }
-  })
+  });
 }
+
 $(() => {
-  handleBirthDateValidator() 
+  handleBirthDateValidator();
   initCities();
   initRegexChecks();
 });
