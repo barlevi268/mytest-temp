@@ -359,7 +359,7 @@ hr {
 
 .mobile-stream>video {
   width: 100%;
-  height: 220px;
+  border-radius:10px;
 }
 .mobile-stream>canvas {
   display:none;
