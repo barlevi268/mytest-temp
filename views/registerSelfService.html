@@ -43,14 +43,14 @@
     <script src="/plugins/select2/select2.full.min.js"></script>
     <script src="/script.js" defer></script>
     <script src="/scripts/selfservice.js" defer></script>
-    
+
     <style>
       .floating-lang {
-        position:sticky;
-        float:left;
-        margin-left:15px;
-        direction:rtl;
-        bottom:15px;
+        position: sticky;
+        float: left;
+        margin-left: 15px;
+        direction: rtl;
+        bottom: 15px;
         font-size: 22pt;
         width: 50px;
         height: 50px;
@@ -104,10 +104,13 @@
         <div class="form-header mt-3 mb-5">
           <img src="media/logo-light.svg" />
         </div>
-        
+
         <div class="form-loader d-flex justify-content-center">
-          <div class="spinner-border" style="color:var(--text-primary);width: 3rem;height: 3rem;" role="status">
-          </div>
+          <div
+            class="spinner-border"
+            style="color:var(--text-primary);width: 3rem;height: 3rem;"
+            role="status"
+          ></div>
         </div>
         <div class="container" style="display:none;">
           <div class="row mt-2 mb-4">
@@ -117,41 +120,163 @@
           <div class="row">
             <div class="form-group col-6">
               <label trns>First Name</label>
-              <input  mandatory class="form-control" type="text" placeholder="Set First Name" name="FirstName"/>
+              <input
+                mandatory
+                class="form-control"
+                type="text"
+                placeholder="Set First Name"
+                name="FirstName"
+              />
             </div>
             <div class="form-group col-6">
               <label trns style="width:100%">Last Name</label>
-              <input  mandatory class="form-control" type="text" placeholder="Set Last Name" name="LastName"/>
+              <input
+                mandatory
+                class="form-control"
+                type="text"
+                placeholder="Set Last Name"
+                name="LastName"
+              />
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
               <label trns>ID Number / Passport</label>
-              <input  mandatory class="form-control" type="number" placeholder="ID Number / Passport" name="IdNum"/>
+              <input
+                mandatory
+                class="form-control"
+                type="number"
+                placeholder="ID Number / Passport"
+                name="IdNum"
+              />
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
               <label trns>Phone Number</label>
-              <input  mandatory class="form-control" type="phone" placeholder="Set Phone Number" name="mobile"/>
+              <input
+                mandatory
+                class="form-control"
+                type="phone"
+                placeholder="Set Phone Number"
+                name="mobile"
+              />
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
               <label trns>Email</label>
-              <input  mandatory class="form-control" type="email" placeholder="Enter Email Address" name="mobile"/>
+              <input
+                mandatory
+                class="form-control"
+                type="email"
+                placeholder="Enter Email Address"
+                name="mobile"
+              />
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
               <label trns>Birth Date</label>
-              <input  mandatory class="form-control" type="date" placeholder="הזן תאריך לידה" name="DOB"/>
+              <div class="row">
+                <div class="form-group col-4">
+                  <input
+                    mandatory=""
+                    class="form-control"
+                    type="number"
+                    min="1921"
+                    max="2021"
+                    placeholder="Year"
+                    id="DOB_year"
+                    name="DOB_year"
+                    onblur="validateData('DOB_year');"
+                    maxlength="4"
+                    pattern="\d{4}"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                  />
+                </div>
+
+                <div class="form-group col-4">
+                  <select
+                    mandatory=""
+                    select2-type="regular"
+                    name="DOB_month"
+                    id="DOB_month"
+                    placeholder="Month"
+                    tabindex="-1"
+                  >
+                    <option></option>
+                    <option trns value="01">January</option>
+                    <option trns value="02">February</option>
+                    <option trns value="03">March</option>
+                    <option trns value="04">April</option>
+                    <option trns value="05">May</option>
+                    <option trns value="06">June</option>
+                    <option trns value="07">July</option>
+                    <option trns value="08">August</option>
+                    <option trns value="09">September</option>
+                    <option trns value="10">October</option>
+                    <option trns value="11">November</option>
+                    <option trns value="12">December</option> </select
+                  >
+                </div>
+
+                <div class="form-group col-4">
+                  <select
+                    mandatory
+                    select2-type="regular"
+                    name="DOB_day"
+                    id="DOB_day"
+                    placeholder="Day"
+                    tabindex="-1"
+                    aria-hidden="true"
+                  >
+                    <option></option>
+                    <option value="01">1</option>
+                    <option value="02">2</option>
+                    <option value="04">3</option>
+                    <option value="03">4</option>
+                    <option value="05">5</option>
+                    <option value="06">6</option>
+                    <option value="07">7</option>
+                    <option value="08">8</option>
+                    <option value="09">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option> </select
+                  >
+                </div>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-6">
               <label trns>Kupa</label>
-              <select mandatory  select2-type="regular" name="HMO" placeholder="Select Kupa">
+              <select
+                mandatory
+                select2-type="regular"
+                name="HMO"
+                placeholder="Select Kupa"
+              >
                 <option></option>
                 <option trns value="1">Clalit</option>
                 <option trns value="2">Leumit</option>
@@ -162,7 +287,7 @@
             </div>
             <div class="form-group col-6">
               <label trns>Gender</label>
-              <select mandatory  select2-type="regular" name="Gender">
+              <select mandatory select2-type="regular" name="Gender">
                 <option trns value="ז">Male</option>
                 <option trns value="נ">Female</option>
               </select>
@@ -171,7 +296,12 @@
           <div class="row">
             <div class="form-group col">
               <label trns>Residence City</label>
-              <select mandatory  select2-type="search" placeholder="Set Residence City" name="cityCode">
+              <select
+                mandatory
+                select2-type="search"
+                placeholder="Set Residence City"
+                name="cityCode"
+              >
                 <option></option>
               </select>
             </div>
@@ -179,26 +309,33 @@
           <div class="row">
             <div class="form-group col-6">
               <label trns>Street Name</label>
-              <input  mandatory class="form-control" type="text" placeholder="Set Street Name" name="streetName"/>
+              <input
+                mandatory
+                class="form-control"
+                type="text"
+                placeholder="Set Street Name"
+                name="streetName"
+              />
             </div>
             <div class="form-group col-6">
               <label trns>Street Number</label>
-              <input  mandatory class="form-control" type="number" placeholder="Set Street Number" name="streetNumber"/>
+              <input
+                mandatory
+                class="form-control"
+                type="number"
+                placeholder="Set Street Number"
+                name="streetNumber"
+              />
             </div>
           </div>
           <div class="row">
-          <div class="form-footer mt-3">
-            <button
-                    trns
-              type="submit"
-              class="btn btn-primary btn-block"
-            >
-              Send Form
-            </button>
+            <div class="form-footer mt-3">
+              <button trns type="submit" class="btn btn-primary btn-block">
+                Send Form
+              </button>
+            </div>
           </div>
         </div>
-        </div>
-        
       </form>
     </div>
     <!-- end::page content -->
@@ -211,5 +348,3 @@
     </select>
   </body>
 </html>
-
-

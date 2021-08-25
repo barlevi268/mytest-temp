@@ -95,17 +95,17 @@ $("form").on("submit", async e => {
 });
 
 function handleBirthDateValidator() {
-  var monthSelect = $(""); //Fill selector here
-  var daySelect = $(""); //Fill selector here
+  var monthSelect = $("#DOB_month");
+  var daySelect = $("#DOB_day");
 
   monthSelect.on("change", e => {
     var selectedValue = e.target.value;
 
-    const thirtyDayMonths = ["4", "6", "9", "11"];
+    const thirtyDayMonths = ["04", "06", "09", "11"];
 
     if (thirtyDayMonths.includes(selectedValue)) {
       daySelect.find('[value="31"]').attr("disabled", "disabled");
-    } else if (selectedValue == "2") {
+    } else if (selectedValue == "02") {
       daySelect.find('[value="29"],[value="30"],[value="31"]').attr("disabled", "disabled");
     } else {
       daySelect.find("option").removeAttr("disabled");
