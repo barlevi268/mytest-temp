@@ -115,7 +115,7 @@ var webcam = (function() {
       e.preventDefault();
       var formData = new FormData(form[0]);
 
-      formData.append(webcamBlob, "uploadBarcode");
+      !isMobile && formData.append(webcamBlob, "uploadBarcode");
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "/", true);
