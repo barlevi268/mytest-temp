@@ -1,6 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
+const cloudnary = require('./cloudnary-json')
 
 app.use(express.static("public"));
 app.use(express.json())
@@ -48,6 +49,7 @@ app.get("/test", (request, response) => {
   response.sendFile(__dirname + "/views/test.html");
 });
 
+app.get("/cloudnary-locals", (_, res) => res.json(cloudnary.dialogStyle))
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
