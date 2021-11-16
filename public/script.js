@@ -29,8 +29,8 @@ var localizations = (async function() {
   });
 
   function _init() {
-    $('.form-loader').remove()
-    $('.container').show()
+    $(".form-loader").remove();
+    $(".container").show();
     var selectLang = document.querySelector(".floating-lang");
     if (selectLang) {
       selectLang.value = lang;
@@ -47,87 +47,94 @@ var localizations = (async function() {
   _init();
 })();
 
-var alertModal = {
-  subView: $("#alertModal"),
-  show: () => alertModal.subView.modal("show"),
-  clear: () => {
-    alertModal.primaryButton.html("אישור");
-    alertModal.secondaryButton.html("ביטול");
-    alertModal.primaryButton.on("click", () => alertModal.hide());
-    alertModal.secondaryButton.on("click", () => alertModal.hide());
-    alertModal.successIcon.addClass("d-none");
-    alertModal.secondaryButton.addClass(["col-spaced", "col-6"]);
-  },
-  hide: () => {
-    alertModal.subView.modal("hide");
-    alertModal.clear();
-  },
-  display: message => {
-    if (typeof message == "object") {
-      if (message.modalId) {
-        alertModal.subView = $(`#${message.modalId}`);
-        alertModal.init();
-      }
+$(() => {
+  window["alertModal"] = {
+    subView: $("#alertModal"),
+    show: function() { 
+      this.subView.modal("show")
+    },
+    clear: function(){
+      var self = this
+      this.primaryButton.html("אישור");
+      this.secondaryButton.html("ביטול");
+      this.primaryButton.on("click", () => self.hide());
+      this.secondaryButton.on("click", () => self.hide());
+      this.successIcon.addClass("d-none");
+      this.secondaryButton.addClass(["col-spaced", "col-6"]);
+    },
+    hide: function() {
+      this.subView.modal("hide");
+      this.clear();
+    },
+    display: function(message) {
+      if (typeof message == "object") {
+        if (message.modalId) {
+          this.subView = $(`#${message.modalId}`);
+          this.init();
+        }
 
-      if (message.content) {
-        alertModal.content.html(message.content);
-      }
+        if (message.content) {
+          this.content.html(message.content);
+        }
 
-      if (message.primaryAction) {
-        alertModal.primaryButton.on("click", e =>
-          message.primaryAction.call(e)
-        );
-      }
-      if (message.preventPrimaryDismiss) {
-        alertModal.primaryButton
-          .off()
-          .on("click", e => message.primaryAction.call(e));
-      }
+        if (message.primaryAction) {
+          this.primaryButton.on("click", e =>
+            message.primaryAction.call(e)
+          );
+        }
+        if (message.preventPrimaryDismiss) {
+          this.primaryButton
+            .off()
+            .on("click", e => message.primaryAction.call(e));
+        }
 
-      if (message.primaryLabel) {
-        alertModal.primaryButton.html(message.primaryLabel);
-      }
+        if (message.primaryLabel) {
+          this.primaryButton.html(message.primaryLabel);
+        }
 
-      if (message.secondaryAction) {
-        alertModal.secondaryButton.on("click", message.secondaryAction);
-      }
+        if (message.secondaryAction) {
+          this.secondaryButton.on("click", message.secondaryAction);
+        }
 
-      if (message.secondaryLabel) {
-        alertModal.secondaryButton.html(message.secondaryLabel);
-      }
+        if (message.secondaryLabel) {
+          this.secondaryButton.html(message.secondaryLabel);
+        }
 
-      if (message.hideSecondary) {
-        alertModal.secondaryButton.hide();
-        alertModal.primaryButton.removeClass(["col-spaced", "col-6"]);
-      }
+        if (message.hideSecondary) {
+          this.secondaryButton.hide();
+          this.primaryButton.removeClass(["col-spaced", "col-6"]);
+        }
 
-      if (message.icon) {
-        message.icon == "success"
-          ? alertModal.successIcon.removeClass("d-none")
-          : alertModal.successIcon.addClass("d-none");
-      }
+        if (message.icon) {
+          message.icon == "success"
+            ? this.successIcon.removeClass("d-none")
+            : this.successIcon.addClass("d-none");
+        }
 
-      if (message.onInit) {
-        message.onInit.call();
-      }
+        if (message.onInit) {
+          message.onInit.call();
+        }
 
-      if (message.afterInit) {
-        alertModal.subView.on("shown.bs.modal", () => message.afterInit.call());
+        if (message.afterInit) {
+          this.subView.on("shown.bs.modal", () =>
+            message.afterInit.call()
+          );
+        }
+      } else if (typeof message == "string") {
+        this.content.html(message);
       }
-    } else if (typeof message == "string") {
-      alertModal.content.html(message);
+      this.show();
+    },
+    init: function() {
+      this.subView.modal({ backdrop: "static", keyboard: false });
+      this.content = this.subView.find(".modal-message");
+      this.successIcon = this.subView.find(".modal-icon");
+      this.primaryButton = this.subView.find(".primary-action");
+      this.secondaryButton = this.subView.find(".secondary-action");
+      this.clear();
     }
-    alertModal.show();
-  },
-  init: () => {
-    alertModal.subView.modal({ backdrop: "static", keyboard: false });
-    alertModal.content = alertModal.subView.find(".modal-message");
-    alertModal.successIcon = alertModal.subView.find(".modal-icon");
-    alertModal.primaryButton = alertModal.subView.find(".primary-action");
-    alertModal.secondaryButton = alertModal.subView.find(".secondary-action");
-    alertModal.clear();
-  }
-};
+  };
+});
 
 var mobileStream = (function() {
   var modal = $("#mobileLiveScanModal");
@@ -350,12 +357,17 @@ function dataURItoBlob(dataURI) {
 }
 
 function initClearInputHelper() {
-  $('#clearBarcodeHelper').on('click', e => $(e.target).closest('.form-group').find('input').val(''))
+  $("#clearBarcodeHelper").on("click", e =>
+    $(e.target)
+      .closest(".form-group")
+      .find("input")
+      .val("")
+  );
 }
 
 $(() => {
-  initClearInputHelper()
-  
+  initClearInputHelper();
+
   alertModal.init();
 
   initUploadField();
