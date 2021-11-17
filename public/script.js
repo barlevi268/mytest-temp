@@ -160,12 +160,18 @@ var mobileStream = (function() {
         }
         console.log("Initialization finished. Ready to start");
         Quagga.start();
+        mobileStreamElm.find('video').on('click',reloadStream)
       }
     );
 
     Quagga.onDetected(e => hanldeQuaggaResults(e));
   }
-
+  
+  function reloadStream() {
+    mobileStreamElm.find('video').remove()
+    initQuagga()
+  }
+  
   function hanldeQuaggaResults(e) {
     if (e.codeResult) {
       if (e.codeResult.code.length > 8) {
@@ -181,9 +187,7 @@ var mobileStream = (function() {
       alertModal.display({
         modalId: "mobileLiveScanModal",
         onInit: () => initQuagga(),
-        afterInit: () => {
-          console.log(mobileStreamElm.find('video'))
-        }
+        afterInit: () => {}
       });
     });
   }
