@@ -1,0 +1,11 @@
+.DS_Store*
+Icon?
+._*
+package-lock.json
+node_modules
+
+*.log
+*.gz
+
+.glitch-assets
+package-lock.json
