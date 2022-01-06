@@ -10,14 +10,13 @@ app.set('view engine', 'ejs');
 
 
 app.get("/", (req, res) => {
-  res.render('index');
+  res.render('pages/index');
 });
 
-app.get("/menu", (request, response) => {
-  response.sendFile(__dirname + "/views/menu.html");
+app.get("/profile", (req, res) => {
+  res.render('pages/profile');
 });
 
-app.get("/newVisit", (request, response) => {
-  response.sendFile(__dirname + "/views/newVisit.html");
+app.get("/newVisit", (req, res) => {
+  res.render('pages/new-visit');
 });
-
