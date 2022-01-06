@@ -10,7 +10,11 @@ app.set('view engine', 'ejs');
 
 
 app.get("/", (req, res) => {
-  res.render('pages/index');
+  res.render('pages/profile');
+});
+
+app.get("/login", (req, res) => {
+  res.render('pages/login');
 });
 
 app.get("/profile", (req, res) => {

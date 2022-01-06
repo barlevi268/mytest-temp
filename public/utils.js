@@ -1,3 +1,52 @@
+var isMobile = "ontouchstart" in window;
+
+var localizations = (async function () {
+  var elements = document.querySelectorAll("[trns]");
+  var inputs = document.querySelectorAll("input");
+  var selects = document.querySelectorAll("select");
+
+  var lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "HE";
+
+  var langRequest = await fetch(`/translations/${lang}.json`);
+  var langResults = await langRequest.json();
+
+  document.querySelector("html").setAttribute("dir", langResults.dir);
+
+  const translateValue = (value) => {
+    var text = langResults.values[value];
+    return text ? text : value;
+  };
+
+  elements.forEach((item) => {
+    item.textContent = translateValue(item.textContent.trim());
+  });
+
+  [...selects, ...inputs].forEach((input) => {
+    input.setAttribute(
+      "placeholder",
+      translateValue(input.getAttribute("placeholder"))
+    );
+  });
+
+  function _init() {
+    $(".form-loader").remove();
+    $(".container").show();
+    var selectLang = document.querySelector(".floating-lang");
+    if (selectLang) {
+      selectLang.value = lang;
+      selectLang.addEventListener("change", (e) => {
+        localStorage.setItem("lang", e.target.value);
+        location.reload();
+      });
+    }
+
+    window["_translations"] = langResults;
+    initSelect2();
+  }
+
+  _init();
+})();
+
 function initAlertModal() {
   var alertModal = {
     subView: $("#alertModal"),
@@ -240,11 +289,7 @@ function dataURItoBlob(dataURI) {
   return new Blob([ab], { type: mimeString });
 }
 
-function initClearInputHelper() {
-  $("#clearBarcodeHelper").on("click", (e) =>
-    $(e.target).closest(".form-group").find("input").val("")
-  );
-}
+
 
 function initMandatoryFields() {
   var fields = $("[mandatory]");
@@ -291,6 +336,76 @@ function initMandatoryFields() {
     }
   });
 }
+
+$.fn.btn = function (action) {
+  const spinner = $(
+      '<span class="btn-spinner spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+  );
+
+  function disable(elm) {
+      $(elm).prop("disabled", true);
+  }
+
+  function enable(elm) {
+      $(elm).prop("disabled", false);
+  }
+
+  function startLoader(elm) {
+      var text = $(`<span class="btn-label">${$(elm).text()}</span>`);
+
+      text.hide();
+      $(elm).btn("disable");
+      $(elm)
+          .html("")
+          .append(text, spinner);
+  }
+
+  function stopLoader(elm) {
+      $(elm)
+          .find(".btn-label")
+          .show();
+      $(elm)
+          .find(".btn-spinner")
+          .hide();
+      $(elm).btn("enable");
+  }
+
+  return this.each(function () {
+      action == "disable" && disable(this);
+      action == "enable" && enable(this);
+      action == "startLoader" && startLoader(this);
+      action == "stopLoader" && stopLoader(this);
+  });
+};
+
+Swal.warning = function (message) {
+  Swal.fire({
+      title: message,
+      icon: "warning",
+      showConfirmButton: false,
+      timer: 1500
+  });
+};
+
+Swal.error = function (message) {
+  Swal.fire({
+      title: message,
+      icon: "error",
+      showConfirmButton: false,
+      timer: 1500
+  });
+};
+
+Swal.success = function (message) {
+  Swal.fire({
+      title: message,
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1500
+  });
+};
+
+const valByName = (nameAtt) => $(`[name="${nameAtt}"]`).val()
 
 $(() => {
   initMandatoryFields();

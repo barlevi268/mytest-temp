@@ -37,7 +37,7 @@
             <!--end::Form group-->
             <!--begin::Action-->
             <div class="pt-3 d-grid">
-              <button type="button" onclick="changeLoginView('two-factor')" class="btn btn-primary btn-block">
+              <button type="button" class="btn btn-primary btn-block login-btn">
                 התחבר
               </button>
               <a class="pt-3 text-left" style="text-align: left" href="javascript:changeLoginView('forgot')"
@@ -49,38 +49,7 @@
           <!--end::Form-->
         </div>
         <!-- end::login-form -->
-        <!-- start::forgot-form -->
-        <div class="login-view forgot-form d-none animate__animated animate__fadeInLeft">
-          <!--begin::Form-->
-          <form class="form" id="forgotPasswordForm" novalidate="novalidate">
-            <!--begin::Title-->
-            <div class="form-header pt-5">
-              <img src="media/logo-light.svg" />
-            </div>
-            <!--begin::Title-->
-            <!--begin::Form group-->
-            <div class="form-group">
-              <label>שם משתמש</label>
-              <input
-                class="form-control"
-                type="text"
-                name="username"
-                placeholder="הזן שם משתמש"
-                autocomplete="off"
-              />
-            </div>
-            <!--end::Form group-->
-            <!--begin::Action-->
-            <div class="pt-3 d-grid">
-              <button type="button" class="btn btn-primary btn-block">
-                שלח איפוס סיסמה
-              </button>
-            </div>
-            <!--end::Action-->
-          </form>
-          <!--end::Form-->
-        </div>
-        <!-- end::forgot-form -->
+
         <!-- start::two-factor-form -->
         <div class="login-view two-factor-form d-none animate__animated animate__fadeInLeft">
           <!--begin::Form-->
@@ -125,4 +94,5 @@
       </div>
     </div>
     <!-- end::page content -->
+<script src="scripts/login.js"></script>
 <%- include('../components/footer') %>
