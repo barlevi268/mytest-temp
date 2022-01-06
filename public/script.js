@@ -1,6 +1,6 @@
 var isMobile = "ontouchstart" in window;
 
-var localizations = (async function() {
+var localizations = (async function () {
   var elements = document.querySelectorAll("[trns]");
   var inputs = document.querySelectorAll("input");
   var selects = document.querySelectorAll("select");
@@ -12,16 +12,16 @@ var localizations = (async function() {
 
   document.querySelector("html").setAttribute("dir", langResults.dir);
 
-  const translateValue = value => {
+  const translateValue = (value) => {
     var text = langResults.values[value];
     return text ? text : value;
   };
 
-  elements.forEach(item => {
+  elements.forEach((item) => {
     item.textContent = translateValue(item.textContent.trim());
   });
 
-  [...selects, ...inputs].forEach(input => {
+  [...selects, ...inputs].forEach((input) => {
     input.setAttribute(
       "placeholder",
       translateValue(input.getAttribute("placeholder"))
@@ -34,7 +34,7 @@ var localizations = (async function() {
     var selectLang = document.querySelector(".floating-lang");
     if (selectLang) {
       selectLang.value = lang;
-      selectLang.addEventListener("change", e => {
+      selectLang.addEventListener("change", (e) => {
         localStorage.setItem("lang", e.target.value);
         location.reload();
       });
@@ -47,13 +47,13 @@ var localizations = (async function() {
   _init();
 })();
 
-$(() => {
-  window["alertModal"] = {
+function initAletModal() {
+  var alertModal = {
     subView: $("#alertModal"),
-    show: function() { 
-      alertModal.subView.modal("show")
+    show: function () {
+      alertModal.subView.modal("show");
     },
-    clear: function(){
+    clear: function () {
       alertModal.primaryButton.html("אישור");
       alertModal.secondaryButton.html("ביטול");
       alertModal.primaryButton.on("click", () => alertModal.hide());
@@ -61,11 +61,11 @@ $(() => {
       alertModal.successIcon.addClass("d-none");
       alertModal.secondaryButton.addClass(["col-spaced", "col-6"]);
     },
-    hide: function() {
+    hide: function () {
       alertModal.subView.modal("hide");
       alertModal.clear();
     },
-    display: function(message) {
+    display: function (message) {
       if (typeof message == "object") {
         if (message.modalId) {
           alertModal.subView = $(`#${message.modalId}`);
@@ -77,14 +77,14 @@ $(() => {
         }
 
         if (message.primaryAction) {
-          alertModal.primaryButton.on("click", e =>
+          alertModal.primaryButton.on("click", (e) =>
             message.primaryAction.call(e)
           );
         }
         if (message.preventPrimaryDismiss) {
           alertModal.primaryButton
             .off()
-            .on("click", e => message.primaryAction.call(e));
+            .on("click", (e) => message.primaryAction.call(e));
         }
 
         if (message.primaryLabel) {
@@ -124,18 +124,22 @@ $(() => {
       }
       alertModal.show();
     },
-    init: function() {
+    init: function () {
       alertModal.subView.modal({ backdrop: "static", keyboard: false });
       alertModal.content = alertModal.subView.find(".modal-message");
       alertModal.successIcon = alertModal.subView.find(".modal-icon");
       alertModal.primaryButton = alertModal.subView.find(".primary-action");
       alertModal.secondaryButton = alertModal.subView.find(".secondary-action");
       alertModal.clear();
-    }
+    },
   };
-});
+  
+  window["alertModal"] = alertModal
+}
 
-var mobileStream = (function() {
+$(() => initAlertModal());
+
+var mobileStream = (function () {
   var modal = $("#mobileLiveScanModal");
   var mobileStreamElm = $(".mobile-stream");
   var btn;
@@ -147,31 +151,31 @@ var mobileStream = (function() {
         inputStream: {
           name: "Live",
           type: "LiveStream",
-          target: ".mobile-stream"
+          target: ".mobile-stream",
         },
         decoder: {
-          readers: ["code_128_reader"]
-        }
+          readers: ["code_128_reader"],
+        },
       },
-      function(err) {
+      function (err) {
         if (err) {
           console.log(err);
           return;
         }
         console.log("Initialization finished. Ready to start");
         Quagga.start();
-        mobileStreamElm.find('video').on('click',reloadStream)
+        mobileStreamElm.find("video").on("click", reloadStream);
       }
     );
 
-    Quagga.onDetected(e => hanldeQuaggaResults(e));
+    Quagga.onDetected((e) => hanldeQuaggaResults(e));
   }
-  
+
   function reloadStream() {
-    mobileStreamElm.find('video').remove()
-    initQuagga()
+    mobileStreamElm.find("video").remove();
+    initQuagga();
   }
-  
+
   function hanldeQuaggaResults(e) {
     if (e.codeResult) {
       if (e.codeResult.code.length > 8) {
@@ -183,11 +187,11 @@ var mobileStream = (function() {
   }
 
   function initListeners() {
-    btn.on("click", e => {
+    btn.on("click", (e) => {
       alertModal.display({
         modalId: "mobileLiveScanModal",
         onInit: () => initQuagga(),
-        afterInit: () => {}
+        afterInit: () => {},
       });
     });
   }
@@ -198,7 +202,7 @@ var mobileStream = (function() {
   }
   return {
     init: _init,
-    refresh: initQuagga
+    refresh: initQuagga,
   };
 })();
 
@@ -206,14 +210,14 @@ var quaggaDefaultConfig = {
   inputStream: {
     type: "ImageStream",
     length: 10,
-    size: 1800
+    size: 1800,
   },
   numOfWorkers: 1,
   locate: true,
   locator: {
     patchSize: "medium",
-    halfSample: true
-  }
+    halfSample: true,
+  },
 };
 
 function decodeBarcode(src, config, cb) {
@@ -229,22 +233,22 @@ function decodeBarcode(src, config, cb) {
   config.src = src;
   console.time("time to scan barcode");
 
-  Quagga.decodeSingle(config, result => {
+  Quagga.decodeSingle(config, (result) => {
     handleResults(result);
 
     config.inputStream.size = 1600;
 
-    Quagga.decodeSingle(config, result => {
+    Quagga.decodeSingle(config, (result) => {
       handleResults(result);
 
       config.inputStream.size = 1200;
 
-      Quagga.decodeSingle(config, result => {
+      Quagga.decodeSingle(config, (result) => {
         handleResults(result);
 
         config.inputStream.size = 600;
 
-        Quagga.decodeSingle(config, result => {
+        Quagga.decodeSingle(config, (result) => {
           handleResults(result);
 
           console.timeEnd("time to failed scan barcode");
@@ -261,7 +265,7 @@ function initSelect2() {
     var settings = {
       width: "100%",
       dir: _translations.dir,
-      placeholder: $(val).attr("placeholder")
+      placeholder: $(val).attr("placeholder"),
     };
     displayMode != "search"
       ? (settings.minimumResultsForSearch = -1)
@@ -271,14 +275,14 @@ function initSelect2() {
 }
 
 function initUploadField() {
-  $('[type="file"]').on("change", e => {
+  $('[type="file"]').on("change", (e) => {
     var $parent = $(e.target).parent();
     var $this = $(e.target);
 
     function readURL(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = e => {
+        reader.onload = (e) => {
           $parent.find(".upload-caddy").attr("src", e.target.result);
           $parent
             .find(`[for="${$this.attr("id")}"]`)
@@ -316,7 +320,7 @@ function initMandatoryFields() {
     return valid;
   }
 
-  $('[type="submit"]').on("click", e => {
+  $('[type="submit"]').on("click", (e) => {
     e.preventDefault();
 
     if (formValidated()) {
@@ -327,7 +331,7 @@ function initMandatoryFields() {
       alertModal.display({
         content: "חלק מהשדות הנדרשים ריקים",
         hideSecondary: true,
-        primaryLabel: "הבנתי"
+        primaryLabel: "הבנתי",
       });
 
       $.each(emptyFields, (i, val) => {
@@ -335,7 +339,7 @@ function initMandatoryFields() {
         $val.after('<span class="field-message text-danger">שדה חובה</span>');
         $val.addClass("border border-danger");
 
-        $val.on("input", e => {
+        $val.on("input", (e) => {
           $val.removeClass("border border-danger");
         });
       });
@@ -347,10 +351,7 @@ function dataURItoBlob(dataURI) {
   var byteString = atob(dataURI.split(",")[1]);
 
   // separate out the mime component
-  var mimeString = dataURI
-    .split(",")[0]
-    .split(":")[1]
-    .split(";")[0];
+  var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
 
   // write the bytes of the string to an ArrayBuffer
   var ab = new ArrayBuffer(byteString.length);
@@ -363,11 +364,8 @@ function dataURItoBlob(dataURI) {
 }
 
 function initClearInputHelper() {
-  $("#clearBarcodeHelper").on("click", e =>
-    $(e.target)
-      .closest(".form-group")
-      .find("input")
-      .val("")
+  $("#clearBarcodeHelper").on("click", (e) =>
+    $(e.target).closest(".form-group").find("input").val("")
   );
 }
 

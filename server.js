@@ -1,16 +1,16 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
-const cloudnary = require('./cloudnary-json')
+
 
 app.use(express.static("public"));
 app.use(express.json())
 app.use(cookieParser());
+app.set('view engine', 'ejs');
 
 
-app.get("/", (request, response) => {
-  var ip = request.headers['x-forwarded-for'];
-  response.sendFile(__dirname + (request.cookies.bar ? "/views/desk.html" : "/views/index.html"));
+app.get("/", (req, res) => {
+  res.render('index');
 });
 
 app.get("/menu", (request, response) => {
@@ -47,9 +47,4 @@ app.post("/test", (request, response) => {
 
 app.get("/test", (request, response) => {
   response.sendFile(__dirname + "/views/test.html");
-});
-
-app.get("/cloudnary-locals", (_, res) => res.json(cloudnary.dialogStyle))
-const listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
 });
