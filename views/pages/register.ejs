@@ -1,0 +1,136 @@
+<%- include('../components/header') %>
+<style>
+  /* CSS comes here */
+  #video,
+  #photo {
+    border: none;
+    width: 480px;
+    height: 360px;
+  }
+
+  #photo {
+    border: 6px solid #05da84 !important;
+    width: 480px;
+    display: inline-block;
+  }
+
+  #canvas {
+    display: none;
+  }
+
+  .camera {
+    width: 480px;
+    display: inline-block;
+  }
+
+  #startbutton {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 36px;
+    padding: 5px;
+    background-color: #6a67ce;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 1);
+    cursor: pointer;
+  }
+
+  .contentarea {
+    font-size: 16px;
+    font-family: Arial;
+    text-align: center;
+  }
+
+  .clear-field-helper {
+    background-color: lightgray;
+    text-align: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+</style>
+
+<!-- start::page content -->
+
+<%- include('../components/header-logo-dark') %>
+<div class="wrapper px-4-5 animate__animated animate__fadeInLeft">
+  <form class="form" id="addNewUser">
+    <div class="container">
+      <div class="row mb-4">
+        <h3 class="fw-bolder">הרשמת נבדק</h3>
+        <div class="text-muted pe-4">הזן את פרטיך האישיים ואת פרטי הבדיקה שקיבלת</div>
+      </div>
+      <div class="row">
+        <div class="form-group col-6">
+          <label>שם פרטי</label>
+          <input class="form-control" placeholder="שם משפחה" name="first_name">
+        </div>
+        <div class="form-group col-6">
+          <label>שם משפחה</label>
+          <input class="form-control" placeholder="שם משפחה" name="last_Name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-12">
+          <label>מס’ ת.ז. \ דרכון</label>
+          <input class="form-control" placeholder="מס’ ת.ז. \ דרכון" name="passport">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>צילום ת.ז. \ דרכון</label>
+          <label for="uploadBarcode" class="form-control text-center py-3">
+            <img style="height: 40px" class="upload-caddy" />
+            <u>בחר תמונה</u>
+          </label>
+          <input type="file" id="uploadBarcode" class="d-none" name="photo_passport" accept=".jpg,.jpeg,.png" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-12">
+          <label>מס’ נייד</label>
+          <input class="form-control" placeholder="מס’ נייד" name="phone">
+        </div>
+      </div>
+      <div class="row">
+        <div class="impair-test-barcode d-none form-group col">
+          <label> </label>
+          <input
+            type="text"
+            name="barcode"
+            class="form-control"
+            placeholder="code"
+            disabled
+          />
+        </div>
+        <div class="form-group col">
+          <label> </label>
+          <div class="mobile-stream-btn form-control cursor-pointer">
+            <label>🔍 סרוק בדיקה</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="form-footer mt-3">
+        <button
+          type="button"
+          onclick="fakeVisitSuccess()"
+          class="btn btn-primary btn-block"
+        >
+          סיים ושלח ביקור
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- end::page content -->
+<script src="scripts/register.js"></script>
+<%- include('../components/live-scan-modal') %>
+<%- include('../components/visit-success-modal') %>
+
+<%- include('../components/footer') %>

@@ -1,12 +1,12 @@
 <style>
-  #mobileLiveScanModal .modal-dialog {
+  #visitSuccessModal .modal-dialog {
     margin-left: auto !important;
     margin-right: auto !important;
   }
 </style>
 <div
       class="modal fade"
-      id="mobileLiveScanModal"
+      id="visitSuccessModal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="mobileLiveScanLabel"
@@ -15,28 +15,27 @@
       <div class="modal-dialog mx-2" role="document">
         <div class="modal-content">
           <div class="modal-body px-0">
-            <div class="modal-icon d-none text-center pt-4 pb-3">
+            <div class="modal-icon text-center pt-4 pb-3">
               <img src="/media/success-icon.svg" />
             </div>
-            <div class="contentarea">
-              <h1>
-                סרוק ברקוד
-              </h1>
-              <div class="pre-capture camera-mobile">
-                <div
-                  class="mobile-stream shadow rounded-lg mb-3 mt-4"
-                  id="mobileStream"
-                >
-                </div>
-              </div>
+            <div class="contentarea py-4">
+              <h2>
+                נבדק נרשם בהצלחה
+              </h2>
             </div>
             <div calss="modal-actions container-fluid">
-              <div class="pre-capture row justify-content-between">
+              <div class="d-flex justify-content-between">
                 <button
                   type="button"
-                  class="secondary-action btn btn-secondary btn-block col col-spaced"
+                  class="primary-action  btn btn-primary btn-block col col-spaced me-2"
                 >
-                  סגירה
+                  {{primaryLabel}}
+                </button>
+                <button
+                        type="button"
+                        class="secondary-action btn btn-default btn-block col col-spaced"
+                >
+                  {{secondaryLabel}}
                 </button>
               </div>
             </div>

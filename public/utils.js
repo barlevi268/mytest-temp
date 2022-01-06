@@ -142,31 +142,13 @@ var mobileStream = (function () {
   var mobileStreamElm = $(".mobile-stream");
   var btn;
   var barcodeInput;
+  var barcodeInputCallback;
+  var html5QrCode;
 
   function initQuagga() {
-    Quagga.init(
-      {
-        inputStream: {
-          name: "Live",
-          type: "LiveStream",
-          target: ".mobile-stream",
-        },
-        decoder: {
-          readers: ["code_128_reader"],
-        },
-      },
-      function (err) {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        console.log("Initialization finished. Ready to start");
-        Quagga.start();
-        mobileStreamElm.find("video").on("click", reloadStream);
-      }
-    );
-
-    Quagga.onDetected((e) => hanldeQuaggaResults(e));
+    html5QrCode = new Html5Qrcode("mobileStream");
+    const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+    html5QrCode.start({ facingMode: "environment" }, config, hanldeQuaggaResults);
   }
 
   function reloadStream() {
@@ -174,18 +156,25 @@ var mobileStream = (function () {
     initQuagga();
   }
 
-  function hanldeQuaggaResults(e) {
-    if (e.codeResult) {
-      if (e.codeResult.code.length > 8) {
-        barcodeInput.val(e.codeResult.code);
-        modal.find(".secondary-action").trigger("click");
-        Quagga.stop();
+  function hanldeQuaggaResults(decodedText, decodedResult) {
+    if (decodedText) {
+      if (decodedText.length > 8) {
+        barcodeInput.val(decodedText);
+        if (barcodeInputCallback) {
+          barcodeInputCallback(decodedText);
+        }
+        $(modal).find('.modal-icon').removeClass('d-none');
+        html5QrCode.stop()
+        setTimeout(() => {
+          modal.find(".secondary-action").trigger("click");
+        }, 1000)
       }
     }
   }
 
   function initListeners() {
     btn.on("click", (e) => {
+      $(modal).find('.modal-icon').addClass('d-none');
       alertModal.display({
         modalId: "mobileLiveScanModal",
         onInit: () => initQuagga(),
@@ -193,9 +182,10 @@ var mobileStream = (function () {
       });
     });
   }
-  function _init({ resultInput, openButton }) {
+  function _init({ resultInput, openButton, resultInputCallback }) {
     barcodeInput = $(resultInput);
     btn = $(openButton);
+    barcodeInputCallback = resultInputCallback;
     initListeners();
   }
   return {
@@ -269,6 +259,15 @@ function initSelect2() {
       ? (settings.minimumResultsForSearch = -1)
       : delete settings.minimumResultsForSearch;
     $(val).select2(settings);
+  });
+}
+
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
   });
 }
 

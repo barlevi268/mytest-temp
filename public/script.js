@@ -21,21 +21,24 @@ var UserSession = function() {
   }
 
   function _route() {
-      const pathname = location.pathname.split('/')[1]
-      const routeUnauthorized = () => !currentState.user && (location.href = "/login")
-      const routeAuthorized = () => currentState.user ? (location.href = "/") : clearState();
+    const pathname = location.pathname.split('/')[1]
+    const routeUnauthorized = () => !currentState.user && (location.href = "/login")
+    const routeAuthorized = () => currentState.user ? (location.href = "/") : clearState();
 
-      switch (pathname) {
-        case 'welcome':
-              routeAuthorized()
-              break;
-          case 'login':
-              routeAuthorized()
-              break;
-          default:
-              routeUnauthorized()
-              break;
-      }
+    switch (pathname) {
+      case 'welcome':
+        routeAuthorized()
+        break;
+      case 'login':
+        routeAuthorized()
+        break;
+      case 'register':
+        routeAuthorized()
+        break;
+      default:
+        routeUnauthorized()
+        break;
+    }
   }
 
   function _init() {
