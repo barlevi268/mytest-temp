@@ -1,0 +1,22 @@
+  <!-- start::modal template -->
+  <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-icon d-none text-center pt-4 pb-3">
+            <img src="/media/success-icon.svg">
+          </div>
+          <div class="modal-message">
+            {{modal message}}
+          </div>
+          <div calss="modal-actiosn container-fluid">
+            <div class="row justify-content-between">
+                <button type="button" class="primary-action btn btn-primary btn-block col-6 col-spaced">אישור</button>
+                <button type="button" class="secondary-action btn btn-secondary btn-block col-6 col-spaced">ביטול</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end::modal template -->
