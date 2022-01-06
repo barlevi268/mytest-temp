@@ -10,24 +10,25 @@
   --bg-light: #F0F0F0;
   --bg-primary: #131f52;
   --border: #E5E5E5;
+  --text-white: #FFF;
 }
 
 @font-face {
   font-family: "Rubik";
   font-weight: 400;
-  src: url("../fonts/Rubik-Regular.woff") format("woff");
+  src: url("public/fonts/Rubik-Regular.ttf") format("opentype");
 }
 
 @font-face {
   font-family: "Rubik";
   font-weight: 500;
-  src: url("fonts/Rubik-Medium.woff") format("woff");
+  src: url("public/fonts/Rubik-Medium.ttf") format("opentype");
 }
 
 @font-face {
   font-family: "Rubik";
   font-weight: 700;
-  src: url("fonts/Rubik-Bold.woff") format("woff");
+  src: url("public/fonts/Rubik-Bold.ttf") format("opentype");
 }
 
 * {
@@ -257,6 +258,7 @@ input::-webkit-inner-spin-button {
 
 .btn-primary {
   background-color: var(--primary);
+  color: var(--text-white);
 }
 
 .btn-primary:hover {
@@ -370,4 +372,18 @@ hr {
   padding: 11px;
   text-align: center;
   height: 60px;
+}
+
+.btn-signup-welcome {
+  background: rgb(19,31,82);
+  background: linear-gradient(101deg, rgba(19,31,82,1) 0%, rgba(29,47,137,1) 100%);
+  box-shadow: 0 7pt 30pt #b7c4ffcc;
+}
+
+.btn.btn-default {
+  border: 1pt solid var(--primary);
+}
+
+.btn-label {
+  color: inherit;
 }

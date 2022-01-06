@@ -13,6 +13,10 @@ app.get("/", (req, res) => {
   res.render('pages/profile');
 });
 
+app.get("/welcome", (req, res) => {
+  res.render('pages/welcome');
+});
+
 app.get("/login", (req, res) => {
   res.render('pages/login');
 });

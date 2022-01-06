@@ -8,4 +8,4 @@ node_modules
 *.gz
 
 .glitch-assets
-package-lock.json
+.idea

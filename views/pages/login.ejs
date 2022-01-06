@@ -5,32 +5,34 @@
         <!-- start::login-form -->
         <div class="login-view login-form">
           <!--begin::Form-->
-          <form class="form login-form " id="loginForm" ovalidate="novalidate">
+          <form class="form login-form " id="loginForm" novalidate="novalidate">
             <!--begin::Title-->
             <div class="form-header pt-5">
-              <img src="media/logo-light.svg" />
+              <img src="media/logo-light.svg" alt="logo"/>
             </div>
             <!--begin::Title-->
             <!--begin::Form group-->
             <div class="form-group">
-              <label>שם משתמש</label>
+              <label>ת.ז. \ דרכון</label>
               <input
                 class="form-control"
                 type="text"
                 name="username"
-                placeholder="הזן שם משתמש"
+                placeholder="הזן ת.ז. \ דרכון"
                 autocomplete="off"
               />
             </div>
             <!--end::Form group-->
             <!--begin::Form group-->
             <div class="form-group">
-              <label>סיסמה</label>
+              <label>מס’ טלפון</label>
               <input
                 class="form-control"
-                type="password"
-                name="password"
-                placeholder="הזן סיסמה"
+                type="tel"
+                inputmode="numeric"
+                name="phone"
+                placeholder="הזן מס’ טלפון"
+                pattern="[0-9]"
                 autocomplete="off"
               />
             </div>
@@ -65,22 +67,22 @@
                 הזן קוד אימות               
               </h4>
               <p>
-                ברגעים אלה שנלח אליך קוד אימות באמצעות SMS </br>
+                ברגעים אלה שנלח אליך קוד אימות באמצעות SMS <br>
                 אנה הזן את קוד האימות לצורך התחברות
               </p>
             </div>
             <div class="form-group">
               <div class="d-flex justify-content-between">
-                <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="4"/>
-                <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="3"/>
-                <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="2"/>
-                <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="1"/>
+                <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="4" placeholder=""/>
+                <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="3" placeholder=""/>
+                <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="2" placeholder=""/>
+                <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="1" placeholder=""/>
               </div>
             </div>
             <!--end::Form group-->
             <!--begin::Action-->
             <div class="pt-3 d-grid">
-              <button type="button" disabled onclick="location.href = '/menu'" class="sumbit-two-factor-button btn btn-primary btn-block">
+              <button type="button" disabled class="sumbit-two-factor-button btn btn-primary btn-block">
                 המשך
               </button>
               <a class="pt-3 text-left" style="text-align: left" href="#"
