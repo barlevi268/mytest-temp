@@ -10,10 +10,6 @@ app.set('view engine', 'ejs');
 
 
 app.get("/", (req, res) => {
-  res.render('pages/profile');
-});
-
-app.get("/welcome", (req, res) => {
   res.render('pages/welcome');
 });
 
@@ -30,6 +26,9 @@ app.get("/profile", (req, res) => {
 
 app.get("/newVisit", (req, res) => {
   res.render('pages/new-visit');
+});
+app.get("*", (req, res) => {
+  res.redirect('/');
 });
 
 app.listen(3000, () => {

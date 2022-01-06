@@ -380,6 +380,11 @@ hr {
   box-shadow: 0 7pt 30pt #b7c4ffcc;
 }
 
+.btn-primary-gradient {
+  background: rgb(19,31,82);
+  background: linear-gradient(101deg, rgba(19,31,82,1) 0%, rgba(29,47,137,1) 100%);
+}
+
 .btn.btn-default {
   border: 1pt solid var(--primary);
 }

@@ -23,9 +23,10 @@ var UserSession = function() {
   function _route() {
     const pathname = location.pathname.split('/')[1]
     const routeUnauthorized = () => !currentState.user && (location.href = "/login")
-    const routeAuthorized = () => currentState.user ? (location.href = "/") : clearState();
+    const routeAuthorized = () => currentState.user ? (location.href = "profile") : clearState();
 
     switch (pathname) {
+      case '':
       case 'welcome':
         routeAuthorized()
         break;
