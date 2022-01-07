@@ -1,0 +1,77 @@
+<%- include('../components/header') %>
+<%- include('../components/header-logo-dark') %>
+<style>
+  input[type="radio"] {
+    width: 24px;
+    height: 24px;
+  }
+  input[type=radio]:not(:checked) {
+    opacity: 0.3;
+  }
+  input[type=radio]:not(:checked) + label  {
+    opacity: 0.3;
+  }
+  .radio_item {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+</style>
+    <div class="container">
+      <div class="wrapper px-4-5">
+        <div class="login-view login-form">
+          <form class="form login-form " id="loginForm" ovalidate="novalidate">
+            <div class="pt-3 d-grid">
+              <h3 class="fw-bolder">שליחת תוצאה</h3>
+              <h5 class="pe-4">יש לברר את תוצאת הבדיקה לפי מס’ הפסים ע”ג הבדיקה.</h5>
+            </div>
+
+            <div class="pt-3">
+             <h6>בחר בהתאם למוצג ע”ג הבדיקה שלך</h6>
+            </div>
+            <div class="pt-3 d-grid d-flex justify-content-evenly">
+              <div class="radio_item">
+                <input id="radio-clear" type="radio" name="result" value="clear">
+                <label for="radio-clear"><img src="/media/test-result/clear.svg"></label>
+              </div>
+
+              <div class="radio_item">
+                <input id="radio-c" type="radio" name="result" value="c">
+                <label for="radio-c"><img src="/media/test-result/c.svg"></label>
+              </div>
+
+              <div class="radio_item">
+                <input id="radio-t" type="radio" name="result" value="t">
+                <label for="radio-t"><img src="/media/test-result/t.svg"></label>
+              </div>
+
+              <div class="radio_item">
+                <input id="radio-ct" type="radio" name="result" value="ct">
+                <label for="radio-ct"><img src="/media/test-result/ct.svg"></label>
+              </div>
+            </div>
+
+
+            <div class="pt-3 d-grid">
+              <h6>תמונת הבדיקה עם התוצאה</h6>
+              <div class="form-group col">
+                <label for="uploadResult" class="form-control text-center py-3">
+                  <img style="height: 40px" class="upload-result" />
+                  <ins>בחר וידאו</ins>
+                </label>
+                <input type="file" id="uploadResult" class="d-none" name="photo_result" accept=".jpg,.jpeg,.png" />
+              </div>
+            </div>
+
+            <div class="pt-5 d-grid">
+              <button type="button" class="btn btn-primary btn-block btn-submission-form">
+                סיים ושלח
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+<script src="/scripts/submit-results-form.js"></script>
+<%- include('../components/footer') %>

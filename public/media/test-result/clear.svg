@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="132" viewBox="0 0 48 132">
+  <g id="Group_77" data-name="Group 77" transform="translate(-18 -30)">
+    <g id="Rectangle_42" data-name="Rectangle 42" transform="translate(18 30)" fill="#f7f7f7" stroke="#2c3350" stroke-width="1">
+      <rect width="48" height="132" rx="6" stroke="none"/>
+      <rect x="0.5" y="0.5" width="47" height="131" rx="5.5" fill="none"/>
+    </g>
+    <g id="Rectangle_43" data-name="Rectangle 43" transform="translate(35 66)" fill="#fff" stroke="#e2e2e2" stroke-width="3">
+      <rect width="14" height="47" rx="2" stroke="none"/>
+      <rect x="1.5" y="1.5" width="11" height="44" rx="0.5" fill="none"/>
+    </g>
+    <g id="Rectangle_46" data-name="Rectangle 46" transform="translate(35 66)" fill="none" stroke="#e2e2e2" stroke-width="3">
+      <rect width="14" height="47" rx="2" stroke="none"/>
+      <rect x="1.5" y="1.5" width="11" height="44" rx="0.5" fill="none"/>
+    </g>
+    <text id="C" transform="translate(31 83)" fill="#2c3350" font-size="10" font-family="Rubik" font-weight="500"><tspan x="-6" y="0">C</tspan></text>
+    <text id="SARS-CoV-2_Antigen" data-name="SARS-CoV-2
+Antigen" transform="translate(42 43)" fill="#2c3350" font-size="5" font-family="Rubik" font-weight="500"><tspan x="-15" y="0">SARS-CoV-2</tspan><tspan x="-9" y="6">Antigen</tspan></text>
+    <text id="T" transform="translate(31 102)" fill="#2c3350" font-size="10" font-family="Rubik" font-weight="500"><tspan x="-6" y="0">T</tspan></text>
+    <g id="Rectangle_44" data-name="Rectangle 44" transform="translate(39 129)" fill="#fff" stroke="#e2e2e2" stroke-width="4">
+      <rect width="6" height="10" rx="3" stroke="none"/>
+      <rect x="-2" y="-2" width="10" height="14" rx="5" fill="none"/>
+    </g>
+    <path id="Icon_ionic-md-arrow-round-up" data-name="Icon ionic-md-arrow-round-up" d="M14.551,9.374,11.136,5.854a.776.776,0,0,0-.571-.229h-.01a.776.776,0,0,0-.571.229L6.569,9.374a.754.754,0,0,0,0,1.1.843.843,0,0,0,1.152,0L9.744,8.359v5.454a.816.816,0,0,0,1.631,0V8.359L13.4,10.475a.843.843,0,0,0,1.152,0A.754.754,0,0,0,14.551,9.374Z" transform="translate(31.44 141.778)" fill="#cbcbcb"/>
+  </g>
+</svg>

@@ -12,7 +12,14 @@ function initTestID() {
 }
 
 function testSubmissionClickHandler() {
-  location.href = '/profile';
+  alertModal.display({
+    modalId: 'alertModal',
+    icon: "success",
+    content: "ביצוע בדיקה נשלח",
+    hideSecondary: true,
+    primaryLabel: "סיום",
+    primaryAction: () => (location.href = '/profile'),
+  });
 }
 
 $(() => {
