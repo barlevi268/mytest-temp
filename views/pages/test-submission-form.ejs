@@ -1,0 +1,44 @@
+<%- include('../components/header') %>
+<%- include('../components/header-logo-dark') %>
+
+    <div class="container">
+      <div class="wrapper px-4-5">
+        <div class="login-view login-form">
+          <form class="form login-form " id="loginForm" ovalidate="novalidate">
+            <div class="pt-3 d-grid">
+              <h3 class="fw-bolder">ביצוע בדיקה</h3>
+              <h6 class="pe-4">יש לצפות בסרטון ההדרכה לקבל הסבר על אופן ביצוע הבדיקה.</h6>
+            </div>
+
+            <div class="pt-3">
+              <iframe
+                      height="182"
+                      width="100%"
+                      src="https://www.youtube.com/embed/ZjLcRnnmnf8"
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+              ></iframe>
+            </div>
+
+
+            <div class="pt-3 d-grid">
+              <h6 class="pe-4">תיעוד ביצע הבדיקה</h6>
+              <button type="button" class="btn btn-secondary btn-block">
+                בחר וידאו
+              </button>
+            </div>
+
+            <div class="pt-5 d-grid">
+              <button type="button" class="btn btn-primary btn-block btn-submission-form">
+                סיים ושלח
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+<script src="/scripts/test-submission-form.js"></script>
+<%- include('../components/footer') %>

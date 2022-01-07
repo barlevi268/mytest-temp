@@ -9,7 +9,7 @@ function createRecordedTest(test) {
     recordedTests.push({
         ...test,
         nameLink: 'בצע בדיקה',
-        link: '',
+        link: `/${test.test}/test`,
     })
 }
 function createRecordedTests() {
@@ -22,7 +22,7 @@ function createAwaitingResult(test) {
     awaitingResult.push({
         ...test,
         nameLink: 'שלח תוצאה',
-        link: '',
+        link: `/${test.test}/send-result`,
     })
 }
 function createAwaitingResults() {
@@ -34,7 +34,7 @@ function createAwaitingResults() {
 var resultTmpl = `
 
   <a
-          href="/findpatient"
+          href="{{:link}}"
           class="nav-item pb-4 mb-3 btn-primary-gradient"
   >
     <div><span class="text-light">{{:name}}</span></div>

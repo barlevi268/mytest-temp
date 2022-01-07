@@ -23,6 +23,9 @@ app.get("/register", (req, res) => {
 app.get("/profile", (req, res) => {
   res.render('pages/profile');
 });
+app.get("/:testID/test", (req, res) => {
+  res.render('pages/test-submission-form', req.params);
+});
 
 app.get("/newVisit", (req, res) => {
   res.render('pages/new-visit');
