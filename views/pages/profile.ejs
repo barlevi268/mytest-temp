@@ -18,27 +18,20 @@
       <hr size class="my-4" />
       <!-- start::nav-items -->
 
-      <div class="nav-items-list d-grid px-4-5" id="recordedTests">
+      <div class="nav-items-list d-grid px-4-5">
         <h4 class="fw-bolder">בדיקות רשומות</h4>
       </div>
+    <div class="nav-items-list d-grid px-4-5" id="recordedTests"></div>
       <div class="px-3 py-3">
         <hr size />
       </div>
-      <div class="nav-items-list d-grid px-4-5" id="awaitingResult">
+      <div class="nav-items-list d-grid px-4-5">
         <h4 class="fw-bolder">ממתין לתוצאה</h4>
       </div>
+    <div class="nav-items-list d-grid px-4-5" id="awaitingResult"></div>
     </div>
   </div>
 </div>
 <!-- end::page content -->
 <%- include('../components/footer') %>
 
-<div class="d-none" id="resultTmpl">
-  <a
-          href="/findpatient"
-          class="nav-item d-flex justify-content-between align-items-center mb-3"
-  >
-    <div class="">${name}</div>
-    <img class="p-0 align-items-center" src="media/go-icon.svg"/>
-  </a>
-</div>
