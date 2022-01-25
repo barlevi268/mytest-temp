@@ -4,18 +4,18 @@
 <!-- start::page content -->
 <div class="container card shadow-light my-3 p-3 flex-grow-1">
   <h4 class="mb-0 mt-3 fw-bolder" id="userName">טיפול בנבדקים</h4>
-  <form class="filter row">
+  <form class="filter row" id="formFilterTable">
     <div class="mb-3 col-md-3 col-12">
       <label for="idNumber" class="form-label">חיפוש</label>
-      <input name="idNumber" type="text" class="form-control" id="idNumber" placeholder="חפש ת.ז. \ דרכון \ סידורי">
+      <input name="idNumber" type="text" class="form-control py-md-3" id="idNumber" placeholder="חפש ת.ז. \ דרכון \ סידורי">
     </div>
     <div class="mb-3 col-md-3 col-12">
       <label for="idSeries" class="form-label">חיפוש</label>
-      <input name="idSeries" type="text" class="form-control" id="idSeries" placeholder="חפש ת.ז. \ דרכון \ סידורי">
+      <input name="idSeries" type="text" class="form-control py-md-3" id="idSeries" placeholder="חפש ת.ז. \ דרכון \ סידורי">
     </div>
     <div class="mb-3 col-md-3 col-12">
       <label for="idSeries" class="form-label">תאריך פתיחה</label>
-      <div id="inputDateRange" class="form-control cursor-pointe">
+      <div id="inputDateRange" class="form-control py-md-3 cursor-pointe position-relative">
         &nbsp;
         <span></span>
         <input hidden name="date" id="inputDate">
@@ -23,22 +23,20 @@
     </div>
     <div class="mb-3 col-md-1 col-12">
       <label class="form-label">&nbsp;</label>
-      <button type="button" class="btn btn-primary btn-block">סנן</button>
+      <button type="button" class="btn btn-primary btn-block py-3" onclick="formFilterTable()">סנן</button>
     </div>
   </form>
   <div class="">
-    <table class="table">
+    <table class="table" id="patientsTable">
       <thead>
         <tr>
           <th scope="col">ID number</th>
           <th scope="col">Series ID</th>
+          <th scope="col">Date</th>
         </tr>
       </thead>
       <tbody id="tableTbody"></tbody>
     </table>
-    <nav>
-      <ul class="pagination pagination-sm" id="tablePagination"></ul>
-    </nav>
     </div>
   </div>
 </div>

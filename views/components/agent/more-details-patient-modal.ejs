@@ -2,17 +2,20 @@
     #mobileDetailPatientModal .modal-dialog {
         margin-left: auto !important;
         margin-right: auto !important;
-        max-width: 481px !important;
+        max-width: 781px !important;
     }
 
-    .modal-content {
-        max-width: 481px !important;
-    }
     ul[aria-labelledby="dropdownResultTestMenu"] {
       margin-top: 10px;
       background: #FFFFFF 0 0 no-repeat padding-box;
       box-shadow: 0 3px 20px #00000050;
       border-radius: 6px;
+    }
+
+    #imageID {
+        max-width: 90%;
+        height: auto;
+        object-fit: cover;
     }
 </style>
 <div
@@ -32,6 +35,7 @@
                 </h1>
             </div>
             <hr class="text-dark h-2"/>
+            <div class="display-content" id="viewContent">
             <div class="modal-body px-0">
                 <div class="contentarea">
                     <div class="row">
@@ -57,7 +61,7 @@
                         <div class="col-4">
                             <label>צילום ת.ז.</label>
                             <h5 class="fw-bolder">
-                                <a class="link-primary" id="photoID" target="_blank"></a>
+                                <span class="link-primary" id="photoID"></span>
                             </h5>
                         </div>
                     </div>
@@ -77,7 +81,7 @@
                         <div class="col-4">
                             <label>תיעוד בדיקה</label>
                             <h5 class="fw-bolder">
-                                <a class="link-primary" id="testDocumentation" target="_blank"></a>
+                                <span class="link-primary" id="testDocumentation"></span>
                             </h5>
                         </div>
                         <div class="col-4">
@@ -87,10 +91,43 @@
                         <div class="col-4">
                             <label>תיעוד תוצאה</label>
                             <h5 class="fw-bolder">
-                                <a class="link-primary" id="outcomeDocumentation" target="_blank"></a>
+                                <span class="link-primary" id="outcomeDocumentation"></span>
                             </h5>
                         </div>
                     </div>
+                </div>
+            </div>
+            </div>
+            <div class="display-content d-none" id="viewImage">
+                <div>
+                    <a onclick="backContentImage()"><img src="media/back-icon.svg" /></a>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <image id="imageID"></image>
+                </div>
+            </div>
+            <div class="display-content d-none" id="viewVideo">
+                <div>
+                    <a onclick="backContentVideo()"><img src="media/back-icon.svg" /></a>
+                </div>
+                <div class="d-flex justify-content-center mt-5" id="blockVideo">
+                    <video
+                            id="videojsID"
+                            class="video-js"
+                            controls
+                            preload="auto"
+                            width="640"
+                            height="264"
+                            data-setup="{}"
+                    >
+                        <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            <a href="https://videojs.com/html5-video-support/" target="_blank"
+                            >supports HTML5 video</a
+                            >
+                        </p>
+                    </video>
                 </div>
             </div>
           <hr class="text-dark h-2 mt-5"/>
@@ -130,3 +167,5 @@
         </div>
     </div>
 </div>
+
+<script src="scripts/agent/more-details-patient-modal.js"></script>

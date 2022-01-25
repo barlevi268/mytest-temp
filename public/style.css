@@ -411,3 +411,14 @@ hr {
 .h-2 {
   height: 2px !important;
 }
+
+.display-content {
+  display: contents;
+}
+#patientsTable_filter {
+  display: none;
+}
+
+.dropdown-menu, .daterangepicker {
+  transition: none;
+}
