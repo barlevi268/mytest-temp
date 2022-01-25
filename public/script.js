@@ -23,6 +23,7 @@ var UserSession = function() {
   function _route() {
     const pathname = location.pathname.split('/')[1]
     const routeUnauthorized = () => !currentState.user && (location.href = "/login")
+    const routeUnauthorizedAgent = () => !currentState.user && !currentState.user.isAgent && (location.href = "/login")
     const routeAuthorized = () => currentState.user ? (location.href = "profile") : clearState();
 
     switch (pathname) {
@@ -35,6 +36,9 @@ var UserSession = function() {
         break;
       case 'register':
         routeAuthorized()
+        break;
+      case 'agent':
+        routeUnauthorizedAgent();
         break;
       default:
         routeUnauthorized()

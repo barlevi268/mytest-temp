@@ -33,6 +33,11 @@ app.get("/:testID/send-result", (req, res) => {
 app.get("/newVisit", (req, res) => {
   res.render('pages/new-visit');
 });
+
+app.get("/agent", (req, res) => {
+  res.render('pages/agent/agent');
+});
+
 app.get("*", (req, res) => {
   res.redirect('/');
 });

@@ -11,6 +11,7 @@
   --bg-primary: #131f52;
   --border: #E5E5E5;
   --text-white: #FFF;
+  --bg-main: #F4F5F7;
 }
 
 @font-face {
@@ -391,4 +392,22 @@ hr {
 
 .btn-label {
   color: inherit;
+}
+
+.bg-main {
+  background: var(--bg-main)
+}
+
+.user-avatar.mini {
+  height: 20pt;
+  width: 20pt;
+  border-radius: 50%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.h-2 {
+  height: 2px !important;
 }

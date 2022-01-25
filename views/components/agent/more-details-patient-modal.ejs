@@ -1,0 +1,132 @@
+<style>
+    #mobileDetailPatientModal .modal-dialog {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 481px !important;
+    }
+
+    .modal-content {
+        max-width: 481px !important;
+    }
+    ul[aria-labelledby="dropdownResultTestMenu"] {
+      margin-top: 10px;
+      background: #FFFFFF 0 0 no-repeat padding-box;
+      box-shadow: 0 3px 20px #00000050;
+      border-radius: 6px;
+    }
+</style>
+<div
+        class="modal fade"
+        id="mobileDetailPatientModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mobileLiveScanLabel"
+        aria-hidden="true"
+>
+    <input hidden name="patientID">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div>
+                <h1>
+                    פרטי נבדק
+                </h1>
+            </div>
+            <hr class="text-dark h-2"/>
+            <div class="modal-body px-0">
+                <div class="contentarea">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>שם מטופל</label>
+                            <h5 class="fw-bolder" id="patientName"></h5>
+                        </div>
+                        <div class="col-4">
+                            <label>סטטוס נבדק</label>
+                            <h5 class="fw-bolder" id="statusChecked"></h5>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-4">
+                            <label>טלפון</label>
+                            <h5 class="fw-bolder" id="phone"></h5>
+                        </div>
+                        <div class="col-4">
+                            <label>ת.ז. \ דרכון</label>
+                            <h5 class="fw-bolder" id="IDPassport"></h5>
+                        </div>
+                        <div class="col-4">
+                            <label>צילום ת.ז.</label>
+                            <h5 class="fw-bolder">
+                                <a class="link-primary" id="photoID" target="_blank"></a>
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-4">
+                            <label>סריאלי בדיקה</label>
+                            <h5 class="fw-bolder" id="serialTest"></h5>
+                        </div>
+                        <div class="col-4">
+                            <label>סטטוס בדיקה</label>
+                            <h5 class="fw-bolder" id="testStatus"></h5>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-4">
+                            <label>תיעוד בדיקה</label>
+                            <h5 class="fw-bolder">
+                                <a class="link-primary" id="testDocumentation" target="_blank"></a>
+                            </h5>
+                        </div>
+                        <div class="col-4">
+                            <label>תוצאה</label>
+                            <h5 class="fw-bolder" id="result"></h5>
+                        </div>
+                        <div class="col-4">
+                            <label>תיעוד תוצאה</label>
+                            <h5 class="fw-bolder">
+                                <a class="link-primary" id="outcomeDocumentation" target="_blank"></a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <hr class="text-dark h-2 mt-5"/>
+          <div class="modal-actions container-fluid">
+            <div class="d-flex justify-content-between">
+              <div class="d-flex flex-grow-1 ms-2">
+                <button
+                        type="button"
+                        class="primary-action  btn btn-secondary btn-block col col-spaced me-2 py-3"
+                >
+                  אימות בדיקה
+                </button>
+                <button
+                        type="button"
+                        class="btn btn-primary btn-block col col-spaced py-3"
+                        id="dropdownResultTestMenu" data-bs-toggle="dropdown" aria-expanded="false"
+                >
+                  אימות נבדק
+                </button>
+                <ul class="dropdown-menu text-start" aria-labelledby="dropdownResultTestMenu">
+                  <li><a class="dropdown-item" id="dropdownResultTestMenuNegative">שלילי</a></li>
+                  <li><a class="dropdown-item" id="dropdownResultTestMenuPositive">חיובי</a></li>
+                  <li><a class="dropdown-item" id="dropdownResultTestMenuDisqualification">פסילה</a></li>
+                </ul>
+                <input hidden name="dropdownResultTest">
+              </div>
+              <div class="d-flex flex-grow-1 justify-content-end">
+                <button
+                        type="button"
+                        class="secondary-action btn btn-light btn-block col col-spaced py-3"
+                >
+                  סגור
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<style>
+  .header-logo-dark {
+    background: var(--primary);
+  }
+  body {
+    background: var(--bg-main);
+  }
+  html {
+    height: 100%;
+  }
+  body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+<div class="w-100">
+  <div class="px-4-5 header-logo-dark">
+    <!-- start::login-form -->
+    <div class="login-view login-form d-flex justify-content-between align-items-center">
+      <!--begin::Title-->
+      <div class="py-4">
+        <img src="/media/logo-dark.svg" alt="logo"/>
+      </div>
+      <div class="d-flex align-content-center">
+        <img class="user-avatar mini" src="media/defualt-avatar.svg" />
+        <span>
+          <h4 class="mx-1 text-light dropdown-toggle" id="navbarDarkDropdownMenuLinkUserName" data-bs-toggle="dropdown" aria-expanded="false">אופק אמסלם</h4>
+          <ul class="dropdown-menu text-right p-1" aria-labelledby="navbarDarkDropdownMenuLinkUserName">
+            <li><a class="pt-1" onclick="logOut()">התנתק</a></li>
+          </ul>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
