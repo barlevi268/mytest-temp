@@ -1,5 +1,5 @@
 <%- include('../components/header') %>
-    
+
     <div class="container">
       <div class="wrapper px-4-5">
         <!-- start::login-form -->
@@ -15,11 +15,12 @@
             <div class="form-group">
               <label>ת.ז. \ דרכון</label>
               <input
-                class="form-control"
-                type="text"
-                name="username"
-                placeholder="הזן ת.ז. \ דרכון"
-                autocomplete="off"
+                      class="form-control"
+                      type="text"
+                      name="password"
+                      placeholder="הזן ת.ז. \ דרכון"
+                      autocomplete="off"
+                      mandatory
               />
             </div>
             <!--end::Form group-->
@@ -27,24 +28,23 @@
             <div class="form-group">
               <label>מס’ טלפון</label>
               <input
-                class="form-control"
-                type="tel"
-                inputmode="numeric"
-                name="phone"
-                placeholder="הזן מס’ טלפון"
-                pattern="[0-9]"
-                autocomplete="off"
+                      class="form-control"
+                      type="tel"
+                      inputmode="numeric"
+                      name="phone"
+                      placeholder="הזן מס’ טלפון"
+                      pattern="[0-9]"
+                      autocomplete="off"
+                      mandatory
+                      data-type="phone"
               />
             </div>
             <!--end::Form group-->
             <!--begin::Action-->
             <div class="pt-3 d-grid">
-              <button type="button" class="btn btn-primary btn-block login-btn">
+              <button type="submit" class="btn btn-primary btn-block login-btn">
                 התחבר
               </button>
-              <a class="pt-3 text-left" style="text-align: left" href="javascript:changeLoginView('forgot')"
-                >שכחת את הסיסמה?</a
-              >
             </div>
             <!--end::Action-->
           </form>
@@ -64,7 +64,7 @@
             <!--begin::Form group-->
             <div class="form-group">
               <h4>
-                הזן קוד אימות               
+                הזן קוד אימות
               </h4>
               <p>
                 ברגעים אלה שנלח אליך קוד אימות באמצעות SMS <br>
@@ -73,6 +73,7 @@
             </div>
             <div class="form-group">
               <div class="d-flex justify-content-between">
+                <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="5" placeholder=""/>
                 <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="4" placeholder=""/>
                 <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="3" placeholder=""/>
                 <input class="form-control form-control-pin" type="number" pattern="\d*" split-input="2" placeholder=""/>

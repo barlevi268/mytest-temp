@@ -73,10 +73,33 @@
           <input mandatory class="form-control" placeholder="שם משפחה" name="last_name">
         </div>
       </div>
+      <div class="row easy-radio" mandatory type="radio">
+        <label>id type</label>
+        <div class="form-group col-6">
+          <input
+                  type="radio"
+                  id="id_type_id"
+                  name="id_type"
+                  value="id"
+                  class="d-none"
+          />
+          <label for="id_type_id" class="form-control text-center">ID</label>
+        </div>
+        <div class="form-group col-6">
+          <input
+                  type="radio"
+                  id="id_type_passport"
+                  name="id_type"
+                  value="passport"
+                  class="d-none"
+          />
+          <label for="id_type_passport" class="form-control text-center">Passport</label>
+        </div>
+      </div>
       <div class="row">
         <div class="form-group col-12">
           <label>מס’ ת.ז. \ דרכון</label>
-          <input mandatory class="form-control" placeholder="מס’ ת.ז. \ דרכון" name="id_password">
+          <input mandatory class="form-control" placeholder="מס’ ת.ז. \ דרכון" name="id_password" data-type-radio="id_type">
         </div>
       </div>
       <div class="row">
@@ -147,29 +170,6 @@
           <input mandatory class="form-control" placeholder="שם משפחה" name="birth_date" id="kt_dashboard_daterangepicker">
         </div>
       </div>
-      <div class="row easy-radio" mandatory type="radio">
-        <label>id type</label>
-        <div class="form-group col-6">
-          <input
-                  type="radio"
-                  id="id_type_id"
-                  name="id_type"
-                  value="id"
-                  class="d-none"
-          />
-          <label for="id_type_id" class="form-control text-center">ID</label>
-        </div>
-        <div class="form-group col-6">
-          <input
-                  type="radio"
-                  id="id_type_passport"
-                  name="id_type"
-                  value="passport"
-                  class="d-none"
-          />
-          <label for="id_type_passport" class="form-control text-center">Passport</label>
-        </div>
-      </div>
 
 
       <div class="row">
@@ -203,7 +203,7 @@
     <div class="row">
       <div class="form-footer mt-3">
         <button
-                disabled
+                disabledf
                 type="submit"
                 id="submitButton"
                 class="btn btn-primary btn-block"

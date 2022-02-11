@@ -337,6 +337,35 @@ function initMandatoryFields() {
       if ($val.val() == "" || $val.val() == undefined) {
         valid = false;
         emptyFields.push($val);
+        return;
+      }
+
+      if ($val.attr('data-type') === 'phone') {
+        if (!formIsValidPhone($val.val())) {
+          valid = false;
+          emptyFields.push($val);
+          return;
+        }
+      }
+      if ($val.attr('data-type-radio')) {
+        let type = $(`[name=${$val.attr('data-type-radio')}]:checked`).val()
+        if (!type) {
+          return;
+        }
+      if (type === 'id') {
+       if (!isValidIsraeliID($val.val())) {
+         valid = false;
+         emptyFields.push($val);
+         return;
+       }
+      }
+        if (type === 'passport') {
+          if (!isOnlyNumber($val.val())) {
+            valid = false;
+            emptyFields.push($val);
+            return;
+          }
+        }
       }
     });
 
@@ -391,11 +420,64 @@ function initMandatoryFields() {
     }
   });
 
+  function formIsValidPhone(val) {
+    let phoneArr = (val || '').split('');
+    return phoneArr.length === 10 && phoneArr[0] === '0' && phoneArr[1] === '5';
+  }
+  function isOnlyNumber(val) {
+    return /^\d+$/.test(val || '')
+  }
+
+  function isValidIsraeliID(IsraeliID) {
+    if (!IsraeliID) {
+      IsraeliID = '';
+    }
+    let id = String(IsraeliID).trim();
+    if (id.length > 9 || id.length < 5 || isNaN(parseInt(id))) return false;
+
+    // Pad string with zeros up to 9 digits
+    id = id.length < 9 ? ('00000000' + id).slice(-9) : id;
+
+    return (
+      Array.from(id, Number).reduce((counter, digit, i) => {
+        const step = digit * ((i % 2) + 1);
+        return counter + (step > 9 ? step - 9 : step);
+      }) %
+      10 ===
+      0
+    );
+  }
+
   function getError($val) {
+    let type = '';
+
+    if ($val.attr('type')) {
+      type = $val.attr('type');
+    }
+    if ($val.attr('data-type')) {
+      type =$val.attr('data-type');
+    }
+
+    if ($val.attr('data-type-radio')) {
+      let tempType = $(`[name=${$val.attr('data-type-radio')}]:checked`).val();
+      if (tempType) {
+        type = tempType;
+      }
+    }
+
     if ($val.val()) {
-      switch ($val.attr('type')) {
+      switch (type) {
         case 'email': {
           return 'Invalid Email Address'
+        }
+        case 'phone': {
+          return 'Invalid phone'
+        }
+        case 'id': {
+          return 'Invalid Israeli ID'
+        }
+        case 'passport': {
+          return 'only number'
         }
       }
     }
