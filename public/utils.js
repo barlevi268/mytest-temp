@@ -473,7 +473,25 @@ Swal.success = function (message) {
 
 const valByName = (nameAtt) => $(`[name="${nameAtt}"]`).val()
 
+function initPrefixFields() {
+  var prefixFields = $('[data-prefix]');
+  prefixFields.each((_, val) => {
+    let prefix = $(val).attr('data-prefix');
+    $(val).val(prefix);
+    $(val).on('paste keydown', (e) => {
+      let prefix = $(val).attr('data-prefix');
+      let oldvalue = $(val).val();
+      setTimeout( () => {
+        if ($(val).val().indexOf(prefix) !== 0) {
+          $(val).val(oldvalue);
+        }
+      }, 1)
+    });
+  })
+}
+
 $(() => {
   initAlertModal()
   initMandatoryFields();
+  initPrefixFields();
 });
