@@ -77,32 +77,35 @@ var UserSession = function() {
 }();
 
 class RequestObject {
-  constructor(type = "GET", body = "", contentType = "application/json", dataType = 'text') {
-      this.type = type.toLowerCase()
-      this.dataType = dataType
-      this.contentType = contentType
-      this.data = body;
-      
-      UserSession.isAuthenticated && (this.headers = {"Authorization" : `bearer ${UserSession.fetch('token').value}`})
+  constructor(method = "GET", body = "", contentType = "application/json", dataType = 'text', processData = true) {
+    this.method = method
+    this.dataType = dataType
+    this.contentType = contentType
+    this.data = body
+    this.cache = false
+    this.processData = processData
+    this.enctype = 'multipart/form-data'
+
+    UserSession.isAuthenticated && (this.headers = { "Authorization": `bearer ${UserSession.fetch('token')}` })
   }
 }
 
 function request(url, obj) {
-  var requestObj = {...{url:url},...obj}
-  return new Promise(function(resolve, reject) {
-      $.ajax(requestObj)
+  var requestObj = { ...{ url: url }, ...obj }
+  return new Promise(function (resolve, reject) {
+    $.ajax(requestObj)
       .done((data) => {
-          try {
-              var parsed = JSON.parse(data)
-              resolve(parsed)
-          } catch (e) {
-              resolve(data)
-          }
-          
+        try {
+          var parsed = JSON.parse(data)
+          resolve(parsed)
+        } catch (e) {
+          resolve(data)
+        }
+
       })
-      .fail((ajax,_,status) => {
-          status == "Unauthorized" && UserSession.deauthenticate()
-          reject(ajax.responseText,ajax,status)
+      .fail((ajax, _, status) => {
+        status == "Unauthorized" && UserSession.deauthenticate()
+        reject(ajax.responseText, ajax, status)
       })
   })
 }

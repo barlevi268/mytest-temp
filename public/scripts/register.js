@@ -2,40 +2,91 @@ var impairTestBarcodeField = $('.impair-test-barcode');
 var uploadCaddyField = $('.upload-caddy');
 var photoPassportBtn = $('[name=photo_passport]');
 var addNewUserForm = $('#addNewUser');
+var birthDateForm = $('[name=birth_date]');
 var photoPassportFile;
 var barCodeValue;
 
-const fakeVisit = {
-  fullName: "חיים רפאלי",
-  testBarcode: "40132164",
-  visitId: "31628"
-};
 
-function fakeVisitSuccess() {
-  let params = {};
+function prepareFromData() {
+  let formData = new FormData();
   addNewUserForm.find('[name]').each(function() {
-    params[$(this).attr("name")] = $(this).val();
+    $(this).attr('name') != "photo_passport" && formData.append($(this).attr('name'), $(this).val());
   });
-  params = {
-    ...params,
-    barCodeValue
-  }
-  alertModal.display({
-    modalId: "visitSuccessModal",
-    primaryLabel: "סיום",
-    secondaryLabel: "הוסף נבדק נוסף",
-    icon: "success",
-    primaryAction: () => gotoPayment(),
-    secondaryAction: () => resetForm(),
-    onInit: () => {}
-  });
+
+  formData.append("serial_number", barCodeValue);
+  formData.append("photo_passport", addNewUserForm.find('[name="photo_passport"]')[0].files[0]);
+
+  return formData;
 }
+
+function handleSubmitSuccess(res) {
+  alertModal.display({
+    modalId: 'visitSuccessModal',
+    content: "מועבר לתשלום",
+    icon: "success",
+    hideSecondary: true,
+    hidePrimary: true,
+  });
+  setTimeout(() => {
+    if (res.data?.payment_url?.length) {
+      location.href = res.data.payment_url
+    } else {
+      location.href = '/'
+    }
+  }, 1000)
+}
+
+function handleSubmitFailure(res) {
+  var errorMessage = res.message;
+  var errorData = res.data;
+
+  var formattedError = function() {
+    var combinedError = '';
+    for (var key in errorData) {
+      combinedError += `${errorData[key][0]}</br>`
+    }
+    return combinedError
+  }()
+
+  if (errorMessage == 'Validation failed') {
+
+    alertModal.display({
+      modalId: 'alertModal',
+      content: formattedError,
+      hideSecondary: true,
+      primaryLabel: "הבנתי",
+    });
+
+  } else if (errorMessage == 'invalid voucher') {
+    alertModal.display({
+      modalId: 'alertModal',
+      content: "קוד קופון לא תקף",
+      hideSecondary: true,
+      primaryLabel: "הבנתי",
+    });
+  }
+}
+
+addNewUserForm.on('submit',async (e) => {
+  e.preventDefault();
+
+  var formData = prepareFromData();
+
+  var requestOpbject = new RequestObject('POST', formData, false,'text', false);
+  request('/api/register', requestOpbject)
+    .then(res => handleSubmitSuccess(res))
+    .catch((res,ajax,status) => handleSubmitFailure(JSON.parse(res)))
+
+})
+
+$('.voucher-toggle').on('click', () => $('#cuponRow').toggleClass('d-none'));
 
 
 function setValueBarCode(value) {
   if (value) {
     barCodeValue = value;
     impairTestBarcodeField.removeClass('d-none')
+    $('#submitButton').prop('disabled', false)
     return;
   }
   barCodeValue = undefined;
@@ -57,10 +108,6 @@ async function setPhotoPassport(event) {
   uploadCaddyField.addClass('d-none')
 }
 
-function gotoPayment() {
-  Swal.warning('go to Payment') // TODO gotoPayment;
-}
-
 function resetForm() {
   if (addNewUserForm && addNewUserForm[0]) {
     addNewUserForm[0].reset();
@@ -69,8 +116,57 @@ function resetForm() {
   }
 }
 
+function initCities() {
+  $.getJSON("/media/cities.json", data =>
+    $.each(data, (i, val) =>
+      $('[name="city_code"]').append(
+        `<option value="${val.City_Code}">${val.CityName_Hebrew}</option>`
+      )
+    )
+  );
+}
+
+function initBirthDate() {
+  birthDateForm.daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    maxDate: moment().toDate(),
+    minDate: '01/01/1900',
+    opens: 'left',
+    direction: true,
+    startDate: '01/01/2000',
+    locale: {
+      cancelLabel: 'לְבַטֵל',
+      applyLabel: "לְיַשֵׂם",
+      customRangeLabel: 'טווח תאריכים',
+      daysOfWeek: [
+        'א\'', 'ב\'', 'ג\'', 'ד\'', 'ה\'', 'ו\'', 'שבת'
+      ],
+      monthNames: [
+        'ינו',
+        'פבר',
+        'מרץ',
+        'אפר',
+        'מאי',
+        'יוני',
+        'יולי',
+        'אוג',
+        'ספט',
+        'אוק',
+        'נוב',
+        'דצמ',
+      ],
+    },
+  }, (start, end, label) => {
+    birthDateForm.val(start.format("DD/MM/YYYY"));
+  });
+}
+
+
 $(() => {
-  // webcam.init();
+  alertModal.init()
+  initCities();
+  initBirthDate();
   mobileStream.init({
     resultInput:'[name=barcode]',
     openButton: '.mobile-stream-btn',

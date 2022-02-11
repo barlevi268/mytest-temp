@@ -66,17 +66,17 @@
       <div class="row">
         <div class="form-group col-6">
           <label>שם פרטי</label>
-          <input class="form-control" placeholder="שם משפחה" name="first_name">
+          <input mandatory class="form-control" placeholder="שם משפחה" name="first_name">
         </div>
         <div class="form-group col-6">
           <label>שם משפחה</label>
-          <input class="form-control" placeholder="שם משפחה" name="last_Name">
+          <input mandatory class="form-control" placeholder="שם משפחה" name="last_name">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-12">
           <label>מס’ ת.ז. \ דרכון</label>
-          <input class="form-control" placeholder="מס’ ת.ז. \ דרכון" name="passport">
+          <input mandatory class="form-control" placeholder="מס’ ת.ז. \ דרכון" name="id_password">
         </div>
       </div>
       <div class="row">
@@ -86,28 +86,106 @@
             <img style="height: 40px" class="upload-caddy" />
             <u>בחר תמונה</u>
           </label>
-          <input type="file" id="uploadBarcode" class="d-none" name="photo_passport" accept=".jpg,.jpeg,.png" />
+          <input mandatory type="file" id="uploadBarcode" class="d-none" name="photo_passport" accept=".jpg,.jpeg,.png" />
         </div>
       </div>
       <div class="row">
         <div class="form-group col-12">
           <label>מס’ נייד</label>
-          <input class="form-control" placeholder="מס’ נייד" name="phone">
+          <input mandatory class="form-control" placeholder="מס’ נייד" name="phone">
         </div>
       </div>
       <div class="row">
-        <div class="impair-test-barcode d-none form-group col">
-          <label> </label>
+        <div class="form-group col-6">
+          <label>קופת חולים</label>
+          <select
+                  mandatory
+                  select2-type="regular"
+                  name="hmo_code"
+                  placeholder="בחר קופה"
+          >
+            <option></option>
+            <option value="1">כללית</option>
+            <option value="2">לאומית</option>
+            <option value="4">מכבי</option>
+            <option value="3">מאוחדת</option>
+            <option value="9">פרטי</option>
+          </select>
+        </div>
+        <div class="form-group col-6">
+          <label >עיר מגורים</label>
+          <select
+                  mandatory
+                  select2-type="search"
+                  placeholder="בחר עיר מגורים"
+                  name="city_code"
+          >
+            <option></option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-6">
+          <label>street name</label>
+          <input mandatory class="form-control" placeholder="שם משפחה" name="street_name">
+        </div>
+        <div class="form-group col-6">
+          <label>street number</label>
+          <input mandatory class="form-control" placeholder="שם משפחה" name="street_number">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-12">
+          <label>email</label>
+          <input mandatory class="form-control" placeholder="שם משפחה" name="email" type="email">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-12">
+          <label>birth date</label>
+          <input mandatory class="form-control" placeholder="שם משפחה" name="birth_date" id="kt_dashboard_daterangepicker">
+        </div>
+      </div>
+      <div class="row easy-radio" mandatory type="radio">
+        <label>id type</label>
+        <div class="form-group col-6">
           <input
-            type="text"
-            name="barcode"
-            class="form-control"
-            placeholder="code"
-            disabled
+                  type="radio"
+                  id="id_type_id"
+                  name="id_type"
+                  value="id"
+                  class="d-none"
+          />
+          <label for="id_type_id" class="form-control text-center">ID</label>
+        </div>
+        <div class="form-group col-6">
+          <input
+                  type="radio"
+                  id="id_type_passport"
+                  name="id_type"
+                  value="passport"
+                  class="d-none"
+          />
+          <label for="id_type_passport" class="form-control text-center">Passport</label>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="impair-test-barcode d-none form-group col">
+          <label> </label>
+          <input
+                  type="text"
+                  name="barcode"
+                  class="form-control"
+                  placeholder="serial_number"
+                  disabled
+                  mandatory
           />
         </div>
         <div class="form-group col">
-          <label> </label>
+          <label> </label>
           <div class="mobile-stream-btn form-control cursor-pointer">
             <label>🔍 סרוק בדיקה</label>
           </div>
@@ -115,17 +193,25 @@
       </div>
 
     </div>
+    <div id="cuponRow" class="d-none row">
+      <div class="form-group col-12">
+        <label>קוד קופון</label>
+        <input class="form-control" placeholder="הזן קוד" name="voucher">
+      </div>
+    </div>
     <div class="row">
       <div class="form-footer mt-3">
         <button
-          type="button"
-          onclick="fakeVisitSuccess()"
-          class="btn btn-primary btn-block"
+                disabled
+                type="submit"
+                id="submitButton"
+                class="btn btn-primary btn-block"
         >
           סיים ושלח ביקור
         </button>
       </div>
     </div>
+    <a href="#" class="btn btn-block voucher-toggle">יש לי קוד קופון</a>
   </form>
 </div>
 <!-- end::page content -->

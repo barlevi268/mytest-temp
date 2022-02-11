@@ -67,6 +67,10 @@ function initAlertModal() {
     },
     display: function (message) {
       if (typeof message == "object") {
+        if (!message.modalId) {
+          message.modalId = 'alertModal';
+        }
+
         if (message.modalId) {
           alertModal.subView = $(`#${message.modalId}`);
           alertModal.init();
@@ -138,8 +142,8 @@ function initAlertModal() {
 }
 
 var mobileStream = (function () {
-  var modal = $("#mobileLiveScanModal");
-  var mobileStreamElm = $(".mobile-stream");
+  var modal;
+  var mobileStreamElm;
   var btn;
   var barcodeInput;
   var barcodeInputCallback;
@@ -158,12 +162,12 @@ var mobileStream = (function () {
 
   function hanldeQuaggaResults(decodedText, decodedResult) {
     if (decodedText) {
-      if (decodedText.length > 8) {
+      if (decodedText.length > 1) {
         barcodeInput.val(decodedText);
         if (barcodeInputCallback) {
           barcodeInputCallback(decodedText);
         }
-        $(modal).find('.modal-icon').removeClass('d-none');
+        modal.find('.modal-icon').removeClass('d-none');
         html5QrCode.stop()
         setTimeout(() => {
           modal.find(".secondary-action").trigger("click");
@@ -174,11 +178,16 @@ var mobileStream = (function () {
 
   function initListeners() {
     btn.on("click", (e) => {
-      $(modal).find('.modal-icon').addClass('d-none');
+      modal.find('.modal-icon').addClass('d-none');
       alertModal.display({
         modalId: "mobileLiveScanModal",
         onInit: () => initQuagga(),
         afterInit: () => {},
+        secondaryAction:() => {
+          if (html5QrCode.getState() === 2) {
+            html5QrCode.stop();
+          }
+        }
       });
     });
   }
@@ -186,6 +195,8 @@ var mobileStream = (function () {
     barcodeInput = $(resultInput);
     btn = $(openButton);
     barcodeInputCallback = resultInputCallback;
+    modal = $("#mobileLiveScanModal")
+    mobileStreamElm = $(".mobile-stream")
     initListeners();
   }
   return {
@@ -300,6 +311,29 @@ function initMandatoryFields() {
 
     $.each(fields, (i, val) => {
       var $val = $(val);
+      if ($val.attr('type') === 'radio') {
+        let isCheckedRadio = false;
+        $.each($val.find('input'), (iRadio, valRadio) => {
+          let $valRadio = $(valRadio);
+          if ($valRadio.is(":checked")) {
+            isCheckedRadio = true;
+          }
+        })
+        if (!isCheckedRadio) {
+          valid = false;
+          emptyFields.push($val);
+        }
+        return
+      }
+      if ($val.attr('type') === 'email') {
+        let email = $val.val();
+        let filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if (!filter.test(email)) {
+          valid = false;
+          emptyFields.push($val);
+          return;
+        }
+      }
       if ($val.val() == "" || $val.val() == undefined) {
         valid = false;
         emptyFields.push($val);
@@ -324,16 +358,49 @@ function initMandatoryFields() {
       });
 
       $.each(emptyFields, (i, val) => {
+        let isTypeRadio = false;
         var $val = $(val);
-        $val.after('<span class="field-message text-danger">שדה חובה</span>');
+        if ($val.attr('type') === 'radio') {
+          isTypeRadio = true;
+        }
+        $val.after(`<span class="field-message text-danger">${getError($val)}</span>`);
+        if (isTypeRadio) {
+          let label$ = $val.find('input + label');
+          $.each(label$, (_, labelVal) => {
+            $(labelVal).addClass("border border-danger");
+          })
+
+          $.each($val.find('input'), (_, inputVal) => {
+            $(inputVal).on("change", (e) => {
+              $.each(label$, (_, labelVal) => {
+                $(labelVal).removeClass("border border-danger");
+              })
+              $val.nextAll('span.field-message').remove();
+            });
+          })
+          return;
+        }
+
         $val.addClass("border border-danger");
 
         $val.on("input", (e) => {
           $val.removeClass("border border-danger");
+          $val.nextAll('span.field-message').remove();
         });
       });
     }
   });
+
+  function getError($val) {
+    if ($val.val()) {
+      switch ($val.attr('type')) {
+        case 'email': {
+          return 'Invalid Email Address'
+        }
+      }
+    }
+    return 'שדה חובה';
+  }
 }
 
 $.fn.btn = function (action) {
@@ -407,7 +474,6 @@ Swal.success = function (message) {
 const valByName = (nameAtt) => $(`[name="${nameAtt}"]`).val()
 
 $(() => {
-  initMandatoryFields();
-  
   initAlertModal()
+  initMandatoryFields();
 });
