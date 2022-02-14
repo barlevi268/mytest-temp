@@ -587,6 +587,192 @@ function initPrefixFields() {
   })
 }
 
+var mobileStreamVideo = (function () {
+  var modal;
+  var mobileStreamElm;
+  var btn;
+  var barcodeInput;
+  var inputCallback;
+  var previewVideoRecordCanvas;
+  var previewVideoRecordCanvasContext;
+  var previewVideoRecordFile;
+  var previewVideoRecordVideo;
+  var camera_stream;
+  var seconds;
+  let isVideoRecord = false;
+  var startRecord;
+  var stopRecord;
+  var setIntervalRecord;
+  var media_recorder = null;
+  var blobs_recorded = [];
+  var setTimeoutVal;
+
+  function initQuagga(stream, modalId) {
+    let thisModal = $(`#${modalId}`);
+    startRecord = thisModal.find('#start-record');
+    startRecord.removeClass('d-none')
+    stopRecord = thisModal.find('.secondary-action');
+    stopRecord.addClass('d-none')
+    seconds = undefined;
+    media_recorder = null;
+    blobs_recorded = [];
+    listenStart();
+
+    previewVideoRecordCanvas = $('#previewVideoRecord')[0];
+    previewVideoRecordCanvasContext = $('#previewVideoRecord')[0].getContext('2d');
+    previewVideoRecordFile = $('#previewVideoRecordFile');
+    previewVideoRecordVideo = $('#previewVideoRecordVideo');
+    previewVideoRecordVideo[0].srcObject = stream;
+    timerCallback();
+  }
+
+  function listenStart() {
+    startRecord.on('click',() => {
+      isVideoRecord = true;
+      startRecord.addClass('d-none');
+      stopRecord.removeClass('d-none');
+      stopRecord.prop('disabled', true);
+      startRecords();
+    })
+  }
+  function startSeconds() {
+    seconds = 0;
+    setIntervalRecord = setInterval(() => {
+      ++seconds;
+      if (seconds >= 60) {
+        stopRecord.prop('disabled', false);
+      }
+      if (seconds >= 180) {
+        modal.find(".secondary-action").trigger("click");
+      }
+    }, 1000)
+  }
+  function stopSeconds() {
+    if (!setIntervalRecord) {
+      return
+    }
+    clearInterval(setIntervalRecord);
+    clearTimeout(setTimeoutVal);
+  }
+
+  function startRecords() {
+    startSeconds();
+    media_recorder = new MediaRecorder(camera_stream, { mimeType: 'video/webm' });
+
+    // event : new recorded video blob available
+    media_recorder.addEventListener('dataavailable', function(e) {
+      blobs_recorded.push(e.data);
+    });
+
+    // event : recording stopped & all blobs sent
+    media_recorder.addEventListener('stop', function() {});
+
+    media_recorder.start(1000);
+  }
+
+  function stopRecords() {
+    if (media_recorder) {
+      media_recorder.stop();
+    }
+    stopBothVideoAndAudio(camera_stream);
+    stopSeconds();
+    if (blobs_recorded.length) {
+      let file = new File([blobs_recorded], "video.webm", {type: "video/webm", lastModified: new Date().getTime()});
+      let container = new DataTransfer();
+      container.items.add(file);
+      barcodeInput[0].files = container.files;
+      inputCallback(container.files);
+    }
+  }
+
+  function stopBothVideoAndAudio(stream) {
+    stream.getTracks().forEach(function(track) {
+      if (track.readyState == 'live') {
+        track.stop();
+      }
+    });
+  }
+
+  function timerCallback() {
+    if (!isVideoRecord) {
+      return;
+    }
+    computeFrame();
+    setTimeoutVal = setTimeout(() => {
+      timerCallback();
+    }, 0);
+  }
+
+  function computeFrame() {
+    const heightCanvas = previewVideoRecordCanvasContext.canvas.width * previewVideoRecordVideo[0].videoHeight / previewVideoRecordVideo[0].videoWidth;
+    if (!heightCanvas) {
+      return
+    }
+    previewVideoRecordCanvasContext.canvas.height = heightCanvas;
+    previewVideoRecordCanvasContext.drawImage(
+      previewVideoRecordVideo[0], 0, 0,
+      previewVideoRecordCanvasContext.canvas.width,
+      heightCanvas
+    );
+    previewVideoRecordCanvasContext.fillStyle = "#ff0000";
+    previewVideoRecordCanvasContext.font = "2rem serif";
+    previewVideoRecordCanvasContext.fillText(getCurrentTime(), 10, previewVideoRecordCanvasContext.canvas.height - 20);
+  }
+
+  function getCurrentTime() {
+    if (!seconds) {
+      return '';
+    }
+    let minutes = Math.floor(seconds/60);
+    let sec = seconds%60;
+    if (minutes < 10) {
+      minutes = `0${minutes}`
+    }
+    if (sec < 10) {
+      sec = `0${sec}`
+    }
+    return `${minutes}:${sec}`
+  }
+
+  function initListeners() {
+    btn.on("click", async (e) => {
+      try {
+        isVideoRecord = true;
+        camera_stream = await navigator.mediaDevices.getUserMedia({video: true, audio: false});
+        modal.find('.modal-icon').addClass('d-none');
+        alertModal.display({
+          modalId: "mobileLiveRecordTestModal",
+          onInit: () => initQuagga(camera_stream, 'mobileLiveRecordTestModal'),
+          afterInit: () => {},
+          secondaryAction: () => {
+            isVideoRecord = false;
+            stopRecords();
+          }
+        });
+      } catch (err) {
+        console.error(err);
+        alertModal.display({
+          content: "You have blocked access to the camera",
+          hideSecondary: true,
+          primaryLabel: "הבנתי",
+        });
+      }
+    });
+  }
+  function _init({ resultInput, openButton, resultInputCallback }) {
+    barcodeInput = $(resultInput);
+    btn = $(openButton);
+    inputCallback = resultInputCallback;
+    modal = $("#mobileLiveRecordTestModal")
+    mobileStreamElm = $(".mobile-stream")
+    initListeners();
+  }
+  return {
+    init: _init,
+    refresh: initQuagga,
+  };
+})();
+
 $(() => {
   initAlertModal()
   initMandatoryFields();

@@ -1,0 +1,59 @@
+<style>
+  #mobileLiveRecordTestModal .modal-dialog {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .pre-capture #mobileStream{
+    display: flex;
+    overflow: hidden;
+  }
+  #previewVideoRecord {
+    width: 100%;
+  }
+</style>
+<div
+      class="modal fade"
+      id="mobileLiveRecordTestModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="mobileLiveScanLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog mx-2" role="document">
+        <div class="modal-content">
+          <div class="modal-body px-0">
+            <input type="file" accept="video/*" capture hidden id="previewVideoRecordFile" name="video">
+            <video width="250" height="250" autoplay id="previewVideoRecordVideo" hidden></video>
+            <div class="modal-icon d-none text-center pt-4 pb-3">
+              <img src="/media/success-icon.svg" />
+            </div>
+            <div class="contentarea">
+              <h1>
+                סרוק ברקוד
+              </h1>
+              <div class="pre-capture camera-mobile">
+                <div
+                  class="shadow rounded-lg mb-3 mt-4"
+                  id="mobileStream"
+                >
+                  <canvas id="previewVideoRecord" height="250" style="direction: ltr"></canvas>
+                </div>
+              </div>
+            </div>
+            <div calss="modal-actions container-fluid">
+              <div class="pre-capture row justify-content-between">
+                <button class="btn btn-secondary btn-block col col-spaced" id="start-record">
+                  Start record
+                </button>
+                <button
+                  type="button"
+                  class="secondary-action btn btn-secondary btn-block col col-spaced"
+                >
+                  סגירה
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
