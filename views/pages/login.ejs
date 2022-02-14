@@ -2,15 +2,22 @@
 
     <div class="container">
       <div class="wrapper px-4-5">
-        <!-- start::login-form -->
-        <div class="login-view login-form">
+        <div class="form-header pt-5">
+          <img src="media/logo-light.svg" alt="logo"/>
+        </div>
+        <ul
+                class="nav nav-tabs nav-tabs-line nav-tabs-line-2x nav-bolder mb-5 justify-content-center font-size-h6">
+          <li class="tab-form nav-item flex-grow-1 p-0" data-tab="login-sms">
+            <a class="nav-link justify-content-center">Login with SMS</a>
+          </li>
+          <li class="tab-form nav-item flex-grow-1 p-0" data-tab="login-email">
+            <a class="nav-link justify-content-center">Login with Email</a>
+          </li>
+        </ul>
+        <!-- start::login-sms -->
+        <div class="login-view login-form tab-form login-sms animate__animated animate__fadeInLeft">
           <!--begin::Form-->
-          <form class="form login-form " id="loginForm" novalidate="novalidate">
-            <!--begin::Title-->
-            <div class="form-header pt-5">
-              <img src="media/logo-light.svg" alt="logo"/>
-            </div>
-            <!--begin::Title-->
+          <form class="form login-form " id="loginFormSMS" novalidate="novalidate">
             <!--begin::Form group-->
             <div class="form-group">
               <label>ת.ז. \ דרכון</label>
@@ -50,17 +57,55 @@
           </form>
           <!--end::Form-->
         </div>
-        <!-- end::login-form -->
+        <!-- end::login-sms -->
+
+        <!-- start::login-email -->
+        <div class="login-view login-form tab-form login-email animate__animated animate__fadeInLeft d-none">
+          <!--begin::Form-->
+          <form class="form login-form " id="loginFormEmail" novalidate="novalidate">
+            <!--begin::Form group-->
+            <div class="form-group">
+              <label>ת.ז. \ דרכון</label>
+              <input
+                      class="form-control"
+                      type="text"
+                      name="password"
+                      placeholder="הזן ת.ז. \ דרכון"
+                      autocomplete="off"
+                      mandatory
+              />
+            </div>
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group">
+              <label>email</label>
+              <input
+                      class="form-control"
+                      type="email"
+                      name="email"
+                      placeholder="email"
+                      autocomplete="off"
+                      mandatory
+                      data-type="email"
+              />
+            </div>
+            <!--end::Form group-->
+            <!--begin::Action-->
+            <div class="pt-3 d-grid">
+              <button type="submit" class="btn btn-primary btn-block login-btn">
+                התחבר
+              </button>
+            </div>
+            <!--end::Action-->
+          </form>
+          <!--end::Form-->
+        </div>
+        <!-- end::login-email -->
 
         <!-- start::two-factor-form -->
-        <div class="login-view two-factor-form d-none animate__animated animate__fadeInLeft">
+        <div class="login-view two-factor-form d-none animate__animated animate__fadeInLeft tab-form login-two-factor">
           <!--begin::Form-->
           <form class="form" id="twoFactorForm" novalidate="novalidate">
-            <!--begin::logo-->
-            <div class="form-header pt-5">
-              <img src="media/logo-light.svg" />
-            </div>
-            <!--begin::logo-->
             <!--begin::Form group-->
             <div class="form-group">
               <h4>

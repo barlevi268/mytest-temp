@@ -302,15 +302,23 @@ function dataURItoBlob(dataURI) {
 
 
 function initMandatoryFields() {
-  var fields = $("[mandatory]");
-  var emptyFields = [];
+  var forms = $("form");
+  var formsAndFields = [];
+  $.each(forms, (_, form) => {
+    let fields = $(form).find("[mandatory]")
+    formsAndFields.push({
+      form: $(form),
+      fields: fields,
+      emptyFields: []
+    })
+  })
 
-  function formValidated() {
+  function formValidated(formObject) {
     var valid = true;
-    emptyFields = [];
+    formObject.emptyFields = [];
 
-    $.each(fields, (i, val) => {
-      var $val = $(val);
+    $.each(formObject.fields, (i, val) => {
+      var $val = formObject.form.find(val);
       if ($val.attr('type') === 'radio') {
         let isCheckedRadio = false;
         $.each($val.find('input'), (iRadio, valRadio) => {
@@ -321,7 +329,7 @@ function initMandatoryFields() {
         })
         if (!isCheckedRadio) {
           valid = false;
-          emptyFields.push($val);
+          formObject.emptyFields.push($val);
         }
         return
       }
@@ -330,39 +338,39 @@ function initMandatoryFields() {
         let filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         if (!filter.test(email)) {
           valid = false;
-          emptyFields.push($val);
+          formObject.emptyFields.push($val);
           return;
         }
       }
       if ($val.val() == "" || $val.val() == undefined) {
         valid = false;
-        emptyFields.push($val);
+        formObject.emptyFields.push($val);
         return;
       }
 
       if ($val.attr('data-type') === 'phone') {
         if (!formIsValidPhone($val.val())) {
           valid = false;
-          emptyFields.push($val);
+          formObject.emptyFields.push($val);
           return;
         }
       }
       if ($val.attr('data-type-radio')) {
-        let type = $(`[name=${$val.attr('data-type-radio')}]:checked`).val()
+        let type = formObject.form.find(`[name=${$val.attr('data-type-radio')}]:checked`).val()
         if (!type) {
           return;
         }
       if (type === 'id') {
        if (!isValidIsraeliID($val.val())) {
          valid = false;
-         emptyFields.push($val);
+         formObject.emptyFields.push($val);
          return;
        }
       }
         if (type === 'passport') {
           if (!isOnlyNumber($val.val())) {
             valid = false;
-            emptyFields.push($val);
+            formObject.emptyFields.push($val);
             return;
           }
         }
@@ -372,11 +380,18 @@ function initMandatoryFields() {
     return valid;
   }
 
+  function getForm(form) {
+    return formsAndFields.find(formAndFields => {
+      return formAndFields.form[0] === form[0]
+    });
+  }
+
   $('[type="submit"]').on("click", (e) => {
     e.preventDefault();
-
-    if (formValidated()) {
-      $("form").submit();
+    let formHtml = $(e.target).closest("form");
+    let formObject = getForm(formHtml);
+    if (formValidated(formObject)) {
+      formObject.form.submit();
     } else {
       $(".field-message").remove();
 
@@ -386,7 +401,7 @@ function initMandatoryFields() {
         primaryLabel: "הבנתי",
       });
 
-      $.each(emptyFields, (i, val) => {
+      $.each(formObject.emptyFields, (i, val) => {
         let isTypeRadio = false;
         var $val = $(val);
         if ($val.attr('type') === 'radio') {

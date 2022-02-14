@@ -426,3 +426,22 @@ hr {
 .border-danger[type="radio"] {
 
 }
+.nav-tabs .nav-item{
+  background: unset;
+}
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+  border-color: snow;
+}
+.nav-tabs .nav-item:not(.active) .nav-link {
+  border: none !important;
+  color: var(--text-muted)
+}
+.nav.nav-tabs .nav-link {
+  border-bottom: 2px solid #0000;
+  transition: color 0ms;
+}
+.nav.nav-tabs .nav-item.active .nav-link{
+  border-bottom: 2px solid #3699ff;
+}
+

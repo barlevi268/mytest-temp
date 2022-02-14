@@ -1,11 +1,26 @@
 const loginBtn = $(".login-btn");
 const twoFactorBtn = $('.sumbit-two-factor-button')
-const passwordField = $('[name="password"]');
+const passwordFieldEmail = $('.login-email [name="password"]');
+const passwordFieldSMS = $('.login-sms [name="password"]');
 const phoneField = $('[name="phone"]');
-const loginForm = $('#loginForm');
+const emailField = $('[name="email"]');
+const loginFormSMS = $('#loginFormSMS');
+const loginFormEmail = $('#loginFormEmail');
+
+const loginSMS = 'login-sms';
+const loginEmail = 'login-email';
+const loginTwoFactor = 'login-two-factor';
+let typeForm = '';
 
 function formIsValid() {
-    return !(passwordField.val() === "" || formIsValidPhone(phoneField.val()));
+    if (typeForm === 'phone') {
+        return !(passwordFieldSMS.val() === "" || formIsValidPhone(phoneField.val()));
+    }
+    if (typeForm === 'email') {
+        let filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        return !(passwordFieldEmail.val() === "" || emailField.val() === "" || !filter.test(emailField.val()));
+    }
+    return false;
 }
 
 function formIsValidPhone(val) {
@@ -21,6 +36,32 @@ function changeLoginView(view) {
     $('.login-view').addClass('d-none')
 
     $(`.${view}-form`).removeClass('d-none')
+}
+function listenTabs() {
+    const tabFormsLi = $('li[data-tab]');
+    $.each(tabFormsLi, (_, tabFormLi) => {
+        $(tabFormLi).on('click', (e) => {
+            showForm($(e.currentTarget).attr('data-tab'));
+        })
+    })
+}
+function showForm(formName) {
+    const tabFormsDiv = $('div.tab-form');
+    const tabFormsLi = $('li[data-tab]');
+    $.each(tabFormsDiv, (_, tabForm) => {
+        if ($(tabForm).hasClass(formName)) {
+            $(tabForm).removeClass('d-none');
+            return;
+        }
+        $(tabForm).addClass('d-none')
+    })
+    $.each(tabFormsLi, (_, tabFormLi) => {
+        if ($(tabFormLi).attr('data-tab') === formName) {
+            $(tabFormLi).addClass('active')
+            return;
+        }
+        $(tabFormLi).removeClass('active');
+    })
 }
 
 var pinField = {
@@ -53,16 +94,31 @@ var pinField = {
 }
 
 async function loginClickHandler(e) {
-
-    const password = passwordField.val();
-    const phone = phoneField.val();
-
     loginBtn.btn("startLoader");
+    const isPhoneField = !$(`.login-view.${loginSMS}`).hasClass('d-none');
+    const isLoginForm = !$(`.login-view.${loginEmail}`).hasClass('d-none');
+    let body = {}
+    changeLoginView('two-factor');
+    return;
+    if (isPhoneField) {
+        typeForm = 'phone';
+        const password = passwordFieldSMS.val();
+        const phone = phoneField.val();
+        body = {
+            id_password: password,
+            phone: phone
+        };
+    }
 
-    let body = {
-        id_password: password,
-        phone: phone
-    };
+    if (isLoginForm) {
+        typeForm = 'email';
+        const password = passwordFieldEmail.val();
+        const email = emailField.val();
+        body = {
+            id_password: password,
+            email: email
+        };
+    }
 
     if (formIsValid()) {
         let fetchObj = new RequestObject("POST", JSON.stringify(body));
@@ -132,7 +188,11 @@ async function loginTwoFactorClickHandler(e) {
 
 }
 
-loginForm.on('submit',async (e) => {
+loginFormSMS.on('submit',async (e) => {
+    e.preventDefault();
+    loginClickHandler(e);
+})
+loginFormEmail.on('submit',async (e) => {
     e.preventDefault();
     loginClickHandler(e);
 })
@@ -140,8 +200,7 @@ loginForm.on('submit',async (e) => {
 $(() => {
 
     pinField.init()
-
-    //handle login
-    // loginBtn.on("click", async e => loginClickHandler(e));
     twoFactorBtn.on("click", async e => loginTwoFactorClickHandler(e));
+    listenTabs();
+    showForm(loginSMS);
 });
