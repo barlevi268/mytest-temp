@@ -132,7 +132,7 @@ async function loginClickHandler(e) {
           })
           .catch((error) => {
               Swal.error('מס זהות או נייד לא נמצאו במערכת')
-              console.log(error)
+              console.error(error)
           })
 
     } else {
@@ -177,7 +177,7 @@ async function loginTwoFactorClickHandler(e) {
           })
           .catch((error) => {
               Swal.error('שם משתמש או סיסמה לא נכונים')
-              console.log(error)
+              console.error(error)
           })
 
     } else {

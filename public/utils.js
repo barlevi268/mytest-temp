@@ -50,20 +50,23 @@ var localizations = (async function () {
 function initAlertModal() {
   var alertModal = {
     subView: $("#alertModal"),
-    show: function () {
-      alertModal.subView.modal("show");
+    modals: {},
+    show: function (modalId) {
+      alertModal.modals[modalId].subView.modal("show")
     },
-    clear: function () {
-      alertModal.primaryButton.html("אישור");
-      alertModal.secondaryButton.html("ביטול");
-      alertModal.primaryButton.on("click", () => alertModal.hide());
-      alertModal.secondaryButton.on("click", () => alertModal.hide());
-      alertModal.successIcon.addClass("d-none");
-      alertModal.secondaryButton.addClass(["col-spaced", "col-6"]);
+    clear: function (modalId) {
+      alertModal.modals[modalId].primaryButton.html("אישור");
+      alertModal.modals[modalId].secondaryButton.html("ביטול");
+      alertModal.modals[modalId].primaryButton.off();
+      alertModal.modals[modalId].secondaryButton.off();
+      alertModal.modals[modalId].primaryButton.on("click", () => alertModal.hide(modalId));
+      alertModal.modals[modalId].secondaryButton.on("click", () => alertModal.hide(modalId));
+      alertModal.modals[modalId].successIcon.addClass("d-none");
+      alertModal.modals[modalId].secondaryButton.addClass(["col-spaced", "col-6"]);
     },
-    hide: function () {
-      alertModal.subView.modal("hide");
-      alertModal.clear();
+    hide: function (modalId) {
+      alertModal.modals[modalId].subView.modal("hide");
+      alertModal.clear(modalId);
     },
     display: function (message) {
       if (typeof message == "object") {
@@ -72,46 +75,47 @@ function initAlertModal() {
         }
 
         if (message.modalId) {
-          alertModal.subView = $(`#${message.modalId}`);
-          alertModal.init();
+          alertModal.modals[message.modalId] = {};
+          alertModal.modals[message.modalId].subView = $(`#${message.modalId}`);
+          alertModal.init(message.modalId);
         }
 
         if (message.content) {
-          alertModal.content.html(message.content);
+          alertModal.modals[message.modalId].content.html(message.content);
         }
 
         if (message.primaryAction) {
-          alertModal.primaryButton.on("click", (e) =>
+          alertModal.modals[message.modalId].primaryButton.on("click", (e) =>
             message.primaryAction.call(e)
           );
         }
         if (message.preventPrimaryDismiss) {
-          alertModal.primaryButton
+          alertModal.modals[message.modalId].primaryButton
             .off()
             .on("click", (e) => message.primaryAction.call(e));
         }
 
         if (message.primaryLabel) {
-          alertModal.primaryButton.html(message.primaryLabel);
+          alertModal.modals[message.modalId].primaryButton.html(message.primaryLabel);
         }
 
         if (message.secondaryAction) {
-          alertModal.secondaryButton.on("click", message.secondaryAction);
+          alertModal.modals[message.modalId].secondaryButton.on("click", message.secondaryAction);
         }
 
         if (message.secondaryLabel) {
-          alertModal.secondaryButton.html(message.secondaryLabel);
+          alertModal.modals[message.modalId].secondaryButton.html(message.secondaryLabel);
         }
 
         if (message.hideSecondary) {
-          alertModal.secondaryButton.hide();
-          alertModal.primaryButton.removeClass(["col-spaced", "col-6"]);
+          alertModal.modals[message.modalId].secondaryButton.hide(message.modalId);
+          alertModal.modals[message.modalId].primaryButton.removeClass(["col-spaced", "col-6"]);
         }
 
         if (message.icon) {
           message.icon == "success"
-            ? alertModal.successIcon.removeClass("d-none")
-            : alertModal.successIcon.addClass("d-none");
+            ? alertModal.modals[message.modalId].successIcon.removeClass("d-none")
+            : alertModal.modals[message.modalId].successIcon.addClass("d-none");
         }
 
         if (message.onInit) {
@@ -119,25 +123,25 @@ function initAlertModal() {
         }
 
         if (message.afterInit) {
-          alertModal.subView.on("shown.bs.modal", () =>
+          alertModal.modals[message.modalId].subView.on("shown.bs.modal", () =>
             message.afterInit.call()
           );
         }
       } else if (typeof message == "string") {
-        alertModal.content.html(message);
+        alertModal.modals[message.modalId].content.html(message);
       }
-      alertModal.show();
+      alertModal.show(message.modalId);
     },
-    init: function () {
-      alertModal.subView.modal({ backdrop: "static", keyboard: false });
-      alertModal.content = alertModal.subView.find(".modal-message");
-      alertModal.successIcon = alertModal.subView.find(".modal-icon");
-      alertModal.primaryButton = alertModal.subView.find(".primary-action");
-      alertModal.secondaryButton = alertModal.subView.find(".secondary-action");
-      alertModal.clear();
+    init: function (modalId) {
+      alertModal.modals[modalId].subView.modal({ backdrop: "static", keyboard: false });
+      alertModal.modals[modalId].content = alertModal.modals[modalId].subView.find(".modal-message");
+      alertModal.modals[modalId].successIcon = alertModal.modals[modalId].subView.find(".modal-icon");
+      alertModal.modals[modalId].primaryButton = alertModal.modals[modalId].subView.find(".primary-action");
+      alertModal.modals[modalId].secondaryButton = alertModal.modals[modalId].subView.find(".secondary-action");
+      alertModal.clear(modalId);
     },
   };
-  
+
   window["alertModal"] = alertModal
 }
 

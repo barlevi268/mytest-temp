@@ -33,7 +33,7 @@ var initDateRangePicker = function () {
     locale: {
       cancelLabel: 'לְבַטֵל',
       applyLabel: "לְיַשֵׂם",
-        customRangeLabel: 'טווח תאריכים',
+      customRangeLabel: 'טווח תאריכים',
       daysOfWeek: [
         'א\'', 'ב\'', 'ג\'', 'ד\'', 'ה\'', 'ו\'', 'שבת'
       ],
@@ -59,7 +59,7 @@ var initDateRangePicker = function () {
 
 function createTableTbodyItems() {
   recordedTests = [];
-  const tests = [{id: 1, idNumber: 'name 1', idSeries: 1}, {id: 2, idNumber: 'name 2', idSeries: 2},]
+  const tests = [{ id: 1, idNumber: 'name 1', idSeries: 1 }, { id: 2, idNumber: 'name 2', idSeries: 2 },]
   tests.forEach((test => createTableTbodyItem(test)));
   tablePaginationItems = [
     {
@@ -84,36 +84,41 @@ function createTableTbodyItem(test) {
   })
 }
 
-function moreDetails(data) {
-  let testImage = 'https://klike.net/uploads/posts/2019-05/1556708032_1.jpg'
-  let testVideo = 'https://samplelib.com/lib/preview/mp4/sample-5s.mp4'
+async function moreDetails(data) {
+  const generateMediaPath = (link) => link ? `/uploaded/${link}` : null;
+
   let itemPatient = {
-    id: data[0],
-    patientName: 'ישראל ישראלי',
+    id: data.user_id,
+    first_name: data.first_name,
+    last_name: data.last_name,
     statusChecked: 'ממתין לאימות',
-    phone: '0541827211',
-    IDPassport: '32891823',
+    phone: data.phone,
+    id_passport: data.id_password,
     photoID: 'לחץ לצפייה',
-    serialTest: 'A12873123',
-    testStatus: 'ממתין לאימות תוצרה',
+    serial_number: data.serial_number,
+    testStatus: 'ממתין לאימות תוצאה',
     testDocumentation: 'לחץ לצפייה',
     result: 'שלילי',
     outcomeDocumentation: 'לחץ לצפייה',
-    photoIDLink: testImage,
-    testDocumentationLink: testVideo,
-    outcomeDocumentationLink: testImage,
+    photoIDLink: generateMediaPath(data.photo_passport),
+    testDocumentationLink: generateMediaPath(data.video),
+    outcomeDocumentationLink: generateMediaPath(data.image),
   }
+
   alertModal.display({
     modalId: 'mobileDetailPatientModal',
     icon: "success",
     content: "ביצוע בדיקה נשלח",
-    primaryLabel: "אימות בדיקה",
+    primaryLabel: "אישור נבדק",
     secondaryLabel: "סגור",
     primaryAction: () => {
       sendResultForPatient();
       moreDetailsPatientModal.close();
     },
     secondaryAction: () => {
+      if (moreDetailsPatientModal.isUpdated) {
+        formFilterTable();
+      }
       moreDetailsPatientModal.close();
     },
     onInit: () => {
@@ -125,10 +130,7 @@ function moreDetails(data) {
 function sendResultForPatient() {
   let dropdownResultTest = $('input[name="dropdownResultTest"]').val();
   let patientID = $('input[name=patientID]').val();
-  console.log({
-    dropdownResultTest,
-    patientID
-  })
+  location.href = `https://www.teremibh.com/CoronaCultures/corona/findpatient.aspx?TT=13&TZ=${$('#IDPassport').text()}&BC=${$('#serialTest').text()}`
 }
 
 function loadTable() {
@@ -156,7 +158,7 @@ function loadTable() {
   formFilterTable();
 }
 
-function formFilterTable() {
+async function formFilterTable() {
   let params = {};
   $('#formFilterTable').find('[name]').each(function () {
     params[$(this).attr("name")] = $(this).val();
@@ -174,7 +176,8 @@ function formFilterTable() {
   patientsTablePl.draw()
 }
 
-$(() => {
+$(async () => {
+  // await getProfile();
   initDateRangePicker();
   createTableTbodyItems();
   loadTable();

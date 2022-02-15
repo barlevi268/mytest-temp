@@ -144,6 +144,23 @@ function requestFile(url, obj, filename) {
   })
 }
 
+async function getProfile() {
+  var requestObj = new RequestObject("GET", "", "application/json", "json", true);
+  await request(`/api/profile`, requestObj)
+    .then((response) => {
+      window['currentUser'] = response.data;
+      $("#userName").html(`${currentUser.userData.first_name} ${currentUser.userData.last_name}`)
+    })
+    .catch((error) => {
+      Swal.error('שגיאה בטעינת פרופיל')
+      logOut()
+    })
+}
+
+function logOut() {
+  UserSession.deauthenticate();
+}
+
 $(() => {
   $("#logoutBtn").on("click", e => {
       Swal.fire({
