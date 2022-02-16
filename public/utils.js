@@ -133,6 +133,11 @@ function initAlertModal() {
       alertModal.show(message.modalId);
     },
     init: function (modalId) {
+      if (!modalId) {
+        modalId = 'alertModal';
+        alertModal.modals[modalId] = {};
+        alertModal.modals[modalId].subView = $(`#${modalId}`);
+      }
       alertModal.modals[modalId].subView.modal({ backdrop: "static", keyboard: false });
       alertModal.modals[modalId].content = alertModal.modals[modalId].subView.find(".modal-message");
       alertModal.modals[modalId].successIcon = alertModal.modals[modalId].subView.find(".modal-icon");
@@ -303,22 +308,91 @@ function dataURItoBlob(dataURI) {
   return new Blob([ab], { type: mimeString });
 }
 
-
-
-function initMandatoryFields() {
-  var forms = $("form");
-  var formsAndFields = [];
-  $.each(forms, (_, form) => {
-    let fields = $(form).find("[mandatory]")
-    formsAndFields.push({
-      form: $(form),
-      fields: fields,
-      emptyFields: []
-    })
+function isValidForm(form$) {
+  return initMandatoryFields.formValidated({
+    emptyFields: [],
+    form: form$,
+    fields: form$.find("[mandatory]")
   })
+}
+window['isValidForm'] = isValidForm;
 
-  function formValidated(formObject) {
-    var valid = true;
+var initMandatoryFields  = {
+  forms: $("form"),
+  formsAndFields: [],
+  init: () => {
+    initMandatoryFields.forms = $("form");
+    initMandatoryFields.formsAndFields = [];
+    $.each(initMandatoryFields.forms, (_, form) => {
+      let fields = $(form).find("[mandatory]")
+      initMandatoryFields.formsAndFields.push({
+        form: $(form),
+        fields: fields,
+        emptyFields: []
+      })
+    })
+
+    $('[type="submit"]').on("click", (e) => {
+      e.preventDefault();
+      let formHtml = $(e.target).closest("form");
+      let formObject = initMandatoryFields.getForm(formHtml);
+      if (initMandatoryFields.formValidated(formObject)) {
+        formObject.form.submit();
+      } else {
+        $(".field-message").remove();
+
+        alertModal.display({
+          content: "חלק מהשדות הנדרשים ריקים",
+          hideSecondary: true,
+          primaryLabel: "הבנתי",
+        });
+
+        $.each(formObject.emptyFields, (i, val) => {
+          let isTypeRadio = false;
+          var $val = $(val);
+          let dataRequiredIf$;
+          const dataRequiredIf = $val.attr('data-required-if');
+          if (dataRequiredIf) {
+            dataRequiredIf$ = formObject.form.find(`[name=${dataRequiredIf}]`)
+          }
+          if ($val.attr('type') === 'radio') {
+            isTypeRadio = true;
+          }
+          $val.after(`<span class="field-message text-danger">${initMandatoryFields.getError($val)}</span>`);
+          if (isTypeRadio) {
+            let label$ = $val.find('input + label');
+            $.each(label$, (_, labelVal) => {
+              $(labelVal).addClass("border border-danger");
+            })
+
+            $.each($val.find('input'), (_, inputVal) => {
+              $(inputVal).on("change", (e) => {
+                $.each(label$, (_, labelVal) => {
+                  $(labelVal).removeClass("border border-danger");
+                })
+                $val.nextAll('span.field-message').remove();
+              });
+            })
+            return;
+          }
+
+          $val.addClass("border border-danger");
+
+          $val.on("input", (e) => {
+            $val.removeClass("border border-danger");
+            $val.nextAll('span.field-message').remove();
+            if (dataRequiredIf$) {
+              dataRequiredIf$.removeClass("border border-danger");
+              dataRequiredIf$.nextAll('span.field-message').remove();
+            }
+          });
+        });
+      }
+    });
+  },
+
+
+  formValidated: (formObject) => {
     formObject.emptyFields = [];
 
     $.each(formObject.fields, (i, val) => {
@@ -332,7 +406,6 @@ function initMandatoryFields() {
           }
         })
         if (!isCheckedRadio) {
-          valid = false;
           formObject.emptyFields.push($val);
         }
         return
@@ -341,20 +414,17 @@ function initMandatoryFields() {
         let email = $val.val();
         let filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         if (!filter.test(email)) {
-          valid = false;
           formObject.emptyFields.push($val);
           return;
         }
       }
       if ($val.val() == "" || $val.val() == undefined) {
-        valid = false;
         formObject.emptyFields.push($val);
         return;
       }
 
       if ($val.attr('data-type') === 'phone') {
-        if (!formIsValidPhone($val.val())) {
-          valid = false;
+        if (!initMandatoryFields.formIsValidPhone($val.val())) {
           formObject.emptyFields.push($val);
           return;
         }
@@ -365,15 +435,13 @@ function initMandatoryFields() {
           return;
         }
       if (type === 'id') {
-       if (!isValidIsraeliID($val.val())) {
-         valid = false;
+       if (!initMandatoryFields.isValidIsraeliID($val.val())) {
          formObject.emptyFields.push($val);
          return;
        }
       }
         if (type === 'passport') {
-          if (!isOnlyNumber($val.val())) {
-            valid = false;
+          if (!initMandatoryFields.isOnlyNumber($val.val())) {
             formObject.emptyFields.push($val);
             return;
           }
@@ -381,73 +449,41 @@ function initMandatoryFields() {
       }
     });
 
-    return valid;
-  }
+    formObject.emptyFields = formObject.emptyFields.filter(emptyField => {
+      const dataRequiredIf = emptyField.attr('data-required-if');
+      if (!dataRequiredIf) {
+        return true;
+      }
 
-  function getForm(form) {
-    return formsAndFields.find(formAndFields => {
+      if (!!initMandatoryFields.findEmptyFieldsByName(formObject, dataRequiredIf)) {
+        return true;
+      }
+      return !!emptyField.val();
+    })
+
+    const valid = !formObject.emptyFields.length;
+    return valid;
+  },
+
+  findEmptyFieldsByName: (formObject, name) => {
+    return formObject.emptyFields.find(emptyField => emptyField.attr('name') === name);
+  },
+
+  getForm: (form) =>  {
+    return initMandatoryFields.formsAndFields.find(formAndFields => {
       return formAndFields.form[0] === form[0]
     });
-  }
+  },
 
-  $('[type="submit"]').on("click", (e) => {
-    e.preventDefault();
-    let formHtml = $(e.target).closest("form");
-    let formObject = getForm(formHtml);
-    if (formValidated(formObject)) {
-      formObject.form.submit();
-    } else {
-      $(".field-message").remove();
-
-      alertModal.display({
-        content: "חלק מהשדות הנדרשים ריקים",
-        hideSecondary: true,
-        primaryLabel: "הבנתי",
-      });
-
-      $.each(formObject.emptyFields, (i, val) => {
-        let isTypeRadio = false;
-        var $val = $(val);
-        if ($val.attr('type') === 'radio') {
-          isTypeRadio = true;
-        }
-        $val.after(`<span class="field-message text-danger">${getError($val)}</span>`);
-        if (isTypeRadio) {
-          let label$ = $val.find('input + label');
-          $.each(label$, (_, labelVal) => {
-            $(labelVal).addClass("border border-danger");
-          })
-
-          $.each($val.find('input'), (_, inputVal) => {
-            $(inputVal).on("change", (e) => {
-              $.each(label$, (_, labelVal) => {
-                $(labelVal).removeClass("border border-danger");
-              })
-              $val.nextAll('span.field-message').remove();
-            });
-          })
-          return;
-        }
-
-        $val.addClass("border border-danger");
-
-        $val.on("input", (e) => {
-          $val.removeClass("border border-danger");
-          $val.nextAll('span.field-message').remove();
-        });
-      });
-    }
-  });
-
-  function formIsValidPhone(val) {
+  formIsValidPhone: (val) =>  {
     let phoneArr = (val || '').split('');
     return phoneArr.length === 10 && phoneArr[0] === '0' && phoneArr[1] === '5';
-  }
-  function isOnlyNumber(val) {
+  },
+  isOnlyNumber: (val) => {
     return /^\d+$/.test(val || '')
-  }
+  },
 
-  function isValidIsraeliID(IsraeliID) {
+  isValidIsraeliID: (IsraeliID) => {
     if (!IsraeliID) {
       IsraeliID = '';
     }
@@ -465,42 +501,89 @@ function initMandatoryFields() {
       10 ===
       0
     );
-  }
+  },
 
-  function getError($val) {
-    let type = '';
+  getError: ($val) => {
+    let types = [];
 
     if ($val.attr('type')) {
-      type = $val.attr('type');
+      types = [$val.attr('type')];
     }
     if ($val.attr('data-type')) {
-      type =$val.attr('data-type');
+      types = [$val.attr('data-type')];
     }
 
     if ($val.attr('data-type-radio')) {
       let tempType = $(`[name=${$val.attr('data-type-radio')}]:checked`).val();
       if (tempType) {
-        type = tempType;
+        types = [tempType];
+      }
+    }
+    let dataRequiredIf = $val.attr('data-required-if');
+
+    if (dataRequiredIf) {
+      let dataRequiredIf$ = $val.closest('form').find(`[name=${dataRequiredIf}`);
+
+      if (dataRequiredIf$.attr('type')) {
+        types.push(dataRequiredIf$.attr('type'));
+      }
+      if (dataRequiredIf$.attr('data-type')) {
+        types.push(dataRequiredIf$.attr('data-type'));
       }
     }
 
+    let errorsArray = [];
     if ($val.val()) {
+      types.forEach(type => {
+        switch (type) {
+          case 'email': {
+            errorsArray.push('Invalid Email Address');
+            return;
+          }
+          case 'phone': {
+            errorsArray.push('Invalid phone');
+            return;
+          }
+          case 'id': {
+            errorsArray.push('Invalid Israeli ID');
+            return;
+          }
+          case 'passport': {
+            errorsArray.push('only number');
+            return;
+          }
+        }
+      })
+    }
+    if (errorsArray.length) {
+      return errorsArray.join(' or ')
+    }
+    let requiredArray = [];
+    types.forEach(type => {
       switch (type) {
         case 'email': {
-          return 'Invalid Email Address'
+          requiredArray.push('required Email Address');
+          return;
         }
         case 'phone': {
-          return 'Invalid phone'
+          requiredArray.push('required phone');
+          return;
         }
         case 'id': {
-          return 'Invalid Israeli ID'
+          requiredArray.push('required Israeli ID');
+          return;
         }
         case 'passport': {
-          return 'only number'
+          requiredArray.push('required passport');
+          return;
+        }
+        default: {
+          requiredArray.push('שדה חובה');
+          return;
         }
       }
-    }
-    return 'שדה חובה';
+    })
+    return requiredArray.join(' or ');
   }
 }
 
@@ -779,6 +862,6 @@ var mobileStreamVideo = (function () {
 
 $(() => {
   initAlertModal()
-  initMandatoryFields();
+  initMandatoryFields.init();
   initPrefixFields();
 });

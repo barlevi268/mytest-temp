@@ -1,19 +1,47 @@
-var impairTestBarcodeField = $('.impair-test-barcode');
 var uploadCaddyField = $('.upload-caddy');
 var photoPassportBtn = $('[name=photo_passport]');
 var addNewUserForm = $('#addNewUser');
 var birthDateForm = $('[name=birth_date]');
 var photoPassportFile;
-var barCodeValue;
 
 
 function prepareFromData() {
   let formData = new FormData();
   addNewUserForm.find('[name]').each(function() {
-    $(this).attr('name') != "photo_passport" && formData.append($(this).attr('name'), $(this).val());
+    switch ($(this).attr('name')) {
+      case 'photo_passport':
+      case 'id_type':
+      case 'DOB_day':
+      case 'DOB_month':
+      case 'DOB_year':
+      {
+        return;
+      }
+    }
+    formData.append($(this).attr('name'), $(this).val());
   });
 
-  formData.append("serial_number", barCodeValue);
+  let IdType = addNewUserForm.find('[name="id_type"]:checked').val();
+  let idTypeVal = 0;
+  switch (IdType) {
+    case 'id': {
+      idTypeVal = 1;
+      break
+    }
+
+    case 'passport': {
+      idTypeVal = 2;
+      break
+    }
+  }
+
+  formData.append('birth_date', [
+    addNewUserForm.find('[name=DOB_day]').val(),
+    addNewUserForm.find('[name=DOB_month]').val(),
+    addNewUserForm.find('[name=DOB_year]').val()
+  ].join('/'));
+
+  formData.append("id_type", idTypeVal.toString());
   formData.append("photo_passport", addNewUserForm.find('[name="photo_passport"]')[0].files[0]);
 
   return formData;
@@ -81,20 +109,8 @@ addNewUserForm.on('submit',async (e) => {
 
 $('.voucher-toggle').on('click', () => $('#cuponRow').toggleClass('d-none'));
 
-
-function setValueBarCode(value) {
-  if (value) {
-    barCodeValue = value;
-    impairTestBarcodeField.removeClass('d-none')
-    $('#submitButton').prop('disabled', false)
-    return;
-  }
-  barCodeValue = undefined;
-  impairTestBarcodeField.addClass('d-none')
-}
-
 async function setPhotoPassport(event) {
-  if (event && event.target.files) {
+  if (event && event.target.files && event.target.files.length) {
     photoPassportFile = event.target.files[0];
     const photoPassportFileBase64 = await toBase64(photoPassportFile);
     if (photoPassportFileBase64) {
@@ -106,14 +122,6 @@ async function setPhotoPassport(event) {
   photoPassportFile = undefined;
   uploadCaddyField.attr('src', undefined);
   uploadCaddyField.addClass('d-none')
-}
-
-function resetForm() {
-  if (addNewUserForm && addNewUserForm[0]) {
-    addNewUserForm[0].reset();
-    setPhotoPassport();
-    setValueBarCode();
-  }
 }
 
 function initCities() {
@@ -163,15 +171,53 @@ function initBirthDate() {
 }
 
 
+function initListenValidForm() {
+  addNewUserForm.find(':input').on('input change',() => {
+    if (isValidForm(addNewUserForm)) {
+      addNewUserForm.find('[type=submit]').prop('disabled', false);
+      return
+    }
+    addNewUserForm.find('[type=submit]').prop('disabled', true);
+  });
+}
+
+function handleBirthDateValidator() {
+  var monthSelect = $("#DOB_month");
+  var daySelect = $("#DOB_day");
+
+  monthSelect.on("change", e => {
+    var selectedValue = e.target.value;
+
+    const thirtyDayMonths = ["04", "06", "09", "11"];
+
+
+    if (thirtyDayMonths.includes(selectedValue)) {
+      if (daySelect.val() === '31') {
+        daySelect.val("1").trigger('change');
+      }
+      daySelect.find('[value="31"]').attr("disabled", "disabled");
+    } else if (selectedValue === "02") {
+      switch (daySelect.val()) {
+        case '29':
+        case '30':
+        case '31':
+        {
+          daySelect.val("01").trigger('change');
+        }
+      }
+      daySelect.find('[value="29"],[value="30"],[value="31"]').attr("disabled", "disabled");
+    } else {
+      daySelect.find("option").removeAttr("disabled");
+    }
+  });
+}
+
 $(() => {
   alertModal.init()
   initCities();
   initBirthDate();
-  mobileStream.init({
-    resultInput:'[name=barcode]',
-    openButton: '.mobile-stream-btn',
-    resultInputCallback: (value) => setValueBarCode(value)
-  });
+  initListenValidForm();
+  handleBirthDateValidator();
 
   photoPassportBtn.on("change", async event => setPhotoPassport(event));
 });

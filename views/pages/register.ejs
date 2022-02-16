@@ -97,16 +97,14 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-12">
+        <div class="form-group col-6">
           <label>מס’ ת.ז. \ דרכון</label>
           <input mandatory class="form-control" placeholder="מס’ ת.ז. \ דרכון" name="id_password" data-type-radio="id_type">
         </div>
-      </div>
-      <div class="row">
-        <div class="form-group col">
+        <div class="form-group col-6">
           <label>צילום ת.ז. \ דרכון</label>
-          <label for="uploadBarcode" class="form-control text-center py-3">
-            <img style="height: 40px" class="upload-caddy" />
+          <label for="uploadBarcode" class="form-control text-center">
+            <img style="height: 20px" class="upload-caddy" />
             <u>בחר תמונה</u>
           </label>
           <input mandatory type="file" id="uploadBarcode" class="d-none" name="photo_passport" accept=".jpg,.jpeg,.png" />
@@ -115,7 +113,13 @@
       <div class="row">
         <div class="form-group col-12">
           <label>מס’ נייד</label>
-          <input mandatory class="form-control" placeholder="מס’ נייד" name="phone">
+          <input mandatory class="form-control" placeholder="מס’ נייד" name="phone" data-type="phone" data-required-if="email">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-12">
+          <label>email</label>
+          <input mandatory class="form-control" placeholder="שם משפחה" name="email" type="email" data-required-if="phone">
         </div>
       </div>
       <div class="row">
@@ -154,42 +158,118 @@
           <input mandatory class="form-control" placeholder="שם משפחה" name="street_name">
         </div>
         <div class="form-group col-6">
-          <label>street number</label>
-          <input mandatory class="form-control" placeholder="שם משפחה" name="street_number">
+          <label>house number</label>
+          <input mandatory class="form-control" placeholder="שם משפחה" name="house_number">
         </div>
       </div>
+
       <div class="row">
-        <div class="form-group col-12">
-          <label>email</label>
-          <input mandatory class="form-control" placeholder="שם משפחה" name="email" type="email">
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-12">
-          <label>birth date</label>
-          <input mandatory class="form-control" placeholder="שם משפחה" name="birth_date" id="kt_dashboard_daterangepicker">
+        <div class="form-group col">
+          <label>Birth Date</label>
+          <div class="row">
+            <div class="form-group col-4">
+              <input
+                      mandatory=""
+                      class="form-control"
+                      type="number"
+                      min="1921"
+                      max="2021"
+                      placeholder="Year"
+                      id="DOB_year"
+                      name="DOB_year"
+                      maxlength="4"
+                      pattern="\d{4}"
+                      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              />
+            </div>
+
+            <div class="form-group col-4">
+              <select
+                      mandatory
+                      select2-type="regular"
+                      name="DOB_month"
+                      id="DOB_month"
+                      placeholder="Month"
+                      tabindex="-1"
+              >
+                <option></option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option> </select
+              >
+            </div>
+
+            <div class="form-group col-4">
+              <select
+                      mandatory
+                      select2-type="regular"
+                      name="DOB_day"
+                      id="DOB_day"
+                      placeholder="Day"
+                      tabindex="-1"
+                      aria-hidden="true"
+              >
+                <option></option>
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+                <option value="09">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
 
 
+
       <div class="row">
-        <div class="impair-test-barcode form-group col">
-          <label> </label>
+        <div class="form-group col-12">
+          <label>Test serial</label>
           <input
                   type="text"
-                  name="barcode"
+                  name="serial_number"
                   class="form-control"
                   placeholder="serial_number"
                   data-prefix="R"
                   value=""
                   mandatory
           />
-        </div>
-        <div class="form-group col">
-          <label> </label>
-          <div class="mobile-stream-btn form-control cursor-pointer">
-            <label>🔍 סרוק בדיקה</label>
-          </div>
         </div>
       </div>
 
