@@ -4,12 +4,11 @@ var UserSession = function() {
       var storageState = localStorage.getItem('state')
       return storageState ? JSON.parse(storageState) : {};
   }
-
-  const currentState = getState()
+  let currentState = getState()
 
   function setState(user) {
-      var newState = { ...currentState, ...user }
-      localStorage.setItem('state', JSON.stringify(newState));
+      currentState = { ...currentState, ...user }
+      localStorage.setItem('state', JSON.stringify(currentState));
   }
 
   function clearState() {
@@ -22,8 +21,8 @@ var UserSession = function() {
   }
 
   function clearStateByName(name) {
-    var newState = { ...currentState, [name]: undefined }
-    localStorage.setItem('state', JSON.stringify(newState));
+    currentState = { ...currentState, [name]: undefined }
+    localStorage.setItem('state', JSON.stringify(currentState));
   }
 
   function getUserObj() {
@@ -33,7 +32,10 @@ var UserSession = function() {
   function _route() {
     const urlParams = new URLSearchParams(window.location.search);
     const testkitSerial = urlParams.get('testkitSerial');
-    setState({testkitSerial: testkitSerial});
+    if (testkitSerial) {
+      setState({testkitSerial: testkitSerial});
+      location.href = "/register";
+    }
     const pathname = location.pathname.split('/')[1]
     const routeUnauthorized = () => !currentState.user && (location.href = "/login")
     const routeUnauthorizedAgent = () => !currentState.user && !currentState.user.isAgent && (location.href = "/login")
@@ -72,9 +74,12 @@ var UserSession = function() {
           clearStateUser();
           location.href = "/login";
       },
-    state: function () {
-      return currentState;
-    },
+      state: function () {
+        return currentState;
+      },
+      clearStateByName: function (name) {
+        return clearStateByName(name)
+      },
 
       obj: getUserObj(),
 

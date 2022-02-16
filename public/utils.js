@@ -411,13 +411,18 @@ var initMandatoryFields  = {
         return
       }
       if ($val.attr('type') === 'email') {
-        if (!initMandatoryFields.isOnlyNumber($val.val())) {
+        let email = $val.val();
+        let filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if (!filter.test(email)) {
           formObject.emptyFields.push($val);
           return;
         }
       }
       if ($val.attr('type') === 'number') {
-        initMandatoryFields.isOnlyNumber($val.val())
+        if (!initMandatoryFields.isOnlyNumber($val.val())) {
+          formObject.emptyFields.push($val);
+          return;
+        }
       }
       if ($val.val() == "" || $val.val() == undefined) {
         formObject.emptyFields.push($val);
