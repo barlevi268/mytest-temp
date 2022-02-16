@@ -98,8 +98,6 @@ async function loginClickHandler(e) {
     const isPhoneField = !$(`.login-view.${loginSMS}`).hasClass('d-none');
     const isLoginForm = !$(`.login-view.${loginEmail}`).hasClass('d-none');
     let body = {}
-    changeLoginView('two-factor');
-    return;
     if (isPhoneField) {
         typeForm = 'phone';
         const password = passwordFieldSMS.val();
