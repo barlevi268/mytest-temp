@@ -1,0 +1,94 @@
+<style>
+    #createVoucherModal .modal-dialog {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 781px !important;
+    }
+
+    ul[aria-labelledby="dropdownResultTestMenu"] {
+        margin-top: 10px;
+        background: #FFFFFF 0 0 no-repeat padding-box;
+        box-shadow: 0 3px 20px #00000050;
+        border-radius: 6px;
+    }
+
+    #imageID {
+        max-width: 90%;
+        height: auto;
+        object-fit: cover;
+    }
+</style>
+<div
+        class="modal fade"
+        id="createVoucherModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mobileLiveScanLabel"
+        aria-hidden="true"
+>
+    <input hidden name="patientID">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content p-4">
+            <div class="d-flex align-content-center justify-content-between">
+                <h1>
+                    New Voucher
+                </h1>
+            </div>
+            <hr class="text-dark h-2"/>
+            <div class="display-content" id="editContent">
+                <form class="modal-body px-0" id="formEdit" novalidate="novalidate">
+                    <div class="contentarea">
+
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label>Name</label>
+                                <input mandatory class="form-control" placeholder="Name" name="name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label>Code</label>
+                                <input mandatory class="form-control" placeholder="Code" name="code" type="number">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label>Quota</label>
+                                <input mandatory pattern="[0-9]" class="form-control" placeholder="Quota" name="quota">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" hidden></button>
+                </form>
+            </div>
+            <hr class="text-dark h-2 mt-5"/>
+            <div class="modal-actions container-fluid">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-grow-1 ms-2">
+                        <button type="button" class="primary-action btn btn-primary me-2 py-3" hidden></button>
+
+                        <button
+                                type="button"
+                                class="btn btn-primary py-3"
+                                id="save"
+                        >
+                            save
+                        </button>
+
+                        <input hidden name="dropdownResultTest">
+                    </div>
+                    <div class="d-flex flex-grow-1 justify-content-end">
+                        <button
+                                type="button"
+                                class="secondary-action btn btn-light btn-block col col-spaced py-3"
+                        >
+                            close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../../components/visit-success-modal') %>
+<script src="scripts/agent/create-voucher-modal.js"></script>

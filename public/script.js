@@ -48,6 +48,7 @@ var UserSession = function() {
         routeAuthorized()
         break;
       case 'agent':
+      case 'vouchers':
         routeUnauthorizedAgent();
         break;
       default:

@@ -37,6 +37,9 @@ app.get("/newVisit", (req, res) => {
 app.get("/agent", (req, res) => {
   res.render('pages/agent/agent');
 });
+app.get("/vouchers", (req, res) => {
+  res.render('pages/agent/vouchers');
+});
 
 app.get("*", (req, res) => {
   res.redirect('/');

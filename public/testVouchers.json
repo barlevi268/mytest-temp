@@ -1,0 +1,27 @@
+{
+  "draw": 2,
+  "recordsTotal": 1,
+  "recordsFiltered": 1,
+  "data": [
+    {
+      "id": 1,
+      "name": "name",
+      "code": "code",
+      "quota": 1,
+      "activations": 1,
+      "expiration": "10/01/2022",
+      "created_at": "2022-01-26 11:20:14",
+      "updated_at": "2022-01-26 12:37:07"
+    },
+    {
+      "id": 2,
+      "name": "name 2",
+      "code": "code 2",
+      "quota": 1,
+      "activations": 1,
+      "expiration": "10/01/2022",
+      "created_at": "2022-01-26 11:20:14",
+      "updated_at": "2022-01-26 12:37:07"
+    }
+  ]
+}

@@ -411,12 +411,13 @@ var initMandatoryFields  = {
         return
       }
       if ($val.attr('type') === 'email') {
-        let email = $val.val();
-        let filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-        if (!filter.test(email)) {
+        if (!initMandatoryFields.isOnlyNumber($val.val())) {
           formObject.emptyFields.push($val);
           return;
         }
+      }
+      if ($val.attr('type') === 'number') {
+        initMandatoryFields.isOnlyNumber($val.val())
       }
       if ($val.val() == "" || $val.val() == undefined) {
         formObject.emptyFields.push($val);
@@ -548,6 +549,7 @@ var initMandatoryFields  = {
             errorsArray.push('Invalid Israeli ID');
             return;
           }
+          case 'number':
           case 'passport': {
             errorsArray.push('only number');
             return;
@@ -583,6 +585,9 @@ var initMandatoryFields  = {
         }
       }
     })
+    if (!requiredArray.length) {
+      requiredArray = ['שדה חובה'];
+    }
     return requiredArray.join(' or ');
   }
 }

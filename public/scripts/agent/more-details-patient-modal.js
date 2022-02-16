@@ -230,7 +230,6 @@ formEditPatient.on('submit',async (e) => {
         ...params
     }
     let requestObject = new RequestObject('PUT', JSON.stringify(params), );
-    handleEditSuccess({}, params)
     request(`/api/agent/patients/${params.id}`, requestObject)
       .then(res => {
           handleEditSuccess(res, params);
