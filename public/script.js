@@ -29,11 +29,8 @@ var UserSession = function() {
     switch (pathname) {
       case '':
       case 'welcome':
-        routeAuthorized()
-        break;
       case 'login':
-        routeAuthorized()
-        break;
+      case 'pre-registration':
       case 'register':
         routeAuthorized()
         break;
@@ -162,19 +159,17 @@ function logOut() {
 }
 
 $(() => {
-  $("#logoutBtn").on("click", e => {
-      Swal.fire({
-          title: "אתה בטוח שתרצה לצאת?",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "כן, צא מהמערכת",
-          cancelButtonText: "ביטול"
-      }).then(function (result) {
-          if (result.value) {
-              UserSession.deauthenticate();
-          }
-      });
-  });
+    $("#logoutBtn").on("click", e => {
+        Swal.fire({
+            title: "אתה בטוח שתרצה לצאת?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "כן, צא מהמערכת",
+            cancelButtonText: "ביטול"
+        }).then(function (result) {
+            result.value && logOut()
+        });
+    });
 
 });
 
