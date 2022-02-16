@@ -212,12 +212,20 @@ function handleBirthDateValidator() {
   });
 }
 
+function initSavedValue() {
+  const testkitSerial = UserSession.fetch('testkitSerial');
+  if (typeof testkitSerial === "string") {
+    $('[name=serial_number]').val(testkitSerial);
+  }
+}
+
 $(() => {
   alertModal.init()
   initCities();
   initBirthDate();
   initListenValidForm();
   handleBirthDateValidator();
+  initSavedValue();
 
   photoPassportBtn.on("change", async event => setPhotoPassport(event));
 });

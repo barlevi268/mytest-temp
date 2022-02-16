@@ -16,15 +16,27 @@ var UserSession = function() {
       localStorage.setItem('state', "{}");
   }
 
+  function clearStateUser() {
+    clearStateByName('user');
+  }
+
+  function clearStateByName(name) {
+    var newState = { ...currentState, [name]: undefined }
+    localStorage.setItem('state', JSON.stringify(newState));
+  }
+
   function getUserObj() {
       return currentState.user ? currentState.user : {}
   }
 
   function _route() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const testkitSerial = urlParams.get('testkitSerial');
+    setState({testkitSerial: testkitSerial});
     const pathname = location.pathname.split('/')[1]
     const routeUnauthorized = () => !currentState.user && (location.href = "/login")
     const routeUnauthorizedAgent = () => !currentState.user && !currentState.user.isAgent && (location.href = "/login")
-    const routeAuthorized = () => currentState.user ? (location.href = "profile") : clearState();
+    const routeAuthorized = () => currentState.user ? (location.href = "profile") : clearStateUser();
 
     switch (pathname) {
       case '':
@@ -55,9 +67,12 @@ var UserSession = function() {
       },
 
       deauthenticate: function () {
-          clearState()
+          clearStateUser();
           location.href = "/login";
       },
+    state: function () {
+      return currentState;
+    },
 
       obj: getUserObj(),
 
