@@ -1,0 +1,30 @@
+{
+  "draw": 2,
+  "recordsTotal": 1,
+  "recordsFiltered": 1,
+  "data": [
+    {
+      "id": 2,
+      "first_name": "\u05e2\u05dc\u05d9",
+      "last_name": "\u05d3\u05d4-\u05de\u05d0\u05d9\u05d5",
+      "id_password": "034300780",
+      "phone": "0538201977",
+      "photo_passport": "users\/passport-photos\/U-1643196014.jpg",
+      "verification_code": null,
+      "verified": 1,
+      "owner_id": null,
+      "created_at": "2022-01-26 11:20:14",
+      "updated_at": "2022-01-26 12:37:07",
+      "status": "negative",
+      "payment_ref": null,
+      "serial_number": "1234565",
+      "video": null,
+      "image": null,
+      "status_id": 2,
+      "user_id": 1,
+      "tested": 1,
+      "display_type": null,
+      "tested_at": "2022-01-26 11:20:14"
+    }
+  ]
+}

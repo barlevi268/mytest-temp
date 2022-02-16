@@ -108,7 +108,7 @@ function initFormEdit() {
     }
     formEditPatient.find('[name=first_name]').val(moreDetailsPatientModal.itemPatientInfo.first_name)
     formEditPatient.find('[name=last_name]').val(moreDetailsPatientModal.itemPatientInfo.last_name)
-    formEditPatient.find('[name=id_passport]').val(moreDetailsPatientModal.itemPatientInfo.id_passport)
+    formEditPatient.find('[name=id_password]').val(moreDetailsPatientModal.itemPatientInfo.id_password)
     formEditPatient.find('[name=phone]').val(moreDetailsPatientModal.itemPatientInfo.phone)
     formEditPatient.find('[name=serial_number]').val(moreDetailsPatientModal.itemPatientInfo.serial_number)
 }
@@ -189,9 +189,10 @@ var moreDetailsPatientModal = {
         $('input[name=patientID]').val(itemPatient.id);
 
         $('#patientName').html(`${itemPatient.first_name} ${itemPatient.last_name}`);
-        $('#statusChecked').html(itemPatient.statusChecked);
+        let statusChecked = itemPatient.status;
+        $('#statusChecked').html(statusChecked);
         $('#phone').html(itemPatient.phone);
-        $('#IDPassport').html(itemPatient.id_passport);
+        $('#IDPassport').html(itemPatient.id_password);
         $('#serialTest').html(itemPatient.serial_number);
         $('#testStatus').html(itemPatient.testStatus);
         $('#result').html(itemPatient.result);
@@ -219,18 +220,22 @@ var moreDetailsPatientModal = {
 
 formEditPatient.on('submit',async (e) => {
     e.preventDefault();
-    const params = updatePatientInfo();
+    let params = updatePatientInfo();
     if (!params) {
         setStatusFormForPatient(true)
         return;
     }
+    params = {
+        ...moreDetailsPatientModal.itemPatientInfo,
+        ...params
+    }
     let requestObject = new RequestObject('PUT', JSON.stringify(params), );
     handleEditSuccess({}, params)
-    // request('/api/register', requestObject) // TODO valid url for update item details patient
-    //   .then(res => {
-    //       handleEditSuccess(res, params);
-    //   })
-    //   .catch((res,ajax,status) => handleEditFailure(JSON.parse(res)))
+    request(`/api/agent/patients/${params.id}`, requestObject)
+      .then(res => {
+          handleEditSuccess(res, params);
+      })
+      .catch((res,ajax,status) => handleEditFailure(JSON.parse(res)))
 
 })
 

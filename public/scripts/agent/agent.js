@@ -88,12 +88,12 @@ async function moreDetails(data) {
   const generateMediaPath = (link) => link ? `/uploaded/${link}` : null;
 
   let itemPatient = {
-    id: data.user_id,
+    id: data.id,
     first_name: data.first_name,
     last_name: data.last_name,
     statusChecked: 'ממתין לאימות',
     phone: data.phone,
-    id_passport: data.id_password,
+    id_password: data.id_password,
     photoID: 'לחץ לצפייה',
     serial_number: data.serial_number,
     testStatus: 'ממתין לאימות תוצאה',
@@ -103,6 +103,14 @@ async function moreDetails(data) {
     photoIDLink: generateMediaPath(data.photo_passport),
     testDocumentationLink: generateMediaPath(data.video),
     outcomeDocumentationLink: generateMediaPath(data.image),
+    hmo_code: data.hmo_code,
+    city_code: data.city_code,
+    email: data.email,
+    street: data.street,
+    house_number: data.house_number,
+    birth_date: data.birth_date,
+    id_type: data.id_type,
+    status: data.status
   }
 
   alertModal.display({
@@ -135,18 +143,31 @@ function sendResultForPatient() {
 
 function loadTable() {
   patientsTablePl = patientsTable.DataTable({
-    ajax: "/testData.txt",
+    ajax: {
+      url: '/testData.json',
+      type: 'GET',
+      headers: {
+        'Authorization': `Bearer  ${UserSession.fetch('token')}`
+      }
+    },
     deferRender: true,
     lengthChange: false,
     serverSide: true,
     pageLength: 50,
     language: {
       paginate: {
-        next: 'הַבָּא',
+        next: 'הבא',
         previous: 'קודם',
       }
     },
     deferLoading: true,
+    columns: [
+      { 'data': "first_name"},
+      { 'data': "last_name"},
+      { 'data': "id_password"},
+      { 'data': "serial_number"},
+      { 'data': "phone"}
+    ],
     initComplete: function () {
     }
   });
