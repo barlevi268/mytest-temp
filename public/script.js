@@ -17,7 +17,8 @@ var UserSession = function() {
   }
 
   function clearStateUser() {
-    clearStateByName('user');
+    const testkitSerial = currentState && currentState.testkitSerial ? currentState.testkitSerial : undefined;
+    localStorage.setItem('state', JSON.stringify({testkitSerial}));
   }
 
   function clearStateByName(name) {
