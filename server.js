@@ -19,6 +19,9 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
   res.render('pages/register');
 });
+app.get("/pre-registration", (req, res) => {
+  res.render('pages/pre-registration');
+});
 
 app.get("/profile", (req, res) => {
   res.render('pages/profile');

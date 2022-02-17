@@ -445,3 +445,5 @@ hr {
   border-bottom: 2px solid #3699ff;
 }
 
+.font-weight-normal {
+  font-weight: 400 !important; }
