@@ -774,7 +774,7 @@ var mobileStreamVideo = (function () {
     stopBothVideoAndAudio(camera_stream);
     stopSeconds();
     if (blobs_recorded.length) {
-      let file = new File([blobs_recorded], "video.webm", {type: "video/webm", lastModified: new Date().getTime()});
+      let file = new File([new Blob(blobs_recorded, { type: 'video/webm' })], "video.webm", {type: "video/webm", lastModified: new Date().getTime()});
       let container = new DataTransfer();
       container.items.add(file);
       barcodeInput[0].files = container.files;
