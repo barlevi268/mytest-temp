@@ -14,7 +14,7 @@ let typeForm = '';
 
 function formIsValid() {
     if (typeForm === 'phone') {
-        return !(passwordFieldSMS.val() === "" || formIsValidPhone(phoneField.val()));
+        return !(passwordFieldSMS.val() === "" || !formIsValidPhone(phoneField.val()));
     }
     if (typeForm === 'email') {
         let filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
