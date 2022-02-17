@@ -229,12 +229,24 @@ formEditPatient.on('submit',async (e) => {
         ...moreDetailsPatientModal.itemPatientInfo,
         ...params
     }
+    Object.keys(params).map(paramKey => {
+        if (!params[paramKey]) {
+            params[paramKey] = undefined;
+        }
+    })
     let requestObject = new RequestObject('PUT', JSON.stringify(params), );
     request(`/api/agent/patients/${params.id}`, requestObject)
       .then(res => {
           handleEditSuccess(res, params);
       })
-      .catch((res,ajax,status) => handleEditFailure(JSON.parse(res)))
+      .catch((res,ajax,status) => {
+          try {
+              const errorJSON = JSON.parse(res);
+              handleEditFailure(errorJSON)
+          } catch {
+              handleEditFailure(null);
+          }
+      })
 
 })
 
@@ -245,6 +257,15 @@ function handleEditSuccess(res, params) {
 }
 
 function handleEditFailure(res) {
+    if (!res) {
+        alertModal.display({
+            modalId: 'alertModal',
+            content: 'Sorry, looks like there are some errors detected, please try again.',
+            hideSecondary: true,
+            primaryLabel: "הבנתי",
+        });
+        return
+    }
     var errorMessage = res.message;
     var errorData = res.data;
 
@@ -269,6 +290,13 @@ function handleEditFailure(res) {
         alertModal.display({
             modalId: 'alertModal',
             content: "קוד קופון לא תקף",
+            hideSecondary: true,
+            primaryLabel: "הבנתי",
+        });
+    } else {
+        alertModal.display({
+            modalId: 'alertModal',
+            content: "Sorry, looks like there are some errors detected, please try again.",
             hideSecondary: true,
             primaryLabel: "הבנתי",
         });
