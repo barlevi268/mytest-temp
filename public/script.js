@@ -34,7 +34,7 @@ var UserSession = function() {
     const testkitSerial = urlParams.get('testkitSerial');
     if (testkitSerial) {
       setState({testkitSerial: testkitSerial});
-      location.href = "/register";
+      location.href = "/pre-registration";
     }
     const pathname = location.pathname.split('/')[1]
     const routeUnauthorized = () => !currentState.user && (location.href = "/login")
