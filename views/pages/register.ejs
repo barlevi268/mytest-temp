@@ -66,7 +66,7 @@
       <div class="row">
         <div class="form-group col-6">
           <label>שם פרטי</label>
-          <input mandatory class="form-control" placeholder="שם משפחה" name="first_name">
+          <input mandatory class="form-control" placeholder="שם פרטי" name="first_name">
         </div>
         <div class="form-group col-6">
           <label>שם משפחה</label>
@@ -99,7 +99,10 @@
       <div class="row">
         <div class="form-group col-6">
           <label>מס’ ת.ז. \ דרכון</label>
-          <input mandatory class="form-control" placeholder="מס’ ת.ז. \ דרכון" name="id_password" data-type-radio="id_type">
+          <input mandatory class="form-control" placeholder="מס’ ת.ז. \ דרכון" name="id_password" data-type-radio="id_type"
+                 type="tel"
+                 inputmode="numeric"
+          >
         </div>
         <div class="form-group col-6">
           <label>צילום ת.ז. \ דרכון</label>
@@ -113,13 +116,19 @@
       <div class="row">
         <div class="form-group col-12">
           <label>מס’ נייד</label>
-          <input mandatory class="form-control" placeholder="מס’ נייד" name="phone" data-type="phone" data-required-if="email">
+          <input mandatory class="form-control" placeholder="מס’ נייד"
+                 name="phone"
+                 data-type="phone"
+                 type="tel"
+                 inputmode="numeric"
+                 data-required-if="email"
+          >
         </div>
       </div>
       <div class="row">
         <div class="form-group col-12">
           <label>email</label>
-          <input mandatory class="form-control" placeholder="שם משפחה" name="email" type="email" data-required-if="phone">
+          <input mandatory class="form-control" placeholder="כתובת מייל" name="email" type="email" data-required-if="phone">
         </div>
       </div>
       <div class="row">
