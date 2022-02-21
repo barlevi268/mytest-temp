@@ -102,7 +102,7 @@ function initFormEdit() {
     }
     formEditPatient.find('[name=first_name]').val(moreDetailsPatientModal.itemPatientInfo.first_name)
     formEditPatient.find('[name=last_name]').val(moreDetailsPatientModal.itemPatientInfo.last_name)
-    formEditPatient.find('[name=id_password]').val(moreDetailsPatientModal.itemPatientInfo.id_password)
+    formEditPatient.find('[name=id_number]').val(moreDetailsPatientModal.itemPatientInfo.id_number)
     formEditPatient.find('[name=phone]').val(moreDetailsPatientModal.itemPatientInfo.phone)
     formEditPatient.find('[name=serial_number]').val(moreDetailsPatientModal.itemPatientInfo.serial_number)
 }
@@ -254,7 +254,7 @@ var moreDetailsPatientModal = {
             }
         })
 
-        $('input[name=patientID]').val(itemPatient.user_id);
+        $('input[name=patientID]').val(itemPatient.id);
 
         $('#patientName').html(`${itemPatient.first_name} ${itemPatient.last_name}`);
         let statusChecked = itemPatient.result ? itemPatient.statusChecked : '';
@@ -265,7 +265,7 @@ var moreDetailsPatientModal = {
         }
         $('#statusChecked').html(statusChecked);
         $('#phone').html(itemPatient.phone);
-        $('#IDPassport').html(itemPatient.id_password);
+        $('#IDPassport').html(itemPatient.id_number);
         $('#serialTest').html(itemPatient.serial_number);
         $('#testStatus').html(itemPatient.testStatus);
         $('#result').html(itemPatient.result);
@@ -316,7 +316,7 @@ formEditPatient.on('submit',async (e) => {
         }
     })
     let requestObject = new RequestObject('PUT', JSON.stringify(params), );
-    request(`/api/agent/patients/${params.user_id}`, requestObject)
+    request(`/api/agent/patients/${params.id}`, requestObject)
       .then(res => {
           handleEditSuccess(res, params);
       })
@@ -334,7 +334,7 @@ formEditPatient.on('submit',async (e) => {
 function deletePatient() {
     handleEditSuccessDelete();
     let requestObject = new RequestObject('DELETE', JSON.stringify({}), );
-    request(`/api/agent/patients/${moreDetailsPatientModal.itemPatientInfo.user_id}`, requestObject)
+    request(`/api/agent/patients/${moreDetailsPatientModal.itemPatientInfo.id}`, requestObject)
       .then(res => {
           handleEditSuccessDelete();
       })

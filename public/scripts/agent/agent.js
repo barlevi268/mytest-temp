@@ -90,12 +90,11 @@ async function moreDetails(data) {
   let itemPatient = {
     id: data.id,
     kit_id: data.kit_id,
-    user_id: data.user_id,
     first_name: data.first_name,
     last_name: data.last_name,
     statusChecked: data.result || 'ממתין לאימות',
     phone: data.phone,
-    id_password: data.id_password,
+    id_number: data.id_number,
     photoID: 'לחץ לצפייה',
     serial_number: data.serial_number,
     testStatus: 'ממתין לאימות תוצאה',
@@ -146,10 +145,10 @@ function sendResultForPatient() {
 function loadTable() {
   patientsTablePl = patientsTable.DataTable({
     ajax: {
-      url: '/testData.json',
+      url: 'https://teremsrl.com/api/agent/users?',
       type: 'GET',
       headers: {
-        'Authorization': `Bearer  ${UserSession.fetch('token')}`
+        'Authorization': `Bearer ${UserSession.fetch('token')}`
       }
     },
     deferRender: true,
@@ -166,9 +165,11 @@ function loadTable() {
     columns: [
       { 'data': "first_name"},
       { 'data': "last_name"},
-      { 'data': "id_password"},
+      { 'data': "id_number"},
       { 'data': "serial_number"},
-      { 'data': "phone"}
+      { 'data': "phone"},
+      { 'data': "registration_date", "visible":false},
+      { 'data':"id_number", "visible":false}
     ],
     initComplete: function () {
     }
@@ -188,13 +189,13 @@ async function formFilterTable() {
   });
 
   if (params.idNumber) {
-    patientsTablePl.column(0).search(params.idNumber, false, false);
+    patientsTablePl.column(6).search(params.idNumber, false, false);
   }
   if (params.idSeries) {
-    patientsTablePl.column(1).search(params.idSeries, false, false);
+    patientsTablePl.column(3).search(params.idSeries, false, false);
   }
   if (params.date) {
-    patientsTablePl.column(2).search(params.date, false, false);
+    patientsTablePl.column(5).search(params.date, false, false);
   }
   patientsTablePl.draw()
 }
