@@ -877,6 +877,14 @@ var mobileStreamVideo = (function () {
 })();
 
 $(() => {
+  const SentryDNS = '';
+  if (SentryDNS) {
+    Sentry.init({
+      dsn: SentryDNS,
+      integrations: [new Sentry.BrowserTracing()],
+      tracesSampleRate: 1.0,
+    });
+  }
   initAlertModal()
   initMandatoryFields.init();
   initPrefixFields();
