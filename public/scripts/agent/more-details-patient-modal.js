@@ -115,9 +115,9 @@ function initFormEdit() {
 
 async function init() {
 
-    $('#dropdownResultTestMenuNegative').on('click', async (e) => setResultTestValue(e))
-    $('#dropdownResultTestMenuPositive').on('click', async (e) => setResultTestValue(e))
-    $('#dropdownResultTestMenuDisqualification').on('click', async (e) => setResultTestValue(e))
+    $('#dropdownResultTestMenuNegative').on('click', async (e) => sendResultTestValue(e, {status: 'negative'}))
+    $('#dropdownResultTestMenuPositive').on('click', async (e) => sendResultTestValue(e, {status: 'positive'}))
+    $('#dropdownResultTestMenuDisqualification').on('click', async (e) => sendResultTestValue(e, {status: 'defected'}))
     setStatusFormForPatient(true);
     listenClickStatusFormForPatient();
     $('#photoID').on('click', async () => {
@@ -153,14 +153,50 @@ async function init() {
     });
 }
 
-function setResultTestValue(e) {
-    let primaryAction = $(e.target).closest("form").find('button.primary-action')
-    let value = e.target.outerText;
+function sendResultTestValue(e, {status}) {
+    if (!moreDetailsPatientModal.itemPatientInfo.kit_id) {
+        alertModal.display({
+            modalId: 'alertModal',
+            icon: "error",
+            content: 'Sorry, kit_id is empty',
+            hideSecondary: true,
+            primaryLabel: "הבנתי",
+        });
+        return;
+    }
+
+    let requestObject = new RequestObject('PUT', JSON.stringify({status}), );
+    request(`/api/test-kit/${moreDetailsPatientModal.itemPatientInfo.kit_id}`, requestObject)
+      .then(res => {
+          setResultTestValue(e);
+      })
+      .catch((res,ajax,status) => {
+          try {
+              const errorJSON = JSON.parse(res);
+              handleEditFailure(errorJSON)
+          } catch {
+              handleEditFailure(null);
+          }
+      })
+}
+
+function setResultTestValue(e, form$, value, defaultValue) {
+    let primaryAction;
+    if (form$) {
+        primaryAction = form$.find('button.primary-action');
+    } else {
+        primaryAction = $(e.target).closest("form").find('button.primary-action')
+    }
+    if (!value && e) {
+        value = e.target.outerText;
+    }
     if (value) {
         $('#dropdownResultTestMenu').html(value)
         $('input[name="dropdownResultTest"]').val(value)
         primaryAction.prop('disabled', false);
         return;
+    } else {
+        $('#dropdownResultTestMenu').html(defaultValue)
     }
     primaryAction.prop('disabled', true);
 }
@@ -192,6 +228,22 @@ var moreDetailsPatientModal = {
                 DOB_day: birthDateMoment.format('DD'),
             }
         }
+        if (itemPatient && itemPatient.statusChecked) {
+            switch (itemPatient.statusChecked) {
+                case 'negative': {
+                    itemPatient.statusChecked = $('#dropdownResultTestMenuNegative')[0].outerText;
+                    break
+                }
+                case 'positive': {
+                    itemPatient.statusChecked = $('#dropdownResultTestMenuPositive')[0].outerText;
+                    break
+                }
+                case 'defected': {
+                    itemPatient.statusChecked = $('#dropdownResultTestMenuDisqualification')[0].outerText;
+                    break
+                }
+            }
+        }
         moreDetailsPatientModal.itemPatientInfo = itemPatient;
 
         $('#mobileDetailPatientModal.button.primary-action').prop('disabled', true);
@@ -208,10 +260,15 @@ var moreDetailsPatientModal = {
             }
         })
 
-        $('input[name=patientID]').val(itemPatient.id);
+        $('input[name=patientID]').val(itemPatient.user_id);
 
         $('#patientName').html(`${itemPatient.first_name} ${itemPatient.last_name}`);
-        let statusChecked = itemPatient.status;
+        let statusChecked = itemPatient.status ? itemPatient.statusChecked : '';
+        if (itemPatient.status) {
+            setResultTestValue(null, formEditPatient, itemPatient.statusChecked);
+        } else {
+            setResultTestValue(null, formEditPatient, null, itemPatient.statusChecked);
+        }
         $('#statusChecked').html(statusChecked);
         $('#phone').html(itemPatient.phone);
         $('#IDPassport').html(itemPatient.id_password);
@@ -265,7 +322,7 @@ formEditPatient.on('submit',async (e) => {
         }
     })
     let requestObject = new RequestObject('PUT', JSON.stringify(params), );
-    request(`/api/agent/patients/${params.id}`, requestObject)
+    request(`/api/agent/patients/${params.user_id}`, requestObject)
       .then(res => {
           handleEditSuccess(res, params);
       })

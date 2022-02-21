@@ -88,10 +88,12 @@ async function moreDetails(data) {
   const generateMediaPath = (link) => link ? `/uploaded/${link}` : null;
 
   let itemPatient = {
-    id: data.user_id,
+    id: data.id,
+    kit_id: data.kit_id,
+    user_id: data.user_id,
     first_name: data.first_name,
     last_name: data.last_name,
-    statusChecked: 'ממתין לאימות',
+    statusChecked: data.status || 'ממתין לאימות',
     phone: data.phone,
     id_password: data.id_password,
     photoID: 'לחץ לצפייה',
