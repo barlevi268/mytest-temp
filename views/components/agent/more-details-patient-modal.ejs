@@ -36,8 +36,11 @@
                 <h1>
                     פרטי נבדק
                 </h1>
-                <button class="btn btn-secondary p-3" id="edit-patient">Edit</button>
-                <button class="btn btn-secondary p-3" id="save-patient">Save</button>
+                <div class="d-flex">
+                    <button class="btn btn-secondary p-3" id="edit-patient">Edit</button>
+                    <button class="btn btn-secondary p-3" id="save-patient">Save</button>
+                    <button class="btn btn-danger p-3 ms-3" onclick="deletePatient()">Delete</button>
+                </div>
             </div>
             <hr class="text-dark h-2"/>
             <div class="display-content" id="viewContent">

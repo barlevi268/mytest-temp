@@ -331,6 +331,29 @@ formEditPatient.on('submit',async (e) => {
 
 })
 
+function deletePatient() {
+    handleEditSuccessDelete();
+    let requestObject = new RequestObject('DELETE', JSON.stringify({}), );
+    request(`/api/agent/patients/${moreDetailsPatientModal.itemPatientInfo.user_id}`, requestObject)
+      .then(res => {
+          handleEditSuccessDelete();
+      })
+      .catch((res,ajax,status) => {
+          try {
+              const errorJSON = JSON.parse(res);
+              handleEditFailure(errorJSON)
+          } catch {
+              handleEditFailure(null);
+          }
+      })
+}
+
+function handleEditSuccessDelete() {
+    moreDetailsPatientModal.isUpdated = true;
+    Swal.success("Deleted successfully");
+    $('#mobileDetailPatientModal button.secondary-action').click();
+}
+
 function handleEditSuccess(res, params) {
     moreDetailsPatientModal.isUpdated = true;
     Swal.success("Saved successfully")
