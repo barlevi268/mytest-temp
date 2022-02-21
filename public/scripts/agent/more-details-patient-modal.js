@@ -183,8 +183,30 @@ var moreDetailsPatientModal = {
         moreDetailsPatientModal.customValue(itemPatient);
     },
     customValue: function (itemPatient) {
+        if (itemPatient && itemPatient.birth_date) {
+            const birthDateMoment = moment(itemPatient.birth_date, "YYYY-MM-DD");
+            itemPatient = {
+                ...itemPatient,
+                DOB_year: birthDateMoment.format('YYYY'),
+                DOB_month: birthDateMoment.format('MM'),
+                DOB_day: birthDateMoment.format('DD'),
+            }
+        }
         moreDetailsPatientModal.itemPatientInfo = itemPatient;
+
         $('#mobileDetailPatientModal.button.primary-action').prop('disabled', true);
+
+        Object.keys(itemPatient).map((itemPatientKey) => {
+            const itemInput$ = $(`[name=${itemPatientKey}]`);
+            if (itemInput$.length) {
+                if (itemInput$.is('select')) {
+                    itemInput$.val(`${itemPatient[itemPatientKey]}`).trigger('change');
+                    moreDetailsPatientModal.itemPatientInfo[itemPatientKey] = `${itemPatient[itemPatientKey]}`;
+                    return;
+                }
+                itemInput$.val(itemPatient[itemPatientKey]);
+            }
+        })
 
         $('input[name=patientID]').val(itemPatient.id);
 
@@ -225,10 +247,18 @@ formEditPatient.on('submit',async (e) => {
         setStatusFormForPatient(true)
         return;
     }
+    const birth_date = [
+        formEditPatient.find('[name=DOB_day]').val(),
+        formEditPatient.find('[name=DOB_month]').val(),
+        formEditPatient.find('[name=DOB_year]').val()].join('/');
     params = {
         ...moreDetailsPatientModal.itemPatientInfo,
-        ...params
+        ...params,
+        birth_date
     }
+    params['DOB_day'] = undefined;
+    params['DOB_month'] = undefined;
+    params['DOB_year'] = undefined;
     Object.keys(params).map(paramKey => {
         if (!params[paramKey]) {
             params[paramKey] = undefined;
@@ -303,8 +333,52 @@ function handleEditFailure(res) {
     }
 }
 
+function handleBirthDateValidator() {
+    var monthSelect = $("#DOB_month");
+    var daySelect = $("#DOB_day");
+
+    monthSelect.on("change", e => {
+        var selectedValue = e.target.value;
+
+        const thirtyDayMonths = ["04", "06", "09", "11"];
+
+
+        if (thirtyDayMonths.includes(selectedValue)) {
+            if (daySelect.val() === '31') {
+                daySelect.val("1").trigger('change');
+            }
+            daySelect.find('[value="31"]').attr("disabled", "disabled");
+        } else if (selectedValue === "02") {
+            switch (daySelect.val()) {
+                case '29':
+                case '30':
+                case '31':
+                {
+                    daySelect.val("01").trigger('change');
+                }
+            }
+            daySelect.find('[value="29"],[value="30"],[value="31"]').attr("disabled", "disabled");
+        } else {
+            daySelect.find("option").removeAttr("disabled");
+        }
+    });
+}
+
+function initCities() {
+    $.getJSON("/media/cities.json", data =>
+      $.each(data, (i, val) =>
+        $('[name="city_code"]').append(
+          `<option value="${val.City_Code}">${val.CityName_Hebrew}</option>`
+        )
+      )
+    );
+}
+
 $(() => {
 
     init();
+    initCities();
+    initSelect2(formEditPatient);
+    handleBirthDateValidator();
     window["moreDetailsPatientModal"] = moreDetailsPatientModal
 });

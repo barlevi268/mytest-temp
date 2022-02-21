@@ -17,6 +17,9 @@
         height: auto;
         object-fit: cover;
     }
+    .select2-container {
+        z-index: 2000;
+    }
 </style>
 <div
         class="modal fade"
@@ -132,6 +135,139 @@
                                 >
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>קופת חולים</label>
+                                <select
+                                        mandatory
+                                        select2-type="regular"
+                                        name="hmo_code"
+                                        placeholder="בחר קופה"
+                                >
+                                    <option></option>
+                                    <option value="1">כללית</option>
+                                    <option value="2">לאומית</option>
+                                    <option value="4">מכבי</option>
+                                    <option value="3">מאוחדת</option>
+                                    <option value="9">פרטי</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label >עיר מגורים</label>
+                                <select
+                                        mandatory
+                                        select2-type="search"
+                                        placeholder="בחר עיר מגורים"
+                                        name="city_code"
+                                >
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>street name</label>
+                                <input mandatory class="form-control" placeholder="שם משפחה" name="street">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>house number</label>
+                                <input mandatory class="form-control" placeholder="שם משפחה" name="house_number">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label>Birth Date</label>
+                                <div class="row">
+                                    <div class="form-group col-4">
+                                        <input
+                                                mandatory=""
+                                                class="form-control"
+                                                type="number"
+                                                min="1921"
+                                                max="2021"
+                                                placeholder="Year"
+                                                id="DOB_year"
+                                                name="DOB_year"
+                                                maxlength="4"
+                                                pattern="\d{4}"
+                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        />
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <select
+                                                mandatory
+                                                select2-type="regular"
+                                                name="DOB_month"
+                                                id="DOB_month"
+                                                placeholder="Month"
+                                                tabindex="-1"
+                                        >
+                                            <option></option>
+                                            <option value="01">January</option>
+                                            <option value="02">February</option>
+                                            <option value="03">March</option>
+                                            <option value="04">April</option>
+                                            <option value="05">May</option>
+                                            <option value="06">June</option>
+                                            <option value="07">July</option>
+                                            <option value="08">August</option>
+                                            <option value="09">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option> </select
+                                        >
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <select
+                                                mandatory
+                                                select2-type="regular"
+                                                name="DOB_day"
+                                                id="DOB_day"
+                                                placeholder="Day"
+                                                tabindex="-1"
+                                                aria-hidden="true"
+                                        >
+                                            <option></option>
+                                            <option value="01">1</option>
+                                            <option value="02">2</option>
+                                            <option value="03">3</option>
+                                            <option value="04">4</option>
+                                            <option value="05">5</option>
+                                            <option value="06">6</option>
+                                            <option value="07">7</option>
+                                            <option value="08">8</option>
+                                            <option value="09">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="form-group col-6">
                                 <label>Test serial</label>

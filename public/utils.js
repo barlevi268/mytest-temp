@@ -267,8 +267,14 @@ function decodeBarcode(src, config, cb) {
   });
 }
 
-function initSelect2() {
-  $.each($("[select2-type]"), (i, val) => {
+function initSelect2(form$) {
+  let select2Types$;
+  if (form$) {
+    select2Types$ = form$.find("[select2-type]");
+  } else {
+    select2Types$ = $("[select2-type]")
+  }
+  $.each(select2Types$, (i, val) => {
     var displayMode = $(val).attr("select2-type");
     var settings = {
       width: "100%",
