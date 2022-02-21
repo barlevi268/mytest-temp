@@ -10,7 +10,6 @@ var formEditPatient = $('#formEditPatient');
 let statusFormForPatientSave = true;
 
 function backContentImage() {
-    setStatusFormForPatient(typeof statusFormForPatientSave === 'boolean' ? null : true);
     viewImage.toggleClass('d-none');
     viewContent.toggleClass('d-none');
 }
@@ -37,11 +36,6 @@ async function getMediaBlobUrl(link) {
 
 function setStatusFormForPatient(isSave, params) {
     statusFormForPatientSave = isSave;
-    if (statusFormForPatientSave === null) {
-        savePatient.addClass('d-none');
-        editPatient.addClass('d-none');
-        return;
-    }
     if (isSave) {
         if (params) {
             moreDetailsPatientModal.customValue({
