@@ -93,14 +93,14 @@ async function moreDetails(data) {
     user_id: data.user_id,
     first_name: data.first_name,
     last_name: data.last_name,
-    statusChecked: data.status || 'ממתין לאימות',
+    statusChecked: data.result || 'ממתין לאימות',
     phone: data.phone,
     id_password: data.id_password,
     photoID: 'לחץ לצפייה',
     serial_number: data.serial_number,
     testStatus: 'ממתין לאימות תוצאה',
     testDocumentation: 'לחץ לצפייה',
-    result: 'שלילי',
+    result: data.result,
     outcomeDocumentation: 'לחץ לצפייה',
     photoIDLink: generateMediaPath(data.photo_passport),
     testDocumentationLink: generateMediaPath(data.video),
@@ -112,7 +112,7 @@ async function moreDetails(data) {
     house_number: data.house_number,
     birth_date: data.birth_date,
     id_type: data.id_type,
-    status: data.status
+    status: data.status,
   }
 
   alertModal.display({

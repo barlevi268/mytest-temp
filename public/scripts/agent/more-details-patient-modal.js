@@ -263,8 +263,8 @@ var moreDetailsPatientModal = {
         $('input[name=patientID]').val(itemPatient.user_id);
 
         $('#patientName').html(`${itemPatient.first_name} ${itemPatient.last_name}`);
-        let statusChecked = itemPatient.status ? itemPatient.statusChecked : '';
-        if (itemPatient.status) {
+        let statusChecked = itemPatient.result ? itemPatient.statusChecked : '';
+        if (itemPatient.result) {
             setResultTestValue(null, formEditPatient, itemPatient.statusChecked);
         } else {
             setResultTestValue(null, formEditPatient, null, itemPatient.statusChecked);
