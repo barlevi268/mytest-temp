@@ -26,10 +26,10 @@ app.get("/pre-registration", (req, res) => {
 app.get("/profile", (req, res) => {
   res.render('pages/profile');
 });
-app.get("/:testID/test", (req, res) => {
+app.get("/submit-test/:testID", (req, res) => {
   res.render('pages/test-submission-form', req.params);
 });
-app.get("/:testID/send-result", (req, res) => {
+app.get("/submit-result/:testID", (req, res) => {
   res.render('pages/submit-results-form', req.params);
 });
 

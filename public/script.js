@@ -165,7 +165,7 @@ function requestFile(url, obj, filename) {
 
 async function getProfile() {
   var requestObj = new RequestObject("GET", "", "application/json", "json", true);
-  await request(`/api/profile`, requestObj)
+  await request(`https://teremsrl.com/api/profile`, requestObj)
     .then((response) => {
       window['currentUser'] = response.data;
       $("#userName").html(`${currentUser.userData.first_name} ${currentUser.userData.last_name}`)

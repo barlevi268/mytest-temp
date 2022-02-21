@@ -6,30 +6,29 @@
 <div class="container">
   <div class="wrapper">
     <div class="nav-menu">
-        <!-- start::user info -->
-        <div class="nav-user-header text-center mt-5">
-          <img class="user-avatar" src="media/defualt-avatar.svg" />
-          <h4 class="mb-0 mt-3" id="userName">אופק אמסלם</h4>
-          <a class="pt-1" onclick="logOut()">התנתק</a>
-        </div>
-        <!-- end::user info -->
+      <!-- start::user info -->
+      <div class="nav-user-header text-center mt-5">
+        <img class="user-avatar" src="media/defualt-avatar.svg" />
+        <h4 class="mb-0 mt-3" id="userName">אופק אמסלם</h4>
+        <a class="pt-1" id="logoutBtn">התנתק</a>
       </div>
-      <!-- end::nav-menu-header -->
-      <hr size class="my-4" />
-      <!-- start::nav-items -->
-
-      <div class="nav-items-list d-grid px-4-5">
-        <h4 class="fw-bolder">בדיקות רשומות</h4>
-      </div>
-    <div class="nav-items-list d-grid px-4-5" id="recordedTests"></div>
-      <div class="px-3 py-3">
-        <hr size />
-      </div>
-      <div class="nav-items-list d-grid px-4-5">
-        <h4 class="fw-bolder">ממתין לתוצאה</h4>
-      </div>
-    <div class="nav-items-list d-grid px-4-5" id="awaitingResult"></div>
+      <!-- end::user info -->
     </div>
+    <!-- end::nav-menu-header -->
+    <hr size class="my-4" />
+    <!-- start::nav-items -->
+
+    <div class="nav-items-list d-grid px-4-5">
+      <h1 class="fw-bolder pb-2" id="recordedTestsTitle">בדיקות רשומות</h1>
+    </div>
+    <div class="nav-items-list d-grid px-4-5" id="recordedTests"></div>
+    <div class="px-3 py-3">
+      <hr size id="section-hr"/>
+    </div>
+    <div class="nav-items-list d-grid px-4-5">
+      <h1 class="fw-bolder pb-2" id="awaitingResultTtitle">ממתין לתוצאה</h1>
+    </div>
+    <div class="nav-items-list d-grid px-4-5" id="awaitingResult"></div>
   </div>
 </div>
 <!-- end::page content -->

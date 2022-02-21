@@ -1,59 +1,85 @@
-var userName = $("#userName");
 var test = 'fddfdf';
+
 var recordedTests = [];
 var awaitingResult = [];
-function logOut() {
-    UserSession.deauthenticate();
-}
+
+
 function createRecordedTest(test) {
+    const link = currentUser.userData.status === 'awaiting-test' ? `href="submit-test/${test.id}"` : '';
     recordedTests.push({
-        ...test,
+        test: test.serial_number,
+        name: `${test.user.first_name} ${test.user.last_name}`,
         nameLink: 'בצע בדיקה',
-        link: `/${test.test}/test`,
+        link: link
     })
-}
-function createRecordedTests() {
-    recordedTests = [];
-    const tests = [{name: 'name 1', test: 1},{name: 'name 2', test: 2},]
-    tests.forEach((test => createRecordedTest(test)));
 }
 
 function createAwaitingResult(test) {
+    const link = currentUser.userData.status === 'awaiting-test' ? `href="submit-result/${test.id}"` : '';
     awaitingResult.push({
-        ...test,
+        test: test.serial_number,
+        name: `${test.user.first_name} ${test.user.last_name}`,
         nameLink: 'שלח תוצאה',
-        link: `/${test.test}/send-result`,
+        link: link,
     })
 }
-function createAwaitingResults() {
-    awaitingResult = [];
-    const tests = [{name: 'name 1', test: 1},{name: 'name 2', test: 2},]
-    tests.forEach((test => createAwaitingResult(test)));
+
+function createRecordedTests() {
+    currentUser.testKits?.recorded_tests?.forEach(test => {
+        createRecordedTest(test)
+    });
+
+    currentUser.testKits?.awaiting_results?.forEach(test => {
+        createAwaitingResult(test)
+    })
 }
 
-var resultTmpl = `
 
+
+var resultTmpl = `
   <a
-          href="{{:link}}"
-          class="nav-item pb-4 mb-3 btn-primary-gradient"
+          {{:link}}
+          class="nav-item mb-3 btn-primary-gradient"
+          style="padding: 1.2rem;"
   >
-    <div><span class="text-light">{{:name}}</span></div>
-    <div class="d-flex justify-content-between align-items-center">
+    <div><span class="text-light" style="font-size: 19px;">{{:name}}</span></div>
+    <div class="d-flex justify-content-between align-items-center mb-4" style="height: 20px;">
     <div class="">
-    <span class="text-light">בדיקה מס’: {{:test}}</span>
+    <span class="text-light font-weight-regular">בדיקה מס’: {{:test}}</span>
     </div>
     <div>
-      <span class="text-light">{{:nameLink}}</span>
-      <img class="p-0 align-items-center" src="media/go-icon-without-circle.svg"/>
+      <span class="text-light" style="margin-left: -10px;">{{:nameLink}}</span>
+      <img class="p-0 align-items-center" style=" margin-top: -2px;margin-left: -5px;" src="media/go-icon-without-circle.svg"/>
     </div>
     </div>
   </a>
 `
 
-$(() => {
+$(async () => {
+    await getProfile();
     createRecordedTests();
-    createAwaitingResults();
-    $('#recordedTests').html($.templates(resultTmpl).render(recordedTests))
-    $('#awaitingResult').html($.templates(resultTmpl).render(awaitingResult))
-    userName.html('first name');
+
+    if (recordedTests.length === 0 && awaitingResult.length === 0){
+        $('#awaitingResultTtitle').html('אין בדיקות שממתינות לתוצאה או לבדיקה')
+        $('#section-hr').hide();
+        $('#recordedTestsTitle').hide();
+        return
+    }
+
+    if(recordedTests.length !== 0){
+        $('#recordedTests').html($.templates(resultTmpl).render(recordedTests))
+    } else {
+        $('#recordedTestsTitle').hide();
+        $('#section-hr').hide();
+    }
+
+
+    if (awaitingResult.length !== 0 ) {
+        $('#awaitingResult').html($.templates(resultTmpl).render(awaitingResult))
+    } else {
+        $('#awaitingResultTtitle').hide()
+        $('#section-hr').hide();
+    }
+
+
 });
