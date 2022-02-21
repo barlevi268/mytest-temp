@@ -5,7 +5,7 @@ var awaitingResult = [];
 
 
 function createRecordedTest(test) {
-    const link = currentUser.userData.status === 'awaiting-test' ? `href="submit-test/${test.id}"` : '';
+    const link = `href="submit-test/${test.id}"`;
     recordedTests.push({
         test: test.serial_number,
         name: `${test.user.first_name} ${test.user.last_name}`,
@@ -15,7 +15,7 @@ function createRecordedTest(test) {
 }
 
 function createAwaitingResult(test) {
-    const link = currentUser.userData.status === 'awaiting-test' ? `href="submit-result/${test.id}"` : '';
+    const link = `href="submit-result/${test.id}"`;
     awaitingResult.push({
         test: test.serial_number,
         name: `${test.user.first_name} ${test.user.last_name}`,
@@ -29,9 +29,11 @@ function createRecordedTests() {
         createRecordedTest(test)
     });
 
-    currentUser.testKits?.awaiting_results?.forEach(test => {
-        createAwaitingResult(test)
-    })
+    if (currentUser.userData.status === 'awaiting-result') {
+        currentUser.testKits?.awaiting_results?.forEach(test => {
+            createAwaitingResult(test)
+        })
+    }
 }
 
 
