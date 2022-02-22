@@ -299,9 +299,9 @@ formEditPatient.on('submit',async (e) => {
         return;
     }
     const birth_date = [
-        formEditPatient.find('[name=DOB_day]').val(),
+        formEditPatient.find('[name=DOB_year]').val(),
         formEditPatient.find('[name=DOB_month]').val(),
-        formEditPatient.find('[name=DOB_year]').val()].join('/');
+        formEditPatient.find('[name=DOB_day]').val()].join('-');
     params = {
         ...moreDetailsPatientModal.itemPatientInfo,
         ...params,
@@ -331,8 +331,7 @@ formEditPatient.on('submit',async (e) => {
 
 })
 
-function deletePatient() {
-    handleEditSuccessDelete();
+function postDeleteRequest() {
     let requestObject = new RequestObject('DELETE', JSON.stringify({}), );
     request(`/api/agent/patients/${moreDetailsPatientModal.itemPatientInfo.id}`, requestObject)
       .then(res => {
@@ -346,6 +345,18 @@ function deletePatient() {
               handleEditFailure(null);
           }
       })
+}
+
+function deletePatient() {
+    Swal.fire({
+        title: "אתה בטוח שתרצה למחוק את המטופל?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "כן, מחק מטופל",
+        cancelButtonText: "ביטול"
+    }).then(function (result) {
+        result.value && postDeleteRequest()
+    });
 }
 
 function handleEditSuccessDelete() {
