@@ -97,7 +97,6 @@ async function moreDetails(data) {
     id_number: data.id_number,
     photoID: 'לחץ לצפייה',
     serial_number: data.serial_number,
-    testStatus: 'ממתין לאימות תוצאה',
     testDocumentation: 'לחץ לצפייה',
     result: data.result,
     outcomeDocumentation: 'לחץ לצפייה',
@@ -163,13 +162,13 @@ function loadTable() {
     },
     deferLoading: true,
     columns: [
-      { 'data': "first_name"},
-      { 'data': "last_name"},
-      { 'data': "id_number"},
-      { 'data': "serial_number"},
-      { 'data': "phone"},
+      { title: "שם פרטי", 'data': "first_name"},
+      { title: "שם מספחה", 'data': "last_name"},
+      { title: "מספר זהות", 'data': "id_number"},
+      { title: "סריאלי בדיקה", 'data': "serial_number"},
+      { title: "טלפון", 'data': "phone"},
       { 'data': "registration_date", "visible":false},
-      { 'data':"id_number", "visible":false}
+      { title: "סטטוס בדיקה", 'data': "status"}
     ],
     initComplete: function () {
     }
@@ -188,8 +187,12 @@ async function formFilterTable() {
     params[$(this).attr("name")] = $(this).val();
   });
 
+  if (params.status) {
+    const status = params.status === 'all' ? '': params.status;
+    patientsTablePl.column(6).search(status, false, false);
+  }
   if (params.idNumber) {
-    patientsTablePl.column(6).search(params.idNumber, false, false);
+    patientsTablePl.column(2).search(params.idNumber, false, false);
   }
   if (params.idSeries) {
     patientsTablePl.column(3).search(params.idSeries, false, false);

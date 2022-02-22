@@ -5,17 +5,34 @@
 <div class="container card shadow-light my-3 p-3 flex-grow-1">
   <h4 class="mb-0 mt-3 fw-bolder" id="userName">טיפול בנבדקים</h4>
   <form class="filter row" id="formFilterTable">
-    <div class="mb-3 col-md-3 col-12">
+    <div class="mb-3 col-md-2 col-12">
       <label for="idNumber" class="form-label">חיפוש</label>
-      <input name="idNumber" type="text" class="form-control py-md-3" id="idNumber" placeholder="חפש ת.ז. \ דרכון \ סידורי">
+      <input name="idNumber" type="text" class="form-control" id="idNumber" placeholder="חפש ת.ז. \ דרכון \ סידורי">
     </div>
-    <div class="mb-3 col-md-3 col-12">
+    <div class="mb-3 col-md-2 col-12">
       <label for="idSeries" class="form-label">חיפוש</label>
-      <input name="idSeries" type="text" class="form-control py-md-3" id="idSeries" placeholder="חפש ת.ז. \ דרכון \ סידורי">
+      <input name="idSeries" type="text" class="form-control" id="idSeries" placeholder="חפש ת.ז. \ דרכון \ סידורי">
     </div>
-    <div class="mb-3 col-md-3 col-12">
+    <div class="mb-3 col-md-2 col-12">
+      <label for="idSeries" class="form-label">סטטוס בדיקה</label>
+      <select
+              select2-type="regular"
+              name="status"
+              placeholder="סטטוס בדיקה"
+              class="test"
+      >
+        <option value="all">all</option>
+        <option value="awaiting-payment">awaiting payment</option>
+        <option value="awaiting-confirmation">awaiting confirmation</option>
+        <option value="awaiting-verification">awaiting verification</option>
+        <option value="awaiting-test">awaiting test</option>
+        <option value="awaiting-result">awaiting result</option>
+        <option value="processing">processing</option>
+      </select>
+    </div>
+    <div class="mb-3 col-md-2 col-12">
       <label for="idSeries" class="form-label">תאריך פתיחה</label>
-      <div id="inputDateRange" class="form-control py-md-3 cursor-pointe position-relative">
+      <div id="inputDateRange" class="form-control cursor-pointe position-relative">
         &nbsp;
         <span></span>
         <input hidden name="date" id="inputDate">
@@ -23,20 +40,12 @@
     </div>
     <div class="mb-3 col-md-1 col-12">
       <label class="form-label">&nbsp;</label>
-      <button type="button" class="btn btn-primary btn-block py-3" onclick="formFilterTable()">סנן</button>
+      <button type="button" class="btn btn-primary btn-block" onclick="formFilterTable()">סנן</button>
     </div>
   </form>
   <div class="">
     <table class="table" id="patientsTable">
-      <thead>
-      <tr>
-        <th scope="col">שם פרטי</th>
-        <th scope="col">שם מספחה</th>
-        <th scope="col">מספר זהות</th>
-        <th scope="col">סריאלי בדיקה</th>
-        <th scope="col">טלפון</th>
-      </tr>
-      </thead>
+      <thead></thead>
       <tbody id="tableTbody"></tbody>
     </table>
   </div>

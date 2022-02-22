@@ -267,7 +267,7 @@ var moreDetailsPatientModal = {
         $('#phone').html(itemPatient.phone);
         $('#IDPassport').html(itemPatient.id_number);
         $('#serialTest').html(itemPatient.serial_number);
-        $('#testStatus').html(itemPatient.testStatus);
+        $('#testStatus').html(itemPatient.status);
         $('#result').html(itemPatient.result);
 
         setStatusFormForPatient(true);
