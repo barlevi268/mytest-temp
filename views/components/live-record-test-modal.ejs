@@ -10,12 +10,6 @@
   #previewVideoRecord {
     width: 100%;
   }
-  .video-class {
-    opacity: 0;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
 </style>
 <div
       class="modal fade"
@@ -41,7 +35,7 @@
                   class="shadow rounded-lg mb-3 mt-4 position-relative"
                   id="mobileStream"
                 >
-                  <video width="250" height="250" autoplay playsinline id="previewVideoRecordVideo" class="video-class"></video>
+                  <video width="250" height="250" autoplay playsinline id="previewVideoRecordVideo" class="d-none"></video>
                   <canvas id="previewVideoRecord" height="250" style="direction: ltr"></canvas>
                 </div>
               </div>

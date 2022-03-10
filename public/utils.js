@@ -725,6 +725,10 @@ var mobileStreamVideo = (function () {
     previewVideoRecordCanvasContext = $('#previewVideoRecord')[0].getContext('2d');
     previewVideoRecordFile = $('#previewVideoRecordFile');
     previewVideoRecordVideo = $('#previewVideoRecordVideo');
+    let video = $(previewVideoRecordVideo[0]).off()
+    video.on('loadeddata', function () {
+      this.play();
+    })
     previewVideoRecordVideo[0].srcObject = stream;
     timerCallback();
   }
